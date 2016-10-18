@@ -1,0 +1,42 @@
+.fusion-main-menu{
+  position: absolute;
+  float: none;
+  bottom: 0;
+  right: 0;
+}
+
+footer {
+  .footerlogo-holder{
+    .logo {
+      text-align: center;
+      img{
+        margin: 0 auto;
+        height: 40px;
+      }
+    }
+  }
+  .widget_nav_menu{
+    ul.menu {
+      li {
+        display: inline-block;
+        *display: inline;
+        zoom: 1;
+        padding: 0;
+        border: none !important;
+
+        a {
+          color: white;
+
+          &:before {
+            display: none;
+          }
+        }
+        &.current-menu-item{
+          a {
+            color: white !important;
+          }
+        }
+      }
+    }
+  }
+}

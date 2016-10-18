@@ -1,0 +1,30 @@
+/* line 1, sass/globalhungary.scss */
+.fusion-main-menu {
+  position: absolute;
+  float: none;
+  bottom: 0;
+  right: 0; }
+
+/* line 10, sass/globalhungary.scss */
+footer .footerlogo-holder .logo {
+  text-align: center; }
+  /* line 12, sass/globalhungary.scss */
+  footer .footerlogo-holder .logo img {
+    margin: 0 auto;
+    height: 40px; }
+/* line 20, sass/globalhungary.scss */
+footer .widget_nav_menu ul.menu li {
+  display: inline-block;
+  *display: inline;
+  zoom: 1;
+  padding: 0;
+  border: none !important; }
+  /* line 27, sass/globalhungary.scss */
+  footer .widget_nav_menu ul.menu li a {
+    color: white; }
+    /* line 30, sass/globalhungary.scss */
+    footer .widget_nav_menu ul.menu li a:before {
+      display: none; }
+  /* line 35, sass/globalhungary.scss */
+  footer .widget_nav_menu ul.menu li.current-menu-item a {
+    color: white !important; }
