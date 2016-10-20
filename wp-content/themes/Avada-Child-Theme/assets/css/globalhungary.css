@@ -5,26 +5,71 @@
   bottom: 0;
   right: 0; }
 
-/* line 10, sass/globalhungary.scss */
-footer .footerlogo-holder .logo {
-  text-align: center; }
-  /* line 12, sass/globalhungary.scss */
-  footer .footerlogo-holder .logo img {
-    margin: 0 auto;
-    height: 40px; }
-/* line 20, sass/globalhungary.scss */
-footer .widget_nav_menu ul.menu li {
+/* line 8, sass/globalhungary.scss */
+.fusion-main-menu > ul > li {
+  position: relative;
+  border-right: 2px solid #333b3b;
+  padding: 0 20px 0 45px !important; }
+  /* line 13, sass/globalhungary.scss */
+  .fusion-main-menu > ul > li:before {
+    content: "";
+    width: 24px;
+    height: 45px;
+    line-height: 45px;
+    background-image: url("../../images/menu-li-btn.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    position: absolute;
+    left: 10px;
+    top: -2px; }
+
+/* line 28, sass/globalhungary.scss */
+#main {
+  background-image: url("../../images/cityscape-overlay-bottom-fullwidth.svg");
+  background-repeat: repeat-x;
+  background-position: bottom;
+  background-size: contain;
+  min-height: 350px; }
+
+/* line 39, sass/globalhungary.scss */
+footer .fusion-widget-area .fusion-footer-widget-column {
   display: inline-block;
   *display: inline;
   zoom: 1;
-  padding: 0;
-  border: none !important; }
-  /* line 27, sass/globalhungary.scss */
-  footer .widget_nav_menu ul.menu li a {
-    color: white; }
-    /* line 30, sass/globalhungary.scss */
-    footer .widget_nav_menu ul.menu li a:before {
-      display: none; }
-  /* line 35, sass/globalhungary.scss */
-  footer .widget_nav_menu ul.menu li.current-menu-item a {
-    color: white !important; }
+  vertical-align: top;
+  margin: 0 -2px;
+  width: 60%; }
+/* line 48, sass/globalhungary.scss */
+footer .fusion-widget-area .fusion-footer-widget-column:first-child,
+footer .fusion-widget-area .fusion-footer-widget-column:last-child {
+  width: 20%; }
+/* line 52, sass/globalhungary.scss */
+footer .footerlogo-holder {
+  margin-top: 20px; }
+  /* line 54, sass/globalhungary.scss */
+  footer .footerlogo-holder .logo {
+    text-align: center; }
+    /* line 56, sass/globalhungary.scss */
+    footer .footerlogo-holder .logo img {
+      margin: 0 auto;
+      height: 40px; }
+/* line 64, sass/globalhungary.scss */
+footer .widget_nav_menu ul.menu {
+  margin-top: 20px; }
+  /* line 66, sass/globalhungary.scss */
+  footer .widget_nav_menu ul.menu li {
+    display: inline-block;
+    *display: inline;
+    zoom: 1;
+    padding: 0 10px;
+    border: none !important; }
+    /* line 73, sass/globalhungary.scss */
+    footer .widget_nav_menu ul.menu li a {
+      color: #e8e8e0; }
+      /* line 76, sass/globalhungary.scss */
+      footer .widget_nav_menu ul.menu li a:before {
+        display: none; }
+    /* line 81, sass/globalhungary.scss */
+    footer .widget_nav_menu ul.menu li.current-menu-item a {
+      color: white !important; }
