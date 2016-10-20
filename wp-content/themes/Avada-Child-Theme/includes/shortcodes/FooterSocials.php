@@ -23,9 +23,12 @@ class FooterSocialsSc
 
             )
         );
+        // Social icons
+        $social = new Avada_Social_Icons();
+        $icons_html = $social->render_social_icons(array('position' => 'footer'));
         /* Parse the arguments. */
         $attr = shortcode_atts( $defaults, $attr );
-        $output .= 'socialicons';
+        $output .= $icons_html;
         $output .= '</div>';
 
 

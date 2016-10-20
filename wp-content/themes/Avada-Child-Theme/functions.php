@@ -23,3 +23,11 @@ function avada_lang_setup() {
 	load_child_theme_textdomain( 'Avada', $lang );
 }
 add_action( 'after_setup_theme', 'avada_lang_setup' );
+
+/**
+* Egyedi felső menü
+**/
+function globalhungary_custom_top_menu()
+{
+  get_template_part( 'templates/globalhungary/top_menu' );
+}
