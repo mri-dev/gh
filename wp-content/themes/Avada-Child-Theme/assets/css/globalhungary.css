@@ -1,16 +1,16 @@
-/* line 1, sass/globalhungary.scss */
+/* line 3, sass/globalhungary.scss */
 .fusion-main-menu {
   position: absolute;
   float: none;
   bottom: 0;
   right: 0; }
 
-/* line 8, sass/globalhungary.scss */
+/* line 10, sass/globalhungary.scss */
 .fusion-main-menu > ul > li {
   position: relative;
   border-right: 2px solid #333b3b;
   padding: 0 20px 0 45px !important; }
-  /* line 13, sass/globalhungary.scss */
+  /* line 15, sass/globalhungary.scss */
   .fusion-main-menu > ul > li:before {
     content: "";
     width: 24px;
@@ -24,7 +24,14 @@
     left: 10px;
     top: -2px; }
 
-/* line 28, sass/globalhungary.scss */
+/* line 31, sass/globalhungary.scss */
+.trans-on,
+.fusion-social-network-icon {
+  -webkit-transition: all .5s;
+  -moz-transition: all .5s;
+  transition: all .5s; }
+
+/* line 37, sass/globalhungary.scss */
 #main {
   background-image: url("../../images/cityscape-overlay-bottom-fullwidth.svg");
   background-repeat: repeat-x;
@@ -32,16 +39,16 @@
   background-size: contain;
   min-height: 350px; }
 
-/* line 36, sass/globalhungary.scss */
+/* line 45, sass/globalhungary.scss */
 .top-float-menubar {
   color: #91999c;
   position: absolute;
   right: 0;
   top: 0; }
-  /* line 42, sass/globalhungary.scss */
+  /* line 51, sass/globalhungary.scss */
   .top-float-menubar a {
     color: #91999c; }
-  /* line 47, sass/globalhungary.scss */
+  /* line 56, sass/globalhungary.scss */
   .top-float-menubar .menu-holder > div {
     margin: 0;
     display: inline-block;
@@ -49,32 +56,33 @@
     zoom: 1;
     vertical-align: middle;
     line-height: 45px; }
-  /* line 56, sass/globalhungary.scss */
+  /* line 65, sass/globalhungary.scss */
   .top-float-menubar .menu-holder .accounts {
     border: 1px solid #333b3b;
-    border-top: none; }
-    /* line 60, sass/globalhungary.scss */
+    border-top: none;
+    margin: 0 0 0 -1px; }
+    /* line 70, sass/globalhungary.scss */
     .top-float-menubar .menu-holder .accounts a {
       display: block;
       padding: 0 20px; }
-    /* line 65, sass/globalhungary.scss */
+    /* line 75, sass/globalhungary.scss */
     .top-float-menubar .menu-holder .accounts .ico {
       float: left;
       margin-right: 5px; }
-      /* line 68, sass/globalhungary.scss */
+      /* line 78, sass/globalhungary.scss */
       .top-float-menubar .menu-holder .accounts .ico img {
         height: 45px;
         width: 20px;
         margin-top: -4px; }
-  /* line 76, sass/globalhungary.scss */
+  /* line 86, sass/globalhungary.scss */
   .top-float-menubar .menu-holder .notify-icos {
     height: 45px;
     line-height: 45px; }
-    /* line 79, sass/globalhungary.scss */
+    /* line 89, sass/globalhungary.scss */
     .top-float-menubar .menu-holder .notify-icos a {
       display: block;
       padding: 0 15px; }
-    /* line 84, sass/globalhungary.scss */
+    /* line 94, sass/globalhungary.scss */
     .top-float-menubar .menu-holder .notify-icos > div {
       display: inline-block;
       *display: inline;
@@ -83,11 +91,17 @@
       line-height: 45px;
       height: 45px;
       max-height: 45px;
-      position: relative;
-      margin: 0;
-      border: 1px solid #333b3b;
-      border-top: none; }
-      /* line 97, sass/globalhungary.scss */
+      position: relative; }
+      /* line 104, sass/globalhungary.scss */
+      .top-float-menubar .menu-holder .notify-icos > div a {
+        margin: 0 0 0 -1px;
+        border: 1px solid #333b3b;
+        border-top: none;
+        height: 45px; }
+        /* line 110, sass/globalhungary.scss */
+        .top-float-menubar .menu-holder .notify-icos > div a:hover {
+          background: #0e0f10; }
+      /* line 115, sass/globalhungary.scss */
       .top-float-menubar .menu-holder .notify-icos > div .fnl {
         position: absolute;
         background: #f00;
@@ -100,17 +114,17 @@
         text-align: center;
         bottom: -8px;
         right: 5px; }
-    /* line 113, sass/globalhungary.scss */
+    /* line 131, sass/globalhungary.scss */
     .top-float-menubar .menu-holder .notify-icos .notify-favorite img {
       height: 44px;
       width: 18px;
       line-height: 44px; }
-    /* line 120, sass/globalhungary.scss */
+    /* line 138, sass/globalhungary.scss */
     .top-float-menubar .menu-holder .notify-icos .notify-newhouse img {
       height: 45px;
       width: 22px;
       line-height: 45px; }
-  /* line 128, sass/globalhungary.scss */
+  /* line 146, sass/globalhungary.scss */
   .top-float-menubar .menu-holder .contact {
     border: 1px solid #333b3b;
     border-top: none;
@@ -118,22 +132,34 @@
     font-size: 1.5em;
     color: #b2b2b2;
     font-weight: bold; }
-    /* line 136, sass/globalhungary.scss */
+    /* line 154, sass/globalhungary.scss */
     .top-float-menubar .menu-holder .contact i {
       margin-right: 8px; }
-  /* line 142, sass/globalhungary.scss */
+  /* line 160, sass/globalhungary.scss */
   .top-float-menubar .menu-holder .socials .fusion-social-networks .fusion-social-networks-wrapper {
     margin: 0 !important; }
-  /* line 145, sass/globalhungary.scss */
+  /* line 163, sass/globalhungary.scss */
   .top-float-menubar .menu-holder .socials .fusion-social-networks .fusion-social-network-icon {
-    margin: 0 !important;
+    margin: 0 0 0 -1px !important;
     padding: 0 15px !important;
-    height: 45px !important;
+    height: 46px !important;
     line-height: 45px !important;
     border: 1px solid #333b3b !important;
     border-top: none !important; }
+    /* line 171, sass/globalhungary.scss */
+    .top-float-menubar .menu-holder .socials .fusion-social-networks .fusion-social-network-icon.fusion-facebook:hover {
+      background: #3762bd; }
+      /* line 173, sass/globalhungary.scss */
+      .top-float-menubar .menu-holder .socials .fusion-social-networks .fusion-social-network-icon.fusion-facebook:hover:before {
+        color: white !important; }
+    /* line 177, sass/globalhungary.scss */
+    .top-float-menubar .menu-holder .socials .fusion-social-networks .fusion-social-network-icon.fusion-googleplus:hover {
+      background: #fd552d; }
+      /* line 179, sass/globalhungary.scss */
+      .top-float-menubar .menu-holder .socials .fusion-social-networks .fusion-social-network-icon.fusion-googleplus:hover:before {
+        color: white !important; }
 
-/* line 160, sass/globalhungary.scss */
+/* line 190, sass/globalhungary.scss */
 footer .fusion-widget-area .fusion-footer-widget-column {
   display: inline-block;
   *display: inline;
@@ -141,48 +167,48 @@ footer .fusion-widget-area .fusion-footer-widget-column {
   vertical-align: top;
   margin: 0 -2px;
   width: 60%; }
-/* line 169, sass/globalhungary.scss */
+/* line 199, sass/globalhungary.scss */
 footer .fusion-widget-area .fusion-footer-widget-column:first-child,
 footer .fusion-widget-area .fusion-footer-widget-column:last-child {
   width: 20%; }
-/* line 173, sass/globalhungary.scss */
+/* line 203, sass/globalhungary.scss */
 footer .footerlogo-holder {
   margin-top: 20px; }
-  /* line 175, sass/globalhungary.scss */
+  /* line 205, sass/globalhungary.scss */
   footer .footerlogo-holder .logo {
     text-align: center; }
-    /* line 177, sass/globalhungary.scss */
+    /* line 207, sass/globalhungary.scss */
     footer .footerlogo-holder .logo img {
       margin: 0 auto;
       height: 40px; }
-/* line 183, sass/globalhungary.scss */
+/* line 213, sass/globalhungary.scss */
 footer .widget .fusion-social-networks .fusion-social-network-icon {
   border: 2px solid #333b3b !important;
   border-top: none;
   margin: 0 -1px;
   padding: 12px;
   font-size: 14px; }
-/* line 191, sass/globalhungary.scss */
+/* line 221, sass/globalhungary.scss */
 footer .widget_nav_menu ul.menu {
   margin-top: 20px; }
-  /* line 193, sass/globalhungary.scss */
+  /* line 223, sass/globalhungary.scss */
   footer .widget_nav_menu ul.menu li {
     display: inline-block;
     *display: inline;
     zoom: 1;
     padding: 0 10px;
     border: none !important; }
-    /* line 200, sass/globalhungary.scss */
+    /* line 230, sass/globalhungary.scss */
     footer .widget_nav_menu ul.menu li a {
       color: #e8e8e0; }
-      /* line 203, sass/globalhungary.scss */
+      /* line 233, sass/globalhungary.scss */
       footer .widget_nav_menu ul.menu li a:before {
         display: none; }
-    /* line 208, sass/globalhungary.scss */
+    /* line 238, sass/globalhungary.scss */
     footer .widget_nav_menu ul.menu li.current-menu-item a {
       color: white !important; }
 
-/* line 217, sass/globalhungary.scss */
+/* line 247, sass/globalhungary.scss */
 #toTop {
   bottom: 25px;
   right: 25px;
@@ -195,10 +221,10 @@ footer .widget_nav_menu ul.menu {
   -moz-box-shadow: 1px 1px 3px -1px black;
   -webkit-box-shadow: 1px 1px 3px -1px black;
   box-shadow: 1px 1px 3px -1px black; }
-  /* line 230, sass/globalhungary.scss */
+  /* line 260, sass/globalhungary.scss */
   #toTop:before {
     color: #b2b2b2 !important;
     font-size: 36px; }
-  /* line 236, sass/globalhungary.scss */
+  /* line 266, sass/globalhungary.scss */
   #toTop:hover:before {
     color: white !important; }

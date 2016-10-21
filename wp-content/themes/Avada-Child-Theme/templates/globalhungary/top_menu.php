@@ -16,13 +16,13 @@
     </div><!--
  --><div class="notify-icos"><!--
     --><div class="notify-favorite">
-        <a href="#">
+        <a class="trans-on" href="#">
           <img src="<?=IMG?>/ico-heart.svg" alt="Favorite" />
           <div class="fnl" id="notification-favorite">14</div>
-          </a>
+        </a>
       </div><!--
    --><div class="notify-newhouse">
-        <a href="#">
+        <a class="trans-on" href="#">
           <img src="<?=IMG?>/ico-house.svg" alt="New House" />
           <div class="fnl" id="notification-newhouse">194</div>
         </a>
