@@ -16,6 +16,27 @@ class UserRoles
       }
     }
 
+    public function i18n( $key )
+    {
+      $lng = array(
+        'property_create' => __('Ingatlan létrehozás', 'gh'),
+        'property_create' => __('Ingatlan törlése', 'gh'),
+        'property_archive' => __('Ingatlan archiválása', 'gh'),
+        'property_edit_price' => __('Ingatlan ár módosítás', 'gh'),
+        'property_edit' => __('Ingatlan szerkesztése', 'gh'),
+        'property_edit_autoconfirm_price' => __('Ingatlan árának automatikus jóváhagyás', 'gh'),
+        'property_edit_autoconfirm_datas' => __('Ingatlan adatmódosítás automatikus jóváhagyás', 'gh'),
+        'property_archive_autoconfirm' => __('Ingatlan archiválás automatikus jóváhagyás', 'gh'),
+        'user_property_connector' => __('Felhasználó <-> Ingatlan összecsatolás', 'gh'),
+      );
+
+      $text = $lng[$key];
+
+      if(empty($text)) return $key;
+
+      return $text;
+    }
+
     public function removeRoles( $role_set = array() )
     {
       foreach ($role_set as $key ) {

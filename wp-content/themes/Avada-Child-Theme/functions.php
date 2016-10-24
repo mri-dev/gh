@@ -5,6 +5,7 @@ define('DEVMODE', true);
 define('IMG', IFROOT.'/images');
 
 // Includes
+require_once WP_PLUGIN_DIR."/cmb2/init.php";
 require_once "includes/include.php";
 
 function theme_enqueue_styles() {
