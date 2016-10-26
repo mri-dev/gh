@@ -7,13 +7,15 @@ function gh_register_user_profile_metabox() {
   global $user_roles;
 	$prefix = 'gh_user_';
 
-  $current_user = get_userdata($_GET['user_id']);
+  if(isset($_GET['user_id'])){
+    $current_user = get_userdata($_GET['user_id']);
+  } else return;
 
-  print_r($user_roles->role_caps);
+  //print_r($user_roles->role_caps);
   //print_r($current_user);
 
   $main_role = $current_user->roles[0];
-  echo $main_role;
+  //echo $main_role;
 
 	/**
 	 * Metabox for the user profile screen
@@ -46,7 +48,7 @@ function gh_register_user_profile_metabox() {
       ) );
     }
   }
-
 }
+
 
 ?>

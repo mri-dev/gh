@@ -7,9 +7,14 @@ function gh_checbox_render_row_cb( $field_args, $field ) {
 	$name        = $field->args( '_name' );
 	$value       = $field->escaped_value();
 	$description = $field->args( 'description' );
+	$permission_name = str_replace("gh_user_permission_", "", $name);
+
+	$current_user = get_userdata($_GET['user_id']);
+	$caps = $current_user->caps;
 	?>
+
   <div class="gh-user-meta-checkbox <?php echo $classes; ?>">
-    <input type="checkbox" name="<?php echo $name; ?>" id="<?php echo $name; ?>" value="<?php echo $value; ?>"><label for="<?php echo $id; ?>"><?php echo $label; ?></label>
+    <input type="checkbox" <?php if(array_key_exists($permission_name, $caps)){ echo "checked='checked'"; }?> name="<?php echo $name; ?>" id="<?php echo $name; ?>" value="1"><label for="<?php echo $id; ?>"><?php echo $label; ?></label>
     <p class="description"><?php echo $description; ?></p>
   </div>
 	<?php

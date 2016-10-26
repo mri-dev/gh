@@ -50,6 +50,7 @@ class UserRoles
 
       foreach ( $capidset as $cap ) {
         $this->role_caps[$roleid][] = $cap;
+        $this->addCap( $roleid, $cap);
       }
     }
 

@@ -61,6 +61,10 @@ function add_admin_menus()
 }
 add_action( 'admin_bar_menu', 'add_admin_menus', 10);
 
+// Admin menü
+add_filter( 'admin_footer_text', '__return_empty_string', 11 );
+add_filter( 'update_footer', '__return_empty_string', 11 );
+
 // Admin bar stílus
 function admin_bar_color() {
 ?>
@@ -121,12 +125,14 @@ function gh_custom_role()
       'property_create', 'property_archive', 'property_edit', 'property_edit_price',
       'property_edit_autoconfirm_price', 'property_edit_autoconfirm_datas', 'property_archive_autoconfirm',
     ) );
+    $user_roles->addCap('reference_manager', 'read');
     // Régió Menedzser
     $user_roles->addAvaiableCaps( 'region_manager', array(
       'property_archive', 'property_edit', 'property_edit_price',
       'user_property_connector'
     ) );
     $user_roles->addCap('region_manager', 'read');
+    $user_roles->addCap('region_manager', 'list_users');
     // Admin
     $user_roles->addAvaiableCaps( 'administrator', array(
       'property_create', 'property_delete', 'property_archive', 'property_edit', 'property_edit_price',
@@ -141,6 +147,21 @@ function gh_custom_role()
 }
 add_action('after_setup_theme', 'gh_custom_role');
 
+// Helper tab lecsúszó eltávolítás
+function gh_remove_help_tabs() {
+    $screen = get_current_screen();
+    $screen->remove_help_tabs();
+}
+add_action('admin_head', 'gh_remove_help_tabs');
+
+// Admin dashboard widget eltávolítások
+function remove_dashboard_widget() {
+ 	remove_meta_box( 'themefusion_news', 'dashboard', 'side');
+  remove_meta_box( 'dashboard_primary', 'dashboard', 'side');
+  remove_meta_box( 'dashboard_activity', 'dashboard', 'core');
+}
+add_action('wp_dashboard_setup', 'remove_dashboard_widget' );
+
 function admin_init_fc()
 {
   $user = wp_get_current_user();
@@ -150,23 +171,6 @@ function admin_init_fc()
   }
 }
 add_action('admin_init', 'admin_init_fc');
-
-/**
-* Felhasználói jogosúltság kezelés aloldal
-*/
-function role_editor_admin() {
-  $user = wp_get_current_user();
-  if ( true  )
-  {
-    add_users_page(__('Szerepkörök jogosultságai', 'gh'), __('Jogosultságok', 'gh'), 'manage_options', 'user-role-editor', 'role_editor_admin_view');
-  }
-}
-add_action('admin_menu', 'role_editor_admin');
-function role_editor_admin_view()
-{
-  global $user_roles;
-  ob_start(); include('templates/admin/user-role-editor.php');ob_end_flush();
-}
 
 /**
 * Egyedi felső menü
