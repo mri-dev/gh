@@ -59,6 +59,12 @@ class UserRoles
       $role = get_role( $roleid );
       $role->add_cap($cap);
     }
+
+    public function removeCap($roleid, $cap)
+    {
+      $role = get_role( $roleid );
+      $role->remove_cap($cap);
+    }
 }
 
 ?>

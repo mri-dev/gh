@@ -50,5 +50,10 @@ function gh_register_user_profile_metabox() {
   }
 }
 
-
+// Kapcsolati adatok kibővítése
+function extend_user_contact_methods( $user_contact ) {
+	$user_contact['phone']   = __( 'Telefonszám', 'gh' );
+	return $user_contact;
+}
+add_filter( 'user_contactmethods', 'extend_user_contact_methods' );
 ?>

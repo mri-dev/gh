@@ -132,7 +132,7 @@ function gh_custom_role()
       'user_property_connector'
     ) );
     $user_roles->addCap('region_manager', 'read');
-    $user_roles->addCap('region_manager', 'list_users');
+
     // Admin
     $user_roles->addAvaiableCaps( 'administrator', array(
       'property_create', 'property_delete', 'property_archive', 'property_edit', 'property_edit_price',
@@ -147,6 +147,25 @@ function gh_custom_role()
 }
 add_action('after_setup_theme', 'gh_custom_role');
 
+/*
+* Fő menük menedzselésének kiiktatása
+**/
+/*
+function discart_manage_options_for_noadmin(){
+
+    if(!current_user_can('administrator')){
+        wp_die("There was a hole here once, it's gone now.");
+        exit();
+    }
+}
+add_action( 'load-options-general.php', 'discart_manage_options_for_noadmin' );
+add_action( 'load-options-writing.php', 'discart_manage_options_for_noadmin' );
+add_action( 'load-options-reading.php', 'discart_manage_options_for_noadmin' );
+add_action( 'load-options-discussion.php', 'discart_manage_options_for_noadmin' );
+add_action( 'load-options-media.php', 'discart_manage_options_for_noadmin' );
+add_action( 'load-options-permalink.php', 'discart_manage_options_for_noadmin' );
+add_action( 'load-options.php', 'discart_manage_options_for_noadmin' );
+*/
 // Helper tab lecsúszó eltávolítás
 function gh_remove_help_tabs() {
     $screen = get_current_screen();
@@ -171,6 +190,50 @@ function admin_init_fc()
   }
 }
 add_action('admin_init', 'admin_init_fc');
+
+function gh_init()
+{
+  add_rewrite_rule('^control/([^/]+)', 'index.php?cp=$matches[1]', 'top');
+}
+add_action('init', 'gh_init');
+
+function gh_custom_template($template) {
+  global $post, $wp_query;
+
+  if ( isset($wp_query->query_vars['cp'])) {
+      add_filter( 'body_class','gh_control_panel_class_body' );
+    return get_stylesheet_directory() . '/control.php';
+  } else {
+    return $template;
+  }
+}
+add_filter( 'template_include', 'gh_custom_template' );
+function gh_control_panel_class_body( $classes ) {
+  $classes[] = 'gh_control_panel';
+  return $classes;
+}
+
+function gh_query_vars($aVars) {
+  $aVars[] = "cp";
+  return $aVars;
+}
+add_filter('query_vars', 'gh_query_vars');
+
+function gh_login_redirect( $redirect_to, $request, $user ) {
+	//is there a user to check?
+	if ( isset( $user->roles ) && is_array( $user->roles ) ) {
+		//check for admins
+		if ( in_array( 'administrator', $user->roles ) ) {
+			// redirect them to the default place
+			return $redirect_to;
+		} else {
+			return '/control/home';
+		}
+	} else {
+		return $redirect_to;
+	}
+}
+add_filter( 'login_redirect', 'gh_login_redirect', 10, 3 );
 
 /**
 * Egyedi felső menü

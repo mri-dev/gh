@@ -13,7 +13,7 @@
     </div><!--
  --><div class="accounts">
       <?php if(is_user_logged_in()): $logged_user = wp_get_current_user(); ?>
-      <a href="<?php echo bloginfo('siteurl');?>/admin"><div class="ico"><i class="fa fa-user"></i>&nbsp;</div><?php echo sprintf(__('Belépve, mint <strong>%s</strong>', 'gh'), $logged_user->display_name); ?></a>
+      <a href="<?php echo bloginfo('siteurl');?>/control/home"><div class="ico"><i class="fa fa-user"></i>&nbsp;</div><?php echo sprintf(__('Belépve, mint <strong>%s</strong>', 'gh'), $logged_user->display_name); ?></a>
       <?php else: ?>
       <a href="<?php echo bloginfo('siteurl');?>/admin"><div class="ico"><img src="<?=IMG?>/ico-lock.svg" alt="Account" /></div><?php echo __('Belépés / Regisztráció', 'gh'); ?></a>
       <?php endif; ?>

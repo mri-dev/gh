@@ -244,6 +244,111 @@ footer {
   }
 }
 
+.gh_control_panel {
+  #main{
+    padding-top: 0 !important;
+  }
+
+  .gn_control_content_container {
+    position: relative;
+
+    .gh_control_sidebar {
+      width: 20%;
+      background: #ffffff;
+      position: absolute;
+      left: 0;
+      top: -55px;
+      -webkit-box-shadow:  0 10px 25px -12px #4f5959;
+      -moz-box-shadow:  0 10px 25px -12px #4f5959;
+      box-shadow:  0 10px 25px -12px #4f5959;
+
+
+      ul, li{
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      ul {
+        li{
+          a{
+            display: block;
+            font-size: 1em;
+            padding: 10px;
+
+            i{
+              margin-right: 5px;
+            }
+
+            &:hover{
+              background: #f2f2f2;
+            }
+          }
+          &.mainhead{
+            background: $color-sec;
+            line-height: 55px;
+            height: 55px;
+            color: white;
+            text-transform: uppercase;
+            text-align: center;
+            font-size: 1.1em;
+          }
+          &.logout{
+            border-top: 1px solid #f1f1f1;
+            a{
+              font-size: 0.8em;
+              color: desaturate(lighten($color-pr, 20%), 35);
+            }
+          }
+        }
+      }
+    }
+
+    .gh_control_content_holder{
+      margin-left: 20%;
+      padding: 15px 0 0 15px;
+
+      .heading{
+        margin-bottom: 20px;
+        h1 {
+          font-size: 36px !important;
+          line-height: 1.2;
+          margin: 0 0 5px 0;
+        }
+        h1 + div.desc {
+          color: #adadad;
+          font-size: 1.1em;
+        }
+      }
+    }
+
+  }
+
+}
+
+.alert{
+  position: relative;
+  padding-left: 50px;
+  &:before{
+    content:"";
+    font-family: "FontAwesome";
+    position: absolute;
+    font-size: 24px;
+    line-height: 24px;
+    height: 24px;
+    left: 15px;
+  }
+  &.alert-danger{
+    color: #b51a18;
+    background-color: #ffe9e9;
+    border-color: #fdcccb;
+
+    &:before {
+      content: "\f071";
+    }
+  }
+}
+
 #toTop{
   bottom: 25px;
   right: 25px;
