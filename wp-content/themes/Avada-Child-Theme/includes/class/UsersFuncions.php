@@ -27,4 +27,14 @@ function gh_users_data_save( $id )
     }
   }
 }
+
+/**
+* Bejelentkezési idő mentése
+**/
+function user_login_save_date ( $login )
+{
+  $user = get_userdatabylogin ( $login );
+  update_usermeta ( $user->ID, 'last_login', date ( 'Y-m-d H:i:s' ) );
+}
+add_action ( 'wp_login', 'user_login_save_date' );
 ?>

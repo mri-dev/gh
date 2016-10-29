@@ -176,6 +176,7 @@ add_action('admin_init', 'admin_init_fc');
 
 function gh_init()
 {
+  date_default_timezone_set('Europe/Budapest');
   add_rewrite_rule('^control/([^/]+)', 'index.php?cp=$matches[1]', 'top');
 }
 add_action('init', 'gh_init');
