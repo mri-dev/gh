@@ -185,6 +185,16 @@
   }
 }
 
+h1 .badge {
+  background: #d9d9d9;
+  padding: 5px 10px;
+  vertical-align: middle;
+  font-size: 15px;
+  border-radius: 8px;
+  text-align: center;
+  color: #888;
+}
+
 footer {
   .fusion-widget-area{
     .fusion-footer-widget-column{
@@ -278,6 +288,8 @@ footer {
 
             i{
               margin-right: 5px;
+              width: 16px;
+              text-align: center;
             }
 
             &:hover{

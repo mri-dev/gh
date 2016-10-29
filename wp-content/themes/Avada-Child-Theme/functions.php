@@ -124,12 +124,14 @@ function gh_custom_role()
     $user_roles->addAvaiableCaps( 'reference_manager', array(
       'property_create', 'property_archive', 'property_edit', 'property_edit_price',
       'property_edit_autoconfirm_price', 'property_edit_autoconfirm_datas', 'property_archive_autoconfirm',
+      'stat_property'
     ) );
     $user_roles->addCap('reference_manager', 'read');
     // Régió Menedzser
     $user_roles->addAvaiableCaps( 'region_manager', array(
       'property_archive', 'property_edit', 'property_edit_price',
-      'user_property_connector'
+      'user_property_connector',
+      'stat_region_property'
     ) );
     $user_roles->addCap('region_manager', 'read');
 
@@ -147,25 +149,6 @@ function gh_custom_role()
 }
 add_action('after_setup_theme', 'gh_custom_role');
 
-/*
-* Fő menük menedzselésének kiiktatása
-**/
-/*
-function discart_manage_options_for_noadmin(){
-
-    if(!current_user_can('administrator')){
-        wp_die("There was a hole here once, it's gone now.");
-        exit();
-    }
-}
-add_action( 'load-options-general.php', 'discart_manage_options_for_noadmin' );
-add_action( 'load-options-writing.php', 'discart_manage_options_for_noadmin' );
-add_action( 'load-options-reading.php', 'discart_manage_options_for_noadmin' );
-add_action( 'load-options-discussion.php', 'discart_manage_options_for_noadmin' );
-add_action( 'load-options-media.php', 'discart_manage_options_for_noadmin' );
-add_action( 'load-options-permalink.php', 'discart_manage_options_for_noadmin' );
-add_action( 'load-options.php', 'discart_manage_options_for_noadmin' );
-*/
 // Helper tab lecsúszó eltávolítás
 function gh_remove_help_tabs() {
     $screen = get_current_screen();
@@ -197,11 +180,24 @@ function gh_init()
 }
 add_action('init', 'gh_init');
 
+function get_control_controller( $controller_class )
+{ global $wp_query;
+
+  // Template controller
+  if ( file_exists(dirname(__FILE__).'/includes/controller/control_'.$controller_class.'.php') ) {
+    include dirname(__FILE__).'/includes/controller/control_'.$controller_class.'.php';
+    $controller_class = 'control_'.$controller_class;
+    return new $controller_class;
+  }
+
+  return false;
+}
+
 function gh_custom_template($template) {
   global $post, $wp_query;
 
   if ( isset($wp_query->query_vars['cp'])) {
-      add_filter( 'body_class','gh_control_panel_class_body' );
+    add_filter( 'body_class','gh_control_panel_class_body' );
     return get_stylesheet_directory() . '/control.php';
   } else {
     return $template;

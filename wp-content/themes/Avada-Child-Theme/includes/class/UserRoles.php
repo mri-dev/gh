@@ -20,7 +20,7 @@ class UserRoles
     {
       $lng = array(
         'property_create' => __('Ingatlan létrehozás', 'gh'),
-        'property_create' => __('Ingatlan törlése', 'gh'),
+        'property_delete' => __('Ingatlan törlése', 'gh'),
         'property_archive' => __('Ingatlan archiválása', 'gh'),
         'property_edit_price' => __('Ingatlan ár módosítás', 'gh'),
         'property_edit' => __('Ingatlan szerkesztése', 'gh'),
@@ -28,6 +28,8 @@ class UserRoles
         'property_edit_autoconfirm_datas' => __('Ingatlan adatmódosítás automatikus jóváhagyás', 'gh'),
         'property_archive_autoconfirm' => __('Ingatlan archiválás automatikus jóváhagyás', 'gh'),
         'user_property_connector' => __('Felhasználó <-> Ingatlan összecsatolás', 'gh'),
+        'stat_property' => __('Saját ingatlan statisztika', 'gh'),
+        'stat_region_property' => __('Régió ingatlan statisztikák', 'gh')
       );
 
       $text = $lng[$key];
