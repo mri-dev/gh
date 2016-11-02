@@ -30,26 +30,19 @@ class WP_Listings {
 
 		$this->property_details = apply_filters( 'wp_listings_property_details', array(
 			'col1' => array(
-			    __( 'Price:', 'wp-listings' ) 					=> '_listing_price',
-			    __( 'Address:', 'wp-listings' )					=> '_listing_address',
-			    __( 'City:', 'wp-listings' )					=> '_listing_city',
-			    __( 'County:', 'wp-listings' )					=> '_listing_county',
-			    __( 'State:', 'wp-listings' )					=> '_listing_state',
-			    __( 'Country:', 'wp-listings' )					=> '_listing_country',
-			    __( 'ZIP:', 'wp-listings' )						=> '_listing_zip',
-			    __( 'MLS #:', 'wp-listings' ) 					=> '_listing_mls',
-				__( 'Open House Time & Date:', 'wp-listings' ) 	=> '_listing_open_house'
+				__( 'Azonosító', 'gh' ) => '_listing_idnumber',
+				__( 'Ingatlan státusza', 'gh' ) 	=> '_listing_status',
+				__( 'Ingatlan állapot', 'gh' ) 	=> '_listing_property_condition',
+				__( 'Ingatlan kategória', 'gh' ) 	=> '_listing_property_types',
+				__( 'Pontos cím (utca, házszám, stb)', 'gh' ) => '_listing_address',
+			  __( 'Irányár', 'gh' ) 	=> '_listing_price',
 			),
 			'col2' => array(
-			    __( 'Year Built:', 'wp-listings' ) 				=> '_listing_year_built',
-			    __( 'Floors:', 'wp-listings' ) 					=> '_listing_floors',
-			    __( 'Square Feet:', 'wp-listings' )				=> '_listing_sqft',
-				__( 'Lot Square Feet:', 'wp-listings' )			=> '_listing_lot_sqft',
-			    __( 'Bedrooms:', 'wp-listings' )				=> '_listing_bedrooms',
-			    __( 'Bathrooms:', 'wp-listings' )				=> '_listing_bathrooms',
-			    __( 'Half Bathrooms:', 'wp-listings' )			=> '_listing_half_bath',
-			    __( 'Garage:', 'wp-listings' )					=> '_listing_garage',
-			    __( 'Pool:', 'wp-listings' )					=> '_listing_pool'
+			    __( 'Építés éve', 'gh' )  => '_listing_year_built',
+					__( 'Szintek száma', 'gh' )  => '_listing_level_numbers',
+					__( 'Szobák száma', 'gh' )  => '_listing_room_numbers',
+					__( 'Telek alapterület (nm)', 'gh' )  => '_listing_lot_size',
+					__( 'Ingatlan alapterület (nm)', 'gh' )  => '_listing_property_size',
 			),
 		) );
 

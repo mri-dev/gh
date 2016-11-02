@@ -2,6 +2,7 @@
   $control = get_control_controller('properties');
   $item_num = 0;
 ?>
+<pre>
 <div class="gh_control_content_holder">
   <div class="heading">
     <h1><?=sprintf(__('Ingatlanok <span class="badge">%d</span>', 'gh'), $item_num)?></h1>
