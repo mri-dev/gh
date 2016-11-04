@@ -38,11 +38,19 @@ class WP_Listings {
 			  __( 'Irányár', 'gh' ) 	=> '_listing_price',
 			),
 			'col2' => array(
-			    __( 'Építés éve', 'gh' )  => '_listing_year_built',
-					__( 'Szintek száma', 'gh' )  => '_listing_level_numbers',
-					__( 'Szobák száma', 'gh' )  => '_listing_room_numbers',
-					__( 'Telek alapterület (nm)', 'gh' )  => '_listing_lot_size',
-					__( 'Ingatlan alapterület (nm)', 'gh' )  => '_listing_property_size',
+		    __( 'Építés éve', 'gh' )  => '_listing_year_built',
+				__( 'Szintek száma', 'gh' )  => '_listing_level_numbers',
+				__( 'Szobák száma', 'gh' )  => '_listing_room_numbers',
+				__( 'Telek alapterület (nm)', 'gh' )  => '_listing_lot_size',
+				__( 'Ingatlan alapterület (nm)', 'gh' )  => '_listing_property_size',
+				__( 'Fürdőszobák száma', 'gh' )  => '_listing_bathroom_numbers',
+			),
+			'checkbox' => array(
+				__( 'Garázs', 'gh' )  => '_listing_garage',
+				__( 'Autóbeálló', 'gh' )  => '_listing_driveways',
+				__( 'Kertcsoport, udvar', 'gh' )  => '_listing_garden',
+				__( 'Lift', 'gh' )  => '_listing_lift',
+				__( 'Zöldövezet', 'gh' )  => '_listing_green_area',
 			),
 		) );
 

@@ -5,6 +5,17 @@ class PropertyFactory
   const PROPERTY_TAXONOMY_META_PREFIX = '_listing_';
 
   public $property_taxonomies_id = array('property-types', 'property-condition', 'status', 'locations');
+  public $property_status_colors = array(
+    'publish' => '#c6e8c6',
+    'draft'   => '#e2e2e2',
+    'pending' => '#ffd383',
+    'future' => '#fff8a8'
+  );
+
+  public function getValuta()
+  {
+    return 'Ft';
+  }
 
   public function __construct()
   {

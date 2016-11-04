@@ -12,9 +12,9 @@ class control_property_create
     return $this;
   }
 
-  public function getPropertyParams()
+  public function getPropertyParams( $group = 'col1' )
   {
-    return $this->listing->property_details['col2'];
+    return $this->listing->property_details[$group];
   }
 
   public function getTaxonomySelects( $id, $value = null )

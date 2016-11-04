@@ -7,6 +7,67 @@
   right: 0;
 }
 
+input[type=checkbox]{
+  display: none;
+}
+input[type=checkbox] + label {
+  cursor: pointer;
+  position: relative;
+  padding-left: 24px;
+
+  &:before {
+    content: "\f096";
+    font-family: 'FontAwesome';
+    position: absolute;
+    left: 0;
+    font-size: 18px;
+    color: #a7a7a7;
+    line-height: 20px;
+    padding: 0;
+    margin: 0;
+  }
+}
+input[type=checkbox]:checked + label {
+  &:before {
+    content: "\f046";
+    color: #000000;
+  }
+}
+
+.boxed-labels{
+  input[type=checkbox]{
+    display: none;
+  }
+  input[type=checkbox] + label {
+    cursor: pointer;
+    position: relative;
+    background: #ebeded;
+    border: 2px solid #d9d9d9;
+    padding: 8px;
+    text-align: left;
+    padding-left: 30px;
+    color: $color-sec !important;
+
+    &:before {
+      content: "\f0c8";
+      font-family: 'FontAwesome';
+      position: absolute;
+      left: 8px;
+      color: #ffffff;
+    }
+  }
+  input[type=checkbox]:checked + label {
+    background: #bf393c;
+    border: 2px solid #a92b2e;
+    color: white !important;
+
+    &:before {
+      content: "\f046";
+      color: #ffffff;
+    }
+  }
+}
+
 .fusion-main-menu > ul > li{
   position: relative;
   border-right: 2px solid #333b3b;
@@ -207,10 +268,12 @@
         font-size: 0.8em;
         color: #888888;
         text-align: center;
+        vertical-align: middle;
       }
     }
   }
   .data-body{
+    font-size: 0.8em;
     .row{
       margin: 0;
       & > div[class*=col-md]{
@@ -231,6 +294,40 @@ h1 .badge {
   border-radius: 8px;
   text-align: center;
   color: #888;
+}
+
+.submit-property{
+  margin: 50px 0 50px 0;
+
+  button[type=submit] {
+    cursor: pointer;
+    padding: 15px 25px;
+    color: white;
+    text-transform: uppercase;
+    background: $color-pr;
+    font-size: 1.2em;
+    border: 2px solid #d9d9d9;
+    margin-top: 20px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    line-height: 1;
+    &:hover {
+      background: darken($color-pr, 10%);
+    }
+  }
+}
+
+.dashboard-label{
+  &.status-label {
+    text-align: center;
+    width: 80%;
+    margin: 0 auto;
+    border-radius: 10px;
+    line-height: 20px;
+    font-size: 0.8em;
+    font-weight: bold;
+  }
 }
 
 form.wide-form{
@@ -291,6 +388,18 @@ form.wide-form{
     content:" *";
     color: $color-pr;
     font-size: 0.9em;
+  }
+
+  .allowvalidate{
+    label {
+      font-weight: bold;
+      font-size: 1.1em;
+      color: black;
+
+      &:before {
+        margin-top: 4px;
+      }
+    }
   }
 }
 
@@ -481,6 +590,58 @@ footer {
   &:hover {
     &:before {
       color: white !important;
+    }
+  }
+}
+
+.gh_control_properties_page{
+  .adv-inf{
+    color: #8c8c8c;
+
+    .img {
+      float: left;
+      margin: 0 10px 0 0;
+      width:50px;
+      max-width: 50px;
+      overflow: hidden;
+      -webkit-border-radius: 10px;
+      -moz-border-radius: 10px;
+      border-radius: 10px;
+      img{
+        width: 100%;
+      }
+    }
+    .main-row{
+      font-size: 1.25em;
+      line-height: 1;
+      padding: 5px 0;
+    }
+    .alt-row {
+      font-size: 0.85em;
+    }
+    .region{
+      color: #444444;
+      font-weight: bold;
+    }
+    .address{
+
+    }
+    .ref-number {
+      background: #8c8c8c;
+      color: white;
+      font-weight: bold;
+      text-transform: uppercase;
+      line-height: 1.4;
+      padding: 0 4px;
+      -webkit-border-radius: 3px;
+      -moz-border-radius: 3px;
+      border-radius: 3px;
+      margin-right: 5px;
+    }
+
+    .price {
+      color: $color-pr;
+      font-weight: bold;
     }
   }
 }

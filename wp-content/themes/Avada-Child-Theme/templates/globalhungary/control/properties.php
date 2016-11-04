@@ -1,8 +1,12 @@
 <?php
   $control = get_control_controller('properties');
-  $item_num = 0;
+  $properties = $control->getProperties(array(
+    'post_status' => array('publish', 'pending', 'draft', 'future')
+  ));
+  $item_num = $control->propertyCount();
 ?>
 <pre>
+</pre>
 <div class="gh_control_content_holder">
   <div class="heading">
     <h1><?=sprintf(__('Ingatlanok <span class="badge">%d</span>', 'gh'), $item_num)?></h1>
@@ -15,15 +19,41 @@
     <div class="data-table">
       <div class="data-head">
         <div class="row">
-          <div class="col-md-4"><?=__('Név', 'gh')?></div>
-          <div class="col-md-3"><?=__('Email', 'gh')?></div>
-          <div class="col-md-2"><?=__('Ingatlanok', 'gh')?></div>
-          <div class="col-md-3"><?=__('Utoljára belépett', 'gh')?></div>
+          <div class="col-md-5"><?=__('Ingatlan', 'gh')?></div>
+          <div class="col-md-3"><?=__('Referens', 'gh')?></div>
+          <div class="col-md-2"><?=__('Állapot', 'gh')?></div>
+          <div class="col-md-2"><?=__('Létrehozva', 'gh')?></div>
         </div>
       </div>
       <div class="data-body">
+        <?php foreach( $properties as $p ): ?>
+          <div class="row">
+            <div class="col-md-5">
+              <div class="adv-inf">
+                <div class="img">
+                  <img src="<?=$p->ProfilImg()?>" alt="" />
+                </div>
+                <div class="main-row">
+                  <span class="region"><?=$p->RegionName()?></span> / <span class="address"><?=$p->Address()?></span>
+                </div>
+                <div class="alt-row">
+                  <span class="ref-number"><?=$p->Azonosito()?></span>
+                  <span class="price"><?=$p->Price(true)?></span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 center"><a title="<?=__('Felhasználó ingatlanjainak listázása', 'gh')?>" href="/control/properties/?user=<?=$p->AuthorID()?>"><?=$p->AuthorName()?></a></div>
+            <div class="col-md-2 center"><?=$p->Status(false)?></div>
+            <div class="col-md-2 center">
+              <?=$p->CreateAt()?>
+            </div>
+          </div>
+        <?php endforeach; ?>
       </div>
     </div>
+    <pre>
+      <? print_r($properties); ?>
+    </pre>
     <?php endif; ?>
   </div>
 </div>

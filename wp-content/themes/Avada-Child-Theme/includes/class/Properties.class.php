@@ -1,6 +1,40 @@
 <?php
 class Properties extends PropertyFactory
 {
+  public $arg = array();
+  private $datalist = array();
+
+  public function __construct( $arg = array() )
+  {
+    $this->arg = array_replace( $this->arg, $arg );
+
+    return $this;
+  }
+
+  public function getList()
+  {
+    $data     = array();
+    $post_arg = array(
+      'post_type' => 'listing'
+    );
+
+    if (isset($this->arg['post_status'])) {
+      $post_arg['post_status'] = $this->arg['post_status'];
+    }
+
+    $posts = get_posts($post_arg);
+
+    foreach($posts as $post) {
+      $this->datalist[] = new Property($post);
+    }
+    return $this->datalist;
+  }
+
+  public function Count()
+  {
+    return wp_count_posts( 'listing' );
+  }
+
   public function getListParams( $taxonomy, $selected = null )
   {
     wp_dropdown_categories(array(
