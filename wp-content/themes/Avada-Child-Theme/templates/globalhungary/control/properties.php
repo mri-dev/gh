@@ -1,15 +1,16 @@
 <?php
+  global $me;
+
   $control = get_control_controller('properties');
   $properties = $control->getProperties(array(
-    'post_status' => array('publish', 'pending', 'draft', 'future')
+    'post_status' => array('publish', 'pending', 'draft', 'future'),
+    'location' => $me->RegionID()
   ));
   $item_num = $control->propertyCount();
 ?>
-<pre>
-</pre>
 <div class="gh_control_content_holder">
   <div class="heading">
-    <h1><?=sprintf(__('Ingatlanok <span class="badge">%d</span>', 'gh'), $item_num)?></h1>
+    <h1><?=sprintf(__('Ingatlanok <span class="region">/ %s</span> <span class="badge">%d</span>', 'gh'), $me->RegionName(), $item_num)?></h1>
     <div class="desc"><?=__('Az alábbi listában az Ön régiójába található ingatlan hirdetéseket találhatja.', 'gh')?></div>
   </div>
   <div class="gh_control_properties_page">
@@ -51,9 +52,6 @@
         <?php endforeach; ?>
       </div>
     </div>
-    <pre>
-      <? print_r($properties); ?>
-    </pre>
     <?php endif; ?>
   </div>
 </div>

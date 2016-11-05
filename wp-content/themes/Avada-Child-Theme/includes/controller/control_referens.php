@@ -2,13 +2,14 @@
 class control_referens
 {
   public $users = null;
-  private $user_data = array();
+  private $user_ids = array();
 
   public function __construct()
   {
+    global $me;
     $this->users = (new GlobalHungaryUsers(array(
       'type' => 'reference_manager',
-      //'reference_manager_id' => get_current_user_id()
+      'region' => $me->RegionID()
     )))->getUsers();
     return $this;
   }
@@ -20,13 +21,19 @@ class control_referens
     if( empty($data) ) return false;
 
     foreach ($data as $d) {
-      $d->properties = 0;
-      $d->phone = get_user_meta($d->ID, 'phone', true);
-
-      $this->user_data[] = $d;
+      if (in_array($d->ID, $this->user_ids)) {
+        continue;
+      }
+      $this->user_ids[] = $d->ID;
+      $this->user_data[] = new UserHelper(array('id' => $d->ID));
     }
 
     return $this->user_data;
+  }
+
+  public function Count()
+  {
+    return count($this->user_ids);
   }
 
   private function get_manager_userlist()

@@ -32,11 +32,28 @@ class Property extends PropertyFactory
   }
   public function RegionName()
   {
-    return 'Régió';
+    $terms = wp_get_post_terms( $this->ID(), 'locations' );
+
+    foreach ($terms as $term) {
+      if($term->taxonomy == 'locations') {
+        $parent = false;
+        if ($term->parent != 0) {
+          $parent = get_term($term->parent);
+        }
+        return ($parent) ? $parent->name.' > '.$term->name . ( ($parent->name == 'Budapest') ? ' '.__('kerület', 'gh') : '' ) : $term->name;
+      }
+    }
+
+    return '???';
   }
   public function Address()
   {
-    return 'Teljes pontos cím';
+    $addr = get_post_meta($this->ID(), '_listing_address', true);
+
+    if (!$addr) {
+      return '--';
+    }
+    return $addr;
   }
   public function Azonosito()
   {

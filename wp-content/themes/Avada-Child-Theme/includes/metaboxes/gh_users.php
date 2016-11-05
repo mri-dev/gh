@@ -48,6 +48,31 @@ function gh_register_user_profile_metabox() {
       ) );
     }
   }
+
+  $cmb_user_zone = new_cmb2_box( array(
+		'id'               => $prefix . 'zona',
+		'title'            => __( 'Felhasználó régió', 'gh' ), // Doesn't output for user boxes
+		'object_types'     => array( 'user' ), // Tells CMB2 to use user_meta vs post_meta
+		'show_names'       => true,
+    'priority'          => 'high',
+		'new_user_section' => 'add-new-user', // where form will show on new user page. 'add-existing-user' is only other valid option.
+    'cmb_styles' => false
+	) );
+
+  $cmb_user_zone->add_field( array(
+    'name'     => __( 'Felhasználó zóna adatok', 'gh' ),
+    'desc'     => __( 'Válassza ki, hogy a felhasználó melyik régió zónába tartozik. A felhasználó jellemzően a régióhoz kapcsolódó adatokat láthatja, szerkesztheti.', 'gh' ),
+    'id'       => $prefix . 'zona_desc',
+    'type'     => 'title',
+    'on_front' => false,
+  ) );
+
+  $cmb_user_zone->add_field( array(
+    'name' => $prefix.'regio',
+    'id'   => $prefix . 'regio',
+    'type' => 'select',
+    'render_row_cb' => 'gh_regio_select_render_row_cb',
+  ) );
 }
 
 // Kapcsolati adatok kibővítése

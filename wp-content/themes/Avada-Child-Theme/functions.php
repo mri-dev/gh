@@ -8,6 +8,8 @@ define('IMG', IFROOT.'/images');
 require_once WP_PLUGIN_DIR."/cmb2/init.php";
 require_once "includes/include.php";
 
+$me = new UserHelper();
+
 function theme_enqueue_styles() {
     wp_enqueue_style( 'avada-parent-stylesheet', get_template_directory_uri() . '/style.css?' . ( (DEVMODE === true) ? time() : '' )  );
     wp_enqueue_style( 'avada-child-stylesheet', IFROOT . '/style.css?' . ( (DEVMODE === true) ? time() : '' ) );

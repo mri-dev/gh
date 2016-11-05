@@ -22,6 +22,14 @@ class Properties extends PropertyFactory
       $post_arg['post_status'] = $this->arg['post_status'];
     }
 
+    if (isset($this->arg['location']) && !empty($this->arg['location'])) {
+      $post_arg['tax_query'][] = array(
+        'taxonomy'  => 'locations',
+        'field'     => 'term_id',
+        'terms'      => $this->arg['location']
+      );
+    }
+
     $posts = get_posts($post_arg);
 
     foreach($posts as $post) {
@@ -30,9 +38,20 @@ class Properties extends PropertyFactory
     return $this->datalist;
   }
 
+  public function CountTotal()
+  {
+    $n = 0;
+    foreach (wp_count_posts( 'listing' ) as $key => $value) {
+      if (array_key_exists($key, $this->property_status_colors)) {
+        $n += $value;
+      }
+    }
+    return $n;
+  }
+
   public function Count()
   {
-    return wp_count_posts( 'listing' );
+    return count($this->datalist);
   }
 
   public function getListParams( $taxonomy, $selected = null )

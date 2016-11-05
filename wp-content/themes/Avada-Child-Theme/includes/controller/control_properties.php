@@ -11,8 +11,9 @@ class control_properties
   {
     $data = false;
     $properties = new Properties( $arg );
+    $data = $properties->getList();
     $this->properties_number = $properties->Count();
-    return $properties->getList();
+    return $data;
   }
 
   public function propertyCount()

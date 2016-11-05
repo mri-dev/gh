@@ -13,25 +13,12 @@ class GlobalHungaryUsers
       $arg['role'] = $param['type'];
     }
 
-    if (isset($param['reference_manager_id'])) {
-      $arg['include'] = $this->get_manager_userlist($param['reference_manager_id']);
+    if (isset($param['region'])) {
+      $arg['meta_key'] = 'gh_user_regio';
+      $arg['meta_value'] = $param['region'];
     }
-
     $this->users = new WP_User_Query( $arg );
-
     return $this;
-  }
-
-  public function get_manager_userlist( $user_id = false )
-  {
-    if (!$user_id) {
-      $user = wp_get_current_user();
-      $user_id = $user->ID;
-    }
-
-    $referens_user_list_ids = get_user_meta( $user_id, 'gh_manager_referens_ids' , true);
-
-    return explode(",", $referens_user_list_ids);
   }
 
   public function getUsers()

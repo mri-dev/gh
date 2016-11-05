@@ -20,4 +20,25 @@ function gh_checbox_render_row_cb( $field_args, $field ) {
 	<?php
 }
 
+function gh_regio_select_render_row_cb( $field_args, $field )
+{
+	$classes     = $field->row_classes();
+	$id          = $field->args( 'id' );
+	$label       = $field->args( 'name' );
+	$name        = $field->args( '_name' );
+	$value       = $field->escaped_value();
+?>
+<?php wp_dropdown_categories(array(
+		'class' => $classes,
+		'id' => $id,
+		'name' => $name,
+		'taxonomy' => 'locations',
+		'hide_empty' => false,
+		'hierarchical' => 1,
+		'selected' => $value,
+		'show_option_none' => __( '-- válaszon régiót --', 'gh' )
+	)); ?>
+	<?php
+}
+
 ?>
