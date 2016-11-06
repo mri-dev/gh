@@ -35,11 +35,12 @@
                   <img src="<?=$p->ProfilImg()?>" alt="" />
                 </div>
                 <div class="main-row">
-                  <span class="region"><?=$p->RegionName()?></span> / <span class="address"><?=$p->Address()?></span>
+                  <span class="title"><?=$p->Title()?></span>
                 </div>
                 <div class="alt-row">
                   <span class="ref-number"><?=$p->Azonosito()?></span>
                   <span class="price"><?=$p->Price(true)?></span>
+                  <span class="region"><?=$p->RegionName()?></span> / <span class="address"><?=$p->Address()?></span>
                 </div>
               </div>
             </div>

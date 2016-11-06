@@ -296,6 +296,10 @@ h1 .badge {
   color: #888;
 }
 
+small.inputhint{
+  color: #9c9c9c;
+}
+
 h1 .region{
   font-size: 0.65em;
   color: #c34646;
@@ -572,6 +576,10 @@ footer {
       content: "\f071";
     }
   }
+
+  & > h3 {
+    margin: 0 0 5px 0;
+  }
 }
 
 #toTop{
@@ -628,6 +636,10 @@ footer {
       color: #444444;
       font-weight: bold;
     }
+    .title{
+      font-weight: bold;
+      color: #222222;
+    }
     .address{
 
     }
@@ -647,6 +659,7 @@ footer {
     .price {
       color: $color-pr;
       font-weight: bold;
+      margin-right: 5px;
     }
   }
 }

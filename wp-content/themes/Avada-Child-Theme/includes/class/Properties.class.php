@@ -59,7 +59,7 @@ class Properties extends PropertyFactory
     wp_dropdown_categories(array(
       'show_option_all' => __('-- válasszon --', 'gh'),
       'taxonomy'        => $taxonomy,
-      'name'            => self::PROPERTY_TAXONOMY_META_PREFIX.$taxonomy,
+      'name'            => 'tax['.$taxonomy.']',
       'id'              => self::PROPERTY_TAXONOMY_META_PREFIX.str_replace("-","_", $taxonomy),
       'orderby'         => 'name',
       'selected'        => $selected,
@@ -80,7 +80,7 @@ class Properties_Select_Walker extends Walker_CategoryDropdown {
 
     $cat_name = PropertyFactory::i18n_taxonomy_values($cat_name);
 
-		$output .= "\t<option class=\"level-$depth\" value=\"".$category->slug."\"";
+		$output .= "\t<option class=\"level-$depth\" value=\"".$category->term_id."\"";
 		if ( $category->term_id == $args['selected'] )
 			$output .= ' selected="selected"';
 		$output .= '>';

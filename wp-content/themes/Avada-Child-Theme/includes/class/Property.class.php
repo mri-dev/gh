@@ -13,7 +13,10 @@ class Property extends PropertyFactory
   {
     return $this->raw_post->ID;
   }
-
+  public function Title()
+  {
+    return $this->raw_post->post_title;
+  }
   public function CreateAt()
   {
     return date(get_option('date_format').' '.get_option('time_format'), strtotime($this->raw_post->post_date));

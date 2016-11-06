@@ -352,17 +352,22 @@ h1 .badge {
 }
 
 /* line 299, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
+small.inputhint {
+  color: #9c9c9c;
+}
+
+/* line 303, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
 h1 .region {
   font-size: 0.65em;
   color: #c34646;
 }
 
-/* line 304, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
+/* line 308, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
 .submit-property {
   margin: 50px 0 50px 0;
 }
 
-/* line 307, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
+/* line 311, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
 .submit-property button[type=submit] {
   cursor: pointer;
   padding: 15px 25px;
@@ -378,12 +383,12 @@ h1 .region {
   line-height: 1;
 }
 
-/* line 320, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
+/* line 324, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
 .submit-property button[type=submit]:hover {
   background: #b8171b;
 }
 
-/* line 327, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
+/* line 331, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
 .dashboard-label.status-label {
   text-align: center;
   width: 80%;
@@ -394,12 +399,12 @@ h1 .region {
   font-weight: bold;
 }
 
-/* line 339, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
+/* line 343, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
 form.wide-form .row {
   margin-bottom: 15px;
 }
 
-/* line 340, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
+/* line 344, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
 form.wide-form .row label {
   color: #696969;
   font-size: 0.9em;
@@ -407,7 +412,7 @@ form.wide-form .row label {
   display: block;
 }
 
-/* line 346, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
+/* line 350, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
 form.wide-form .row input[type=text],
 form.wide-form .row input[type=number],
 form.wide-form .row select,
@@ -427,12 +432,12 @@ form.wide-form .row textarea {
   width: 100%;
 }
 
-/* line 365, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
+/* line 369, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
 form.wide-form .row select, form.wide-form .row textarea {
   width: 100%;
 }
 
-/* line 369, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
+/* line 373, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
 form.wide-form .row .noinp-data {
   line-height: 40px;
   font-size: 1.2em;
@@ -440,7 +445,7 @@ form.wide-form .row .noinp-data {
   color: black;
 }
 
-/* line 379, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
+/* line 383, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
 form.wide-form h3 {
   text-transform: uppercase;
   color: black;
@@ -448,36 +453,36 @@ form.wide-form h3 {
   font-size: 20px;
 }
 
-/* line 386, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
+/* line 390, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
 form.wide-form .wp-editor-container {
   border: 1px solid #e5e5e5;
 }
 
-/* line 389, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
+/* line 393, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
 form.wide-form .wp-editor-wrap {
   margin-top: -30px;
 }
 
-/* line 392, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
+/* line 396, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
 form.wide-form .reqf > label:after {
   content: " *";
   color: #E31F24;
   font-size: 0.9em;
 }
 
-/* line 399, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
+/* line 403, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
 form.wide-form .allowvalidate label {
   font-weight: bold;
   font-size: 1.1em;
   color: black;
 }
 
-/* line 404, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
+/* line 408, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
 form.wide-form .allowvalidate label:before {
   margin-top: 4px;
 }
 
-/* line 413, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
+/* line 417, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
 footer .fusion-widget-area .fusion-footer-widget-column {
   display: inline-block;
   *display: inline;
@@ -487,29 +492,29 @@ footer .fusion-widget-area .fusion-footer-widget-column {
   width: 60%;
 }
 
-/* line 421, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
+/* line 425, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
 footer .fusion-widget-area .fusion-footer-widget-column:first-child,
 footer .fusion-widget-area .fusion-footer-widget-column:last-child {
   width: 20%;
 }
 
-/* line 426, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
+/* line 430, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
 footer .footerlogo-holder {
   margin-top: 20px;
 }
 
-/* line 428, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
+/* line 432, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
 footer .footerlogo-holder .logo {
   text-align: center;
 }
 
-/* line 430, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
+/* line 434, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
 footer .footerlogo-holder .logo img {
   margin: 0 auto;
   height: 40px;
 }
 
-/* line 436, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
+/* line 440, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
 footer .widget .fusion-social-networks .fusion-social-network-icon {
   border: 2px solid #333b3b !important;
   border-top: none;
@@ -518,12 +523,12 @@ footer .widget .fusion-social-networks .fusion-social-network-icon {
   font-size: 14px;
 }
 
-/* line 444, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
+/* line 448, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
 footer .widget_nav_menu ul.menu {
   margin-top: 20px;
 }
 
-/* line 446, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
+/* line 450, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
 footer .widget_nav_menu ul.menu li {
   display: inline-block;
   *display: inline;
@@ -532,32 +537,32 @@ footer .widget_nav_menu ul.menu li {
   border: none !important;
 }
 
-/* line 453, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
+/* line 457, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
 footer .widget_nav_menu ul.menu li a {
   color: #e8e8e0;
 }
 
-/* line 456, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
+/* line 460, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
 footer .widget_nav_menu ul.menu li a:before {
   display: none;
 }
 
-/* line 461, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
+/* line 465, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
 footer .widget_nav_menu ul.menu li.current-menu-item a {
   color: white !important;
 }
 
-/* line 471, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
+/* line 475, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
 .gh_control_panel #main {
   padding-top: 0 !important;
 }
 
-/* line 475, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
+/* line 479, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
 .gh_control_panel .gn_control_content_container {
   position: relative;
 }
 
-/* line 478, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
+/* line 482, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
 .gh_control_panel .gn_control_content_container .gh_control_sidebar {
   width: 20%;
   background: #ffffff;
@@ -569,33 +574,33 @@ footer .widget_nav_menu ul.menu li.current-menu-item a {
   box-shadow: 0 10px 25px -12px #4f5959;
 }
 
-/* line 489, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
+/* line 493, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
 .gh_control_panel .gn_control_content_container .gh_control_sidebar ul, .gh_control_panel .gn_control_content_container .gh_control_sidebar li {
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-/* line 497, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
+/* line 501, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
 .gh_control_panel .gn_control_content_container .gh_control_sidebar ul li a {
   display: block;
   font-size: 1em;
   padding: 10px;
 }
 
-/* line 502, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
+/* line 506, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
 .gh_control_panel .gn_control_content_container .gh_control_sidebar ul li a i {
   margin-right: 5px;
   width: 16px;
   text-align: center;
 }
 
-/* line 508, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
+/* line 512, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
 .gh_control_panel .gn_control_content_container .gh_control_sidebar ul li a:hover {
   background: #f2f2f2;
 }
 
-/* line 512, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
+/* line 516, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
 .gh_control_panel .gn_control_content_container .gh_control_sidebar ul li.mainhead {
   background: #26292B;
   line-height: 55px;
@@ -606,48 +611,48 @@ footer .widget_nav_menu ul.menu li.current-menu-item a {
   font-size: 1.1em;
 }
 
-/* line 521, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
+/* line 525, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
 .gh_control_panel .gn_control_content_container .gh_control_sidebar ul li.logout {
   border-top: 1px solid #f1f1f1;
 }
 
-/* line 523, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
+/* line 527, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
 .gh_control_panel .gn_control_content_container .gh_control_sidebar ul li.logout a {
   font-size: 0.8em;
   color: #d49496;
 }
 
-/* line 532, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
+/* line 536, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
 .gh_control_panel .gn_control_content_container .gh_control_content_holder {
   margin-left: 20%;
   padding: 15px 0 0 15px;
 }
 
-/* line 536, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
+/* line 540, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
 .gh_control_panel .gn_control_content_container .gh_control_content_holder .heading {
   margin-bottom: 40px;
 }
 
-/* line 538, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
+/* line 542, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
 .gh_control_panel .gn_control_content_container .gh_control_content_holder .heading h1 {
   font-size: 36px !important;
   line-height: 1.2;
   margin: 0 0 5px 0;
 }
 
-/* line 543, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
+/* line 547, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
 .gh_control_panel .gn_control_content_container .gh_control_content_holder .heading h1 + div.desc {
   color: #adadad;
   font-size: 1.1em;
 }
 
-/* line 554, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
+/* line 558, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
 .alert {
   position: relative;
   padding-left: 50px;
 }
 
-/* line 557, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
+/* line 561, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
 .alert:before {
   content: "";
   font-family: "FontAwesome";
@@ -658,19 +663,24 @@ footer .widget_nav_menu ul.menu li.current-menu-item a {
   left: 15px;
 }
 
-/* line 566, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
+/* line 570, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
 .alert.alert-danger {
   color: #b51a18;
   background-color: #ffe9e9;
   border-color: #fdcccb;
 }
 
-/* line 571, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
+/* line 575, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
 .alert.alert-danger:before {
   content: "\f071";
 }
 
-/* line 577, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
+/* line 580, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
+.alert > h3 {
+  margin: 0 0 5px 0;
+}
+
+/* line 585, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
 #toTop {
   bottom: 25px;
   right: 25px;
@@ -685,23 +695,23 @@ footer .widget_nav_menu ul.menu li.current-menu-item a {
   box-shadow: 1px 1px 3px -1px #000000;
 }
 
-/* line 590, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
+/* line 598, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
 #toTop:before {
   color: #b2b2b2 !important;
   font-size: 36px;
 }
 
-/* line 596, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
+/* line 604, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
 #toTop:hover:before {
   color: white !important;
 }
 
-/* line 603, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
+/* line 611, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
 .gh_control_properties_page .adv-inf {
   color: #8c8c8c;
 }
 
-/* line 606, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
+/* line 614, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
 .gh_control_properties_page .adv-inf .img {
   float: left;
   margin: 0 10px 0 0;
@@ -713,30 +723,36 @@ footer .widget_nav_menu ul.menu li.current-menu-item a {
   border-radius: 10px;
 }
 
-/* line 615, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
+/* line 623, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
 .gh_control_properties_page .adv-inf .img img {
   width: 100%;
 }
 
-/* line 619, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
+/* line 627, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
 .gh_control_properties_page .adv-inf .main-row {
   font-size: 1.25em;
   line-height: 1;
   padding: 5px 0;
 }
 
-/* line 624, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
+/* line 632, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
 .gh_control_properties_page .adv-inf .alt-row {
   font-size: 0.85em;
 }
 
-/* line 627, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
+/* line 635, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
 .gh_control_properties_page .adv-inf .region {
   color: #444444;
   font-weight: bold;
 }
 
-/* line 634, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
+/* line 639, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
+.gh_control_properties_page .adv-inf .title {
+  font-weight: bold;
+  color: #222222;
+}
+
+/* line 646, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
 .gh_control_properties_page .adv-inf .ref-number {
   background: #8c8c8c;
   color: white;
@@ -750,10 +766,11 @@ footer .widget_nav_menu ul.menu li.current-menu-item a {
   margin-right: 5px;
 }
 
-/* line 647, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
+/* line 659, /Users/MolnarIstvan/Documents/Munka/GlobalHungary/gh/wp-content/themes/Avada-Child-Theme/assets/css/sass/globalhungary.scss */
 .gh_control_properties_page .adv-inf .price {
   color: #E31F24;
   font-weight: bold;
+  margin-right: 5px;
 }
 
 /*# sourceMappingURL=../globalhungary.map */
