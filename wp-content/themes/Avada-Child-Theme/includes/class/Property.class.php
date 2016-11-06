@@ -49,6 +49,68 @@ class Property extends PropertyFactory
 
     return '???';
   }
+
+  public function StatusID()
+  {
+    $terms = wp_get_post_terms( $this->ID(), 'status' );
+
+    if (!$terms) {
+      return 0;
+    }
+
+    return $terms[0]->term_id;
+  }
+
+  public function CatID()
+  {
+    $terms = wp_get_post_terms( $this->ID(), 'property-types' );
+
+    if (!$terms) {
+      return 0;
+    }
+
+    return $terms[0]->term_id;
+  }
+
+  public function ConditionID()
+  {
+    $terms = wp_get_post_terms( $this->ID(), 'property-condition' );
+
+    if (!$terms) {
+      return 0;
+    }
+
+    return $terms[0]->term_id;
+  }
+
+  public function ShortDesc()
+  {
+    return $this->raw_post->post_excerpt;
+  }
+
+  public function getMetaValue( $key )
+  {
+    $value = get_post_meta($this->ID(), $key, true);
+
+    return $value;
+  }
+
+  public function getMetaCheckbox( $key )
+  {
+    $v = $this->getMetaValue( $key );
+
+    if ( !empty($v) && $v == '1') {
+      return 1;
+    } else {
+      return 0;
+    }
+  }
+
+  public function Description()
+  {
+    return $this->raw_post->post_content;
+  }
+
   public function Address()
   {
     $addr = get_post_meta($this->ID(), '_listing_address', true);

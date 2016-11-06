@@ -18,6 +18,14 @@ class Properties extends PropertyFactory
       'post_type' => 'listing'
     );
 
+    if (isset($this->arg['id'])) {
+      $post_arg['post__in'] = array((int)$this->arg['id']);
+    }
+
+    if (isset($this->arg['author'])) {
+      $post_arg['author'] = $this->arg['author'];
+    }
+
     if (isset($this->arg['post_status'])) {
       $post_arg['post_status'] = $this->arg['post_status'];
     }

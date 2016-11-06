@@ -2,9 +2,28 @@
   global $me;
 
   $control = get_control_controller('properties');
+
+  $author = false;
+  $filtered = false;
+
+  if (current_user_can('reference_manager')) {
+    $author = $me->ID();
+  } else {
+    if (isset($_GET['user'])) {
+      if ( true ) {
+        if ( current_user_can('region_manager') || current_user_can('administrator') ) {
+          $author = $_GET['user'];
+          $filtered = true;
+          $selected_user = new UserHelper(array( 'id' => $_GET['user']) );
+        }
+      }
+    }
+  }
+
   $properties = $control->getProperties(array(
     'post_status' => array('publish', 'pending', 'draft', 'future'),
-    'location' => $me->RegionID()
+    'location' => $me->RegionID(),
+    'author' => $author
   ));
   $item_num = $control->propertyCount();
 ?>
@@ -14,9 +33,15 @@
     <div class="desc"><?=__('Az alábbi listában az Ön régiójába található ingatlan hirdetéseket találhatja.', 'gh')?></div>
   </div>
   <div class="gh_control_properties_page">
-    <?php if( !current_user_can('region_manager') ): ?>
+    <?php if( false ): ?>
       <div class="alert alert-danger"><?=__('Önnek nincs joga ezt a funkciót használni. A funkció használata csak Régió Menedzsereknek engedélyezett.', 'gh')?></div>
     <?php else: ?>
+    <?php if ($filtered): ?>
+      <a href="/control/properties/">< <?=__('Teljes lista mutatása', 'gh')?></a> <br>
+      <?php if (isset($_GET['user'])): ?>
+        <?=sprintf(__('Kiválasztott felhasználó: <strong>%s</strong>', 'gh'), $selected_user->Name())?>
+      <?php endif; ?>
+    <?php endif; ?>
     <div class="data-table">
       <div class="data-head">
         <div class="row">
@@ -48,6 +73,7 @@
             <div class="col-md-2 center"><?=$p->Status(false)?></div>
             <div class="col-md-2 center">
               <?=$p->CreateAt()?>
+              <div class="edit"><a href="/control/property_edit/?id=<?=$p->ID()?>"><?=__('szerkeszt', 'gh')?> <i class="fa fa-pencil"></i></a></div>
             </div>
           </div>
         <?php endforeach; ?>

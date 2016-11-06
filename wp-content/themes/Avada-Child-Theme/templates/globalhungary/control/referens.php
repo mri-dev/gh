@@ -20,7 +20,7 @@
         <div class="row">
           <div class="col-md-4"><?=__('Név', 'gh')?></div>
           <div class="col-md-3"><?=__('Email', 'gh')?></div>
-          <div class="col-md-2"><?=__('Ingatlanok', 'gh')?></div>
+          <div class="col-md-2"><?=__('Aktív ingatlanok', 'gh')?></div>
           <div class="col-md-3"><?=__('Utoljára belépett', 'gh')?></div>
         </div>
       </div>

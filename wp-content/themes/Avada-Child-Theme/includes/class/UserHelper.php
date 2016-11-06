@@ -54,7 +54,7 @@ class UserHelper
 
   public function PropertiesCount()
   {
-    $c = 0;
+    $c = count_user_posts($this->ID(), 'listing');
     return $c;
   }
 }
