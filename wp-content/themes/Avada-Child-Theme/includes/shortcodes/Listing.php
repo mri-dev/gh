@@ -37,7 +37,7 @@ class ListingLista
 
         if (!is_null($attr['src']))
         {
-          $output .= '<div class="'.self::SCTAG.'-set-'.$attr['set'].'">';
+          $output .= '<div class="'.self::SCTAG.'-set-'.$this->type.'">';
           switch ( $this->type )
           {
             case 'highlight':
@@ -71,7 +71,7 @@ class ListingLista
     private function highlight( $arg = array() )
     {
       $o = '<div class="header">
-        <div><a title="'.__('További kiemelt ingatlanok', 'gh').'" href="/ingatlanok/?kiemelt=1"><i class="fa fa-bars"></i></a></div>
+        <div class="morev"><a title="'.__('További kiemelt ingatlanok', 'gh').'" href="/ingatlanok/?kiemelt=1"><i class="fa fa-bars"></i></a></div>
         <h2>'.__('Kiemelt ingatlanok', 'gh').'</h2>
       </div>';
       $t = new ShortcodeTemplates(__CLASS__.'/'.$this->template);
@@ -98,7 +98,7 @@ class ListingLista
     private function news( $arg = array() )
     {
       $o = '<div class="header">
-        <div><a title="'.__('További új ingatlanok mutatása', 'gh').'" href="/ingatlanok/?ob=date&o=desc&title=news"><i class="fa fa-bars"></i></a></div>
+        <div class="morev"><a title="'.__('További új ingatlanok mutatása', 'gh').'" href="/ingatlanok/?ob=date&o=desc&title=news"><i class="fa fa-bars"></i></a></div>
         <h2>'.__('Legújabb ingatlanok', 'gh').'</h2>
       </div>';
       $t = new ShortcodeTemplates(__CLASS__.'/'.$this->template);

@@ -7,6 +7,22 @@
   right: 0;
 }
 
+body, html {
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f5f5f5+0,ffffff+50,f5f5f5+100 */
+background: rgb(245,245,245); /* Old browsers */
+background: -moz-linear-gradient(left,  rgba(245,245,245,1) 0%, rgba(255,255,255,1) 50%, rgba(245,245,245,1) 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(left,  rgba(245,245,245,1) 0%,rgba(255,255,255,1) 50%,rgba(245,245,245,1) 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to right,  rgba(245,245,245,1) 0%,rgba(255,255,255,1) 50%,rgba(245,245,245,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5f5f5', endColorstr='#f5f5f5',GradientType=1 ); /* IE6-9 */
+
+}
+
+body.home {
+  #main {
+    margin-top: -150px;
+  }
+}
+
 .avada-skin-rev {
   border: none !important;
 }
@@ -665,6 +681,144 @@ footer {
       color: $color-pr;
       font-weight: bold;
       margin-right: 5px;
+    }
+  }
+}
+
+.listing-searcher-holder{
+  background: #ffffff;
+  border: 1px solid #cccfd1;
+  width: 90%;
+  margin: 0 auto;
+  position: relative;
+
+  .searcher-header{
+    position: absolute;
+    left: -1px;
+    top: -50px;
+
+    ul {
+      margin: 0;
+      padding: 0;
+      li {
+        display:inline-block;
+        *display: inline;
+        zoom: 1;
+        vertical-align: middle;
+        margin-right: 5px;
+
+        input[type=radio] {
+          display: none;
+        }
+
+        label {
+          cursor: pointer;
+          position: relative;
+          display: block;
+          height: 50px;
+          line-height: 50px;
+          background: $color-sec;
+          color: white;
+          padding: 0 15px 0 35px;
+          text-transform: uppercase;
+          font-weight: bold;
+          font-family: 'Arial';
+
+          &:before {
+            font-family: 'FontAwesome';
+            content:"\f111";
+            position: absolute;
+            left: 12px;
+            font-weight: normal;
+            color: #c7c7c7;
+          }
+        }
+
+        input[type=radio]:checked + label {
+          background: $color-pr;
+          &:before {
+            content:"\f192";
+            color: white;
+          }
+        }
+
+        .ico {
+          background: darken($color-pr, 5%);
+          height: 50px;
+          text-align: center;
+          padding: 0 15px;
+
+          i{
+            color: white;
+            padding: 0;
+            margin: 0;
+            height: 50px;
+            font-size: 24px;
+            line-height: 50px;
+          }
+        }
+
+        &:first-child{
+          margin-right: 0;
+        }
+      }
+    }
+  }
+  .searcher-wrapper {
+    min-height: 120px;
+    padding: 15px;
+  }
+  .searcher-footer {
+    padding: 15px;
+    background: #f2f2f2;
+    border-top: 1px solid #cccfd1;
+  }
+}
+
+.listing-sc{
+  .header{
+    position: relative;
+    .morev {
+      position: absolute;
+      right: 0;
+
+      a:link, a:visited{
+        color: #cccfd1;
+      }
+
+      a:hover {
+        color: $color-pr;
+      }
+
+      i{
+        font-size: 34px;
+        line-height: 1;
+        margin: 0;
+        padding: 0;
+      }
+    }
+    h2{
+      text-transform: uppercase;
+      color: #b2b2b2;
+      font-family: 'Arial' !important;
+      font-size: 2.2em !important;
+      line-height: 1 !important;
+      margin: 0 0 0 50px !important;
+    }
+    border-bottom: 1px solid #e8e8e0;
+    padding: 10px 0;
+    margin-bottom: 25px;
+  }
+
+  .listing-list-set-watchnow{
+    border: 10px solid #cccfd1;
+    .header{
+      border-bottom: none;
+      h2 {
+        margin: 0 !important;
+        text-align: center;
+        font-size: 2em !important;
+      }
     }
   }
 }
