@@ -38,6 +38,14 @@ class Properties extends PropertyFactory
       );
     }
 
+    if (isset($this->arg['limit'])) {
+      $post_arg['posts_per_page'] = $this->arg['limit'];
+    } else {
+      $post_arg['posts_per_page'] = 30;
+    }
+
+
+
     $posts = get_posts($post_arg);
 
     foreach($posts as $post) {

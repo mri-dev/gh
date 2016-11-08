@@ -33,6 +33,10 @@ class Property extends PropertyFactory
   {
     return $this->raw_post->post_status;
   }
+  public function URL()
+  {
+    return get_option('siteurl').'/'.SLUG_INGATLAN.'/'.$this->RegionSlug().'/'.sanitize_title($this->Title()).'-'.$this->ID();
+  }
   public function RegionName()
   {
     $terms = wp_get_post_terms( $this->ID(), 'locations' );
@@ -44,6 +48,22 @@ class Property extends PropertyFactory
           $parent = get_term($term->parent);
         }
         return ($parent) ? $parent->name.' > '.$term->name . ( ($parent->name == 'Budapest') ? ' '.__('kerület', 'gh') : '' ) : $term->name;
+      }
+    }
+
+    return '???';
+  }
+  public function RegionSlug()
+  {
+    $terms = wp_get_post_terms( $this->ID(), 'locations' );
+
+    foreach ($terms as $term) {
+      if($term->taxonomy == 'locations') {
+        $parent = false;
+        if ($term->parent != 0) {
+          $parent = get_term($term->parent);
+        }
+        return ($parent) ? $parent->slug : $term->slug;
       }
     }
 
@@ -140,7 +160,13 @@ class Property extends PropertyFactory
   }
   public function ProfilImg()
   {
-    return 'https://placeholdit.imgix.net/~text?txtsize=12&txt=GH&w=50&h=50';
+    $img = wp_get_attachment_image_src( get_post_thumbnail_id( $this->ID() ), "full" );
+
+    if (!$img) {
+      return 'https://placeholdit.imgix.net/~text?txtsize=18&txt=GH&w=500&h=420';
+    } else {
+        return $img[0];
+    }
   }
   public function Status( $only_text = true )
   {

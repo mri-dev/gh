@@ -25,7 +25,8 @@ class ListingLista
             self::SCTAG.'_defaults',
             array(
               'src' => 'list',
-              'view' => 'standard'
+              'view' => 'standard',
+              'limit' => 6
             )
         );
 
@@ -76,6 +77,20 @@ class ListingLista
       </div>';
       $t = new ShortcodeTemplates(__CLASS__.'/'.$this->template);
 
+      $arg = array(
+        'limit' => $this->params['limit']
+      );
+
+      $properties = new Properties($arg);
+      $list = $properties->getList();
+
+      $o .= '<div class="prop-list style-'.$this->template.'"><div class="prop-wrapper">';
+      foreach ( $list as $e )
+      {
+        $o .= $t->load_template( array( 'item' => $e ) );
+      }
+      $o .= '</div></div>';
+
       return $o;
     }
 
@@ -88,6 +103,20 @@ class ListingLista
         <h2>'.__('Most nézik', 'gh').'</h2>
       </div>';
       $t = new ShortcodeTemplates(__CLASS__.'/'.$this->template);
+
+      $arg = array(
+        'limit' => $this->params['limit']
+      );
+
+      $properties = new Properties($arg);
+      $list = $properties->getList();
+
+      $o .= '<div class="prop-list im1 style-'.$this->template.'"><div class="prop-wrapper">';
+      foreach ( $list as $e )
+      {
+        $o .= $t->load_template( array( 'item' => $e ) );
+      }
+      $o .= '</div></div>';
 
       return $o;
     }
@@ -103,6 +132,19 @@ class ListingLista
       </div>';
       $t = new ShortcodeTemplates(__CLASS__.'/'.$this->template);
 
+      $arg = array(
+        'limit' => $this->params['limit']
+      );
+
+      $properties = new Properties($arg);
+      $list = $properties->getList();
+
+      $o .= '<div class="prop-list im4 style-'.$this->template.'"><div class="prop-wrapper">';
+      foreach ( $list as $e )
+      {
+        $o .= $t->load_template( array( 'item' => $e ) );
+      }
+      $o .= '</div></div>';
       return $o;
     }
 
@@ -115,6 +157,20 @@ class ListingLista
         <h2>'.__('Legutóbb megtekintett ingatlanok', 'gh').'</h2>
       </div>';
       $t = new ShortcodeTemplates(__CLASS__.'/'.$this->template);
+
+      $arg = array(
+        'limit' => $this->params['limit']
+      );
+
+      $properties = new Properties($arg);
+      $list = $properties->getList();
+
+      $o .= '<div class="prop-list im5 style-'.$this->template.'"><div class="prop-wrapper">';
+      foreach ( $list as $e )
+      {
+        $o .= $t->load_template( array( 'item' => $e ) );
+      }
+      $o .= '</div></div>';
 
       return $o;
     }

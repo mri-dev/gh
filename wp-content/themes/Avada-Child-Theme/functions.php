@@ -3,6 +3,8 @@
 define('IFROOT', get_stylesheet_directory_uri());
 define('DEVMODE', true);
 define('IMG', IFROOT.'/images');
+define('SLUG_INGATLAN', 'ingatlan');
+define('SLUG_INGATLAN_LIST', 'ingatlanok');
 
 // Includes
 require_once WP_PLUGIN_DIR."/cmb2/init.php";
