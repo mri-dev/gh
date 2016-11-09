@@ -24,9 +24,11 @@ class ListingSearcher
             )
         );
 
+        $properties = new Properties();
+
         $t = new ShortcodeTemplates(__CLASS__.'/v1');
 
-        $output .= $t->load_template();
+        $output .= $t->load_template( array( 'properties' => $properties));
 
         $output .= '</div>';
 

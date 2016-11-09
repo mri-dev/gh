@@ -70,6 +70,44 @@ class Property extends PropertyFactory
     return '???';
   }
 
+  public function PropertyStatus( $text = false )
+  {
+    $terms = wp_get_post_terms( $this->ID(), 'status' );
+
+    foreach ($terms as $term) {
+      if($term->taxonomy == 'status') {
+        if ($text) {
+          return $this->i18n_taxonomy_values($term->name);
+        } else {
+          return $term->name;
+        }
+      }
+    }
+
+    return '???';
+  }
+
+  public function isNews()
+  {
+    $h = true;
+
+    return $h;
+  }
+
+  public function isDropOff()
+  {
+    $h = false;
+
+    return $h;
+  }
+
+  public function isHighlighted()
+  {
+    $h = true;
+
+    return $h;
+  }
+
   public function StatusID()
   {
     $terms = wp_get_post_terms( $this->ID(), 'status' );

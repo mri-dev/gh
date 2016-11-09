@@ -11,6 +11,15 @@ class Properties extends PropertyFactory
     return $this;
   }
 
+  public function getRegions()
+  {
+    $terms = get_terms(array(
+      'taxonomy' => 'locations'
+    ));
+
+    return $terms;
+  }
+
   public function getList()
   {
     $data     = array();
