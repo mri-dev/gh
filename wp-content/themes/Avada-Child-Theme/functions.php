@@ -19,7 +19,8 @@ function theme_enqueue_styles() {
 add_action( 'wp_enqueue_scripts', 'theme_enqueue_styles' );
 
 function custom_theme_enqueue_styles() {
-    wp_enqueue_style( 'globalhungary-css', IFROOT . '/assets/css/globalhungary.css?' . ( (DEVMODE === true) ? time() : '' ) );
+    wp_enqueue_style( 'globalhungary-css', IFROOT . '/assets/css/globalhungary.css?t=' . ( (DEVMODE === true) ? time() : '' ) );
+    wp_enqueue_script( 'globalhungary', IFROOT . '/assets/js/master.js?t=' . ( (DEVMODE === true) ? time() : '' ), array('jquery') );
 }
 add_action( 'wp_enqueue_scripts', 'custom_theme_enqueue_styles', 100 );
 
@@ -182,6 +183,8 @@ function gh_init()
 {
   date_default_timezone_set('Europe/Budapest');
   add_rewrite_rule('^control/([^/]+)', 'index.php?cp=$matches[1]', 'top');
+  add_rewrite_rule('^'.SLUG_INGATLAN_LIST.'/?', 'index.php?custom_page='.SLUG_INGATLAN_LIST.'&urlstring=$matches[1]', 'top');
+  add_rewrite_rule('^'.SLUG_INGATLAN.'/([^/]+)/([^/]+)', 'index.php?custom_page='.SLUG_INGATLAN.'&regionslug=$matches[1]&urlstring=$matches[2]', 'top');
 }
 add_action('init', 'gh_init');
 
@@ -204,6 +207,8 @@ function gh_custom_template($template) {
   if ( isset($wp_query->query_vars['cp'])) {
     add_filter( 'body_class','gh_control_panel_class_body' );
     return get_stylesheet_directory() . '/control.php';
+  } else if(isset($wp_query->query_vars['custom_page'])) {
+    return get_stylesheet_directory() . '/'.$wp_query->query_vars['custom_page'].'.php';
   } else {
     return $template;
   }
@@ -216,6 +221,8 @@ function gh_control_panel_class_body( $classes ) {
 
 function gh_query_vars($aVars) {
   $aVars[] = "cp";
+  $aVars[] = "custom_page";
+  $aVars[] = "urlstring";
   return $aVars;
 }
 add_filter('query_vars', 'gh_query_vars');

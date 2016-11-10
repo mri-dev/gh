@@ -775,6 +775,7 @@ footer {
 
       .inp {
         padding: 8px;
+        position: relative;
 
         label {
           line-height: 1;
@@ -1122,7 +1123,7 @@ footer {
           i{
             color: lighten($color-sec, 20%);
             &:hover, &.active {
-              color: #e9f91a;
+              color: #ffffff;
             }
           }
         }
@@ -1147,7 +1148,7 @@ footer {
       .image{
         height: 180px !important;
         .excerpt {
-          background: rgba(214, 44, 48, 0.8);
+          background: rgba(214, 44, 48, 0.81);
           padding: 10px;
           font-size: 0.8em;
           color: white;
@@ -1226,6 +1227,77 @@ footer {
   }
 }
 
+.tglwatcher{
+  cursor: pointer;
+
+}
+
+.tglwatcher-wrapper,
+.select-wrapper{
+  position: relative;
+  cursor: pointer;
+
+  &:after {
+    pointer-events: none;
+    content:"\f0d7";
+    font-family: 'FontAwesome';
+    right: 0;
+    position: absolute;
+    top: 0;
+    background: #cccccc;
+    height: 34px;
+    width: 20px;
+    text-align: center;
+    line-height: 34px;
+    color: #fff;
+  }
+}
+
+.multi-selector-holder{
+  position: absolute;
+  width: 100%;
+  z-index: 1000;
+  display: none;
+
+  &.opened {
+    display: block;
+  }
+
+  .selector-wrapper{
+    background: #ffffff;
+    border: 1px solid #cccccc;
+    border-top: 1px dashed #c9c9c9;
+    margin-right: 16px;
+    margin-top: -1px;
+    -webkit-box-shadow: 0 10px 26px -9px #8e8e8e;
+    -moz-box-shadow: 0 10px 26px -9px #8e8e8e;
+    box-shadow: 0 10px 26px -9px #8e8e8e;
+
+    .selector-row {
+      input[type=checkbox] + label{
+        padding: 8px 8px 8px 35px;
+        margin: 0 0 1px 0;
+
+        .n {
+          color: #d2d2d2;
+          font-size: 0.85em;
+        }
+        &:before {
+          left: 10px;
+        }
+      }
+      input[type=checkbox] + label:hover,
+      input[type=checkbox]:checked + label {
+        background: #585a5d;
+        color: white;
+
+        &:before {
+          color: white;
+        }
+      }
+    }
+  }
+}
 .transf {
   -webkit-transition: all .6s;
   -moz-transition: all .6s;

@@ -3,6 +3,7 @@ class Properties extends PropertyFactory
 {
   public $arg = array();
   private $datalist = array();
+  private $exclue_megye_str = array( 'Budapest', 'Balaton' );
 
   public function __construct( $arg = array() )
   {
@@ -17,7 +18,33 @@ class Properties extends PropertyFactory
       'taxonomy' => 'locations'
     ));
 
-    return $terms;
+    $t = array();
+
+    foreach ($terms as $term) {
+      if ( !in_array($term->name, $this->exclue_megye_str)) {
+        $term->name = sprintf(__('%s megye', 'gh'), $term->name);
+      }
+      $t[] = $term;
+    }
+
+    return $t;
+  }
+
+  public function getSelectors( $id, $sel_values = array() )
+  {
+    $terms = get_terms(array(
+      'taxonomy' => $id
+    ));
+
+    $t = array();
+
+    foreach ($terms as $term) {
+      $term->selected = (in_array($term->term_id, $sel_values)) ? true : false;
+      $term->name = $this->i18n_taxonomy_values($term->name);
+      $t[] = $term;
+    }
+
+    return $t;
   }
 
   public function getList()
@@ -79,7 +106,7 @@ class Properties extends PropertyFactory
     return count($this->datalist);
   }
 
-  public function getListParams( $taxonomy, $selected = null )
+  public function getListParams( $taxonomy, $selected = null, $render_select = true )
   {
     wp_dropdown_categories(array(
       'show_option_all' => __('-- válasszon --', 'gh'),
