@@ -53,6 +53,9 @@ class ListingLista
             case 'viewed':
               $output .= $this->viewed();
             break;
+            case 'get':
+              $output .= $this->get();
+            break;
             default:
               $output .= $this->no_src();
             break;
@@ -64,6 +67,35 @@ class ListingLista
 
         /* Return the output of the tooltip. */
         return apply_filters( self::SCTAG, $output );
+    }
+
+    /**
+    * Kereső, standard listázás
+    **/
+    private function get( $arg = array() )
+    {
+      $o = '<h1>'.__('Keresés eredménye', 'gh').'</h1>';
+      $t = new ShortcodeTemplates(__CLASS__.'/'.$this->template);
+
+      $get = $_GET;
+
+      $arg = array(
+        'limit' => $this->params['limit'],
+      );
+
+      print_r($get);
+
+      $properties = new Properties($arg);
+      $list = $properties->getList();
+
+      $o .= '<div class="prop-list style-'.$this->template.'"><div class="prop-wrapper">';
+      foreach ( $list as $e )
+      {
+        $o .= $t->load_template( array( 'item' => $e ) );
+      }
+      $o .= '</div></div>';
+
+      return $o;
     }
 
     /**

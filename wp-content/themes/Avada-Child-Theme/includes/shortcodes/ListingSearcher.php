@@ -14,21 +14,24 @@ class ListingSearcher
 
     public function do_shortcode( $attr, $content = null )
     {
-        $output = '<div class="'.self::SCTAG.'-holder">';
+      /* Set up the default arguments. */
+      $defaults = apply_filters(
+          self::SCTAG.'_defaults',
+          array(
+            'view' => 'v1'
+          )
+      );
+        $attr = shortcode_atts( $defaults, $attr );
 
-    	  /* Set up the default arguments. */
-        $defaults = apply_filters(
-            self::SCTAG.'_defaults',
-            array(
+        $get = $_GET;
 
-            )
-        );
+        $output = '<div class="'.self::SCTAG.'-holder style-'.$attr['view'].'">';
 
         $properties = new Properties();
 
-        $t = new ShortcodeTemplates(__CLASS__.'/v1');
+        $t = new ShortcodeTemplates(__CLASS__.'/'.$attr['view']);
 
-        $output .= $t->load_template( array( 'properties' => $properties));
+        $output .= $t->load_template( array( 'properties' => $properties, 'form' => $get ));
 
         $output .= '</div>';
 

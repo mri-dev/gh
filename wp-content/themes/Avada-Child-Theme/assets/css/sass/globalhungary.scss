@@ -685,12 +685,25 @@ footer {
   }
 }
 
-.listing-searcher-holder{
+.listing-searcher-holder {
   background: #ffffff;
   border: 1px solid #cccfd1;
-  width: 90%;
   margin: 0 auto;
   position: relative;
+
+  /* Main home style v1 */
+  &.style-v1 {
+    width: 90%;
+  }
+  /* Listing style v2 */
+  &.style-v2 {
+    width: 100%;
+    margin-top: 10px;
+  }
+  /* Ingatlan style floating */
+  &.style-floating {
+
+  }
 
   .searcher-header{
     position: absolute;
@@ -866,6 +879,74 @@ footer {
     background: #f2f2f2;
     border-top: 1px solid #cccfd1;
   }
+
+  /* MOD v2 */
+  &.style-v2 {
+    .searcher-header {
+      left: -1px;
+      right: -1px;
+      ul {
+        width: 100%;
+        background: #384040;
+
+        li {
+          color: white;
+          text-transform: uppercase;
+          font-family: 'Arial';
+          font-weight: bold;
+
+          .head-title {
+            padding-left: 15px;
+            display: block;
+          }
+        }
+      }
+    }
+    .searcher-wrapper{
+      .form-items{
+        .inp{
+          &.inp-city,
+          &.inp-kategoria,
+          &.inp-status,
+          &.inp-azonosito{
+            flex-basis: 100%;
+          }
+          &.inp-alapterulet,
+          &.inp-rooms,
+          &.inp-price-min,
+          &.inp-price-max{
+            flex-basis: 50%;
+          }
+        }
+      }
+    }
+    .submit button {
+      display: block;
+      width: 100%;
+      text-align: center;
+      background: #bf2121;
+      color: white;
+      border: none;
+      padding: 15px;
+      line-height: 20px;
+      cursor: pointer;
+      font-size: 1.2em;
+      font-family: 'Arial';
+      font-weight: bold;
+      text-transform: uppercase;
+
+      i {
+        font-size: 20px;
+        line-height: 20px;
+        margin-right: 10px;
+        padding: 0;
+      }
+
+      &:hover {
+        background: darken(#bf2121, 10%);
+      }
+    }
+  }
 }
 
 .listing-sc{
@@ -973,7 +1054,7 @@ footer {
         .image{
           position: relative;
           width: 100%;
-          height: 220px;
+          height: 180px;
           overflow: hidden;
 
           img {
@@ -1146,7 +1227,7 @@ footer {
     .prop-item-wrapper {
       border: 1px solid #d9d9d9;
       .image{
-        height: 180px !important;
+        height: 140px !important;
         .excerpt {
           background: rgba(214, 44, 48, 0.81);
           padding: 10px;
@@ -1182,7 +1263,7 @@ footer {
         width: 32px !important;
       }
       .image{
-        height: 180px !important;
+        height: 140px !important;
         .excerpt {
           background: rgba(214, 44, 48, 0.8);
           padding: 10px;
@@ -1227,9 +1308,35 @@ footer {
   }
 }
 
+.ingatlan-page-view{
+  .search-side,
+  .listing-content {
+    display: inline-block;
+    vertical-align: top;
+    float: left;
+  }
+  .search-side{
+    width: 25%;
+    padding-top: 40px;
+  }
+  .listing-content{
+    width: 75%;
+
+    .listing-wrapper{
+      padding-left: 25px;
+
+      h1 {
+        color: $color-pr;
+        font-family: 'Arial';
+        margin: 0 0 15px 0;
+        line-height: 1;
+      }
+    }
+  }
+}
+
 .tglwatcher{
   cursor: pointer;
-
 }
 
 .tglwatcher-wrapper,
