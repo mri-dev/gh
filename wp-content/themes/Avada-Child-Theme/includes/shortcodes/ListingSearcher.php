@@ -25,7 +25,7 @@ class ListingSearcher
 
         $get = $_GET;
 
-        $output = '<div class="'.self::SCTAG.'-holder style-'.$attr['view'].'">';
+        $output = '<div class="'.self::SCTAG.'-holder style-'.$attr['view'].' transf">';
 
         $properties = new Properties();
 

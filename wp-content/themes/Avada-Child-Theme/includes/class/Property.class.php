@@ -29,13 +29,23 @@ class Property extends PropertyFactory
   {
     return get_author_name( $this->raw_post->post_author );
   }
+  public function AuthorPhone()
+  {
+    $meta = get_the_author_meta('phone', $this->raw_post->post_author);
+    return $meta;
+  }
+  public function AuthorEmail()
+  {
+    $meta = get_the_author_meta('email', $this->raw_post->post_author);
+    return $meta;
+  }
   public function StatusKey()
   {
     return $this->raw_post->post_status;
   }
   public function URL()
   {
-    return get_option('siteurl').'/'.SLUG_INGATLAN.'/'.$this->RegionSlug().'/'.sanitize_title($this->Title()).'-'.$this->ID();
+    return get_option('siteurl').'/'.SLUG_INGATLAN.'/'.$this->RegionSlug().'/'.$this->ParentRegionSlug().'/'.sanitize_title($this->Title()).'-'.$this->ID();
   }
   public function RegionName()
   {
@@ -70,12 +80,76 @@ class Property extends PropertyFactory
     return '???';
   }
 
+  public function ParentRegionSlug()
+  {
+    $terms = wp_get_post_terms( $this->ID(), 'locations' );
+
+    foreach ($terms as $term) {
+      if($term->taxonomy == 'locations') {
+        if ($term->parent != 0) {
+          return $term->slug;
+        }
+      }
+    }
+
+    return '???';
+  }
+
+  public function ParentRegion()
+  {
+    $terms = wp_get_post_terms( $this->ID(), 'locations' );
+
+    foreach ($terms as $term) {
+      if($term->taxonomy == 'locations') {
+        if ($term->parent != 0) {
+          return $term->name;
+        }
+      }
+    }
+
+    return '???';
+  }
+
   public function PropertyStatus( $text = false )
   {
     $terms = wp_get_post_terms( $this->ID(), 'status' );
 
     foreach ($terms as $term) {
       if($term->taxonomy == 'status') {
+        if ($text) {
+          return $this->i18n_taxonomy_values($term->name);
+        } else {
+          return $term->name;
+        }
+      }
+    }
+
+    return '???';
+  }
+
+  public function PropertyCondition( $text = false )
+  {
+    $terms = wp_get_post_terms( $this->ID(), 'property-condition' );
+
+    foreach ($terms as $term) {
+      if($term->taxonomy == 'property-condition') {
+        if ($text) {
+          return $this->i18n_taxonomy_values($term->name);
+        } else {
+          return $term->name;
+        }
+      }
+    }
+
+    return '???';
+  }
+
+  public function PropertyType( $text = false )
+  {
+    $terms = wp_get_post_terms( $this->ID(), 'property-types' );
+
+    foreach ($terms as $term) {
+      if($term->taxonomy == 'property-types') {
         if ($text) {
           return $this->i18n_taxonomy_values($term->name);
         } else {
@@ -166,7 +240,8 @@ class Property extends PropertyFactory
 
   public function Description()
   {
-    return $this->raw_post->post_content;
+
+    return apply_filters ("the_content", $this->raw_post->post_content);
   }
 
   public function Address()
