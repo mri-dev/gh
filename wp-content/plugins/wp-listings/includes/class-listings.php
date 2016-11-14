@@ -49,6 +49,7 @@ class WP_Listings {
 				__( 'Garázs', 'gh' )  => '_listing_garage',
 				__( 'Autóbeálló', 'gh' )  => '_listing_driveways',
 				__( 'Kertcsoport, udvar', 'gh' )  => '_listing_garden',
+				__( 'Erkély', 'gh' )  => '_listing_balcony',
 				__( 'Lift', 'gh' )  => '_listing_lift',
 				__( 'Zöldövezet', 'gh' )  => '_listing_green_area',
 			),

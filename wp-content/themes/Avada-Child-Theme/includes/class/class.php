@@ -1,4 +1,5 @@
 <?php
+  require_once "YoutubeHelper.php";
   require_once "UserHelper.php";
   require_once "GlobalHungaryUsers.class.php";
   require_once "PropertyFactory.class.php";

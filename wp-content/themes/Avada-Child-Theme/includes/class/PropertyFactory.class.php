@@ -38,6 +38,7 @@ class PropertyFactory
       'reconditioned' => __('Felújított', 'gh'),
       'semi-finished' => __('Félkész', 'gh'),
       'used' => __('Használt', 'gh'),
+      'gaz-cirko' => __('Gáz / Cirkó', 'gh'),
     );
 
     $t = $texts[$key];

@@ -319,6 +319,42 @@ class WP_Listings_Taxonomies {
 
 	}
 
+	/**
+	 * Register the property-heating taxonomy, manually.
+	 */
+	function property_heating_taxonomy() {
+		//return array();
+
+		$name = __( 'Fűtés típusok', 'wp-listings' );
+		$singular_name = __( 'Fűtés típus', 'wp-listings' );
+
+		return array(
+			'property-heating' => array(
+				'labels' => array(
+					'name'					=> strip_tags( $name ),
+					'singular_name' 		=> strip_tags( $singular_name ),
+					'menu_name'				=> strip_tags( $name ),
+					'search_items'			=> sprintf( __( '%s keresés', 'gh' ), strip_tags( $name ) ),
+					'popular_items'			=> sprintf( __( 'Népszerű %s', 'gh' ), strip_tags( $name ) ),
+					'all_items'				=> sprintf( __( 'Összes', 'gh' ), strip_tags( $name ) ),
+					'edit_item'				=> sprintf( __( '%s szerkesztés', 'gh' ), strip_tags( $singular_name ) ),
+					'update_item'			=> sprintf( __( '%s frissítés', 'gh' ), strip_tags( $singular_name ) ),
+					'add_new_item'			=> sprintf( __( 'Új %s', 'gh' ), strip_tags( $singular_name ) ),
+					'new_item_name'			=> sprintf( __( 'Új %s', 'gh' ), strip_tags( $singular_name ) ),
+					'add_or_remove_items'	=> sprintf( __( '%s létrehozás, törlés', 'gh' ), strip_tags( $name ) ),
+					'choose_from_most_used'	=> sprintf( __( 'Válasszon: %s', 'gh' ), strip_tags( $name ) )
+				),
+				'hierarchical' => true,
+				'rewrite'  => array( __( 'property-heating', 'wp-listings' ), 'with_front' => false ),
+				'editable' => 0,
+				'show_in_rest'  => true,
+				'rest_base'     => 'property-heating',
+				'rest_controller_class' => 'WP_REST_Terms_Controller'
+			)
+		);
+
+	}
+
 	function property_condition_taxonomy() {
 
 		$name = __( 'Ingalan állapotok', 'wp-listings' );
@@ -438,7 +474,7 @@ class WP_Listings_Taxonomies {
 	 */
 	function get_taxonomies() {
 
-		return array_merge( $this->listing_status_taxonomy(), $this->listing_location_taxonomy(), $this->property_type_taxonomy(), $this->property_features_taxonomy(), $this->property_condition_taxonomy(), (array) get_option( $this->settings_field ) );
+		return array_merge( $this->listing_status_taxonomy(), $this->listing_location_taxonomy(), $this->property_type_taxonomy(), $this->property_features_taxonomy(), $this->property_condition_taxonomy(), $this->property_heating_taxonomy(), (array) get_option( $this->settings_field ) );
 
 	}
 

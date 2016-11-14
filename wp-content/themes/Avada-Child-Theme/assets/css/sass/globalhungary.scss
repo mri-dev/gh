@@ -1465,6 +1465,25 @@ footer {
             }
           }
         }
+
+        .images{
+          .profil {
+            img{
+              width: 100%;
+              max-width: 100%;
+            }
+          }
+          .stack {
+            .stack-wrapper{
+              .items {
+                width: 100%;
+                table-layout: fixed;
+                display: table;
+                margin-top: -25px;
+              }
+            }
+          }
+        }
       }
     }
     & > .data-top-right {
@@ -1480,7 +1499,7 @@ footer {
   }
 
   .data-main{
-    margin: 40px 0 20px 0;
+    margin: 0 0 20px 0;
   }
 
   .properties{
@@ -1548,6 +1567,51 @@ footer {
         border-bottom: none;
       }
     }
+
+    .cube-properties {
+      display: flex;
+      flex-wrap: wrap;
+      font-size: 0.9em;
+
+      .cb {
+        color: #cccfd1;
+        text-align: center;
+        flex-basis: calc(100%/3);
+        border-right: 1px solid #f1f1f1;
+
+        .t{
+          text-align: center;
+          padding: 8px 0;
+        }
+        .i {
+          position: relative;
+          margin: 0 auto 10px auto;
+          width: 20px;
+          height:20px;
+
+          &:before {
+            font-family: 'FontAwesome';
+            content:"\f1db";
+            position: absolute;
+            line-height: 20px;
+            top: 0;
+            right: 0;
+            left: 0;
+            font-size: 20px;
+          }
+        }
+
+        &.cb-yes {
+          color: black;
+          .i:before {
+            content:"\f058";
+          }
+        }
+      }
+      .cb:nth-child(3n) {
+        border-right: none;
+      }
+    }
   }
 
   .ref-number{
@@ -1590,6 +1654,8 @@ footer {
     }
     .phone{
       color: $color-pr;
+
+      i{color: $color-pr;}
     }
     .email{
       a, a:link, a:visited {

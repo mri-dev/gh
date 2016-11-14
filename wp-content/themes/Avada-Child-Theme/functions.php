@@ -15,6 +15,9 @@ $me = new UserHelper();
 function theme_enqueue_styles() {
     wp_enqueue_style( 'avada-parent-stylesheet', get_template_directory_uri() . '/style.css?' . ( (DEVMODE === true) ? time() : '' )  );
     wp_enqueue_style( 'avada-child-stylesheet', IFROOT . '/style.css?' . ( (DEVMODE === true) ? time() : '' ) );
+    wp_enqueue_style( 'slick', IFROOT . '/assets/vendor/slick/slick.css' );
+    wp_enqueue_style( 'slick-theme', IFROOT . '/assets/css/slick-theme.css?t=' . ( (DEVMODE === true) ? time() : '' ) );
+    wp_enqueue_script( 'slick', IFROOT . '/assets/vendor/slick/slick.min.js', array('jquery'));
 }
 add_action( 'wp_enqueue_scripts', 'theme_enqueue_styles' );
 

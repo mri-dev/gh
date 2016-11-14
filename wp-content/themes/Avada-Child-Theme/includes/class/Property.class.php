@@ -61,7 +61,7 @@ class Property extends PropertyFactory
       }
     }
 
-    return '???';
+    return false;
   }
   public function RegionSlug()
   {
@@ -77,7 +77,7 @@ class Property extends PropertyFactory
       }
     }
 
-    return '???';
+    return false;
   }
 
   public function ParentRegionSlug()
@@ -92,7 +92,7 @@ class Property extends PropertyFactory
       }
     }
 
-    return '???';
+    return false;
   }
 
   public function ParentRegion()
@@ -107,7 +107,7 @@ class Property extends PropertyFactory
       }
     }
 
-    return '???';
+    return false;
   }
 
   public function PropertyStatus( $text = false )
@@ -124,7 +124,24 @@ class Property extends PropertyFactory
       }
     }
 
-    return '???';
+    return false;
+  }
+
+  public function PropertyHeating( $text = false )
+  {
+    $terms = wp_get_post_terms( $this->ID(), 'property-heating' );
+
+    foreach ($terms as $term) {
+      if($term->taxonomy == 'property-heating') {
+        if ($text) {
+          return $this->i18n_taxonomy_values($term->name);
+        } else {
+          return $term->name;
+        }
+      }
+    }
+
+    return false;
   }
 
   public function PropertyCondition( $text = false )
@@ -141,7 +158,7 @@ class Property extends PropertyFactory
       }
     }
 
-    return '???';
+    return false;
   }
 
   public function PropertyType( $text = false )
@@ -158,7 +175,7 @@ class Property extends PropertyFactory
       }
     }
 
-    return '???';
+    return false;
   }
 
   public function isNews()
@@ -238,10 +255,13 @@ class Property extends PropertyFactory
     }
   }
 
-  public function Description()
+  public function Description( $front = false )
   {
-
-    return apply_filters ("the_content", $this->raw_post->post_content);
+    $content = apply_filters ("the_content", $this->raw_post->post_content);
+    if ($front) {
+        $content = YoutubeHelper::ember($content);
+    }
+    return $content;
   }
 
   public function Address()
