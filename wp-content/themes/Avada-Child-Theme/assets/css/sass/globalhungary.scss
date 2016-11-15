@@ -1085,7 +1085,7 @@ footer {
         .image{
           position: relative;
           width: 100%;
-          height: 180px;
+          height: 172px;
           overflow: hidden;
 
           img {
@@ -1283,6 +1283,9 @@ footer {
     .prop-item {
       padding: 5px 10px !important;
     }
+    .prop-item:last-child{
+      padding-bottom: 10px !important;
+    }
     .prop-item-wrapper {
       border: 1px solid #d9d9d9;
       .newi {
@@ -1310,7 +1313,7 @@ footer {
       .line-price {
         background: #91999c;
         color: #f5f5f5;
-        padding: 5px 10px;
+        padding: 8px 12px;
       }
     }
   }
@@ -1510,6 +1513,10 @@ footer {
       color: white;
       line-height: 26px;
 
+      .old-price {
+        float: left;
+        text-decoration: line-through;
+      }
       .current-price {
         font-family: 'Arial';
         font-weight: bold;

@@ -17,6 +17,7 @@
     }
   }
 
+  $regions = $property->Regions();
 ?>
 <div class="gh_control_content_holder">
   <div class="heading">
@@ -64,7 +65,7 @@
     <div class="row">
       <div class="col-md-2">
         <label for=""><?=__('Hirdetés régió', 'gh')?></label>
-        <div class="noinp-data"><?=$me->RegionName()?></div>
+        <div class="noinp-data"><?=$regions[0]->name?></div>
         <input type="hidden" name="tax[locations]" value="<?=$me->RegionID()?>">
       </div>
       <div class="col-md-7 reqf">

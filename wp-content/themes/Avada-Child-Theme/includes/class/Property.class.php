@@ -63,6 +63,35 @@ class Property extends PropertyFactory
 
     return false;
   }
+  
+  public function Regions()
+  {
+    $regions  = array();
+    $start    = true;
+    $end      = false;
+    $terms    = wp_get_post_terms( $this->ID(), 'locations' );
+    $term     = $terms[0];
+    unset($terms);
+    $ctp      = $term->parent;
+    $regions[$term->term_id] = $term;
+
+    while ( $ctp )
+    {
+      $term =  get_term($ctp, 'locations');
+      $regions[$term->term_id] = $term;
+
+      if($term->parent != 0) {
+        $ctp = $term->parent;
+      } else {
+        $ctp = false;
+        $term = null;
+      }
+      echo '1';
+    }
+
+    return array_reverse($regions);
+  }
+
   public function RegionSlug()
   {
     $terms = wp_get_post_terms( $this->ID(), 'locations' );
@@ -188,6 +217,11 @@ class Property extends PropertyFactory
   public function isDropOff()
   {
     $h = false;
+    $offp = $this->getMetaValue('_listing_offprice');
+
+    if ($offp != 0 && $offp) {
+      $h = true;
+    }
 
     return $h;
   }
@@ -281,8 +315,29 @@ class Property extends PropertyFactory
   {
     $price = get_post_meta($this->ID(), '_listing_price', true);
 
+    if ($this->isDropOff()) {
+      $off_price = $this->getMetaValue('_listing_offprice');
+      if ($off_price && $off_price != 0) {
+        $price = $off_price;
+      }
+    }
+
     if ( !$price ) {
       return __('Ár hiányzik (!)', 'gh');
+    }
+
+    if ($formated) {
+      $price = number_format($price, 0, ' ', '.').' '.$this->getValuta();
+    }
+
+    return $price;
+  }
+  public function OriginalPrice( $formated = false )
+  {
+    $price = $this->getMetaValue('_listing_price');
+
+    if ( !$price ) {
+      return 0;
     }
 
     if ($formated) {

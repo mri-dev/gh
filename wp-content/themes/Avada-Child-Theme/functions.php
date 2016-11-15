@@ -212,6 +212,7 @@ function gh_custom_template($template) {
     return get_stylesheet_directory() . '/control.php';
   } else if(isset($wp_query->query_vars['custom_page'])) {
     add_filter( 'body_class','gh_ingatlan_class_body' );
+    add_filter( 'document_title_parts', 'ingatlan_custom_title' );
     return get_stylesheet_directory() . '/'.$wp_query->query_vars['custom_page'].'.php';
   } else {
     return $template;
@@ -226,7 +227,28 @@ function gh_ingatlan_class_body( $classes ) {
   $classes[] = 'gh_ingatlan_page';
   return $classes;
 }
+function ingatlan_custom_title($title)
+{ global $wp_query;
 
+  if($wp_query->query_vars['custom_page'] == 'ingatlan' ) {
+    $xs = explode("-",$wp_query->query_vars['urlstring']);
+    $ingatlan_id = end($xs);
+    $properties = new Properties(array(
+      'id' => $ingatlan_id,
+      'post_status' => array('publish'),
+    ));
+    $property = $properties->getList();
+    $property = $property[0];
+
+    $title['title'] = $property->Title() . ' ['.$property->Azonosito().']' . ' - ' . $property->PropertyStatus(true) . ' '. $property->PropertyType(true) . ' - '. $property->ParentRegion();
+  }
+
+  if($wp_query->query_vars['custom_page'] == 'ingatlanok' ) {
+    $title['title'] = __('Ingatlankereső', 'gh');
+  }
+
+  return $title;
+}
 
 function gh_query_vars($aVars) {
   $aVars[] = "cp";

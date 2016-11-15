@@ -36,6 +36,9 @@ class WP_Listings {
 				__( 'Ingatlan kategória', 'gh' ) 	=> '_listing_property_types',
 				__( 'Pontos cím (utca, házszám, stb)', 'gh' ) => '_listing_address',
 			  __( 'Irányár', 'gh' ) 	=> '_listing_price',
+				__( 'Akciós irányár', 'gh' ) 	=> '_listing_offprice',
+				__( 'GPS (lat)', 'gh' ) 	=> '_listing_gps_lat',
+				__( 'GPS (lng)', 'gh' ) 	=> '_listing_gps_lng',
 			),
 			'col2' => array(
 		    __( 'Építés éve', 'gh' )  => '_listing_year_built',
@@ -52,6 +55,9 @@ class WP_Listings {
 				__( 'Erkély', 'gh' )  => '_listing_balcony',
 				__( 'Lift', 'gh' )  => '_listing_lift',
 				__( 'Zöldövezet', 'gh' )  => '_listing_green_area',
+			),
+			'flags' => array(
+				__( 'Kiemelt', 'gh' )  => '_listing_flag_highlight',
 			),
 		) );
 

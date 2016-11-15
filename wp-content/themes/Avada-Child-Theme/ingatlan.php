@@ -10,7 +10,6 @@
   ));
   $property = $properties->getList();
   $prop = $property[0];
-
 ?>
 	<div id="content" <?php Avada()->layout->add_class( 'content_class' ); ?> <?php Avada()->layout->add_style( 'content_style' ); ?>>
     <div class="<?=SLUG_INGATLAN?>-page-view">
@@ -45,6 +44,11 @@
         <div class="data-top-right">
           <div class="properties">
             <div class="header">
+              <?php if ($prop->isDropOff()): ?>
+                <div class="old-price">
+                  <?=$prop->OriginalPrice(true)?>
+                </div>
+              <?php endif; ?>
               <div class="current-price">
                 <?=$prop->Price(true)?>
               </div>
@@ -116,7 +120,7 @@
               </div>
               <div class="e">
                <div class="h">
-                 <div class="ico"><img src="<?=IMG?>/ico/payment.svg" alt="<?=__('Fűtés', 'gh')?>"></div>
+                 <div class="ico"><img src="<?=IMG?>/ico/heating.svg" alt="<?=__('Fűtés', 'gh')?>"></div>
                  <?=__('Fűtés', 'gh')?>
                </div><!--
             --><div class="v"><?=$prop->PropertyHeating(true)?></div>
