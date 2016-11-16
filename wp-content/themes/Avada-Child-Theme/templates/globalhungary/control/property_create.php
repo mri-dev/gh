@@ -118,6 +118,14 @@
         <input type="file" name="property_images[]" id="property_images" value="" class="form-control">
       </div>
     </div>
+    <h3><?=__('Ingatlan jelölése térképen', 'gh')?></h3>
+    <small class="inputhint"><?=__('Kattintson a térképen az ingatlan pozíciójának kiválasztásához. Ha módosítani kívánja, fogja meg a markert és helyezze át.', 'gh')?></small>
+    <br><br>
+    <div class="row">
+      <div class="col-md-12">
+        <? get_template_part('templates/parts/map_gps_picker'); ?>
+      </div>
+    </div>
     <?php if(current_user_can('reference_manager')): ?>
       <input type="hidden" name="property_author" value="<?=get_current_user_id()?>">
     <?php else: ?>

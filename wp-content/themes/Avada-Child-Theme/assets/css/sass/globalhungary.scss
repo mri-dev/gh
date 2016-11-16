@@ -1737,3 +1737,29 @@ footer {
   -moz-transition: all .6s;
   transition: all .6s;
 }
+
+.map-container{
+  &.gps-map {
+    .map-gps-selected{
+      width: 50%;
+      margin: 10px auto;
+      text-align: center;
+
+      .lat, .lng {
+        background: #ef5659;
+        color: #fff;
+        padding: 5px 15px;
+        border-radius: 4px;
+
+        &.setted {
+          background: #5fb55f;
+        }
+      }
+
+      .sep {
+        padding: 0 10px;
+        font-size: 22px;
+      }
+    }
+  }
+}

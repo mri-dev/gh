@@ -5,6 +5,7 @@ define('DEVMODE', true);
 define('IMG', IFROOT.'/images');
 define('SLUG_INGATLAN', 'ingatlan');
 define('SLUG_INGATLAN_LIST', 'ingatlanok');
+define('GOOGLE_API_KEY', 'AIzaSyA0Mu8_XYUGo9iXhoenj7HTPBIfS2jDU2E');
 
 // Includes
 require_once WP_PLUGIN_DIR."/cmb2/init.php";
@@ -18,6 +19,7 @@ function theme_enqueue_styles() {
     wp_enqueue_style( 'slick', IFROOT . '/assets/vendor/slick/slick.css' );
     wp_enqueue_style( 'slick-theme', IFROOT . '/assets/css/slick-theme.css?t=' . ( (DEVMODE === true) ? time() : '' ) );
     wp_enqueue_script( 'slick', IFROOT . '/assets/vendor/slick/slick.min.js', array('jquery'));
+    wp_enqueue_script( 'google-maps', '//maps.googleapis.com/maps/api/js?language=hu&region=hu&key='.GOOGLE_API_KEY);
 }
 add_action( 'wp_enqueue_scripts', 'theme_enqueue_styles' );
 
