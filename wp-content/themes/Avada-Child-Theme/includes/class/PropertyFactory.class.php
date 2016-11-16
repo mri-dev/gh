@@ -3,8 +3,9 @@
 class PropertyFactory
 {
   const PROPERTY_TAXONOMY_META_PREFIX = '_listing_';
+  const LOG_CHANGE_DB = 'listing_change_history';
 
-  public $property_taxonomies_id = array('property-types', 'property-condition', 'status', 'locations');
+  public $property_taxonomies_id = array('property-types', 'property-condition', 'property-heating', 'status', 'locations');
   public $property_status_colors = array(
     'publish' => '#c6e8c6',
     'draft'   => '#e2e2e2',

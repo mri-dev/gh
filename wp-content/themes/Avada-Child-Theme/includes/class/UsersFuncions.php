@@ -63,7 +63,17 @@ function overwrite_author_list_all_users( $output )
 
   return $output;
 }
-add_filter('wp_dropdown_users', 'overwrite_author_list_all_users');
+//add_filter('wp_dropdown_users', 'overwrite_author_list_all_users');
+
+/**
+* Összes felhasználó listázása a legördülő select-ben
+**/
+function all_users_to_dropdown( $query_args, $r )
+{
+  $query_args['who'] = '';
+  return $query_args;
+}
+add_filter( 'wp_dropdown_users_args', 'all_users_to_dropdown', 10, 2 );
 
 /**
 * Bejelentkezési idő mentése

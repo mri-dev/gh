@@ -598,6 +598,12 @@ footer {
     }
   }
 
+  &.alert-success{
+    &:before {
+      content: "\f058";
+    }
+  }
+
   & > h3 {
     margin: 0 0 5px 0;
   }

@@ -5,8 +5,10 @@
   if (isset($_POST['createProperty'])) {
     try {
       $f = $control->createsave($_POST);
-      if ($f != 0) {
-        //wp_redirect('/control/properties/?createdAdv=1');
+      if ($f['mode'] == 'save') {
+        wp_redirect('/control/property_edit/?id='.$f['id'].'&saved=1');
+      } else if($f['mode'] == 'create') {
+        wp_redirect('/control/properties/?createdAdv=1');
       }
     } catch (Exception $e) {
       $error = $e->getMessage();

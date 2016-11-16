@@ -63,7 +63,7 @@ class Property extends PropertyFactory
 
     return false;
   }
-  
+
   public function Regions()
   {
     $regions  = array();
@@ -86,7 +86,6 @@ class Property extends PropertyFactory
         $ctp = false;
         $term = null;
       }
-      echo '1';
     }
 
     return array_reverse($regions);
@@ -255,6 +254,17 @@ class Property extends PropertyFactory
     return $terms[0]->term_id;
   }
 
+  public function HeatingID()
+  {
+    $terms = wp_get_post_terms( $this->ID(), 'property-heating' );
+
+    if (!$terms) {
+      return 0;
+    }
+
+    return $terms[0]->term_id;
+  }
+
   public function ConditionID()
   {
     $terms = wp_get_post_terms( $this->ID(), 'property-condition' );
@@ -335,6 +345,20 @@ class Property extends PropertyFactory
   public function OriginalPrice( $formated = false )
   {
     $price = $this->getMetaValue('_listing_price');
+
+    if ( !$price ) {
+      return 0;
+    }
+
+    if ($formated) {
+      $price = number_format($price, 0, ' ', '.').' '.$this->getValuta();
+    }
+
+    return $price;
+  }
+  public function OffPrice( $formated = false )
+  {
+    $price = $this->getMetaValue('_listing_offprice');
 
     if ( !$price ) {
       return 0;

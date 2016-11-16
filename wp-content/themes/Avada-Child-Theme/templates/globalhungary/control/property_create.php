@@ -16,7 +16,11 @@
     <input type="hidden" name="property_id" value="0">
     <h3><?=__('Alapadatok', 'gh')?></h3>
     <div class="row">
-      <div class="col-md-12 reqf">
+      <div class="col-md-3 reqf">
+        <label for="_listing_idnumber"><?=__('Azonosító', 'gh')?></label>
+        <input type="text" id="_listing_idnumber" name="meta_input[_listing_idnumber]" value="<?=$_POST['meta']['_listing_idnumber']?>" class="form-control">
+      </div>
+      <div class="col-md-9 reqf">
         <label for="post_title"><?=__('Ingatlan cím (SEO)', 'gh')?></label>
         <input type="text" id="post_title" name="post_title" value="<?=$_POST['post_title']?>" class="form-control">
         <small class="inputhint"><?=__('Pl.: Újépítésű 120 nm-es 4 szobás családi ház Pécs szívében.', 'gh')?></small>
@@ -36,23 +40,43 @@
         <? $control->getTaxonomySelects( 'property-condition' ); ?>
       </div>
       <div class="col-md-3 reqf">
-        <label for="_listing_idnumber"><?=__('Azonosító', 'gh')?></label>
-        <input type="text" id="_listing_idnumber" name="meta_input[_listing_idnumber]" value="<?=$_POST['meta']['_listing_idnumber']?>" class="form-control">
+        <label for=""><?=__('Fűtés típusa', 'gh')?></label>
+        <? $control->getTaxonomySelects( 'property-heating' ); ?>
       </div>
     </div>
     <div class="row">
       <div class="col-md-2">
         <label for=""><?=__('Hirdetés régió', 'gh')?></label>
-        <div class="noinp-data"><?=$me->RegionName()?></div>
-        <input type="hidden" name="tax[locations]" value="<?=$me->RegionID()?>">
+        <div class="noinp-data"><?=(!$me->RegionID()) ? __('Összes', 'gh'):$me->RegionName()?></div>
       </div>
-      <div class="col-md-7 reqf">
+      <div class="col-md-4">
+        <label for="tax_locations"><?=__('Város', 'gh')?></label>
+        <? wp_dropdown_categories(array(
+          'show_option_all' => __('-- válasszon --', 'gh'),
+          'taxonomy' => 'locations',
+          'hide_empty' => 0,
+          'name' => 'tax[locations]',
+          'id' => 'tax_locations',
+          'parent' => $me->RegionID(),
+          'hierarchical' => 1,
+          'orderby' => 'name'
+        )); ?>
+        <input type="hidden" name="pre[tax][locations]" value="<?=$parea->term_id?>">
+        <small class="inputhint"><?=__('Nem találja a várost?', 'gh')?> <a href="#"><?=__('Város hozzáadása', 'gh')?></a></small>
+      </div>
+      <div class="col-md-6 reqf">
         <label for="_listing_address"><?=__('Pontos cím (utca, házszám, stb)', 'gh')?></label>
         <input type="text" id="_listing_address" name="meta_input[_listing_address]" value="<?=$_POST['meta']['_listing_address']?>" class="form-control">
       </div>
+    </div>
+    <div class="row">
       <div class="col-md-3 reqf">
         <label for="_listing_price"><?=__('Irányár (Ft)', 'gh')?></label>
         <input type="number" min="0" id="_listing_price" name="meta_input[_listing_price]" value="<?=$_POST['meta']['_listing_price']?>" class="form-control">
+      </div>
+      <div class="col-md-3">
+        <label for="_listing_offprice"><?=__('Akciós irányár (Ft)', 'gh')?></label>
+        <input type="number" min="0" id="_listing_offprice" name="meta_input[_listing_offprice]" value="<?=$_POST['meta']['_listing_offprice']?>" class="form-control">
       </div>
     </div>
     <h3><?=__('Leírások', 'gh')?></h3>
