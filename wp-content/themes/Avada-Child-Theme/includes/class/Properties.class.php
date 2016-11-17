@@ -80,8 +80,6 @@ class Properties extends PropertyFactory
       $post_arg['posts_per_page'] = 30;
     }
 
-
-
     $posts = get_posts($post_arg);
 
     foreach($posts as $post) {
@@ -121,6 +119,25 @@ class Properties extends PropertyFactory
       'walker'          => new Properties_Select_Walker
     ));
 
+  }
+
+  public function logView()
+  {
+    global $wpdb;
+    if ($this->arg['id']) {
+      $wpdb->insert(
+        self::LOG_VIEW_DB,
+        array(
+          'ip' => $_SERVER['REMOTE_ADDR'],
+          'pid' => $this->arg['id'],
+          'ref' => $_SERVER['HTTP_REFERER'],
+          'qrystr' => $_SERVER['QUERY_STRING']
+        ),
+        array(
+          '%s', '%d', '%s', '%s'
+        )
+      );
+    }
   }
 }
 

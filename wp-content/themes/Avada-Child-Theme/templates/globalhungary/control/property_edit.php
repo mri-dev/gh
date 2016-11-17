@@ -167,10 +167,17 @@
         <input type="file" name="property_images[]" id="property_images" value="" class="form-control">
       </div>
     </div>
+    <?
+      $gps = $property->GPS();
+    ?>
     <h3><?=__('Ingatlan jelölése térképen', 'gh')?></h3>
     <div class="row">
       <div class="col-md-12">
-        <? get_template_part('templates/parts/map_gps_picker'); ?>
+        <?
+          ob_start();
+          include(locate_template('/templates/parts/map_gps_picker.php'));
+          ob_end_flush();
+        ?>
       </div>
     </div>
     <?php if(current_user_can('reference_manager')): ?>

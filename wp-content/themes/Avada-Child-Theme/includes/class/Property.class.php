@@ -254,6 +254,21 @@ class Property extends PropertyFactory
     return $terms[0]->term_id;
   }
 
+  public function GPS()
+  {
+    $lat = $this->getMetaValue( '_listing_gps_lat' );
+    $lng = $this->getMetaValue( '_listing_gps_lng' );
+
+    if (!$lng || !$lat) {
+      return false;
+    }
+
+    return array(
+      "lat" => (float)$lat,
+      "lng" => (float)$lng
+    );
+  }
+
   public function HeatingID()
   {
     $terms = wp_get_post_terms( $this->ID(), 'property-heating' );

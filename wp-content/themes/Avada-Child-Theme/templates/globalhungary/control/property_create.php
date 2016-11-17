@@ -123,7 +123,11 @@
     <br><br>
     <div class="row">
       <div class="col-md-12">
-        <? get_template_part('templates/parts/map_gps_picker'); ?>
+        <?
+          ob_start();
+          include(locate_template('/templates/parts/map_gps_picker.php'));
+          ob_end_flush();
+        ?>
       </div>
     </div>
     <?php if(current_user_can('reference_manager')): ?>
@@ -147,3 +151,25 @@
   </form>
   <? endif; ?>
 </div>
+<script>
+  (function($){
+    $('#_listing_address, #tax_locations').on('change', function(){
+      var qryaddr = 'Magyarország<?=(!$me->RegionID()) ?'':', '.$me->RegionName().' megye'?>';
+      var v = $('#_listing_address').val();
+      var c = $('#tax_locations option:selected').text();
+      if (typeof c !== 'undefined') {
+        qryaddr += ', '+c;
+      }
+      qryaddr += ', '+v;
+      var geo = new google.maps.Geocoder();
+
+      geo.geocode({ address: qryaddr }, function(r,s){
+        if (s == 'OK') {
+          var center = r[0].geometry.location;
+          setGPSMarker(center, r[0].formatted_address);
+        }
+      });
+
+    });
+  })(jQuery);
+</script>

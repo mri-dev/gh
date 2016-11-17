@@ -1523,6 +1523,11 @@ footer .widget_nav_menu ul.menu {
     .map-container.gps-map .map-gps-selected .lat.setted, .map-container.gps-map .map-gps-selected .lng.setted {
       background: #5fb55f; }
   /* line 1759, sass/globalhungary.scss */
+  .map-container.gps-map .map-gps-selected .selected-address {
+    color: #000;
+    padding: 15px 0 0 0;
+    font-size: 0.9em; }
+  /* line 1765, sass/globalhungary.scss */
   .map-container.gps-map .map-gps-selected .sep {
     padding: 0 10px;
     font-size: 22px; }

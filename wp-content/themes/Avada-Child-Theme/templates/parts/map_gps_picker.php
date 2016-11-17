@@ -2,16 +2,20 @@
 <div class="map-container gps-map">
   <div id="propertygpsmap" style="width: 100%; height: 320px;"></div>
   <div class="map-gps-selected">
-    <span class="lat" id="gpsmap_txt_lat">00.00000</span>
+    <span class="lat <?=($gps['lat']) ? 'setted' : ''?>" id="gpsmap_txt_lat"><?=($gps['lat']) ? $gps['lat'] : '00.00000'?></span>
     <span class="sep">,</span>
-    <span class="lng" id="gpsmap_txt_lng">00.00000</span>
+    <span class="lng <?=($gps['lng']) ? 'setted' : ''?>" id="gpsmap_txt_lng"><?=($gps['lng']) ? $gps['lng'] : '00.00000'?></span>
+    <div class="selected-address" id="gpsmap_txt_address"></div>
   </div>
-  <input type="hidden" id="gpsmap_lat" name="meta_input[_listing_gps_lat]" value="">
-  <input type="hidden" id="gpsmap_lng" name="meta_input[_listing_gps_lng]" value="">
+  <input type="hidden" id="gpsmap_lat" name="meta_input[_listing_gps_lat]" value="<?=$gps['lat']?>">
+  <input type="hidden" id="gpsmap_lng" name="meta_input[_listing_gps_lng]" value="<?=$gps['lng']?>">
+  <input type="hidden" name="pre[meta_input][_listing_gps_lat]" value="<?=$gps['lat']?>">
+  <input type="hidden" name="pre[meta_input][_listing_gps_lng]" value="<?=$gps['lng']?>">
 </div>
 
 <script type="text/javascript">
   var gpsmap, geo, pMarker;
+  var inited_gps = <?=($gps['lat']) ? 1 : 0?>;
   (function($){
     geo     = new google.maps.Geocoder();
     var styledMapType = new google.maps.StyledMapType( [
@@ -177,8 +181,8 @@
     {name: '<?=__('Letisztult', 'gh')?>'});
 
     var mapopt = {
-      center: {lat: 46.075493, lng: 18.228361},
-      zoom: 12,
+      center: {lat: <?=($gps['lat']) ? $gps['lat'] : '46.075493'?>, lng: <?=($gps['lng']) ? $gps['lng'] : '18.228361'?>},
+      zoom: <?=($gps) ? 14 : 12?>,
       mapTypeControlOptions: {
         mapTypeIds: ['roadmap', 'satellite', 'hybrid', 'terrain', 'styled_map']
       }
@@ -186,37 +190,55 @@
 
     gpsmap  = new google.maps.Map(document.getElementById('propertygpsmap'), mapopt);
 
-    geo.geocode({ address: 'Magyarország <?=($me->RegionID())?', '.$me->RegionName().' megye':''?>'}, function(r,s){
-      if (s == 'OK') {
-        gpsmap.setCenter(r[0].geometry.location);
-        gpsmap.setZoom(10);
-      }
-    });
+    if (inited_gps == 0) {
+      geo.geocode({ address: 'Magyarország <?=($me->RegionID())?', '.$me->RegionName().' megye':''?>'}, function(r,s){
+        if (s == 'OK') {
+          gpsmap.setCenter(r[0].geometry.location);
+          gpsmap.setZoom(10);
+        }
+      });
+    } else {
+      setGPSMarker(mapopt.center);
+    }
 
-    gpsmap.addListener('click', function(e) {
-      if( !pMarker ) {
-        pMarker = new google.maps.Marker({
-            position: e.latLng,
-            draggable: true
-        });
-        $('#gpsmap_lat').val(e.latLng.lat().toFixed(5));
-        $('#gpsmap_txt_lat').text(e.latLng.lat().toFixed(5)).addClass('setted');
-        $('#gpsmap_lng').val(e.latLng.lng().toFixed(5));
-        $('#gpsmap_txt_lng').text(e.latLng.lng().toFixed(5)).addClass('setted');
-
-        google.maps.event.addListener(pMarker, 'dragend', function(evt){
-            //console.log(evt);
-            $('#gpsmap_lat').val(evt.latLng.lat().toFixed(5));
-            $('#gpsmap_txt_lat').text(evt.latLng.lat().toFixed(5)).addClass('setted');
-            $('#gpsmap_lng').val(evt.latLng.lng().toFixed(5));
-            $('#gpsmap_txt_lng').text(evt.latLng.lng().toFixed(5)).addClass('setted');
-        });
-        pMarker.setMap(gpsmap);
-      }
+    gpsmap.addListener('click', function(e,r) {
+      setGPSMarker({
+        lat: parseFloat(e.latLng.lat().toFixed(5)),
+        lng: parseFloat(e.latLng.lng().toFixed(5))
+      });
     });
 
     gpsmap.mapTypes.set('styled_map', styledMapType);
     gpsmap.setMapTypeId('styled_map');
 
   })(jQuery);
+
+  function setGPSMarker(latLng, address) {
+    if(pMarker) {
+      pMarker.setPosition(latLng);
+    } else {
+      pMarker = new google.maps.Marker({
+          position: latLng,
+          draggable: true
+      });
+      pMarker.setMap(gpsmap);
+      google.maps.event.addListener(pMarker, 'dragend', function(evt){
+          //console.log(evt);
+          jQuery('#gpsmap_lat').val(evt.latLng.lat().toFixed(5));
+          jQuery('#gpsmap_txt_lat').text(evt.latLng.lat().toFixed(5)).addClass('setted');
+          jQuery('#gpsmap_lng').val(evt.latLng.lng().toFixed(5));
+          jQuery('#gpsmap_txt_lng').text(evt.latLng.lng().toFixed(5)).addClass('setted');
+      });
+    }
+
+    jQuery('#gpsmap_lat').val(latLng.lat);
+    jQuery('#gpsmap_txt_lat').text(latLng.lat).addClass('setted');
+    jQuery('#gpsmap_lng').val(latLng.lng);
+    jQuery('#gpsmap_txt_lng').text(latLng.lng).addClass('setted');
+
+    gpsmap.setZoom(14);
+    gpsmap.setCenter(latLng);
+
+    jQuery('#gpsmap_txt_address').text(address);
+  }
 </script>

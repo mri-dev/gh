@@ -10,6 +10,7 @@
   ));
   $property = $properties->getList();
   $prop = $property[0];
+  $properties->logView();
 ?>
 	<div id="content" <?php Avada()->layout->add_class( 'content_class' ); ?> <?php Avada()->layout->add_style( 'content_style' ); ?>>
     <div class="<?=SLUG_INGATLAN?>-page-view">
