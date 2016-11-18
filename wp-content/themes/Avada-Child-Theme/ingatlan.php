@@ -11,6 +11,7 @@
   $property = $properties->getList();
   $prop = $property[0];
   $properties->logView();
+  $regions = $prop->Regions();
 ?>
 	<div id="content" <?php Avada()->layout->add_class( 'content_class' ); ?> <?php Avada()->layout->add_style( 'content_style' ); ?>>
     <div class="<?=SLUG_INGATLAN?>-page-view">
@@ -21,7 +22,11 @@
         <div class="data-top-left">
           <div class="cwrapper">
             <div class="title">
-              <h1><?=$prop->PropertyStatus(true)?> <?=$prop->PropertyType(true)?> <span class="addr"><?=$prop->ParentRegion()?>, <?=$prop->Address()?></span></h1>
+              <h1><?=$prop->Title()?></h1>
+              <div class="subtitle">
+                <strong><?=$prop->PropertyStatus(true)?> <?=$prop->PropertyType(true)?></strong>
+                <span class="addr"><?php $regtext = ''; foreach ($regions as $r ): $regtext .= $r->name.' / '; endforeach; $regtext = rtrim($regtext, ' / '); ?><?=$regtext?></span>
+              </div>
               <div class="icons"></div>
             </div>
             <div class="images">
@@ -62,13 +67,6 @@
                   <?=__('Település', 'gh')?>
                 </div><!--
              --><div class="v"><?=$prop->ParentRegion()?></div>
-              </div>
-              <div class="e">
-               <div class="h">
-                 <div class="ico"><img src="<?=IMG?>/ico/cim.svg" alt="<?=__('Cím', 'gh')?>"></div>
-                 <?=__('Cím', 'gh')?>
-               </div><!--
-            --><div class="v"><?=$prop->Address()?></div>
               </div>
               <div class="e">
                <div class="h">
@@ -178,7 +176,12 @@
         </div>
         <div class="data-main-right">
           <div class="map-block">
-
+            <?
+              $gps = $prop->GPS();
+              ob_start();
+              include(locate_template('/templates/parts/map_place_poi.php'));
+              ob_end_flush();
+            ?>
           </div>
         </div>
       </div>

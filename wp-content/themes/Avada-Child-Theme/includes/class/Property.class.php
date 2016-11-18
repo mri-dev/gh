@@ -229,7 +229,19 @@ class Property extends PropertyFactory
   {
     $h = true;
 
+    $v = $this->getMetaValue('_listing_flag_highlight');
+
+    if (!$v || $v == '' || $v == '0') {
+      return false;
+    }
+
     return $h;
+  }
+
+  public function imageNumbers()
+  {
+    $n = 1;
+    return $n;
   }
 
   public function StatusID()
