@@ -1,6 +1,7 @@
 <?php
 class control_property_save
 {
+  private $temppostid = 0;
 
   public function __construct()
   {
@@ -31,6 +32,7 @@ class control_property_save
 
     if ($post['ID'] != 0) {
       $mode = 'save';
+      $this->temppostid = $post['ID'];
     }
 
     // Meta checkboxes
@@ -125,6 +127,9 @@ class control_property_save
     }
 
     $post_id = wp_insert_post( $post );
+    if ($mode == 'create') {
+      $this->temppostid = $post_id;
+    }
 
     if ( $post_id != 0 ) {
       wp_set_object_terms( $post_id, array((int)$taxes['locations']), 'locations' );
@@ -134,6 +139,42 @@ class control_property_save
       wp_set_object_terms( $post_id, array((int)$taxes['property-heating']), 'property-heating' );
     }
 
+    /**
+    * Images
+    **/
+    $uploads_dir = wp_upload_dir();
+    $property_image_dir = $uploads_dir['basedir'] . '/listing/' . $post_id;
+
+
+    if ( $_FILES )
+    {
+      add_filter( 'upload_dir', array( $this, 'upload_dir_filter') );
+      add_filter( 'intermediate_image_sizes', '__return_empty_array', 99 );
+
+      $files = $_FILES["property_images"];
+
+      foreach ($files['name'] as $key => $value) {
+        if ($files['name'][$key]) {
+          $file = array(
+              'name' => $files['name'][$key],
+              'type' => $files['type'][$key],
+              'tmp_name' => $files['tmp_name'][$key],
+              'error' => $files['error'][$key],
+              'size' => $files['size'][$key]
+          );
+
+          $_FILES = array ("property_images" => $file);
+
+          foreach ($_FILES as $file => $array) {
+            $newupload = $this->uploads_handler( $file, $this->temppostid );
+            $changed['image_uploads'][] = $newupload;
+          }
+        }
+      }
+      remove_filter( 'upload_dir', array( $this, 'upload_dir_filter') );
+      remove_filter( 'intermediate_image_sizes', '__return_empty_array', 99 );
+    }
+
     // Változások logolása
     if ( $post['ID'] != 0 && !empty($changed) ) {
       $this->logChanges( get_current_user_id(), $post['ID'], $changed );
@@ -141,6 +182,29 @@ class control_property_save
 
     //return $post;
     return array( 'id' => $post_id, 'mode' => $mode );
+  }
+
+  public function uploads_handler ( $file_handler, $post_id, $set_thu = false )
+  {
+    // check to make sure its a successful upload
+    if ($_FILES[$file_handler]['error'] !== UPLOAD_ERR_OK) __return_false();
+
+    require_once(ABSPATH . "wp-admin" . '/includes/image.php');
+    require_once(ABSPATH . "wp-admin" . '/includes/file.php');
+    require_once(ABSPATH . "wp-admin" . '/includes/media.php');
+
+    $attach_id = media_handle_upload( $file_handler, $this->temppostid );
+
+    return $attach_id;
+  }
+
+  public function upload_dir_filter( $dir )
+  {
+    return array(
+      'path'   => $dir['basedir'] . '/listing/'.$this->temppostid,
+      'url'    => $dir['baseurl'] . '/listing/'.$this->temppostid,
+      'subdir' => '/listing/'.$this->temppostid,
+     ) + $dir;
   }
 
   private function logChanges( $uid, $pid, $changes_arr = array())

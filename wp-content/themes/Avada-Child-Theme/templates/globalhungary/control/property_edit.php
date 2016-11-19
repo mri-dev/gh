@@ -32,7 +32,7 @@
   <? elseif( $denied_to_edit ): ?>
   <div class="alert alert-danger"><?=sprintf(__('Ön nem jogosult a(z) %s számú ingatlan szerkesztésére. Vegye fel a kapcsolatot felettesével vagy az oldal üzemeltetőjével', 'gh'), $property->Azonosito())?></div>
   <? else: ?>
-  <form class="wide-form" action="/control/property_save" method="post">
+  <form class="wide-form" action="/control/property_save" method="post" enctype="multipart/form-data">
     <input type="hidden" name="property_id" value="<?=$property->ID()?>">
     <h3><?=__('Művelet végrehajtás', 'gh')?></h3>
     <div class="row">
@@ -164,9 +164,15 @@
     <div class="row">
       <div class="col-md-12">
         <label for="property_images"><?=__('Képek tallózása', 'gh')?></label>
-        <input type="file" name="property_images[]" id="property_images" value="" class="form-control">
+        <input type="file" multiple="multiple" name="property_images[]" id="property_images" value="" class="form-control">
       </div>
     </div>
+    <?
+      $images = $property->Images();
+      ob_start();
+      include(locate_template('/templates/parts/property_images_editor.php'));
+      ob_end_flush();
+    ?>
     <?
       $gps = $property->GPS();
     ?>

@@ -238,9 +238,14 @@ class Property extends PropertyFactory
     return $h;
   }
 
+  public function Images()
+  {
+    return get_attached_media( 'image', $this->ID() );
+  }
+
   public function imageNumbers()
   {
-    $n = 1;
+    $n = count($this->Images());
     return $n;
   }
 
