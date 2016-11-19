@@ -402,6 +402,10 @@ class Property extends PropertyFactory
 
     return $price;
   }
+  public function ProfilImgID()
+  {
+    return get_post_thumbnail_id( $this->ID() );
+  }
   public function ProfilImg()
   {
     $img = wp_get_attachment_image_src( get_post_thumbnail_id( $this->ID() ), "full" );

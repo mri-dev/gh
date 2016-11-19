@@ -88,6 +88,113 @@ input[type=checkbox]:checked + label {
   }
 }
 
+.image-set {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+
+  .image {
+    flex-basis: 20%;
+    height: 120px;
+    padding: 2px;
+    .iwrapper {
+      height: 100%;
+      max-height: 100%;
+      overflow: hidden;
+      position: relative;
+
+      .profil_selector{
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        color: white;
+
+        input[type=radio] {
+          display: none;
+        }
+        input[type=radio] + label {
+          cursor: pointer;
+          background: #65686b;
+          color: white;
+          font-size: 0.7em;
+          margin: 0;
+          padding: 4px 10px 4px 23px;
+          -webkit-border-radius: 8px 0 0 0;
+          -moz-border-radius: 8px 0 0 0;
+          border-radius: 8px 0 0 0;
+
+          &:before {
+            content: "\f1db";
+            font-family: 'FontAwesome';
+            color: white;
+            position: absolute;
+            left: 8px;
+          }
+        }
+        input[type=radio]:checked + label {
+          background: #2a9a53;
+          &:before {
+            content: "\f05d";
+          }
+        }
+      }
+
+      .delete_selector{
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        color: white;
+
+        input[type=checkbox] {
+          display: none !important;
+        }
+        input[type=checkbox] + label {
+          cursor: pointer;
+          background: #a95153;
+          color: white;
+          font-size: 0.7em;
+          margin: 0;
+          padding: 4px 23px 4px 10px;
+          -webkit-border-radius: 0 8px 0 0;
+          -moz-border-radius: 0 8px 0 0;
+          border-radius: 0 8px 0 0;
+
+          &:before {
+            display: none;
+          }
+
+          &:after {
+            content: "\f096";
+            font-family: 'FontAwesome';
+            color: white;
+            position: absolute;
+            right: 8px;
+          }
+        }
+        input[type=checkbox]:checked + label {
+          background: $color-pr;
+          &:after {
+            content: "\f046";
+          }
+        }
+      }
+
+      a{
+        display: block;
+      }
+
+      img {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 120%;
+        max-width: 120%;
+        transform:translate(-50%,-50%);
+      }
+    }
+  }
+}
+
 .fusion-main-menu > ul > li{
   position: relative;
   border-right: 2px solid #333b3b;
@@ -643,12 +750,20 @@ footer {
       margin: 0 10px 0 0;
       width:50px;
       max-width: 50px;
+      height: 46px;
       overflow: hidden;
       -webkit-border-radius: 10px;
       -moz-border-radius: 10px;
       border-radius: 10px;
+      position: relative;
       img{
-        width: 100%;
+        width: auto;
+        max-width: initial;
+        height: 120%;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
       }
     }
     .main-row{
@@ -1114,8 +1229,8 @@ footer {
           overflow: hidden;
 
           img {
-            height: 110%;
-            max-height: 110%;
+            height: 125%;
+            max-height: 125%;
             width: auto;
             max-width: initial;
             position: absolute;

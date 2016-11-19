@@ -33,17 +33,30 @@
               <div class="profil" id="profilimg">
                 <a href="<?=$prop->ProfilImg()?>"><img src="<?=$prop->ProfilImg()?>" alt=""></a>
               </div>
+              <?
+                $pimgid = $prop->ProfilImgID();
+                $images = $prop->Images();
+                $imn    = $prop->imageNumbers();
+                $newimgs = array();
+                $newimgs[$pimgid] = $images[$pimgid];
+                unset($images[$pimgid]);
+                foreach ($images as $iid => $iv) {
+                  $newimgs[$iid] = $iv;
+                }
+              ?>
+              <? if(  $imn > 1 ): ?>
               <div class="stack">
                 <div class="stack-wrapper">
                   <div class="items image-slide">
-                    <? for( $f = 0; $f <= 6; $f++): if($f%2 === 0){ $img = $prop->ProfilImg(); }else{ $img = 'http://globalhungary.mri-dev.com/wp-content/uploads/2016/11/House.jpg'; }  ?>
+                    <? foreach( $newimgs as $img ): ?>
                     <div class="i">
-                      <img src="<?=$img?>" alt="" />
+                      <img src="<?=$img->guid?>" alt="<?=$prop->Title()?>" />
                     </div>
-                    <? endfor; ?>
+                    <? endforeach; ?>
                   </div>
                 </div>
               </div>
+              <? endif; ?>
             </div>
           </div>
         </div>

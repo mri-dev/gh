@@ -28,7 +28,9 @@ class control_property_save
     $post['post_title'] = wp_strip_all_tags($post['post_title']);
     $post['post_excerpt'] = wp_strip_all_tags($post['post_excerpt']);
     $taxes = $post['tax'];
+    $extra = $post['extra'];
     $images = $post['property_images'];
+    $pre = $post['pre'];
 
     if ($post['ID'] != 0) {
       $mode = 'save';
@@ -76,6 +78,8 @@ class control_property_save
       }
     }
 
+    unset($post['pre']);
+    unset($post['extra']);
     unset($post['metacheckboxes']);
     unset($post['property_id']);
     unset($post['createProperty']);
@@ -127,6 +131,7 @@ class control_property_save
     }
 
     $post_id = wp_insert_post( $post );
+
     if ($mode == 'create') {
       $this->temppostid = $post_id;
     }
@@ -145,9 +150,9 @@ class control_property_save
     $uploads_dir = wp_upload_dir();
     $property_image_dir = $uploads_dir['basedir'] . '/listing/' . $post_id;
 
-
     if ( $_FILES )
     {
+      $first_imaged = false;
       add_filter( 'upload_dir', array( $this, 'upload_dir_filter') );
       add_filter( 'intermediate_image_sizes', '__return_empty_array', 99 );
 
@@ -167,12 +172,34 @@ class control_property_save
 
           foreach ($_FILES as $file => $array) {
             $newupload = $this->uploads_handler( $file, $this->temppostid );
+
             $changed['image_uploads'][] = $newupload;
+
+            // Első kép beállítása
+            if ( !$first_imaged && empty($extra['feature_img_id']) ) {
+              set_post_thumbnail( $this->temppostid, $newupload);
+              $first_imaged = true;
+            }
+
           }
         }
       }
       remove_filter( 'upload_dir', array( $this, 'upload_dir_filter') );
       remove_filter( 'intermediate_image_sizes', '__return_empty_array', 99 );
+    }
+
+    if ($mode == 'save') {
+      // Profilkép cseréje
+      if ( $extra['feature_img_id'] != $pre['extra']['feature_img_id']) {
+        set_post_thumbnail( $this->temppostid, $extra['feature_img_id']);
+      }
+      // Kép(ek) törlése
+      if (!empty($extra['deleting_imgs'])) {
+        foreach ($extra['deleting_imgs']as $did => $v) {
+          wp_delete_attachment( $did );
+          $changed['extra']['deleting_imgs'][] = $did;
+        }
+      }
     }
 
     // Változások logolása
