@@ -53,9 +53,27 @@ class Properties extends PropertyFactory
     $post_arg = array(
       'post_type' => 'listing'
     );
+    $meta_qry = array();
+
+    if (isset($this->arg['highlight'])) {
+      $meta_qry[] = array(
+        'key' => '_listing_flag_highlight',
+        'value' => '1'
+      );
+    }
+
+    if (isset($this->arg['orderby'])) {
+      $post_arg['orderby'] = $this->arg['orderby'];
+    }
+    if (isset($this->arg['order'])) {
+      $post_arg['order'] = $this->arg['order'];
+    }
 
     if (isset($this->arg['id'])) {
       $post_arg['post__in'] = array((int)$this->arg['id']);
+    }
+    if (isset($this->arg['ids']) && is_array($this->arg['ids'])) {
+      $post_arg['post__in'] = $this->arg['ids'];
     }
 
     if (isset($this->arg['author'])) {
@@ -78,6 +96,10 @@ class Properties extends PropertyFactory
       $post_arg['posts_per_page'] = $this->arg['limit'];
     } else {
       $post_arg['posts_per_page'] = 30;
+    }
+
+    if (!empty($meta_qry)) {
+      $post_arg['meta_query'] = $meta_qry;
     }
 
     $posts = get_posts($post_arg);

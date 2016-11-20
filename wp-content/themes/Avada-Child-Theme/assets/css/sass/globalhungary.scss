@@ -538,6 +538,12 @@ form.wide-form{
       }
     }
   }
+  label.fm {
+    &:before {
+      font-size: 34px;
+      margin: 8px 0 0 0;
+    }
+  }
 }
 
 footer {
@@ -1190,7 +1196,8 @@ footer {
 
           .dropoff {
             right: 5px;
-            top: 5px;
+            top: 10px;
+            z-index: 90;
           }
 
           .photo {
@@ -1370,7 +1377,7 @@ footer {
 
       .dropoff {
         right: 5px !important;
-        top: 5px !important;
+        top: 10px !important;
       }
 
       .image{
@@ -1454,7 +1461,7 @@ footer {
       }
       .dropoff {
         right: 5px !important;
-        top: 5px !important;
+        top: 10px !important;
       }
       .image{
         height: 140px !important;
@@ -1709,6 +1716,14 @@ footer {
           width: 50%;
           line-height: 20px;
           margin: 0 -1px;
+
+          .na {
+            font-style: italic;
+            font-weight: normal;
+            color: #949494;
+            font-size: 0.9em;
+            letter-spacing: -0.4px;
+          }
         }
       }
 

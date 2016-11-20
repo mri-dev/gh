@@ -79,63 +79,63 @@
                   <div class="ico"><img src="<?=IMG?>/ico/telepules.svg" alt="<?=__('Település', 'gh')?>"></div>
                   <?=__('Település', 'gh')?>
                 </div><!--
-             --><div class="v"><?=$prop->ParentRegion()?></div>
+             --><div class="v"><?=($v = $prop->ParentRegion())?$v:'<span class="na">'.__('nincs megadva', 'gh').'</span>'?></div>
               </div>
               <div class="e">
                <div class="h">
                  <div class="ico"><img src="<?=IMG?>/ico/allapot.svg" alt="<?=__('Állapot', 'gh')?>"></div>
                  <?=__('Állapot', 'gh')?>
                </div><!--
-            --><div class="v"><?=$prop->PropertyCondition(true)?></div>
+            --><div class="v"><?=($v = $prop->PropertyCondition(true))?$v:'<span class="na">'.__('nincs megadva', 'gh').'</span>'?></div>
               </div>
               <div class="e">
                <div class="h">
                  <div class="ico"><img src="<?=IMG?>/ico/szoba.svg" alt="<?=__('Szobák száma', 'gh')?>"></div>
                  <?=__('Szobák száma', 'gh')?>
                </div><!--
-            --><div class="v"><?=$prop->getMetaValue('_listing_room_numbers')?></div>
+            --><div class="v"><?=($v = $prop->getMetaValue('_listing_room_numbers'))?$v:'<span class="na">'.__('nincs megadva', 'gh').'</span>'?></div>
               </div>
               <div class="e">
                <div class="h">
                  <div class="ico"><img src="<?=IMG?>/ico/telek-alapterulet.svg" alt="<?=__('Telek területe', 'gh')?>"></div>
                  <?=__('Telek területe', 'gh')?>
                </div><!--
-            --><div class="v"><?=sprintf(__('%d nm', 'gh'), $prop->getMetaValue('_listing_lot_size'))?></div>
+            --><div class="v"><?=($v = $prop->getMetaValue('_listing_lot_size'))?sprintf(__('%d nm', 'gh'), $v):'<span class="na">'.__('nincs megadva', 'gh').'</span>'?></div>
               </div>
               <div class="e">
                <div class="h">
                  <div class="ico"><img src="<?=IMG?>/ico/alapterulet.svg" alt="<?=__('Alapterület', 'gh')?>"></div>
                  <?=__('Alapterület', 'gh')?>
                </div><!--
-            --><div class="v"><?=sprintf(__('%d nm', 'gh'), $prop->getMetaValue('_listing_property_size'))?></div>
+            --><div class="v"><?=($v = $prop->getMetaValue('_listing_property_size'))?sprintf(__('%d nm', 'gh'), $v):'<span class="na">'.__('nincs megadva', 'gh').'</span>'?></div>
               </div>
               <div class="e">
                <div class="h">
                  <div class="ico"><img src="<?=IMG?>/ico/szint.svg" alt="<?=__('Szintek száma', 'gh')?>"></div>
                  <?=__('Szintek száma', 'gh')?>
                </div><!--
-            --><div class="v"><?=$prop->getMetaValue('_listing_level_numbers')?></div>
+            --><div class="v"><?=($v = $prop->getMetaValue('_listing_level_numbers'))?$v:'<span class="na">'.__('nincs megadva', 'gh').'</span>'?></div>
               </div>
               <div class="e">
                <div class="h">
                  <div class="ico"><img src="<?=IMG?>/ico/home.svg" alt="<?=__('Ingatlan típusa', 'gh')?>"></div>
                  <?=__('Ingatlan típusa', 'gh')?>
                </div><!--
-            --><div class="v"><?=$prop->PropertyType(true)?></div>
+            --><div class="v"><?=($v = $prop->PropertyType(true))?$v:'<span class="na">'.__('nincs megadva', 'gh').'</span>'?></div>
               </div>
               <div class="e">
                <div class="h">
                  <div class="ico"><img src="<?=IMG?>/ico/payment.svg" alt="<?=__('Megbízás típusa', 'gh')?>"></div>
                  <?=__('Megbízás típusa', 'gh')?>
                </div><!--
-            --><div class="v"><?=$prop->PropertyStatus(true)?></div>
+            --><div class="v"><?=($v = $prop->PropertyStatus(true))?$v:'<span class="na">'.__('nincs megadva', 'gh').'</span>'?></div>
               </div>
               <div class="e">
                <div class="h">
                  <div class="ico"><img src="<?=IMG?>/ico/heating.svg" alt="<?=__('Fűtés', 'gh')?>"></div>
                  <?=__('Fűtés', 'gh')?>
                </div><!--
-            --><div class="v"><?=$prop->PropertyHeating(true)?></div>
+            --><div class="v"><?=($v = $prop->PropertyHeating(true))?$v:'<span class="na">'.__('nincs megadva', 'gh').'</span>'?></div>
               </div>
               <div class="cube-properties">
                 <div class="cb cb-<?=($prop->getMetaValue('_listing_garage'))?'yes':'no'?>">

@@ -110,7 +110,9 @@ class ListingLista
       $t = new ShortcodeTemplates(__CLASS__.'/'.$this->template);
 
       $arg = array(
-        'limit' => $this->params['limit']
+        'limit' => $this->params['limit'],
+        'orderby' => 'rand',
+        'highlight' => true
       );
 
       $properties = new Properties($arg);
@@ -131,14 +133,32 @@ class ListingLista
     **/
     private function watchnow( $arg = array() )
     {
+      global $wpdb;
+
       $o = '<div class="header">
         <h2>'.__('Most nézik', 'gh').'</h2>
       </div>';
       $t = new ShortcodeTemplates(__CLASS__.'/'.$this->template);
 
+      // Visited
+      $qry = "SELECT pid FROM `".\PropertyFactory::LOG_VIEW_DB."` as t ORDER BY t.visited DESC LIMIT 0, 100;";
+
+      $idsq = $wpdb->get_results($qry, ARRAY_A );
+      $ids = array();
+      foreach ($idsq as $sid) {
+        if(count($ids) >= $this->params['limit']) break;
+        if (!in_array($sid['pid'], $ids)) {
+          $ids[] = $sid['pid'];
+        }
+      }
+
       $arg = array(
-        'limit' => $this->params['limit']
+        'ids' => $ids,
+        'limit' => $this->params['limit'],
+        'orderby' => 'post__in'
       );
+
+      print_r($arg);
 
       $properties = new Properties($arg);
       $list = $properties->getList();
@@ -165,7 +185,9 @@ class ListingLista
       $t = new ShortcodeTemplates(__CLASS__.'/'.$this->template);
 
       $arg = array(
-        'limit' => $this->params['limit']
+        'limit' => $this->params['limit'],
+        'orderby' => 'post_date',
+        'order' => 'DESC'
       );
 
       $properties = new Properties($arg);
@@ -185,13 +207,29 @@ class ListingLista
     **/
     private function viewed( $arg = array() )
     {
+      global $wpdb;
+
       $o = '<div class="header">
         <h2>'.__('Legutóbb megtekintett ingatlanok', 'gh').'</h2>
       </div>';
       $t = new ShortcodeTemplates(__CLASS__.'/'.$this->template);
 
+      // Visited
+      $qry = "SELECT pid FROM `".\PropertyFactory::LOG_VIEW_DB."` as t WHERE t.`ip` = '".$_SERVER['REMOTE_ADDR']."' ORDER BY t.visited DESC LIMIT 0, 100;";
+
+      $idsq = $wpdb->get_results($qry, ARRAY_A );
+      $ids = array();
+      foreach ($idsq as $sid) {
+        if(count($ids) >= $this->params['limit']) break;
+        if (!in_array($sid['pid'], $ids)) {
+          $ids[] = $sid['pid'];
+        }
+      }
+
       $arg = array(
-        'limit' => $this->params['limit']
+        'ids' => $ids,
+        'limit' => $this->params['limit'],
+        'orderby' => 'post__in'
       );
 
       $properties = new Properties($arg);

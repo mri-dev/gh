@@ -34,6 +34,7 @@
   <? else: ?>
   <form class="wide-form" action="/control/property_save" method="post" enctype="multipart/form-data">
     <input type="hidden" name="property_id" value="<?=$property->ID()?>">
+    <input type="hidden" name="post_date" value="<?=$property->CreateAt()?>">
     <h3><?=__('Művelet végrehajtás', 'gh')?></h3>
     <div class="row">
       <div class="col-md-3">
@@ -43,6 +44,12 @@
           <option value="draft" <?=($property->StatusKey() == 'draft')?'selected="selected"':''?>><?=__('Vázlat (inaktív)', 'gh')?></option>
         </select>
         <input type="hidden" name="pre[post_status]" value="<?=$property->StatusKey()?>" class="form-control">
+      </div>
+      <div class="col-md-3">
+        <label for=""><?=__('Kiemelt hirdetés', 'gh')?></label>
+        <input type="checkbox" id="_listing_flag_highlight" name="meta_input[_listing_flag_highlight]" <?=($property->isHighlighted())?'checked="checked"':''?> value="<?=($property->isHighlighted())?1:0?>"><label class="fm" for="_listing_flag_highlight"></label>
+        <input type="hidden" name="pre[meta_input][_listing_flag_highlight]" value="<?=($property->isHighlighted())?1:0?>" class="form-control">
+        <input type="hidden" name="metacheckboxes[_listing_flag_highlight]" value="1">
       </div>
     </div>
     <h3><?=__('Alapadatok', 'gh')?></h3>
