@@ -21,7 +21,7 @@
         <div class="title"><?=$item->Title()?></div>
       </div>
       <div class="fav">
-        <i class="fa fa-heart" title="<?=__('Ingatlanhirdetés mentése kedvencek közzé.', 'gh')?>"></i>
+        <i class="fa fa-heart" favchecker data-fav-pid="<?=$item->ID()?>" title="<?=__('Ingatlanhirdetés mentése kedvencek közzé.', 'gh')?>"></i>
       </div>
     </div>
     <div class="sec-line">

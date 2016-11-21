@@ -84,11 +84,57 @@ class Properties extends PropertyFactory
       $post_arg['post_status'] = $this->arg['post_status'];
     }
 
+    if (isset($this->arg['idnumber'])) {
+      $meta_qry[] = array(
+        'key' => '_listing_idnumber',
+        'value' => $this->arg['idnumber']
+      );
+    }
+
     if (isset($this->arg['location']) && !empty($this->arg['location'])) {
       $post_arg['tax_query'][] = array(
         'taxonomy'  => 'locations',
         'field'     => 'term_id',
-        'terms'      => $this->arg['location']
+        'terms'     => $this->arg['location'],
+        'compare'   => 'IN'
+      );
+    } else {
+      if (isset($this->arg['cities']) && !empty($this->arg['cities'])) {
+        $post_arg['tax_query'][] = array(
+          'taxonomy'  => 'locations',
+          'field'     => 'name',
+          'terms'     => $this->arg['cities'],
+          'compare'   => 'LIKE'
+        );
+      } else {
+        if(isset($this->arg['regio']) && !empty($this->arg['regio'])) {
+          $post_arg['tax_query'][] = array(
+            'taxonomy'  => 'locations',
+            'field'     => 'term_id',
+            'terms'     => array($this->arg['regio']),
+            'compare'   => 'IN'
+          );
+        }
+      }
+    }
+
+    // Ingatlan státusz
+    if (isset($this->arg['status']) && !empty($this->arg['status'])) {
+      $post_arg['tax_query'][] = array(
+        'taxonomy'  => 'status',
+        'field'     => 'term_id',
+        'terms'     => $this->arg['status'],
+        'compare'   => 'IN'
+      );
+    }
+
+    // Ingatlan típus
+    if (isset($this->arg['property-types']) && !empty($this->arg['property-types'])) {
+      $post_arg['tax_query'][] = array(
+        'taxonomy'  => 'property-types',
+        'field'     => 'term_id',
+        'terms'     => $this->arg['property-types'],
+        'compare'   => 'IN'
       );
     }
 
@@ -98,9 +144,65 @@ class Properties extends PropertyFactory
       $post_arg['posts_per_page'] = 30;
     }
 
+    // Rooms
+    if (isset($this->arg['rooms'])) {
+      $meta_qry[] = array(
+        'key' => '_listing_room_numbers',
+        'value' => (int) $this->arg['rooms'],
+        'type' => 'numeric',
+        'compare' => '>='
+      );
+    }
+
+    // Alapterület
+    if (isset($this->arg['alapterulet'])) {
+      $meta_qry[] = array(
+        'key' => '_listing_lot_size',
+        'value' => (int) $this->arg['alapterulet'],
+        'type' => 'numeric',
+        'compare' => '>='
+      );
+    }
+
+    // Price
+    if (isset($this->arg['price'])) {
+      $price_meta_qry = array();
+      $all_price = false;
+
+      if (isset($this->arg['price_from']) && isset($this->arg['price_to'])) {
+        $all_price = true;
+      }
+
+      if ( $all_price ) {
+        $price_meta_qry['relation'] = 'AND';
+      }
+
+      if (isset($this->arg['price_from'])) {
+        $price_meta_qry[] = array(
+          'key' => '_listing_price',
+          'value' => (int) $this->arg['price_from'],
+          'type' => 'numeric',
+          'compare' => '>='
+        );
+      }
+
+      if (isset($this->arg['price_to'])) {
+        $price_meta_qry[] = array(
+          'key' => '_listing_price',
+          'value' => (int) $this->arg['price_to'],
+          'type' => 'numeric',
+          'compare' => '<='
+        );
+      }
+
+      $meta_qry[] = $price_meta_qry;
+    }
+
     if (!empty($meta_qry)) {
       $post_arg['meta_query'] = $meta_qry;
     }
+
+    print_r($post_arg);
 
     $posts = get_posts($post_arg);
 

@@ -56,6 +56,9 @@ class ListingLista
             case 'get':
               $output .= $this->get();
             break;
+            case 'favorite':
+              $output .= $this->favorite();
+            break;
             default:
               $output .= $this->no_src();
             break;
@@ -67,6 +70,55 @@ class ListingLista
 
         /* Return the output of the tooltip. */
         return apply_filters( self::SCTAG, $output );
+    }
+
+    /**
+    * Kedvencek
+    **/
+    private function favorite( $arg = array() )
+    {
+      global $wpdb;
+
+      $o = '<h1>'.__('Kedvenc ingatlanok listája', 'gh').'</h1>';
+      $o .= '<div class="subtitle">'.__('Az alábbi listában találja azokat az ingatlanokat, amiket Ön kedvencnek jelölt.').'</div>';
+      $t = new ShortcodeTemplates(__CLASS__.'/'.$this->template);
+
+      $get = $_GET;
+
+      $ucid = ucid();
+
+      $fav_ids = array();
+      $favs = $wpdb->get_results($wpdb->prepare( "SELECT pid FROM listing_favorites WHERE ucid = %s ORDER BY added DESC;", $ucid ), ARRAY_A);
+
+      foreach ($favs as $f) {
+        $fav_ids[] = $f['pid'];
+      }
+
+      $arg = array(
+        'limit' => $this->params['limit'],
+      );
+
+      if (count($fav_ids) != 0)
+      {
+        $arg['ids'] = $fav_ids;
+
+        $properties = new Properties($arg);
+        $list = $properties->getList();
+
+        $o .= '<div class="prop-list style-'.$this->template.'"><div class="prop-wrapper">';
+        foreach ( $list as $e )
+        {
+          $o .= $t->load_template( array( 'item' => $e ) );
+        }
+        $o .= '</div></div>';
+      } else {
+        ob_start();
+        include(locate_template('templates/parts/nodata-listing-favorite.php'));
+        $o .= ob_get_contents();
+        ob_end_clean();
+      }
+
+      return $o;
     }
 
     /**
@@ -83,18 +135,68 @@ class ListingLista
         'limit' => $this->params['limit'],
       );
 
-      print_r($get);
+      if (isset($get['hl']) && $get['hl'] == '1') {
+        $arg['highlight'] = 1;
+      }
+
+      if (isset($get['n']) && !empty($get['n'])) {
+        $arg['idnumber'] = $get['n'];
+      }
+
+      if (isset($get['rg']) && !empty($get['rg'])) {
+        $arg['regio'] = $get['rg'];
+      }
+      if (isset($get['pa']) && !empty($get['pa'])) {
+        $arg['price_from'] = $get['pa'];
+        $arg['price'] = 1;
+      }
+      if (isset($get['pb']) && !empty($get['pb'])) {
+        $arg['price_to'] = $get['pb'];
+        $arg['price'] = 1;
+      }
+
+      if (isset($get['r']) && !empty($get['r'])) {
+        $arg['rooms'] = $get['r'];
+      }
+
+      if (isset($get['ps']) && !empty($get['ps'])) {
+        $arg['alapterulet'] = $get['ps'];
+      }
+
+      if (isset($get['ci']) && !empty($get['ci'])) {
+        $arg['location'] = explode(",", $get['ci']);
+      }
+      if (isset($get['cities']) && !empty($get['cities'])) {
+        $arg['cities'] = explode(",", $get['cities']);
+      }
+
+      if (isset($get['st']) && !empty($get['st'])) {
+        $arg['status'] = explode(",", $get['st']);
+      }
+
+      if (isset($get['c']) && !empty($get['c'])) {
+        $arg['property-types'] = explode(",", $get['c']);
+      }
+
+      //print_r($arg);
 
       $properties = new Properties($arg);
       $list = $properties->getList();
 
-      $o .= '<div class="prop-list style-'.$this->template.'"><div class="prop-wrapper">';
-      foreach ( $list as $e )
-      {
-        $o .= $t->load_template( array( 'item' => $e ) );
-      }
-      $o .= '</div></div>';
 
+      if ( count($list) != 0 ) {
+        $o .= '<div class="prop-list style-'.$this->template.'"><div class="prop-wrapper">';
+        foreach ( $list as $e )
+        {
+          $o .= $t->load_template( array( 'item' => $e ) );
+        }
+        $o .= '</div></div>';
+      } else {
+        ob_start();
+        include(locate_template('templates/parts/nodata-listing-get.php'));
+        $o .= ob_get_contents();
+        ob_end_clean();
+      }
       return $o;
     }
 

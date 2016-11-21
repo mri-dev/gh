@@ -20,15 +20,15 @@
     </div><!--
  --><div class="notify-icos"><!--
     --><div class="notify-favorite">
-        <a class="trans-on" href="#">
+        <a class="trans-on" href="/kedvencek" title="<?=__('Kedvenceknek elmentett ingatlanok', 'gh')?>">
           <img src="<?=IMG?>/ico-heart.svg" alt="Favorite" />
-          <div class="fnl" id="notification-favorite">14</div>
+          <div class="fnl" id="notification-favorite"></div>
         </a>
       </div><!--
    --><div class="notify-newhouse">
         <a class="trans-on" href="#">
           <img src="<?=IMG?>/ico-house.svg" alt="New House" />
-          <div class="fnl" id="notification-newhouse">194</div>
+          <div class="fnl has" id="notification-newhouse">194</div>
         </a>
       </div><!--
   --></div><!--

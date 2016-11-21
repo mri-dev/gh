@@ -5,6 +5,7 @@ define('DEVMODE', true);
 define('IMG', IFROOT.'/images');
 define('SLUG_INGATLAN', 'ingatlan');
 define('SLUG_INGATLAN_LIST', 'ingatlanok');
+define('SLUG_FAVORITE', 'kedvencek');
 define('GOOGLE_API_KEY', 'AIzaSyA0Mu8_XYUGo9iXhoenj7HTPBIfS2jDU2E');
 
 // Includes
@@ -20,20 +21,40 @@ function theme_enqueue_styles() {
     wp_enqueue_style( 'slick-theme', IFROOT . '/assets/css/slick-theme.css?t=' . ( (DEVMODE === true) ? time() : '' ) );
     wp_enqueue_script( 'slick', IFROOT . '/assets/vendor/slick/slick.min.js', array('jquery'));
     wp_enqueue_script( 'google-maps', '//maps.googleapis.com/maps/api/js?language=hu&region=hu&key='.GOOGLE_API_KEY);
+    wp_enqueue_script( 'mocjax', IFROOT . '/assets/vendor/autocomplete/scripts/jquery.mockjax.js');
+    wp_enqueue_script( 'autocomplete', IFROOT . '/assets/vendor/autocomplete/dist/jquery.autocomplete.min.js');
 }
 add_action( 'wp_enqueue_scripts', 'theme_enqueue_styles' );
 
 function custom_theme_enqueue_styles() {
     wp_enqueue_style( 'globalhungary-css', IFROOT . '/assets/css/globalhungary.css?t=' . ( (DEVMODE === true) ? time() : '' ) );
-    wp_enqueue_script( 'globalhungary', IFROOT . '/assets/js/master.js?t=' . ( (DEVMODE === true) ? time() : '' ), array('jquery') );
+    wp_enqueue_script( 'globalhungary', IFROOT . '/assets/js/master.js?t=' . ( (DEVMODE === true) ? time() : '' ), array('jquery'), '', 999 );
 }
 add_action( 'wp_enqueue_scripts', 'custom_theme_enqueue_styles', 100 );
 
 function avada_lang_setup() {
 	$lang = get_stylesheet_directory() . '/languages';
 	load_child_theme_textdomain( 'Avada', $lang );
+
+  $ucid = ucid();
+
+  $ucid = $_COOKIE['uid'];
+
+
 }
 add_action( 'after_setup_theme', 'avada_lang_setup' );
+
+function ucid()
+{
+  $ucid = $_COOKIE['ucid'];
+
+  if (!isset($ucid)) {
+    $ucid = mt_rand();
+    setcookie( 'ucid', $ucid, time() + 60*60*24*365*2, "/");
+  }
+
+  return $ucid;
+}
 /**
 * Admin módosítások
 **/
@@ -189,6 +210,7 @@ function gh_init()
   date_default_timezone_set('Europe/Budapest');
   add_rewrite_rule('^control/([^/]+)', 'index.php?cp=$matches[1]', 'top');
   add_rewrite_rule('^'.SLUG_INGATLAN_LIST.'/?', 'index.php?custom_page='.SLUG_INGATLAN_LIST.'&urlstring=$matches[1]', 'top');
+  add_rewrite_rule('^'.SLUG_FAVORITE.'/?', 'index.php?custom_page='.SLUG_FAVORITE.'&urlstring=$matches[1]', 'top');
   add_rewrite_rule('^'.SLUG_INGATLAN.'/([^/]+)/([^/]+)/([^/]+)', 'index.php?custom_page='.SLUG_INGATLAN.'&regionslug=$matches[1]&cityslug=$matches[2]&urlstring=$matches[3]', 'top');
 }
 add_action('init', 'gh_init');
@@ -284,4 +306,22 @@ add_filter( 'login_redirect', 'gh_login_redirect', 10, 3 );
 function globalhungary_custom_top_menu()
 {
   get_template_part( 'templates/globalhungary/top_menu' );
+}
+
+/**
+* AJAX REQUESTS
+*/
+function ajax_requests()
+{
+  $ajax = new AjaxRequests();
+  $ajax->check_property_fav();
+  $ajax->property_fav_action();
+  $ajax->city_autocomplete();
+}
+add_action( 'init', 'ajax_requests' );
+
+// AJAX URL
+function get_ajax_url( $function )
+{
+  return admin_url('admin-ajax.php?action='.$function);
 }

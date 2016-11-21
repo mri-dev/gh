@@ -31,7 +31,7 @@
             </div>
             <div class="images">
               <div class="profil" id="profilimg">
-                <a href="<?=$prop->ProfilImg()?>"><img src="<?=$prop->ProfilImg()?>" alt=""></a>
+                <a data-rel="iLightbox[p<?=$prop->ID()?>]" class="fusion-lightbox" data-title="<?=$prop->Title()?>" href="<?=$prop->ProfilImg()?>"><img src="<?=$prop->ProfilImg()?>" alt=""></a>
               </div>
               <?
                 $pimgid = $prop->ProfilImgID();
@@ -44,6 +44,9 @@
                   $newimgs[$iid] = $iv;
                 }
               ?>
+              <? foreach( $newimgs as $img ): ?>
+                <a href="<?=$img->guid?>" data-rel="iLightbox[p<?=$prop->ID()?>]" style="display: none;" class="fusion-lightbox" data-title="<?=$prop->Title()?>"><img src="<?=$img->guid?>" alt="<?=$prop->Title()?>" /></a>
+              <? endforeach; ?>
               <? if(  $imn > 1 ): ?>
               <div class="stack">
                 <div class="stack-wrapper">
@@ -214,7 +217,7 @@
       $('.image-slide').on('beforeChange', function(event, slick, currentSlide, nextSlide){
         var cs = $(slick.$slides).get(nextSlide);
         var ci = $(cs).find('img').attr('src');
-        $('#profilimg a').attr('href', ci);
+        //$('#profilimg a').attr('href', ci);
         $('#profilimg img').attr('src', ci);
       });
       $('.image-slide .slick-slide').on('click', function() {
