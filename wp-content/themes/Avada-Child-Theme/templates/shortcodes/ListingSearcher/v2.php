@@ -3,7 +3,7 @@
   $regions = $properties->getRegions();
 ?>
 
-<form class="" action="/<?=SLUG_INGATLAN_LIST?>/" method="get">
+<form class="" role="searcher" id="searcher-form" action="/<?=SLUG_INGATLAN_LIST?>/" method="get">
 <div class="searcher-header">
   <ul>
     <li>
@@ -23,6 +23,7 @@
       <div class="inp inp-city">
         <label for="searcher_city"><?=__('Város', 'gh')?></label>
         <input type="text" id="searcher_city" class="form-control" name="cities" value="<?=$form['cities']?>" placeholder="<?=__('Összes', 'gh')?>">
+        <div id="searcher_city_autocomplete" class="selector-wrapper"></div>
         <input type="hidden" name="ci" id="searcher_city_ids" value="<?=$form['ci']?>">
       </div>
       <div class="inp inp-kategoria">
@@ -144,6 +145,50 @@
       var selected = collect_checkbox(tkey, false);
       $('#'+tkey+'_ids').val(selected);
     });
+
+    /* Autocompleter */
+    var src_current_region = 0;
+    $("#searcher-form input[name='rg']").change(function(){
+      var sl = $(this).val();
+      src_current_region = sl;
+    });
+    $('#searcher_city').autocomplete({
+        serviceUrl: '/wp-admin/admin-ajax.php?action=city_autocomplete',
+        appendTo: '#searcher_city_autocomplete',
+        paramName: 'search',
+        params : { "region": get_current_regio() },
+        type: 'GET',
+        dataType: 'json',
+        transformResult: function(response) {
+            return {
+                suggestions: $.map(response, function(dataItem) {
+                    //return { value: dataItem.label.toLowerCase().capitalizeFirstLetter(), data: dataItem.value };
+                    return { value: dataItem.label, data: dataItem.value };
+                })
+            };
+        },
+        onSelect: function(suggestion) {
+          $('#searcher_city_ids').val(suggestion.data);
+        },
+        onSearchComplete: function(query, suggestions){
+        },
+        onSearchStart: function(query){
+          $(this).autocomplete().options.params.region = get_current_regio();
+        },
+        onSearchError: function(query, jqXHR, textStatus, errorThrown){
+            console.log('Autocomplete error: '+textStatus);
+        }
+    });
+
+     function get_current_regio() {
+       return $("#searcher-form input[name=rg]:checked").val();
+     }
+
+    String.prototype.capitalizeFirstLetter = function() {
+      return this;
+      //return this.charAt(0).toUpperCase() + this.slice(1);
+    }
+    /* E:Autocompleter */
   })(jQuery);
 
   function collect_checkbox(rkey, loader)

@@ -44,7 +44,7 @@
                   $newimgs[$iid] = $iv;
                 }
               ?>
-              <? foreach( $newimgs as $img ): ?>
+              <? foreach( $newimgs as $img ): if($img->ID == $pimgid){ continue; } ?>
                 <a href="<?=$img->guid?>" data-rel="iLightbox[p<?=$prop->ID()?>]" style="display: none;" class="fusion-lightbox" data-title="<?=$prop->Title()?>"><img src="<?=$img->guid?>" alt="<?=$prop->Title()?>" /></a>
               <? endforeach; ?>
               <? if(  $imn > 1 ): ?>

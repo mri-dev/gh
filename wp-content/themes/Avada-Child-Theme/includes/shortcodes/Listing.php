@@ -126,10 +126,22 @@ class ListingLista
     **/
     private function get( $arg = array() )
     {
-      $o = '<h1>'.__('Keresés eredménye', 'gh').'</h1>';
-      $t = new ShortcodeTemplates(__CLASS__.'/'.$this->template);
-
       $get = $_GET;
+
+      switch ($get['title'])
+      {
+        case 'news':
+          $o = '<h1>'.__('Legújabb ingatlanok', 'gh').'</h1>';
+        break;
+        case 'highlight':
+          $o = '<h1>'.__('Kiemelt ingatlanok', 'gh').'</h1>';
+        break;
+        default:
+          $o = '<h1>'.__('Keresés eredménye', 'gh').'</h1>';
+        break;
+      }
+
+      $t = new ShortcodeTemplates(__CLASS__.'/'.$this->template);
 
       $arg = array(
         'limit' => $this->params['limit'],
@@ -206,7 +218,7 @@ class ListingLista
     private function highlight( $arg = array() )
     {
       $o = '<div class="header">
-        <div class="morev"><a title="'.__('További kiemelt ingatlanok', 'gh').'" href="/ingatlanok/?kiemelt=1"><i class="fa fa-bars"></i></a></div>
+        <div class="morev"><a title="'.__('További kiemelt ingatlanok', 'gh').'" href="/ingatlanok/?hl=1&title=highlight"><i class="fa fa-bars"></i></a></div>
         <h2>'.__('Kiemelt ingatlanok', 'gh').'</h2>
       </div>';
       $t = new ShortcodeTemplates(__CLASS__.'/'.$this->template);

@@ -202,7 +202,7 @@ class Properties extends PropertyFactory
       $post_arg['meta_query'] = $meta_qry;
     }
 
-    print_r($post_arg);
+    //print_r($post_arg);
 
     $posts = get_posts($post_arg);
 

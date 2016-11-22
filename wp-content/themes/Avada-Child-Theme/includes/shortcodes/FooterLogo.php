@@ -25,7 +25,7 @@ class FooterLogoSc
         );
         /* Parse the arguments. */
         $attr = shortcode_atts( $defaults, $attr );
-        $output .= '<div class="logo"><img src="'.IMG.'/global-hungary-logo-wtext.svg" alt=""/></div>';
+        $output .= '<div class="logo"><img src="'.IMG.'/global-hungary-logo-wtext.svg" alt="'.get_option('blogname', '').'"/><div class="badge">'.__('Alapítva 1999').'</div></div>';
         $output .= '</div>';
 
 

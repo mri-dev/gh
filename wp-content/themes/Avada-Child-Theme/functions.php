@@ -233,6 +233,9 @@ function gh_custom_template($template) {
 
   if ( isset($wp_query->query_vars['cp'])) {
     add_filter( 'body_class','gh_control_panel_class_body' );
+    if ( !is_user_logged_in() ) {
+      wp_redirect('/admin');
+    }
     return get_stylesheet_directory() . '/control.php';
   } else if(isset($wp_query->query_vars['custom_page'])) {
     add_filter( 'body_class','gh_ingatlan_class_body' );
@@ -325,3 +328,9 @@ function get_ajax_url( $function )
 {
   return admin_url('admin-ajax.php?action='.$function);
 }
+
+function after_logo_content()
+{
+  echo '<div class="badge">'.__('Alapítva 1999','gh').'</div>';
+}
+add_filter('avada_logo_append', 'after_logo_content');

@@ -27,6 +27,17 @@ body.home {
   border: none !important;
 }
 
+.fusion-logo {
+  position: relative;
+  .badge {
+    color: white;
+    background: #777777;
+    padding: 3px 7px;
+    float: right;
+    font-size: 1em;
+  }
+}
+
 input[type=checkbox]{
   display: none;
 }
@@ -569,10 +580,18 @@ footer {
   .footerlogo-holder{
     margin-top: 20px;
     .logo {
-      text-align: center;
+      text-align: right;
+      padding-right: 30px;
       img{
         margin: 0 auto;
         height: 40px;
+      }
+
+      .badge {
+        background: #777777;
+        float: right;
+        font-size: 0.75em;
+        padding: 2px 4px;
       }
     }
   }
