@@ -22,13 +22,13 @@
         <div class="clearfix">
 
         </div>
-        <?php if ( !$me->can('property_archive_autoconfirm') && !current_user_can('administrator') ): ?>
-          <div class="pull-right info-msg-red">
-            <?=__('Ön archiválási kérvényt nyújt be az űrlap elküldésével. A kérését régióvezetőnk feldolgozza, és ha jogszerűnek találjuk kérését, jóváhagyjuk archiválási szándékát.', 'gh')?>
-          </div>
-        <?php else: ?>
+        <?php if ( current_user_can('administrator') || $me->can('property_archive_autoconfirm') ): ?>
           <div class="pull-right info-msg-green">
             <?=__('Ön archiválási kérvényt nyújt be az űrlap elküldésével. A kérését azonnal végrehajtódik és nem vonható vissza!', 'gh')?>
+          </div>
+        <?php else: ?>
+          <div class="pull-right info-msg-red">
+            <?=__('Ön archiválási kérvényt nyújt be az űrlap elküldésével. A kérését régióvezetőnk feldolgozza, és ha jogszerűnek találjuk kérését, jóváhagyjuk archiválási szándékát.', 'gh')?>
           </div>
         <?php endif; ?>
       </div>
