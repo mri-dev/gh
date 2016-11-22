@@ -151,32 +151,33 @@ function gh_custom_role()
   $user_roles->removeRoles(array('subscriber', 'contributor', 'author', 'editor'));
 
   // Jogkörök
-    // Referens
-    $user_roles->addAvaiableCaps( 'reference_manager', array(
-      'property_create', 'property_archive', 'property_edit', 'property_edit_price',
-      'property_edit_autoconfirm_price', 'property_edit_autoconfirm_datas', 'property_archive_autoconfirm',
-      'stat_property'
-    ) );
-    $user_roles->addCap('reference_manager', 'read');
-    // Régió Menedzser
-    $user_roles->addAvaiableCaps( 'region_manager', array(
-      'property_create', 'property_archive', 'property_edit', 'property_edit_price',
-      'user_property_connector',
-      'stat_region_property'
-    ) );
-    $user_roles->addCap('region_manager', 'read');
+  // Referens
+  $user_roles->addAvaiableCaps( 'reference_manager', array(
+    'property_create', 'property_archive', 'property_edit', 'property_edit_price', 'property_edit_status',
+    'property_edit_autoconfirm_price', 'property_edit_autoconfirm_datas', 'property_archive_autoconfirm',
+    'stat_property'
+  ) );
+  $user_roles->addCap('reference_manager', 'read');
+  // Régió Menedzser
+  $user_roles->addAvaiableCaps( 'region_manager', array(
+    'property_create', 'property_archive', 'property_edit', 'property_edit_price', 'property_edit_status',
+    'user_property_connector',
+    'stat_property'
+  ) );
+  $user_roles->addCap('region_manager', 'read');
 
-    // Admin
-    $user_roles->addAvaiableCaps( 'administrator', array(
-      'property_create', 'property_delete', 'property_archive', 'property_edit', 'property_edit_price',
-      'user_property_connector'
-    ) );
+  // Admin
+  $user_roles->addAvaiableCaps( 'administrator', array(
+    'property_create', 'property_delete', 'property_archive', 'property_edit', 'property_edit_price', 'property_edit_status',
+    'user_property_connector',
+    'property_edit_autoconfirm_price', 'property_edit_autoconfirm_datas', 'property_archive_autoconfirm',
+    'stat_property'
+  ) );
 
-  /*
-  global $wp_roles;
-  $all_roles = $wp_roles->roles;
-  */
-  //print_r($user_roles->role_caps);
+  /* * /
+  print_r(wp_get_current_user());
+  /* */
+
 }
 add_action('after_setup_theme', 'gh_custom_role');
 

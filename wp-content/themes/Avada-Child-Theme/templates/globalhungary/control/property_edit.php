@@ -21,6 +21,11 @@
 ?>
 <div class="gh_control_content_holder">
   <div class="heading">
+    <div class="buttons">
+      <?php if ( $me->can('property_archive') || (current_user_can('administrator')) ): ?>
+      <a href="/control/property_archive/?id=<?=$property->ID()?>" class="btn btn-rounded btn-red"><?=__('Archiválás', 'gh')?> <i class="fa fa-trash"></i></a>
+      <?php endif; ?>
+    </div>
     <h1><?=__('Ingatlan szerkesztés', 'gh')?></h1>
     <div class="desc"><?=sprintf(__('<strong>%s</strong> ingatlan szerkesztése.', 'gh'), strtoupper($property->Azonosito()))?></div>
   </div>
@@ -37,20 +42,25 @@
     <input type="hidden" name="post_date" value="<?=$property->CreateAt()?>">
     <h3><?=__('Művelet végrehajtás', 'gh')?></h3>
     <div class="row">
+
       <div class="col-md-3">
         <label for="post_status"><?=__('Státusz', 'gh')?></label>
-        <select class="form-control" name="post_status" id="post_status">
+
+        <select class="form-control" name="post_status" id="post_status" <?=(!$me->can('property_edit_status') && !current_user_can('administrator')) ? 'disabled="disabled"' : ''?>>
           <option value="publish" <?=($property->StatusKey() == 'publish')?'selected="selected"':''?>><?=__('Közzétéve (aktív)', 'gh')?></option>
           <option value="draft" <?=($property->StatusKey() == 'draft')?'selected="selected"':''?>><?=__('Vázlat (inaktív)', 'gh')?></option>
         </select>
         <input type="hidden" name="pre[post_status]" value="<?=$property->StatusKey()?>" class="form-control">
       </div>
+
+      <?php if ( current_user_can('region_manager') || current_user_can('administrator') ): ?>
       <div class="col-md-3">
         <label for=""><?=__('Kiemelt hirdetés', 'gh')?></label>
         <input type="checkbox" id="_listing_flag_highlight" name="meta_input[_listing_flag_highlight]" <?=($property->isHighlighted())?'checked="checked"':''?> value="<?=($property->isHighlighted())?1:0?>"><label class="fm" for="_listing_flag_highlight"></label>
         <input type="hidden" name="pre[meta_input][_listing_flag_highlight]" value="<?=($property->isHighlighted())?1:0?>" class="form-control">
         <input type="hidden" name="metacheckboxes[_listing_flag_highlight]" value="1">
       </div>
+      <?php endif; ?>
     </div>
     <h3><?=__('Alapadatok', 'gh')?></h3>
     <div class="row">
@@ -121,12 +131,12 @@
     <div class="row">
       <div class="col-md-3 reqf">
         <label for="_listing_price"><?=__('Irányár (Ft)', 'gh')?></label>
-        <input type="number" min="0" id="_listing_price" name="meta_input[_listing_price]" value="<?=$property->Price()?>" class="form-control">
+        <input type="number" min="0" id="_listing_price" name="meta_input[_listing_price]" value="<?=$property->Price()?>" class="form-control" <?=(!$me->can('property_edit_price') && !current_user_can('administrator')) ? 'readonly="readonly"' : ''?>>
         <input type="hidden" name="pre[meta_input][_listing_price]" value="<?=$property->Price()?>">
       </div>
       <div class="col-md-3">
         <label for="_listing_offprice"><?=__('Kedvezményes irányár (Ft)', 'gh')?></label>
-        <input type="number" min="0" id="_listing_offprice" name="meta_input[_listing_offprice]" value="<?=$property->OffPrice()?>" class="form-control">
+        <input type="number" min="0" id="_listing_offprice" name="meta_input[_listing_offprice]" value="<?=$property->OffPrice()?>" class="form-control" <?=(!$me->can('property_edit_price') && !current_user_can('administrator')) ? 'readonly="readonly"' : ''?>>
         <input type="hidden" name="pre[meta_input][_listing_offprice]" value="<?=$property->OffPrice()?>">
       </div>
     </div>

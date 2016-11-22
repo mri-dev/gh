@@ -12,7 +12,7 @@
     <div class="desc"><?=__('Itt találhatók azok a referens felhasználók, akik Ön régiója alá tartoznak.', 'gh')?></div>
   </div>
   <div class="gh_control_referens_page">
-    <?php if( !current_user_can('region_manager') ): ?>
+    <?php if( !current_user_can('region_manager') && !current_user_can('administrator')): ?>
       <div class="alert alert-danger"><?=__('Önnek nincs joga ezt a funkciót használni. A funkció használata csak Régió Menedzsereknek engedélyezett.', 'gh')?></div>
     <?php else: ?>
     <div class="data-table">

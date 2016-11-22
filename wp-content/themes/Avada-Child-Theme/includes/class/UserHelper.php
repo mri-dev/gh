@@ -14,6 +14,17 @@ class UserHelper
     return get_user_meta( $this->ID(), 'gh_user_regio', true);
   }
 
+  public function can( $cap )
+  {
+    if ( $this->user ) {
+      if ( array_key_exists($cap, $this->user->caps) ) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
   public function RegionName()
   {
     $parent     = false;

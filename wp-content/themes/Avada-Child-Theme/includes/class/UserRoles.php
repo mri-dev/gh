@@ -24,12 +24,12 @@ class UserRoles
         'property_archive' => __('Ingatlan archiválása', 'gh'),
         'property_edit_price' => __('Ingatlan ár módosítás', 'gh'),
         'property_edit' => __('Ingatlan szerkesztése', 'gh'),
+        'property_edit_status' => __('Ingatlan státusz módosítás', 'gh'),
         'property_edit_autoconfirm_price' => __('Ingatlan árának automatikus jóváhagyás', 'gh'),
         'property_edit_autoconfirm_datas' => __('Ingatlan adatmódosítás automatikus jóváhagyás', 'gh'),
         'property_archive_autoconfirm' => __('Ingatlan archiválás automatikus jóváhagyás', 'gh'),
         'user_property_connector' => __('Felhasználó <-> Ingatlan összecsatolás', 'gh'),
-        'stat_property' => __('Saját ingatlan statisztika', 'gh'),
-        'stat_region_property' => __('Régió ingatlan statisztikák', 'gh')
+        'stat_property' => __('Ingatlan statisztika', 'gh')
       );
 
       $text = $lng[$key];

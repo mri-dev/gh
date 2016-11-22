@@ -697,6 +697,15 @@ footer {
 
       .heading{
         margin-bottom: 25px;
+        .buttons {
+          float: right;
+          .btn {
+            font-size: 0.8em;
+            display: block;
+            padding: 5px;
+            line-height: 1;
+          }
+        }
         h1 {
           font-size: 36px !important;
           line-height: 1.2;
@@ -771,6 +780,61 @@ footer {
   }
 }
 
+.info-msg-red,
+.info-msg-green {
+  font-size: 0.8em;
+  font-style: italic;
+}
+
+.info-msg-red{
+  color: red;
+}
+
+.info-msg-green{
+  color: green;
+}
+
+*.btn {
+  cursor: pointer;
+  margin: 5px 0;
+  padding: 10px;
+  background: #f3f3f3;
+  line-height: 1;
+  color: #333333;
+  border: 1px solid #d6d6d6;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+
+  &:hover {
+    background: darken(#f3f3f3, 10%);
+    color: black;
+  }
+
+  &.btn-red {
+    background: #da3d3d;
+    border: 1px solid #a03e3e;
+    color: white;
+
+    &:hover {
+      background: darken(#da3d3d, 10%);
+    }
+  }
+
+  &.btn-rounded{
+    background: transparent !important;
+    border: 1px solid #000000;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+
+    &.btn-red {
+      border-color: #ff989b;
+      color: #ec6e6e !important;
+    }
+  }
+}
+
 .gh_control_properties_page{
   .adv-inf{
     color: #8c8c8c;
@@ -782,9 +846,9 @@ footer {
       max-width: 50px;
       height: 46px;
       overflow: hidden;
-      -webkit-border-radius: 10px;
-      -moz-border-radius: 10px;
-      border-radius: 10px;
+      -webkit-border-radius: 60px;
+      -moz-border-radius: 60px;
+      border-radius: 60px;
       position: relative;
       img{
         width: auto;

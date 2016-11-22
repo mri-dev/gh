@@ -9,7 +9,7 @@
     <h1><?=__('Ingatlan létrehozása', 'gh')?></h1>
     <div class="desc"><?=__('Az alábbi űrlap segítségével létrehozhat egy új ingatlan hirdetést az Ön régiójában.', 'gh')?></div>
   </div>
-  <? if(!current_user_can('property_create')): ?>
+  <? if(!$me->can('property_create') && !current_user_can('administrator')): ?>
   <div class="alert alert-danger"><?=__('Ön nem jogosult ingatlan létrehozására. Vegye fel a kapcsolatot felettesével vagy az oldal üzemeltetőjével', 'gh')?></div>
   <? else: ?>
   <form class="wide-form" action="/control/property_save" method="post">
