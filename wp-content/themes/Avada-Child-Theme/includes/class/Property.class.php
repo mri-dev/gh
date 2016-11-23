@@ -3,9 +3,15 @@ class Property extends PropertyFactory
 {
   private $raw_post = false;
 
-  public function __construct( WP_Post $property_post )
+  public function __construct( WP_Post $property_post = null )
   {
     $this->raw_post = $property_post;
+    return $this;
+  }
+
+  public function load( $id )
+  {
+    $this->raw_post = get_post($id);
     return $this;
   }
 
@@ -41,6 +47,9 @@ class Property extends PropertyFactory
   }
   public function StatusKey()
   {
+    if ($this->isArchived()) {
+      return 'archived';
+    }
     return $this->raw_post->post_status;
   }
   public function URL()
@@ -211,6 +220,42 @@ class Property extends PropertyFactory
     $h = true;
 
     return $h;
+  }
+
+  public function isArchived()
+  {
+    if ($this->getMetaValue('_listing_flag_archived') == 1) {
+      return true;
+    }
+
+    return false;
+  }
+
+  public function ArchivingInProgress()
+  {
+    global $wpdb;
+
+    $arc_reg_id = $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM listing_archive_reg WHERE postID = %d and accept_userid IS NULL;", $this->ID() ) );
+
+    if ($arc_reg_id) {
+      return $arc_reg_id;
+    }
+
+    return false;
+  }
+
+  public function ArchivingData()
+  {
+    global $wpdb;
+
+    $arcid = $this->ArchivingInProgress();
+
+    if ($arcid) {
+      $data = $wpdb->get_row( "SELECT * FROM listing_archive_reg WHERE ID = ".$arcid );
+      return $data;
+    }
+
+    return false;
   }
 
   public function isDropOff()
@@ -424,23 +469,7 @@ class Property extends PropertyFactory
       $status .= '<div class="dashboard-label status-label status-'.$this->StatusKey().'" style="background: '.$this->property_status_colors[$this->StatusKey()].';">';
     }
 
-    switch ($this->StatusKey()) {
-      case 'publish':
-        $status .= __( 'Közzétéve (aktív)', 'gh');
-      break;
-      case 'pending':
-        $status .= __( 'Függőben', 'gh');
-      break;
-      case 'draft':
-        $status .= __( 'Vázlat', 'gh');
-      break;
-      case 'future':
-        $status .= __( 'Időzített', 'gh');
-      break;
-      default:
-        $status .= $this->StatusKey();
-      break;
-    }
+    $status .= $this->StatusText($this->StatusKey());
 
     if (!$only_text) {
       $status .= '</div>';

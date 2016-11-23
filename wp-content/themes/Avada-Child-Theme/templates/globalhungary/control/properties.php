@@ -5,6 +5,7 @@
 
   $author = false;
   $filtered = false;
+  $archived = false;
 
   if (current_user_can('reference_manager')) {
     $author = $me->ID();
@@ -20,16 +21,30 @@
     }
   }
 
+  if (isset($_GET['arc'])) {
+    $filtered = true;
+    if ( current_user_can('administrator') || current_user_can('region_manager') ){
+      $archived = true;
+    }
+  }
+
   $properties = $control->getProperties(array(
     'post_status' => array('publish', 'pending', 'draft', 'future'),
     'location' => $me->RegionID(),
-    'author' => $author
+    'author' => $author,
+    'hide_archived' => (($archived) ? false : true),
+    'only_archived' => (($archived) ? true : false),
   ));
   $item_num = $control->propertyCount();
 ?>
 <div class="gh_control_content_holder">
   <div class="heading">
-    <h1><?=sprintf(__('Ingatlanok <span class="region">/ %s</span> <span class="badge">%d</span>', 'gh'), $me->RegionName(), $item_num)?></h1>
+    <div class="buttons">
+      <?php if ( current_user_can('administrator') || current_user_can('region_manager') ): ?>
+      <a href="/control/properties/?arc=1" class="btn btn-rounded btn-red"><?=__('Archiváltak', 'gh')?> <i class="fa fa-archive"></i></a>
+      <?php endif; ?>
+    </div>
+    <h1><?=(isset($_GET['arc'])?__('Archivált', 'gh').' ':'')?><?=sprintf(__('Ingatlanok <span class="region">/ %s</span> <span class="badge">%d</span>', 'gh'), $me->RegionName(), $item_num)?></h1>
     <div class="desc"><?=__('Az alábbi listában az Ön régiójába található ingatlan hirdetéseket találhatja.', 'gh')?></div>
   </div>
   <div class="gh_control_properties_page">
@@ -40,6 +55,9 @@
       <a href="/control/properties/">< <?=__('Teljes lista mutatása', 'gh')?></a> <br>
       <?php if (isset($_GET['user'])): ?>
         <?=sprintf(__('Kiválasztott felhasználó: <strong>%s</strong>', 'gh'), $selected_user->Name())?>
+      <?php endif; ?>
+      <?php if ($archived): ?>
+        <?=__('Megjelenített lista: <strong>Archivált ingatlanok</strong>', 'gh')?>
       <?php endif; ?>
     <?php endif; ?>
     <div class="data-table">

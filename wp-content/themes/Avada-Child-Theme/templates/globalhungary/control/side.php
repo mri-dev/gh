@@ -14,6 +14,9 @@
     <?php if( $me->can('stat_property') || ( current_user_can('administrator') || current_user_can('region_manager') ) ): ?>
     <li class=""><a href="/control/property_statistic"><i class="fa fa-pie-chart"></i> <?=__('Ingatlan statisztika', 'gh')?></a></li>
     <?php endif; ?>
+    <?php if(current_user_can('administrator')): ?>
+    <li class=""><a href="/control/property_history"><i class="fa fa-history"></i> <?=__('Ingatlan módosítások', 'gh')?></a></li>
+    <?php endif; ?>
     <li class="logout"><a href="<?=wp_logout_url('/')?>"><i class="fa fa-sign-out"></i> <?=__('Kijelentkezés', 'gh')?></a></li>
   </ul>
 </div>

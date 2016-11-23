@@ -40,7 +40,7 @@ class UserHelper
 
   public function ID()
   {
-    return get_current_user_id();
+    return $this->user->ID;
   }
 
   public function Name()

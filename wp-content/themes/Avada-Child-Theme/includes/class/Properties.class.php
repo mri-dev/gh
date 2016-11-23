@@ -47,6 +47,62 @@ class Properties extends PropertyFactory
     return $t;
   }
 
+  public function listChangeHistory( $arg = array() )
+  {
+    global $wpdb;
+
+    $data = array(
+      'page' => array(
+        'current' => 1,
+        'max'     => 1
+      ),
+      'count' => 0,
+      'data' => array()
+    );
+
+    $params = array();
+
+    // query
+    $q = "SELECT
+      h.ID,
+      h.changer_user_id,
+      h.item_id,
+      h.mod_data_json,
+      h.transaction_date
+    FROM listing_change_history as h
+    WHERE 1=1 ";
+
+    $q .= " and group_key ='property'";
+
+    if (isset($arg['property_id'])) {
+      $q .= " and h.item_id IN(%d)";
+      $params[] = (int)$arg['property_id'];
+    }
+
+    if (isset($arg['user_id'])) {
+      $q .= " and h.changer_user_id IN(%d)";
+      $params[] = (int)$arg['user_id'];
+    }
+
+    $q .= " ORDER BY h.transaction_date DESC";
+
+    $qry = $wpdb->get_results($wpdb->prepare( $q, $params ));
+    $count = $wpdb->get_var( "SELECT FOUND_ROWS();" );
+
+    if($qry)
+    foreach ($qry as $qr)
+    {
+      $qr->modify = json_decode($qr->mod_data_json, true);
+      unset($qr->mod_data_json);
+
+      $data['data'][] = new PropertyHistory( $qr->item_id, $qr );
+    }
+
+    $data['count'] = $count;
+
+    return $data;
+  }
+
   public function getList()
   {
     $data     = array();
@@ -82,6 +138,27 @@ class Properties extends PropertyFactory
 
     if (isset($this->arg['post_status'])) {
       $post_arg['post_status'] = $this->arg['post_status'];
+    }
+
+    if (isset($this->arg['hide_archived']) && $this->arg['hide_archived']) {
+      $meta_qry[] = array(
+          'relation' => 'OR',
+          array(
+            'key' => '_listing_flag_archived',
+            'compare' => 'NOT EXISTS'
+          ),
+          array(
+            'key' => '_listing_flag_archived',
+            'value' => ''
+          )
+      );
+    }
+
+    if (isset($this->arg['only_archived']) && $this->arg['only_archived']) {
+      $meta_qry[] = array(
+        'key' => '_listing_flag_archived',
+        'value' => '1'
+      );
     }
 
     if (isset($this->arg['idnumber'])) {
@@ -201,7 +278,6 @@ class Properties extends PropertyFactory
     if (!empty($meta_qry)) {
       $post_arg['meta_query'] = $meta_qry;
     }
-
     //print_r($post_arg);
 
     $posts = get_posts($post_arg);
@@ -242,7 +318,6 @@ class Properties extends PropertyFactory
       'class'           => 'form-control',
       'walker'          => new Properties_Select_Walker
     ));
-
   }
 
   public function logView()

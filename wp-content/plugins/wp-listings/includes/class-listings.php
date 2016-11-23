@@ -47,6 +47,8 @@ class WP_Listings {
 				__( 'Telek alapterület (nm)', 'gh' )  => '_listing_lot_size',
 				__( 'Ingatlan alapterület (nm)', 'gh' )  => '_listing_property_size',
 				__( 'Fürdőszobák száma', 'gh' )  => '_listing_bathroom_numbers',
+				__( 'Archiválás megjegyzés', 'gh' )  => '_listing_archive_text',
+				__( 'Archiválta', 'gh' )  => '_listing_archive_who',
 			),
 			'checkbox' => array(
 				__( 'Garázs', 'gh' )  => '_listing_garage',
@@ -58,6 +60,7 @@ class WP_Listings {
 			),
 			'flags' => array(
 				__( 'Kiemelt', 'gh' )  => '_listing_flag_highlight',
+				__( 'Archivált', 'gh' )  => '_listing_flag_archived',
 			),
 		) );
 

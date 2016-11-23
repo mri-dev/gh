@@ -23,7 +23,9 @@
   <div class="heading">
     <div class="buttons">
       <?php if ( $me->can('property_archive') || (current_user_can('administrator')) ): ?>
-      <a href="/control/property_archive/?id=<?=$property->ID()?>" class="btn btn-rounded btn-red"><?=__('Archiválás', 'gh')?> <i class="fa fa-trash"></i></a>
+        <?php if ( !$property->ArchivingInProgress() ): ?>
+            <a href="/control/property_archive/?id=<?=$property->ID()?>" class="btn btn-rounded btn-red"><?=__('Archiválás', 'gh')?> <i class="fa fa-trash"></i></a>
+        <?php endif; ?>
       <?php endif; ?>
     </div>
     <h1><?=__('Ingatlan szerkesztés', 'gh')?></h1>
@@ -31,6 +33,23 @@
   </div>
   <?php if (isset($_GET['saved'])): ?>
     <div class="alert alert-success"><?=__('Változásokat sikeresen mentette.', 'gh')?></div>
+  <?php endif; ?>
+  <?php if (isset($_GET['archived'])): ?>
+    <? if($_GET['archived'] == '100'): ?>
+    <div class="alert alert-warning"><?=__('Ön sikeresen elindította az archiválási folyamatot. Hamarosan elbírálásra kerül a kérelme.', 'gh')?></div>
+    <? endif; ?>
+    <? if($_GET['archived'] == '200'): ?>
+    <div class="alert alert-success"><?=__('Ön sikeresen archiválta ezt az ingatlanhirdetést.', 'gh')?></div>
+    <? endif; ?>
+  <?php endif; ?>
+  <?php if ($property->ArchivingInProgress()): $arc_data = $property->ArchivingData(); ?>
+    <div class="alert alert-danger">
+      <h4><?=__('Archiválási folyamat elindítva ennél az ingatlanhirdetésnél.', 'gh')?></h4>
+      <sub>&quot;</sub><em><?=$arc_data->comment?></em><sup>&quot;</sup>
+      <div class="">
+        <small>@ <?=$arc_data->regDate?></small>
+      </div>
+    </div>
   <?php endif; ?>
   <? if(!current_user_can('property_edit')): ?>
   <div class="alert alert-danger"><?=__('Ön nem jogosult ingatlan szerkesztésre. Vegye fel a kapcsolatot felettesével vagy az oldal üzemeltetőjével', 'gh')?></div>

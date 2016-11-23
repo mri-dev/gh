@@ -11,7 +11,8 @@ class PropertyFactory
     'publish' => '#c6e8c6',
     'draft'   => '#e2e2e2',
     'pending' => '#ffd383',
-    'future' => '#fff8a8'
+    'future' => '#fff8a8',
+    'archived' => '#ff9797',
   );
 
   public function getValuta()
@@ -22,6 +23,30 @@ class PropertyFactory
   public function __construct()
   {
     return $this;
+  }
+
+  public function StatusText( $status = null )
+  {
+    switch ( $status ) {
+      case 'publish':
+        return __( 'Közzétéve (aktív)', 'gh');
+      break;
+      case 'pending':
+        return __( 'Függőben', 'gh');
+      break;
+      case 'draft':
+          return __( 'Vázlat', 'gh');
+      break;
+      case 'archived':
+        return __( 'Archivált', 'gh');
+      break;
+      case 'future':
+        return __( 'Időzített', 'gh');
+      break;
+      default:
+        return $status;
+      break;
+    }
   }
 
   public static function i18n_taxonomy_values( $key )

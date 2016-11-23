@@ -744,9 +744,21 @@ footer {
     }
   }
 
+  &.alert-warning{
+    color: #CE8B17;
+    background-color: #fff0a4;
+    border-color: #edda79;
+  }
+
   &.alert-success{
     &:before {
       content: "\f058";
+    }
+  }
+
+  &.alert-warning{
+    &:before {
+      content: "\f06a";
     }
   }
 
@@ -896,6 +908,178 @@ footer {
       color: $color-pr;
       font-weight: bold;
       margin-right: 5px;
+    }
+  }
+}
+
+.gh_control_property_history_page{
+  .modify-list{
+    .modify-row{
+      background: #fff;
+      margin: 5px 0;
+      border: 1px solid #e8e8e8;
+      .head{
+        background: #f1f1f1;
+        border-top: 5px solid #ff7b7f;
+        display: flex;
+        align-items: center;
+        .prof {
+          flex-basis: 75%;
+          padding: 15px;
+
+          .img {
+            width: 80px;
+            height: 80px;
+            overflow: hidden;
+            -webkit-border-radius: 80px;
+            -moz-border-radius: 80px;
+            border-radius: 80px;
+            text-align: center;
+            float: left;
+            border: 5px solid #ffffff;
+            margin: 0 15px 0 0;
+            position: relative;
+            -webkit-box-shadow: 2px 2px 10px -4px #5d5d5d;
+            -moz-box-shadow: 2px 2px 10px -4px #5d5d5d;
+            box-shadow: 2px 2px 10px -4px #5d5d5d;
+
+            img{
+              text-align: center;
+              height: 115%;
+              width:auto;
+              max-width: initial;
+              position: absolute;
+              left: 50%;
+              top: 50%;
+              -webkit-transform:translate(-50%,-50%);
+              -moz-transform:translate(-50%,-50%);
+              transform:translate(-50%,-50%);
+            }
+          }
+
+          .title {
+            a {
+              font-size: 1.4em;
+              text-transform: uppercase;
+              font-weight: bold;
+            }
+          }
+
+          .meta {
+            font-size: 1em;
+            line-height: 1;
+            margin: 4px 0;
+
+            .code {
+              background: $color-sec;
+              color: white;
+              margin-right: 5px;
+              padding: 5px;
+              line-height: 1.5;
+              font-size: 0.8em;
+              text-transform: uppercase;
+            }
+
+            .region {
+              color: black;
+              font-weight: bold;
+            }
+          }
+
+          .modifier {
+            font-size: 0.85em;
+            color: #8c8c8c;
+
+            .who {
+              font-weight: bold;
+              color: black;
+
+              a{ color: black; }
+            }
+
+            .date {
+              font-style: italic;
+              color: black;
+            }
+          }
+        }
+        .change-n {
+          flex-basis: 25%;
+          text-align: center;
+          color: #444444;
+          font-size: 0.8em;
+
+          .n {
+            font-weight: bold;
+            font-family: 'Arial';
+            color: black;
+            line-height: 1;
+            font-size: 2.5em;
+          }
+        }
+      }
+
+      .mods {
+        font-size: 0.8em;
+        .mcol{
+          display: flex;
+          border-bottom: 1px solid #e8e8e8;
+
+          &:last-child {
+            border-bottom: none;
+          }
+
+          & > div {
+            padding: 5px;
+            border-right: 1px solid #e8e8e8;
+          }
+
+          & > div:last-child {
+            border-right: none;
+          }
+
+          .what { flex-basis: 20%; text-align: left; }
+          .dfrom { flex-basis: 40%; text-align: center; }
+          .dto { flex-basis: 40%; text-align: center; }
+
+          .key_post_content {
+            text-align: left;
+          }
+          .key__listing_price{
+            .price-down {
+              background: red;
+              margin-left:5px;
+              font-size: 0.7em;
+              padding: 2px;
+              color: white;
+            }
+            .price-up {
+              background: green;
+              margin-left:5px;
+              font-size: 0.7em;
+              padding: 2px;
+              color: white;
+            }
+          }
+
+          i.fa.fa-times {
+            color: red;
+            font-size: 1.4em;
+          }
+          i.fa.fa-check {
+            color: green;
+            font-size: 1.4em;
+          }
+
+          &.mcolh {
+            background: #dcdcdc;
+            border-top: 1px solid #fff;
+            color: #000;
+            font-size: 0.8em;
+            font-weight: bold;
+          }
+        }
+      }
     }
   }
 }
