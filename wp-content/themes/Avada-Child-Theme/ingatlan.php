@@ -10,6 +10,9 @@
   ));
   $property = $properties->getList();
   $prop = $property[0];
+  if (!$prop) {
+    wp_redirect('/');
+  }
   $properties->logView();
   $regions = $prop->Regions();
 ?>

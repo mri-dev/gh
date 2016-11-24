@@ -268,7 +268,9 @@ function ingatlan_custom_title($title)
     $property = $properties->getList();
     $property = $property[0];
 
-    $title['title'] = $property->Title() . ' ['.$property->Azonosito().']' . ' - ' . $property->PropertyStatus(true) . ' '. $property->PropertyType(true) . ' - '. $property->ParentRegion();
+    if ($property) {
+      $title['title'] = $property->Title() . ' ['.$property->Azonosito().']' . ' - ' . $property->PropertyStatus(true) . ' '. $property->PropertyType(true) . ' - '. $property->ParentRegion();
+    }
   }
 
   if($wp_query->query_vars['custom_page'] == 'ingatlanok' ) {
