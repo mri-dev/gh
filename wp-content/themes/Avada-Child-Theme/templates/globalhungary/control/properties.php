@@ -3,6 +3,7 @@
 
   $control = get_control_controller('properties');
 
+  $selected_user = false;
   $author = false;
   $filtered = false;
   $archived = false;
@@ -91,7 +92,10 @@
             <div class="col-md-2 center"><?=$p->Status(false)?></div>
             <div class="col-md-2 center">
               <?=$p->CreateAt()?>
-              <div class="edit"><a href="/control/property_edit/?id=<?=$p->ID()?>"><?=__('szerkeszt', 'gh')?> <i class="fa fa-pencil"></i></a></div>
+              <div class="edit">
+                <a href="/control/property_edit/?id=<?=$p->ID()?>"><?=__('szerkeszt', 'gh')?> <i class="fa fa-pencil"></i></a>
+                | <a href="/control/property_history/?pid=<?=$p->ID()?><?=($selected_user)?'&u='.$selected_user->ID():''?>" title="<?=__('Módosítások')?>"><?=$p->historyChangeCount($selected_user)?> <i class="fa fa-history"></i></a>
+              </div>
             </div>
           </div>
         <?php endforeach; ?>

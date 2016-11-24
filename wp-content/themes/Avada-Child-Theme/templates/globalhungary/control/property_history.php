@@ -1,20 +1,24 @@
 <?php
   global $me;
   $control  = get_control_controller('property_history');
+  $filtered = false;
 
   $param = array();
 
   if (isset($_GET['pid']) && !empty($_GET['pid'])) {
     $param['property_id'] = $_GET['pid'];
+    $filtered = true;
   }
 
   if (isset($_GET['u']) && !empty($_GET['u'])) {
     $param['user_id'] = $_GET['u'];
+    $selected_user = new UserHelper(array('id'=> $_GET['u']));
+    $filtered = true;
   }
 
   $list = $control->load( $param );
 
-  if ( !current_user_can('administrator') ) {
+  if ( !current_user_can('administrator') && !current_user_can('region_manager') ) {
     wp_redirect('/control/home');
   }
 ?>
@@ -31,6 +35,16 @@
       ob_end_flush();
     ?>
     <?php else: ?>
+      <?php if ($filtered): ?>
+        <a href="/control/property_history/">< <?=__('Teljes lista mutatása', 'gh')?></a> <br>
+        <?php if ($selected_user): ?>
+          <?=sprintf(__('Kiválasztott felhasználó: <strong>%s</strong> által módosítottak', 'gh'), $selected_user->Name())?><br>
+        <?php endif; ?>
+        <?php if (isset($_GET['pid'])): ?>
+          <?=sprintf(__('Kiválasztott ingatlan: <strong>#%d számú ingatlan változások</strong>', 'gh'), $_GET['pid'])?><br>
+        <?php endif; ?>
+        <br>
+      <?php endif; ?>
       <div class="modify-list">
       <?php foreach ($list['data'] as $c): $mods = $c->mods(); ?>
         <div class="modify-row">
@@ -71,17 +85,23 @@
                 <?=__('Új érték', 'gh')?>
               </div>
             </div>
-            <?php foreach ($mods as $key => $value): ?>
-            <div class="mcol">
+            <?php foreach ($mods as $key => $value): $is_action = (!is_null($value['f'])) ? false : true; ?>
+            <div class="mcol <?=($is_action)?'mcolact':''?>">
               <div class="what">
                 <?=$c->modText($key)?>
               </div>
-              <div class="dfrom key_<?=$key?>">
-                <?=($value['f'] == '') ? 'n.a.' : $c->formatValue($key, $value['f'])?>
-              </div>
-              <div class="dto key_<?=$key?>">
-                <?=$c->formatValue($key, $value['t'], $value['f'])?>
-              </div>
+              <?php if ($is_action): ?>
+                <div class="dact key_<?=$key?>">
+                  <?=( empty($value) ) ? 'n.a.' : $c->formatValue($key, $value)?>
+                </div>
+              <?php else: ?>
+                <div class="dfrom key_<?=$key?>">
+                  <?=($value['f'] == '') ? 'n.a.' : $c->formatValue($key, $value['f'])?>
+                </div>
+                <div class="dto key_<?=$key?>">
+                  <?=$c->formatValue($key, $value['t'], $value['f'])?>
+                </div>
+              <?php endif; ?>
             </div>
             <?php endforeach; ?>
           </div>

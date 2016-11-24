@@ -215,6 +215,23 @@ class Property extends PropertyFactory
     return false;
   }
 
+  public function historyChangeCount( $user = false )
+  {
+    global $wpdb;
+
+    $prep = array();
+    $prep[] = $this->ID();
+
+    $q = "SELECT count(ID) FROM listing_change_history WHERE item_id = %d ";
+
+    if ($user && $user->ID()) {
+      $q .= " and changer_user_id = %d ";
+      $prep[] = $user->ID();
+    }
+
+    return $wpdb->get_var($wpdb->prepare($q, $prep));
+  }
+
   public function isNews()
   {
     $h = true;

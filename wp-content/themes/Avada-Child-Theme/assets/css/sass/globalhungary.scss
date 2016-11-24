@@ -423,6 +423,12 @@ input[type=checkbox]:checked + label {
       & > div[class*=col-md]{
         padding: 10px;
       }
+
+      .edit {
+        a {
+          font-size: 0.9em;
+        }
+      }
     }
     .row:nth-child(even){
       background: #f7f7f7;
@@ -1041,8 +1047,10 @@ footer {
           .what { flex-basis: 20%; text-align: left; }
           .dfrom { flex-basis: 40%; text-align: center; }
           .dto { flex-basis: 40%; text-align: center; }
+          .dact { flex-basis: 80%; text-align: center;}
 
-          .key_post_content {
+          .key_post_content,
+          .key_post_excerpt {
             text-align: left;
           }
           .key__listing_price{
@@ -1069,6 +1077,10 @@ footer {
           i.fa.fa-check {
             color: green;
             font-size: 1.4em;
+          }
+
+          .img-prev {
+            margin: 5px;
           }
 
           &.mcolh {

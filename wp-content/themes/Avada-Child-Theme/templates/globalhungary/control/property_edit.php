@@ -222,7 +222,7 @@
         ?>
       </div>
     </div>
-    <?php if(current_user_can('reference_manager')): ?>
+    <?php if(!current_user_can('administrator')): ?>
       <input type="hidden" name="post_author" value="<?=get_current_user_id()?>">
     <?php else: ?>
       <h3><?=__('Ingatlan referense', 'gh')?></h3>

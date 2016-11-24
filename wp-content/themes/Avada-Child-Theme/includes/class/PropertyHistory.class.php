@@ -22,15 +22,17 @@ class PropertyHistory extends PropertyFactory
     foreach ($this->data->modify as $k => $v) {
       if ( !isset($v['f']) ) {
         foreach ($v as $key => $value) {
+
           if (is_array($value)) {
             $value['type'] = 'meta';
+            $mods[$key] = $value;
+          } else {
+            $mods[$k][] = $value;
           }
-
-          $mods[$key] = $value;
         }
       } else {
-          $v['type'] = 'post';
-          $mods[$k] = $v;
+        $v['type'] = 'post';
+        $mods[$k] = $v;
       }
     }
 
@@ -49,13 +51,66 @@ class PropertyHistory extends PropertyFactory
 
   public function modText( $key = '' )
   {
-    $text = array(
-      'post_content' => __('Leírás', 'gh'),
-      '_listing_flag_highlight' => __('Kiemelt hirdetés', 'gh'),
-      '_listing_driveways' => __('Autóbeálló', 'gh'),
-      '_listing_green_area' => __('Zöldövezet', 'gh'),
-      'xxx' => __('', 'gh'),
-    );
+    $text = array();
+
+    $texts = array(
+			'col1' => array(
+				__( 'Azonosító', 'gh' ) => '_listing_idnumber',
+				__( 'Ingatlan státusza', 'gh' ) 	=> '_listing_status',
+				__( 'Ingatlan állapot', 'gh' ) 	=> '_listing_property_condition',
+				__( 'Ingatlan kategória', 'gh' ) 	=> '_listing_property_types',
+				__( 'Pontos cím (utca, házszám, stb)', 'gh' ) => '_listing_address',
+			  __( 'Irányár', 'gh' ) 	=> '_listing_price',
+				__( 'Akciós irányár', 'gh' ) 	=> '_listing_offprice',
+				__( 'GPS (lat)', 'gh' ) 	=> '_listing_gps_lat',
+				__( 'GPS (lng)', 'gh' ) 	=> '_listing_gps_lng',
+			),
+			'col2' => array(
+		    __( 'Építés éve', 'gh' )  => '_listing_year_built',
+				__( 'Szintek száma', 'gh' )  => '_listing_level_numbers',
+				__( 'Szobák száma', 'gh' )  => '_listing_room_numbers',
+				__( 'Telek alapterület (nm)', 'gh' )  => '_listing_lot_size',
+				__( 'Ingatlan alapterület (nm)', 'gh' )  => '_listing_property_size',
+				__( 'Fürdőszobák száma', 'gh' )  => '_listing_bathroom_numbers',
+				__( 'Archiválás megjegyzés', 'gh' )  => '_listing_archive_text',
+				__( 'Archiválta', 'gh' )  => '_listing_archive_who',
+			),
+			'checkbox' => array(
+				__( 'Garázs', 'gh' )  => '_listing_garage',
+				__( 'Autóbeálló', 'gh' )  => '_listing_driveways',
+				__( 'Kertcsoport, udvar', 'gh' )  => '_listing_garden',
+				__( 'Erkély', 'gh' )  => '_listing_balcony',
+				__( 'Lift', 'gh' )  => '_listing_lift',
+				__( 'Zöldövezet', 'gh' )  => '_listing_green_area',
+			),
+			'flags' => array(
+				__( 'Kiemelt', 'gh' )  => '_listing_flag_highlight',
+				__( 'Archivált', 'gh' )  => '_listing_flag_archived',
+			),
+      'default' => array(
+        __( 'Referens', 'gh') => 'post_author',
+        __( 'Állapot', 'gh') => 'post_status',
+        __( 'Leírás', 'gh') => 'post_content',
+        __( 'Rövid leírás', 'gh') => 'post_excerpt',
+      ),
+      'extra' => array(
+        __( 'Profilkép', 'gh') => 'feature_img_id',
+        __( 'Törölt képek (ID)', 'gh') => 'deleting_imgs',
+        __( 'Feltöltött képek', 'gh') => 'image_uploads'
+      ),
+      'tax' => array(
+        __( 'Ingatlan státusza', 'gh') => 'status',
+        __( 'Ingatlan kategória', 'gh') => 'property-types',
+        __( 'Fűtés', 'gh') => 'property-heating',
+        __( 'Ingatlan állapota', 'gh') => 'property-condition',
+      )
+		);
+
+    foreach ($texts as $tk => $ta ) {
+      foreach ($ta as $tkk => $tv ) {
+        $text[$tv] = $tkk;
+      }
+    }
 
     if (array_key_exists($key, $text)) {
       return $text[$key];
@@ -96,11 +151,45 @@ class PropertyHistory extends PropertyFactory
       case '_listing_green_area':
       case '_listing_flag_highlight':
       case '_listing_garden':
+      case '_listing_garage':
+      case '_listing_balcony':
+      case '_listing_lift':
         $value = ($value == '0') ? '<i class="fa fa-times"></i>' : '<i class="fa fa-check"></i>';
+        return $value;
+      break;
+      case 'post_author':
+        if ($value != '') {
+          $refu = new UserHelper(array('id' => $value));
+          $value = '<strong>'.$refu->Name() . '</strong> <em>('.$refu->Email().')</em>';
+        }
         return $value;
       break;
       case 'post_status':
         $value = $this->StatusText($value);
+        return $value;
+      break;
+      case 'deleting_imgs':
+        unset($value['type']);
+        return implode($value, ', ');
+      break;
+      case 'image_uploads':
+        $imgset = '';
+        foreach ($value as $id ) {
+          $src = wp_get_attachment_image($id, array(90, 90), "", array('class' => 'img-prev'));
+          $imgset .= $src;
+        }
+        return $imgset;
+      break;
+      case 'status':
+      case 'property-condition':
+      case 'property-heating':
+      case 'property-types':
+        if ($value == '' || $value == '0') {
+          $value = 'n.a.';
+        } else {
+          $vt = get_term($value);
+          $value = $this->i18n_taxonomy_values($vt->name);
+        }
         return $value;
       break;
       default:

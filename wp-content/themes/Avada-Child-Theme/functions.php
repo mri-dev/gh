@@ -296,7 +296,8 @@ function gh_login_redirect( $redirect_to, $request, $user ) {
 		//check for admins
 		if ( in_array( 'administrator', $user->roles ) ) {
 			// redirect them to the default place
-			return $redirect_to;
+			// return $redirect_to;
+      return '/control/home';
 		} else {
 			return '/control/home';
 		}
