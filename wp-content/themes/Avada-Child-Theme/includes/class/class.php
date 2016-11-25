@@ -10,4 +10,5 @@
   require_once "AjaxRequests.php";
   require_once "UserRoles.php";
   require_once "UsersFuncions.php";
+  require_once "GHImporter.php";
 ?>

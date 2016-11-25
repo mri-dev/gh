@@ -39,8 +39,6 @@ function avada_lang_setup() {
   $ucid = ucid();
 
   $ucid = $_COOKIE['uid'];
-
-
 }
 add_action( 'after_setup_theme', 'avada_lang_setup' );
 
@@ -177,7 +175,6 @@ function gh_custom_role()
   /* * /
   print_r(wp_get_current_user());
   /* */
-
 }
 add_action('after_setup_theme', 'gh_custom_role');
 
@@ -213,8 +210,23 @@ function gh_init()
   add_rewrite_rule('^'.SLUG_INGATLAN_LIST.'/?', 'index.php?custom_page='.SLUG_INGATLAN_LIST.'&urlstring=$matches[1]', 'top');
   add_rewrite_rule('^'.SLUG_FAVORITE.'/?', 'index.php?custom_page='.SLUG_FAVORITE.'&urlstring=$matches[1]', 'top');
   add_rewrite_rule('^'.SLUG_INGATLAN.'/([^/]+)/([^/]+)/([^/]+)', 'index.php?custom_page='.SLUG_INGATLAN.'&regionslug=$matches[1]&cityslug=$matches[2]&urlstring=$matches[3]', 'top');
+
+
 }
 add_action('init', 'gh_init');
+
+function old_importer()
+{
+  $importer = new GHImporter();
+  $imp_zona_pre = $importer->zonak();
+  $imp_zone_ins = $importer->insert_zonak( $imp_zona_pre );
+  /* * /
+  echo '<pre>';
+  print_r($imp_zone_ins);
+  exit;
+  /* */
+}
+add_action('init', 'old_importer', 9999);
 
 function get_control_controller( $controller_class )
 { global $wp_query;
