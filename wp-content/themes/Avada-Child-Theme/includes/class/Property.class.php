@@ -473,7 +473,7 @@ class Property extends PropertyFactory
     $img = wp_get_attachment_image_src( get_post_thumbnail_id( $this->ID() ), "full" );
 
     if (!$img) {
-      return 'https://placeholdit.imgix.net/~text?txtsize=18&txt=GH&w=360&h=200';
+      return IMG.'/default_image.jpg';
     } else {
         return $img[0];
     }
