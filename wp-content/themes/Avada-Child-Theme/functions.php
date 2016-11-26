@@ -218,13 +218,17 @@ add_action('init', 'gh_init');
 function old_importer()
 {
   $importer = new GHImporter();
-  $imp_zona_pre = $importer->zonak();
-  $imp_zone_ins = $importer->insert_zonak( $imp_zona_pre );
-  /* * /
-  echo '<pre>';
-  print_r($imp_zone_ins);
-  exit;
-  /* */
+  //$imp_zona_pre = $importer->zonak();
+  //$imp_zone_ins = $importer->insert_zonak( $imp_zona_pre );
+  if ($_GET['imp'] == '1') {
+    //$ing = $importer->ingatlanok();
+    //$ing = $importer->do_ingatlan_import($ing['import']);
+    /* * /
+    echo '<pre>';
+    print_r($ing);
+    exit;
+    /* */
+  }
 }
 add_action('init', 'old_importer', 9999);
 
