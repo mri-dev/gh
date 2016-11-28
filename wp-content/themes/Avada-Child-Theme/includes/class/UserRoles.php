@@ -59,7 +59,10 @@ class UserRoles
     public function addCap($roleid, $cap)
     {
       $role = get_role( $roleid );
-      $role->add_cap($cap);
+
+      if ($role) {
+        $role->add_cap($cap);
+      }
     }
 
     public function removeCap($roleid, $cap)

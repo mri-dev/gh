@@ -141,6 +141,7 @@ function gh_custom_role()
   **/
   $user_roles = new UserRoles();
   $user_roles->addRoles(array(
+    //array( 'administrator', __('Adminisztrátor','gh') ),
     array( 'region_manager', __('Régióvezető','gh') ),
     array( 'reference_manager', __('Referens','gh') ),
     array( 'starter', __('Előregisztráló','gh') )
