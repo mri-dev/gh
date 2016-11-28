@@ -38,6 +38,31 @@ body.home {
   }
 }
 
+.pagination {
+  margin: 20px auto;
+  text-align: center;
+  float: none;
+
+  .page-numbers:not(.prev):not(.next):not(.dots){
+    padding: 2px 6px;
+    background: #d7d7d7;
+    color: black;
+    &:hover{
+      background: $color-pr !important;
+      color: white !important;
+    }
+  }
+
+  .current {
+    background: $color-pr !important;
+    color: white !important;
+    margin: 0 3px !important;
+    font-size: 18px;
+    padding: 0px 7px !important;
+    text-align: center;
+  }
+}
+
 input[type=checkbox]{
   display: none;
 }

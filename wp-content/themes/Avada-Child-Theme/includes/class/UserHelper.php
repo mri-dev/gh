@@ -11,7 +11,11 @@ class UserHelper
 
   public function RegionID()
   {
-    return get_user_meta( $this->ID(), 'gh_user_regio', true);
+    $rid = get_user_meta( $this->ID(), 'gh_user_regio', true);
+    if (!$rid || $rid <= 0) {
+      $rid = 0;
+    }
+    return $rid;
   }
 
   public function can( $cap )

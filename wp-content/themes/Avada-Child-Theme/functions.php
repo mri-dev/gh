@@ -210,8 +210,6 @@ function gh_init()
   add_rewrite_rule('^'.SLUG_INGATLAN_LIST.'/?', 'index.php?custom_page='.SLUG_INGATLAN_LIST.'&urlstring=$matches[1]', 'top');
   add_rewrite_rule('^'.SLUG_FAVORITE.'/?', 'index.php?custom_page='.SLUG_FAVORITE.'&urlstring=$matches[1]', 'top');
   add_rewrite_rule('^'.SLUG_INGATLAN.'/([^/]+)/([^/]+)/([^/]+)', 'index.php?custom_page='.SLUG_INGATLAN.'&regionslug=$matches[1]&cityslug=$matches[2]&urlstring=$matches[3]', 'top');
-
-
 }
 add_action('init', 'gh_init');
 
@@ -223,6 +221,7 @@ function old_importer()
   if ($_GET['imp'] == '1') {
     //$ing = $importer->ingatlanok();
     //$ing = $importer->do_ingatlan_import($ing['import']);
+    //$ing = $importer->user_connecter();
     /* * /
     echo '<pre>';
     print_r($ing);

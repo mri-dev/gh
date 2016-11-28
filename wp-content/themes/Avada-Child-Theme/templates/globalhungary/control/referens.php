@@ -19,9 +19,10 @@
       <div class="data-head">
         <div class="row">
           <div class="col-md-4"><?=__('Név', 'gh')?></div>
-          <div class="col-md-3"><?=__('Email', 'gh')?></div>
+          <div class="col-md-2"><?=__('Régió', 'gh')?></div>
+          <div class="col-md-2"><?=__('Email', 'gh')?></div>
           <div class="col-md-2"><?=__('Aktív ingatlanok', 'gh')?></div>
-          <div class="col-md-3"><?=__('Utoljára belépett', 'gh')?></div>
+          <div class="col-md-2"><?=__('Utoljára belépett', 'gh')?></div>
         </div>
       </div>
       <div class="data-body">
@@ -34,9 +35,10 @@
               <strong><?=$u->Name()?></strong><br>
               <small>Tel: <?=$u->Phone()?></small>
             </div>
-            <div class="col-md-3 center"><?=$u->Email()?></div>
+            <div class="col-md-2 center"><?=$u->RegionName()?></div>
+            <div class="col-md-2 center"><?=$u->Email()?></div>
             <div class="col-md-2 center"><a href="/control/properties/?user=<?=$u->ID()?>"><?=$u->PropertiesCount()?> <?=__('db', 'gh')?></a></div>
-            <div class="col-md-3 center"><?=$u->LastLogin()?></div>
+            <div class="col-md-2 center"><?=$u->LastLogin()?></div>
           </div>
       <?php }
        } else { ?>

@@ -88,6 +88,7 @@ class PropertyHistory extends PropertyFactory
 				__( 'Archivált', 'gh' )  => '_listing_flag_archived',
 			),
       'default' => array(
+        __( 'Ingatlan főcím (SEO)', 'gh') => 'post_title',
         __( 'Referens', 'gh') => 'post_author',
         __( 'Állapot', 'gh') => 'post_status',
         __( 'Leírás', 'gh') => 'post_content',

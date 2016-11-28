@@ -41,6 +41,43 @@ class GHImporter extends PropertyFactory {
     return $pre;
   }
 
+  public function user_connecter()
+  {
+    global $wpdb;
+
+    $c = array();
+
+    $q = "SELECT
+      i.id,
+      i.azon,
+      i.kapcsolat
+    FROM ingatlan_trans as i
+    WHERE 1=1 LIMIT 0, 1000";
+
+    $qdata = $wpdb->get_results( $q, ARRAY_A );
+
+    foreach ($qdata as $d) {
+      $c[] = array(
+        'id' => $d['id'],
+        'newid' => $this->check_ghid_usage($d['azon']),
+        'kapcsolat' => $d['kapcsolat'],
+        'author' => $this->find_post_author($d['kapcsolat'])
+      );
+    }
+
+    if ($c)
+    foreach ($c as $ci) {
+      if ( $ci['author'] > 0 && $ci['newid'] ) {
+        wp_update_post( array(
+          'ID' => $ci['newid'],
+          'post_author' => $ci['author']
+        ) );
+      }
+    }
+
+    return $c;
+  }
+
   public function insert_zonak( $prepare = array() )
   {
     if (!$prepare) {

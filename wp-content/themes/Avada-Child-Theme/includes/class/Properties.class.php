@@ -4,6 +4,8 @@ class Properties extends PropertyFactory
   public $arg = array();
   private $datalist = array();
   private $exclue_megye_str = array( 'Budapest', 'Balaton' );
+  private $count = 0;
+  private $query = null;
 
   public function __construct( $arg = array() )
   {
@@ -107,7 +109,8 @@ class Properties extends PropertyFactory
   {
     $data     = array();
     $post_arg = array(
-      'post_type' => 'listing'
+      'post_type' => 'listing',
+      'no_found_rows' => false
     );
     $meta_qry = array();
 
@@ -278,11 +281,17 @@ class Properties extends PropertyFactory
     if (!empty($meta_qry)) {
       $post_arg['meta_query'] = $meta_qry;
     }
-    //print_r($post_arg);
 
-    $posts = get_posts($post_arg);
+    $post_arg['paged'] = (int)$this->arg['page'];
 
-    foreach($posts as $post) {
+    $posts = new WP_Query($post_arg);
+
+    $this->query = $posts;
+    $this->count = $posts->found_posts;
+
+    //print_r($posts);
+
+    foreach($posts->posts as $post) {
       $this->datalist[] = new Property($post);
     }
     return $this->datalist;
@@ -290,13 +299,17 @@ class Properties extends PropertyFactory
 
   public function CountTotal()
   {
-    $n = 0;
-    foreach (wp_count_posts( 'listing' ) as $key => $value) {
-      if (array_key_exists($key, $this->property_status_colors)) {
-        $n += $value;
-      }
-    }
-    return $n;
+    return $this->count;
+  }
+
+  public function pagination( $base = '' )
+  {
+    return paginate_links( array(
+    	'base'   => $base.'%_%',
+    	'format'  => '?page=%#%',
+    	'current' => max( 1, get_query_var('page') ),
+    	'total'   => $this->query->max_num_pages
+    ) );
   }
 
   public function Count()

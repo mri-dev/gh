@@ -35,8 +35,10 @@
     'author' => $author,
     'hide_archived' => (($archived) ? false : true),
     'only_archived' => (($archived) ? true : false),
+    'page' => (isset($_GET['page']) && is_numeric($_GET['page'])) ? $_GET['page'] : 1
   ));
   $item_num = $control->propertyCount();
+  $pager = $control->pager('/control/properties/');
 ?>
 <div class="gh_control_content_holder">
   <div class="heading">
@@ -61,6 +63,9 @@
         <?=__('Megjelenített lista: <strong>Archivált ingatlanok</strong>', 'gh')?>
       <?php endif; ?>
     <?php endif; ?>
+    <div class="pagination">
+      <?php echo $pager; ?>
+    </div>
     <div class="data-table">
       <div class="data-head">
         <div class="row">
@@ -100,6 +105,9 @@
           </div>
         <?php endforeach; ?>
       </div>
+    </div>
+    <div class="pagination">
+      <?php echo $pager; ?>
     </div>
     <?php endif; ?>
   </div>
