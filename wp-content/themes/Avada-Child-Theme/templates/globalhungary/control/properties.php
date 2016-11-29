@@ -35,7 +35,8 @@
     'author' => $author,
     'hide_archived' => (($archived) ? false : true),
     'only_archived' => (($archived) ? true : false),
-    'page' => (isset($_GET['page']) && is_numeric($_GET['page'])) ? $_GET['page'] : 1
+    'page' => (isset($_GET['page']) && is_numeric($_GET['page'])) ? $_GET['page'] : 1,
+    'idnumber' => (isset($_GET['id'])) ? $_GET['id'] : false
   ));
   $item_num = $control->propertyCount();
   $pager = $control->pager('/control/properties/');
@@ -63,6 +64,21 @@
         <?=__('Megjelenített lista: <strong>Archivált ingatlanok</strong>', 'gh')?>
       <?php endif; ?>
     <?php endif; ?>
+
+    <form action="/control/properties/" method="get" class="pull-right">
+      <input type="hidden" name="user" value="<?=$_GET['user']?>">
+      <div class="inline-input">
+        <div>
+          <input type="text" name="id" class="pull-right" id="refid" placeholder="<?=__('Referenciaszám', 'gh')?>" class="form-control" value="<?=$_GET['id']?>">
+        </div>
+        <div>
+          <button type="submit" class="fusion-button button-flat button-square button-small button-neutral"><?=__('Keresés')?> <i class="fa fa-search"></i></button>
+        </div>
+      </div>
+    </form>
+
+    <div class="clearfix"></div>
+
     <div class="pagination">
       <?php echo $pager; ?>
     </div>
@@ -84,7 +100,7 @@
                   <img src="<?=$p->ProfilImg()?>" alt="" />
                 </div>
                 <div class="main-row">
-                  <span class="title"><?=$p->Title()?></span>
+                  <span class="title"><a href="<?=$p->URL()?>" target="_blank"><?=$p->Title()?></a></span>
                 </div>
                 <div class="alt-row">
                   <span class="ref-number"><?=$p->Azonosito()?></span>

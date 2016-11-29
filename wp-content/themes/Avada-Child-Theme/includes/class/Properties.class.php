@@ -56,40 +56,57 @@ class Properties extends PropertyFactory
     $data = array(
       'page' => array(
         'current' => 1,
+        'limit'   => 25,
         'max'     => 1
       ),
       'count' => 0,
       'data' => array()
     );
 
+    if (isset($arg['page']) && !empty($arg['page']))
+    {
+      $data['page']['current'] = (int)$arg['page'];
+    }
+
+    if (isset($arg['limit']) && !empty($arg['limit']))
+    {
+      $data['page']['limit'] = (int)$arg['limit'];
+    }
+
     $params = array();
 
     // query
-    $q = "SELECT
+    $q = "SELECT SQL_CALC_FOUND_ROWS
       h.ID,
       h.changer_user_id,
       h.item_id,
       h.mod_data_json,
       h.transaction_date
-    FROM listing_change_history as h
-    WHERE 1=1 ";
+    FROM listing_change_history as h ";
 
-    $q .= " and group_key ='property'";
-
-    if (isset($arg['property_id'])) {
-      $q .= " and h.item_id IN(%d)";
-      $params[] = (int)$arg['property_id'];
-    }
+    $q .= " WHERE 1=1 ";
+    $q .= " and h.group_key ='property'";
 
     if (isset($arg['user_id'])) {
       $q .= " and h.changer_user_id IN(%d)";
       $params[] = (int)$arg['user_id'];
     }
 
+    if (isset($arg['property_id']) && !empty($arg['property_id'])) {
+      $q .= " and (SELECT pm1.meta_value FROM {$wpdb->prefix}postmeta as pm1 WHERE pm1.post_id = h.item_id and pm1.meta_key = '_listing_idnumber') = %s ";
+      $params[] = $arg['property_id'];
+    }
+
     $q .= " ORDER BY h.transaction_date DESC";
+
+    // Limit
+    $page_min = ($data['page']['current'] * $data['page']['limit']) - $data['page']['limit'];
+    $q .= " LIMIT ".$page_min.", ".$data['page']['limit'];
 
     $qry = $wpdb->get_results($wpdb->prepare( $q, $params ));
     $count = $wpdb->get_var( "SELECT FOUND_ROWS();" );
+
+    $data['page']['max'] = floor( $count / $data['page']['limit'] );
 
     if($qry)
     foreach ($qry as $qr)
@@ -164,7 +181,7 @@ class Properties extends PropertyFactory
       );
     }
 
-    if (isset($this->arg['idnumber'])) {
+    if (isset($this->arg['idnumber']) && !empty($this->arg['idnumber'])) {
       $meta_qry[] = array(
         'key' => '_listing_idnumber',
         'value' => $this->arg['idnumber']
@@ -328,6 +345,7 @@ class Properties extends PropertyFactory
       'selected'        => $selected,
       'show_count'      => false,
       'hide_empty'      => false,
+      'hierarchical'    => 1,
       'class'           => 'form-control',
       'walker'          => new Properties_Select_Walker
     ));
@@ -355,7 +373,7 @@ class Properties extends PropertyFactory
 
 class Properties_Select_Walker extends Walker_CategoryDropdown {
   function start_el(&$output, $category, $depth, $args) {
-		$pad = str_repeat(' ', $depth * 3);
+		$pad = str_repeat('&mdash; ', $depth);
 
 		$cat_name = apply_filters('list_cats', $category->name, $category);
 

@@ -16,14 +16,10 @@
     <input type="hidden" name="property_id" value="0">
     <h3><?=__('Alapadatok', 'gh')?></h3>
     <div class="row">
-      <div class="col-md-3 reqf">
-        <label for="_listing_idnumber"><?=__('Azonosító', 'gh')?></label>
-        <input type="text" id="_listing_idnumber" name="meta_input[_listing_idnumber]" value="<?=$_POST['meta']['_listing_idnumber']?>" class="form-control">
-      </div>
-      <div class="col-md-9 reqf">
+      <div class="col-md-12 reqf">
         <label for="post_title"><?=__('Ingatlan cím (SEO)', 'gh')?></label>
-        <input type="text" id="post_title" name="post_title" value="<?=$_POST['post_title']?>" class="form-control">
-        <small class="inputhint"><?=__('Pl.: Újépítésű 120 nm-es 4 szobás családi ház Pécs szívében.', 'gh')?></small>
+        <input type="text" id="post_title" name="post_title" size="60" value="<?=$_POST['post_title']?>" class="form-control">
+        <small class="inputhint"><strong><?=__('max. 60 karakter', 'gh')?></strong> &nbsp; <?=__('Pl.: Újépítésű 120 nm-es 4 szobás családi ház Pécs szívében.', 'gh')?></small>
       </div>
     </div>
     <div class="row">
@@ -51,18 +47,24 @@
       </div>
       <div class="col-md-4">
         <label for="tax_locations"><?=__('Város', 'gh')?></label>
-        <? wp_dropdown_categories(array(
+        <?
+        $cata = array(
           'show_option_all' => __('-- válasszon --', 'gh'),
           'taxonomy' => 'locations',
           'hide_empty' => 0,
           'name' => 'tax[locations]',
           'id' => 'tax_locations',
-          'parent' => $me->RegionID(),
           'hierarchical' => 1,
           'orderby' => 'name'
-        )); ?>
+        );
+
+        $regionid = $me->RegionID();
+        if ( $regionid != 0 ) {
+          $cata['parent'] = $regionid;
+        }
+
+        wp_dropdown_categories( $cata ); ?>
         <input type="hidden" name="pre[tax][locations]" value="<?=$parea->term_id?>">
-        <small class="inputhint"><?=__('Nem találja a várost?', 'gh')?> <a href="#"><?=__('Város hozzáadása', 'gh')?></a></small>
       </div>
       <div class="col-md-6 reqf">
         <label for="_listing_address"><?=__('Pontos cím (utca, házszám, stb)', 'gh')?></label>
@@ -94,7 +96,7 @@
     </div>
     <h3><?=__('Paraméterek', 'gh')?></h3>
     <div class="row">
-      <? $metai = 0; foreach($params as $title => $meta): $metai++; ?>
+      <? $metai = 0; foreach($params as $title => $meta): $metai++; if( in_array($meta, array('_listing_archive_text','_listing_archive_who')) ){ continue; } ?>
       <div class="col-md-4">
         <label for="<?=$meta?>"><?=$title?></label>
         <input type="text" id="<?=$meta?>" name="meta_input[<?=$meta?>]" value="<?=$_POST['meta'][$meta]?>" class="form-control">

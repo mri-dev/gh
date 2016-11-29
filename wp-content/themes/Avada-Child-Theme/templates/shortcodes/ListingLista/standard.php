@@ -32,29 +32,49 @@
       <div class="opt">
         <div class="head"><?=__('Telek alapterület', 'gh')?></div>
         <div class="d">
-          <div class="ico"><img src="<?=IMG."/ico/telek-alapterulet.svg"?>" alt="<?=__('Telek alapterület', 'gh')?>" /></div>
-          <?=sprintf(__('%s nm', 'gh'), $item->getMetaValue('_listing_lot_size'))?>
+          <?php $o = $item->getMetaValue('_listing_lot_size'); ?>
+          <?php if (!empty($o)): ?>
+            <div class="ico"><img src="<?=IMG."/ico/telek-alapterulet.svg"?>" alt="<?=__('Telek alapterület', 'gh')?>" /></div>
+            <?=sprintf(__('%s nm', 'gh'), $item->getMetaValue('_listing_lot_size'))?>
+          <?php else: ?>
+            &mdash;&mdash;
+          <?php endif; ?>
         </div>
       </div>
       <div class="opt">
         <div class="head"><?=__('Alapterület', 'gh')?></div>
         <div class="d">
-          <div class="ico"><img src="<?=IMG."/ico/alapterulet.svg"?>" alt="<?=__('Alapterület', 'gh')?>" /></div>
-          <?=sprintf(__('%s nm', 'gh'), $item->getMetaValue('_listing_property_size'))?>
+          <?php $o = $item->getMetaValue('_listing_property_size'); ?>
+          <?php if (!empty($o)): ?>
+            <div class="ico"><img src="<?=IMG."/ico/alapterulet.svg"?>" alt="<?=__('Alapterület', 'gh')?>" /></div>
+            <?=sprintf(__('%s nm', 'gh'), $item->getMetaValue('_listing_property_size'))?>
+          <?php else: ?>
+            &mdash;&mdash;
+          <?php endif; ?>
         </div>
       </div>
       <div class="opt">
         <div class="head"><?=__('Szobák száma', 'gh')?></div>
         <div class="d">
-          <div class="ico"><img src="<?=IMG."/ico/szoba.svg"?>" alt="<?=__('Szobák száma', 'gh')?>" /></div>
-          <?=sprintf(_n('%s szoba', '%s szoba', $item->getMetaValue('_listing_room_numbers'), 'gh'), $item->getMetaValue('_listing_room_numbers'))?>
+          <?php $o = $item->getMetaValue('_listing_room_numbers'); ?>
+          <?php if (!empty($o)): ?>
+            <div class="ico"><img src="<?=IMG."/ico/szoba.svg"?>" alt="<?=__('Szobák száma', 'gh')?>" /></div>
+            <?=sprintf(_n('%s szoba', '%s szoba', $item->getMetaValue('_listing_room_numbers'), 'gh'), $item->getMetaValue('_listing_room_numbers'))?>
+          <?php else: ?>
+            &mdash;&mdash;
+          <?php endif; ?>
         </div>
       </div>
       <div class="opt">
         <div class="head"><?=__('Szintek száma', 'gh')?></div>
         <div class="d">
-          <div class="ico"><img src="<?=IMG."/ico/szint.svg"?>" alt="<?=__('Szintek száma', 'gh')?>" /></div>
-          <?=sprintf(_n('%s szint', '%s szint', $item->getMetaValue('_listing_level_numbers'), 'gh'), $item->getMetaValue('_listing_level_numbers'))?>
+          <?php $o = $item->getMetaValue('_listing_level_numbers'); ?>
+          <?php if (!empty($o)): ?>
+            <div class="ico"><img src="<?=IMG."/ico/szint.svg"?>" alt="<?=__('Szintek száma', 'gh')?>" /></div>
+            <?=sprintf(_n('%s szint', '%s szint', $item->getMetaValue('_listing_level_numbers'), 'gh'), $item->getMetaValue('_listing_level_numbers'))?>
+          <?php else: ?>
+            &mdash;&mdash;
+          <?php endif; ?>
         </div>
       </div>
     </div>

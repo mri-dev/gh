@@ -16,7 +16,18 @@
     $filtered = true;
   }
 
+  if (isset($_GET['page']) && !empty($_GET['page'])) {
+    $param['page'] = (int)$_GET['page'];
+  }
+
   $list = $control->load( $param );
+
+  $pager = paginate_links( array(
+    'base'   => '/control/property_history/%_%',
+    'format'  => '?page=%#%',
+    'current' => max( 1, get_query_var('page') ),
+    'total'   => $list['page']['max']
+  ) );
 
   if ( !current_user_can('administrator') && !current_user_can('region_manager') ) {
     wp_redirect('/control/home');
@@ -24,7 +35,7 @@
 ?>
 <div class="gh_control_content_holder">
   <div class="heading">
-    <h1><?=__('Ingatlan módosítások', 'gh')?></h1>
+    <h1><?=__('Ingatlan módosítások', 'gh')?> <span class="badge"><?=$list['count']?></span></h1>
     <div class="desc"><?=__('Az alábbi listában találhatóak az ingatlanoknál történő módosítások.', 'gh')?></div>
   </div>
   <div class="gh_control_property_history_page">
@@ -41,10 +52,29 @@
           <?=sprintf(__('Kiválasztott felhasználó: <strong>%s</strong> által módosítottak', 'gh'), $selected_user->Name())?><br>
         <?php endif; ?>
         <?php if (isset($_GET['pid'])): ?>
-          <?=sprintf(__('Kiválasztott ingatlan: <strong>#%d számú ingatlan változások</strong>', 'gh'), $_GET['pid'])?><br>
+          <?=sprintf(__('Kiválasztott ingatlan: <strong>%s számú ingatlan változások</strong>', 'gh'), $_GET['pid'])?><br>
         <?php endif; ?>
         <br>
       <?php endif; ?>
+
+      <form action="/control/property_history/" method="get" class="pull-right">
+        <input type="hidden" name="u" value="<?=$_GET['u']?>">
+        <div class="inline-input">
+          <div>
+            <input type="text" name="pid" class="pull-right" id="refid" placeholder="<?=__('Referenciaszám', 'gh')?>" class="form-control" value="<?=$_GET['pid']?>">
+          </div>
+          <div>
+            <button type="submit" class="fusion-button button-flat button-square button-small button-neutral"><?=__('Keresés')?> <i class="fa fa-search"></i></button>
+          </div>
+        </div>
+      </form>
+
+      <div class="clearfix"></div>
+
+      <div class="pagination">
+        <?php echo $pager; ?>
+      </div>
+
       <div class="modify-list">
       <?php foreach ($list['data'] as $c): $mods = $c->mods(); ?>
         <div class="modify-row">
@@ -107,6 +137,9 @@
           </div>
         </div>
       <?php endforeach; ?>
+      </div>
+      <div class="pagination">
+        <?php echo $pager; ?>
       </div>
     <?php endif; ?>
     <pre><? //print_r($list); ?></pre>
