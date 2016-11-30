@@ -89,7 +89,6 @@
               <div class="meta">
                   <span class="code"><?=$c->property()->Azonosito()?></span>
                   <span class="region"><?=$c->property()->RegionName()?></span>
-
               </div>
               <div class="modifier">
                 <span class="who"><a href="/control/property_history/?u=<?=$c->user()->ID()?>"><?=$c->user()->Name()?></a></span>

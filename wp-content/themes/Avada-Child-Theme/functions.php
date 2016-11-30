@@ -158,7 +158,7 @@ function gh_custom_role()
   $user_roles->addCap('reference_manager', 'read');
   // Régió Menedzser
   $user_roles->addAvaiableCaps( 'region_manager', array(
-    'property_create', 'property_archive', 'property_edit', 'property_edit_price', 'property_edit_status',
+    'property_create', 'property_archive', 'property_archive_mod', 'property_edit', 'property_edit_price', 'property_edit_status',
     'user_property_connector',
     'stat_property'
   ) );

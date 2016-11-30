@@ -22,6 +22,7 @@ class UserRoles
         'property_create' => __('Ingatlan létrehozás', 'gh'),
         'property_delete' => __('Ingatlan törlése', 'gh'),
         'property_archive' => __('Ingatlan archiválása', 'gh'),
+        'property_archive_mod' => __('Ingatlan archiválás kérelmek kezelése', 'gh'),
         'property_edit_price' => __('Ingatlan ár módosítás', 'gh'),
         'property_edit' => __('Ingatlan szerkesztése', 'gh'),
         'property_edit_status' => __('Ingatlan státusz módosítás', 'gh'),

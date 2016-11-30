@@ -124,12 +124,49 @@ class Properties extends PropertyFactory
 
   public function getList()
   {
+    global $wpdb;
+
     $data     = array();
     $post_arg = array(
       'post_type' => 'listing',
       'no_found_rows' => false
     );
     $meta_qry = array();
+
+    // Archive
+    if (isset($this->arg['list_archive']) && $this->arg['list_archive'] !== false)
+    {
+      $archive_dataset = array();
+      $archive_ids = array();
+
+      $aq = "SELECT
+        a.*
+      FROM ".self::PROPERTY_ARCHIVE_DB." as a
+      WHERE 1=1 ";
+
+      if ($this->arg['list_archive'] === 'only_accepted') {
+        $aq .= " and a.accept_userid IS NOT NULL ";
+      }
+
+      if ($this->arg['list_archive'] === 'only_not_accepted') {
+        $aq .= " and a.accept_userid IS NULL ";
+      }
+
+      $aq .= " ORDER BY a.accept_userid ASC, a.regDate ASC ";
+
+
+      $qdata = $wpdb->get_results( $wpdb->prepare($aq, $prep), ARRAY_A );
+
+      if ($qdata) {
+        foreach ( $qdata as $qda ) {
+          $archive_dataset[$qda['postID']] = $qda;
+          $archive_ids[] = $qda['postID'];
+        }
+      }
+
+      $post_arg['post__in'] = $archive_ids;
+      $post_arg['post_status'] = -1;
+    }
 
     if (isset($this->arg['highlight'])) {
       $meta_qry[] = array(
@@ -306,7 +343,7 @@ class Properties extends PropertyFactory
     $this->query = $posts;
     $this->count = $posts->found_posts;
 
-    //print_r($posts);
+    //print_r($post_arg);
 
     foreach($posts->posts as $post) {
       $this->datalist[] = new Property($post);

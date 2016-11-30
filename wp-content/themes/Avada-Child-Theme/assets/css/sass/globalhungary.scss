@@ -972,7 +972,9 @@ footer {
   }
 }
 
-.gh_control_property_history_page{
+.gh_control_property_history_page,
+.gh_control_property_archive_page
+{
   .modify-list{
     .modify-row{
       background: #fff;
@@ -1145,6 +1147,24 @@ footer {
             font-weight: bold;
           }
         }
+      }
+    }
+  }
+  .archive-comment{
+    padding: 15px;
+    .text {
+      font-size: 1.3em;
+      color:black;
+      font-style: italic;
+    }
+    .who {
+      margin-top:10px;
+      font-size: 0.85em;
+      color: #8c8c8c;
+      margin-left: 10px;
+
+      strong {
+        color: black;
       }
     }
   }
