@@ -18,7 +18,10 @@
           $author = $_GET['user'];
           $filtered = true;
           $selected_user = new UserHelper(array( 'id' => $_GET['user']) );
-          $show_selector = true;
+
+          if ($me->can('user_property_connector') || current_user_can('administrator')) {
+            $show_selector = true;
+          }
         }
       }
     }
@@ -86,7 +89,7 @@
     <div class="pagination">
       <?php echo $pager; ?>
     </div>
-    <form id="prop-list" action="/control/property_action/" method="get" class="wide-form">
+    <form id="prop-list" action="/control/property_action/" method="post" class="wide-form">
       <div class="data-table">
         <div class="data-head">
           <div class="row">
@@ -109,7 +112,7 @@
                 <div class="adv-inf">
                   <?php if ($show_selector): ?>
                   <div class="connecter">
-                    <input type="checkbox" id="reconnecter_<?=$p->ID()?>" name="reconnecter[]" value="<?=$p->ID()?>"><label for="reconnecter_<?=$p->ID()?>"></label>
+                    <input type="checkbox" id="reconnecter_<?=$p->ID()?>" name="ids[]" value="<?=$p->ID()?>"><label for="reconnecter_<?=$p->ID()?>"></label>
                   </div>
                   <?php endif; ?>
                   <div class="img">
