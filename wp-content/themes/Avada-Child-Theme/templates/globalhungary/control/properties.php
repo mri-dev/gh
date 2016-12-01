@@ -45,7 +45,9 @@
   <div class="heading">
     <div class="buttons">
       <?php if ( current_user_can('administrator') || current_user_can('region_manager') ): ?>
-      <a href="/control/properties/?arc=1" class="btn btn-rounded btn-red"><?=__('Archiváltak', 'gh')?> <i class="fa fa-archive"></i></a>
+        <?php if ($_GET['arc'] != '1'): ?>
+          <a href="/control/properties/?arc=1" class="btn btn-rounded btn-red"><?=__('Archiváltak', 'gh')?> <i class="fa fa-archive"></i></a>
+        <?php endif; ?>
       <?php endif; ?>
     </div>
     <h1><?=(isset($_GET['arc'])?__('Archivált', 'gh').' ':'')?><?=sprintf(__('Ingatlanok <span class="region">/ %s</span> <span class="badge">%d</span>', 'gh'), $me->RegionName(), $item_num)?></h1>

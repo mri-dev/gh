@@ -690,12 +690,30 @@ footer {
           a{
             display: block;
             font-size: 1em;
+            position: relative;
             padding: 10px;
 
             i{
               margin-right: 5px;
               width: 16px;
               text-align: center;
+            }
+
+            .badge {
+              position: absolute;
+              right: 10px;
+              top: 12px;
+              background: $color-pr;
+              color: white;
+              width: 20px;
+              height: 20px;
+              line-height: 20px;
+              font-size: 11px;
+              font-weight: bold;
+              text-align: center;
+              -moz-border-radius: 25px;
+              -webkit-border-radius: 25px;
+              border-radius: 25px;
             }
 
             &:hover{

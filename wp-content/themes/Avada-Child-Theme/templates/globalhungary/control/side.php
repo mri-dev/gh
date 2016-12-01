@@ -1,4 +1,7 @@
-<? global $me; ?>
+<?
+global $me;
+global $notify;
+?>
 <div class="gh_control_sidebar">
   <ul>
     <li class="mainhead"><?=__('Kezelőfelület', 'gh')?></li>
@@ -13,7 +16,11 @@
     <li class=""><a href="/control/referens"><i class="fa fa-users"></i> <?=__('Referensek', 'gh')?></a></li>
     <? endif; ?>
     <?php if ( current_user_can('administrator') || $me->can('property_archive_mod') ): ?>
-    <li class=""><a href="/control/archive_requests"><i class="fa fa-archive"></i> <?=__('Archiválás kérelmek', 'gh')?></a></li>
+    <li class=""><a href="/control/archive_requests"><i class="fa fa-archive"></i> <?=__('Archiválás kérelmek', 'gh')?>
+    <?php $noti_arc = $notify->propertyArchiveRequests();
+    if ( $noti_arc != 0 ): ?>
+      <div class="badge"><?=$noti_arc?></div>
+    <?php endif; ?></a></li>
     <?php endif; ?>
     <li class=""><a href="/control/properties"><i class="fa fa-home"></i> <?=__('Ingatlanok', 'gh')?></a></li>
     <?php if( $me->can('property_create') || ( current_user_can('administrator') || current_user_can('region_manager') ) ): ?>

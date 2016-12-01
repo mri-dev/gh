@@ -11,4 +11,5 @@
   require_once "UserRoles.php";
   require_once "UsersFuncions.php";
   require_once "GHImporter.php";
+  require_once "NotifyManager.class.php";
 ?>

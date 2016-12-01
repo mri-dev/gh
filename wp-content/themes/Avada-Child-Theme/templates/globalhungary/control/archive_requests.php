@@ -6,7 +6,7 @@
   }
   $arg = array();
 
-  $arg['list_archive'] = true;
+  $arg['list_archive'] = 'only_not_accepted';
   $arg['orderby'] = 'post__in';
 
   $properties = new Properties( $arg );
@@ -29,46 +29,54 @@
     <?php endif; ?>
 
     <div class="modify-list">
-    <?php foreach ($list as $c): $arcdata = $c->ArchivingData(); ?>
-      <div class="modify-row">
-        <div class="head">
-          <div class="prof">
-            <div class="img">
-              <img src="<?=$c->ProfilImg()?>" alt="">
+    <?php if ($properties->Count() == 0): ?>
+      <?php
+        ob_start();
+        include(locate_template('templates/parts/nodata-property-archive.php'));
+        ob_end_flush();
+      ?>
+    <?php else: ?>
+      <?php foreach ($list as $c): $arcdata = $c->ArchivingData(); ?>
+        <div class="modify-row">
+          <div class="head">
+            <div class="prof">
+              <div class="img">
+                <img src="<?=$c->ProfilImg()?>" alt="">
+              </div>
+              <div class="title">
+                <a target="_blank" href="/control/property_edit/?id=<?=$c->ID()?>"><?=$c->Title()?></a>
+              </div>
+              <div class="meta">
+                <span class="code"><?=$c->Azonosito()?></span>
+                <span class="region"><?=$c->RegionName()?></span>
+              </div>
+              <div class="modifier">
+                <span class="who"><a title="<?=__('Felhasználó ingatlan hirdetései')?>" href="/control/properties/?user=<?=$c->AuthorID()?>"><?=$c->AuthorName()?></a></span>
+                <?=__('által létrehozott ingatlan', 'gh')?>
+              </div>
             </div>
-            <div class="title">
-              <a href="<?=$c->URL()?>"><?=$c->Title()?></a>
-            </div>
-            <div class="meta">
-              <span class="code"><?=$c->Azonosito()?></span>
-              <span class="region"><?=$c->RegionName()?></span>
-            </div>
-            <div class="modifier">
-              <span class="who"><a title="<?=__('Felhasználó ingatlan hirdetései')?>" href="/control/properties/?user=<?=$c->AuthorID()?>"><?=$c->AuthorName()?></a></span>
-              <?=__('által létrehozott ingatlan', 'gh')?>
+            <div class="change-n">
+              <form class="" action="/control/arcive_requests_save/" method="post">
+                <input type="hidden" name="rid" value="<?=$arcdata->ID?>">
+                <button type="submit" class="fusion-button button-square button-small button-flat button-green" name="allow" value="1"><?=__('Elfogad', 'gh')?> <i class="fa fa-check"></i></button><br><br>
+                <button type="submit" class="fusion-button button-square button-small button-flat button-red" name="disallow" value="1"><?=__('Elutasít', 'gh')?> <i class="fa fa-times"></i></button>
+              </form>
             </div>
           </div>
-          <div class="change-n">
-            <form class="" action="/control/arcive_requests_save/" method="post">
-              <input type="hidden" name="rid" value="<?=$arcdata->ID?>">
-              <button type="submit" class="fusion-button button-square button-small button-flat button-green" name="allow" value="1"><?=__('Elfogad', 'gh')?> <i class="fa fa-check"></i></button><br><br>
-              <button type="submit" class="fusion-button button-square button-small button-flat button-red" name="disallow" value="1"><?=__('Elutasít', 'gh')?> <i class="fa fa-times"></i></button>
-            </form>
+          <div class="mods">
+            <div class="archive-comment">
+              <div class="text">
+                <sub>&quot;</sub> <?=$arcdata->comment?> <sup>&quot;</sup>
+              </div>
+              <div class="who">
+                <?php $arc_who = new UserHelper(array('id' => $arcdata->userID)); ?>
+                &mdash; <strong><?=$arc_who->Name()?></strong> <?=__('kérelmezte ekkor:', 'gh')?> <?=$arcdata->regDate?>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="mods">
-          <div class="archive-comment">
-            <div class="text">
-              <sub>&quot;</sub> <?=$arcdata->comment?> <sup>&quot;</sup>
-            </div>
-            <div class="who">
-              <?php $arc_who = new UserHelper(array('id' => $arcdata->userID)); ?>
-              &mdash; <strong><?=$arc_who->Name()?></strong> <?=__('kérelmezte ekkor:', 'gh')?> <?=$arcdata->regDate?>
-            </div>
-          </div>
-        </div>
-      </div>
-    <?php endforeach; ?>
+      <?php endforeach; ?>
+    <?php endif; ?>
     </div>
   </div>
 </div>

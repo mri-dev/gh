@@ -154,7 +154,6 @@ class Properties extends PropertyFactory
 
       $aq .= " ORDER BY a.accept_userid ASC, a.regDate ASC ";
 
-
       $qdata = $wpdb->get_results( $wpdb->prepare($aq, $prep), ARRAY_A );
 
       if ($qdata) {
@@ -162,8 +161,10 @@ class Properties extends PropertyFactory
           $archive_dataset[$qda['postID']] = $qda;
           $archive_ids[] = $qda['postID'];
         }
+      } else {
+        $archive_ids[] = -1;
       }
-
+      
       $post_arg['post__in'] = $archive_ids;
       $post_arg['post_status'] = -1;
     }
