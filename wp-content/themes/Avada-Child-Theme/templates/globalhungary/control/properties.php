@@ -7,6 +7,7 @@
   $author = false;
   $filtered = false;
   $archived = false;
+  $show_selector = false;
 
   if (current_user_can('reference_manager')) {
     $author = $me->ID();
@@ -17,6 +18,7 @@
           $author = $_GET['user'];
           $filtered = true;
           $selected_user = new UserHelper(array( 'id' => $_GET['user']) );
+          $show_selector = true;
         }
       }
     }
@@ -84,49 +86,112 @@
     <div class="pagination">
       <?php echo $pager; ?>
     </div>
-    <div class="data-table">
-      <div class="data-head">
-        <div class="row">
-          <div class="col-md-5"><?=__('Ingatlan', 'gh')?></div>
-          <div class="col-md-3"><?=__('Referens', 'gh')?></div>
-          <div class="col-md-2"><?=__('Állapot', 'gh')?></div>
-          <div class="col-md-2"><?=__('Létrehozva', 'gh')?></div>
-        </div>
-      </div>
-      <div class="data-body">
-        <?php foreach( $properties as $p ): ?>
+    <form id="prop-list" action="/control/property_action/" method="get" class="wide-form">
+      <div class="data-table">
+        <div class="data-head">
           <div class="row">
             <div class="col-md-5">
-              <div class="adv-inf">
-                <div class="img">
-                  <img src="<?=$p->ProfilImg()?>" alt="" />
+              <?php if ($show_selector): ?>
+                <div class="reconnecter_switcher">
+                  <input type="checkbox" id="reconnecter_switch"><label for="reconnecter_switch"></label>
                 </div>
-                <div class="main-row">
-                  <span class="title"><a href="<?=$p->URL()?>" target="_blank"><?=$p->Title()?></a></span>
+              <?php endif; ?>
+              <?=__('Ingatlan', 'gh')?></div>
+            <div class="col-md-3"><?=__('Referens', 'gh')?></div>
+            <div class="col-md-2"><?=__('Állapot', 'gh')?></div>
+            <div class="col-md-2"><?=__('Létrehozva', 'gh')?></div>
+          </div>
+        </div>
+        <div class="data-body">
+          <?php foreach( $properties as $p ): ?>
+            <div class="row">
+              <div class="col-md-5">
+                <div class="adv-inf">
+                  <?php if ($show_selector): ?>
+                  <div class="connecter">
+                    <input type="checkbox" id="reconnecter_<?=$p->ID()?>" name="reconnecter[]" value="<?=$p->ID()?>"><label for="reconnecter_<?=$p->ID()?>"></label>
+                  </div>
+                  <?php endif; ?>
+                  <div class="img">
+                    <img src="<?=$p->ProfilImg()?>" alt="" />
+                  </div>
+                  <div class="main-row">
+                    <span class="title"><a href="<?=$p->URL()?>" target="_blank"><?=$p->Title()?></a></span>
+                  </div>
+                  <div class="alt-row">
+                    <span class="ref-number"><?=$p->Azonosito()?></span>
+                    <span class="price"><?=$p->Price(true)?></span>
+                    <span class="region"><?=$p->RegionName()?></span> / <span class="address"><?=$p->Address()?></span>
+                  </div>
                 </div>
-                <div class="alt-row">
-                  <span class="ref-number"><?=$p->Azonosito()?></span>
-                  <span class="price"><?=$p->Price(true)?></span>
-                  <span class="region"><?=$p->RegionName()?></span> / <span class="address"><?=$p->Address()?></span>
+              </div>
+              <div class="col-md-3 center"><a title="<?=__('Felhasználó ingatlanjainak listázása', 'gh')?>" href="/control/properties/?user=<?=$p->AuthorID()?>"><?=$p->AuthorName()?></a></div>
+              <div class="col-md-2 center"><?=$p->Status(false)?></div>
+              <div class="col-md-2 center">
+                <?=$p->CreateAt()?>
+                <div class="edit">
+                  <a href="/control/property_edit/?id=<?=$p->ID()?>"><?=__('szerkeszt', 'gh')?> <i class="fa fa-pencil"></i></a>
+                  | <a href="/control/property_history/?pid=<?=$p->ID()?><?=($selected_user)?'&u='.$selected_user->ID():''?>" title="<?=__('Módosítások')?>"><?=$p->historyChangeCount($selected_user)?> <i class="fa fa-history"></i></a>
                 </div>
               </div>
             </div>
-            <div class="col-md-3 center"><a title="<?=__('Felhasználó ingatlanjainak listázása', 'gh')?>" href="/control/properties/?user=<?=$p->AuthorID()?>"><?=$p->AuthorName()?></a></div>
-            <div class="col-md-2 center"><?=$p->Status(false)?></div>
-            <div class="col-md-2 center">
-              <?=$p->CreateAt()?>
-              <div class="edit">
-                <a href="/control/property_edit/?id=<?=$p->ID()?>"><?=__('szerkeszt', 'gh')?> <i class="fa fa-pencil"></i></a>
-                | <a href="/control/property_history/?pid=<?=$p->ID()?><?=($selected_user)?'&u='.$selected_user->ID():''?>" title="<?=__('Módosítások')?>"><?=$p->historyChangeCount($selected_user)?> <i class="fa fa-history"></i></a>
-              </div>
+          <?php endforeach; ?>
+        </div>
+      </div>
+      <div class="pagination">
+        <?php echo $pager; ?>
+      </div>
+      <div id="action_selector" class="selector_action_cont">
+        <h4>(<span id="selected_item_n">0</span>) <?=__('kiválasztott ingatlan műveletvégrehajtás', 'gh')?>:</h4>
+        <div class="row">
+          <div class="col-md-12">
+            <select class="form-control" name="action">
+              <option value="" selected="selected"><?=__('-- válasszon --', 'gh')?></option>
+              <option value="" disabled="disabled"></option>
+              <option value="change_referens"><?=__('Ingatlan referens csere')?></option>
+            </select>
+          </div>
+          <div class="col-md-12">
+            <div class="pull-right">
+              <button type="submit" class="fusion-button button-flat button-square button-medium button-neutral"><?=__('Tovább', 'gh')?></button>
             </div>
           </div>
-        <?php endforeach; ?>
+        </div>
       </div>
-    </div>
-    <div class="pagination">
-      <?php echo $pager; ?>
-    </div>
+    </form>
     <?php endif; ?>
   </div>
 </div>
+<script type="text/javascript">
+  (function($){
+    checkCheckbox();
+    $('#reconnecter_switch').change(function(){
+			var sa 	= $(this).is(':checked');
+			var chs = $('.data-body').find('input[type=checkbox]');
+			if(sa){
+				chs.prop("checked", !chs.prop("checked"));
+			}else{
+				chs.prop("checked", !chs.prop("checked"));
+			}
+      checkCheckbox();
+		});
+
+    $('.data-body input[type=checkbox]').change(function(){
+      checkCheckbox();
+		});
+
+    function checkCheckbox() {
+      var chs = $('.data-body').find('input[type=checkbox]:checked');
+      var len = chs.length;
+
+      $('#selected_item_n').text(len);
+
+      if (len == 0) {
+
+      } else {
+
+      }
+    }
+
+  })(jQuery);
+</script>

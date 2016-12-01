@@ -430,6 +430,10 @@ input[type=checkbox]:checked + label {
   margin-top: 15px;
   .data-head{
     border-bottom: 2px solid $color-pr;
+    .reconnecter_switcher{
+      float: left;
+      margin: 0 0 0 5px;
+    }
     .row{
       margin: 0;
       & > div[class*=col-md]{
@@ -896,9 +900,14 @@ footer {
   }
 }
 
-.gh_control_properties_page{
+.gh_control_properties_page {
   .adv-inf{
     color: #8c8c8c;
+
+    .connecter {
+      float: left;
+      margin: 15px 4px 0 0;
+    }
 
     .img {
       float: left;
