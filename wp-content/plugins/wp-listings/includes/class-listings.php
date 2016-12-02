@@ -60,6 +60,7 @@ class WP_Listings {
 			),
 			'flags' => array(
 				__( 'Kiemelt', 'gh' )  => '_listing_flag_highlight',
+				__( 'Kizárólagos', 'gh') => '_listing_flag_exclusive',
 				__( 'Archivált', 'gh' )  => '_listing_flag_archived',
 				__( 'Ár jellege', 'gh' )  => '_listing_flag_pricetype',
 			),

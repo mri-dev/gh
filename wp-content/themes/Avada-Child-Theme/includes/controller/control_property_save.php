@@ -105,9 +105,6 @@ class control_property_save
     if ( empty($taxes['property-condition']) ) {
       $form_errors .= __('- Kérjük, hogy válassza ki az ingatlan állapotát.','gh') . "<br />";
     }
-    if ( empty($post['meta_input']['_listing_idnumber']) ) {
-      $form_errors .= __('- Az ingatlan azonosítója hiányzik. Kérjük, hogy pótolja.','gh') . "<br />";
-    }
     if ( empty($post['meta_input']['_listing_address']) ) {
       $form_errors .= __('- Az ingatlan pontos címe hiányzik. Kérjük, hogy pótolja.','gh') . "<br />";
     }
@@ -134,6 +131,9 @@ class control_property_save
 
     if ($mode == 'create') {
       $this->temppostid = $post_id;
+
+      // Save azon
+      update_post_meta( $post_id, '_listing_idnumber', 'GH'.$post_id );
     }
 
     if ( $post_id != 0 ) {

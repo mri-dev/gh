@@ -306,6 +306,19 @@ class Property extends PropertyFactory
     return $h;
   }
 
+  public function isExclusive()
+  {
+    $h = true;
+
+    $v = $this->getMetaValue('_listing_flag_exclusive');
+
+    if (!$v || $v == '' || $v == '0') {
+      return false;
+    }
+
+    return $h;
+  }
+
   public function Images()
   {
     return get_attached_media( 'image', $this->ID() );

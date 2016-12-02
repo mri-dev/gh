@@ -30,11 +30,14 @@ body.home {
 .fusion-logo {
   position: relative;
   .badge {
-    color: white;
-    background: #777777;
-    padding: 3px 7px;
-    float: right;
-    font-size: 1em;
+    color: #2b2a29;
+    background: #ebecec;
+    padding: 3px 5px;
+    float: left;
+    margin: -33px 0 0 83px;
+    line-height: 1;
+    font-family: 'Arial';
+    font-size: 1.2em;
   }
 }
 
@@ -623,10 +626,13 @@ footer {
       }
 
       .badge {
-        background: #777777;
-        float: right;
-        font-size: 0.75em;
+        color: #2b2a29;
+        background: #ebecec;
+        float: left;
+        font-size: 0.6em;
         padding: 2px 4px;
+        line-height: 1;
+        margin: -18px 0 0 66px;
       }
     }
   }
@@ -1252,6 +1258,8 @@ footer {
           text-transform: uppercase;
           font-weight: bold;
           font-family: 'Arial';
+          font-size: 1.2em;
+          letter-spacing: 1px;
 
           &:before {
             font-family: 'FontAwesome';
@@ -1363,10 +1371,10 @@ footer {
           flex-basis: 30%;
         }
         &.inp-azonosito{
-          flex-basis: 20%;
+          flex-basis: 15%;
         }
         &.inp-status{
-          flex-basis: 25%;
+          flex-basis: 30%;
         }
         &.inp-price-min{
           flex-basis: 20%;

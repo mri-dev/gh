@@ -24,7 +24,7 @@
     <div class="buttons">
       <?php if ( $me->can('property_archive') || (current_user_can('administrator')) ): ?>
         <?php if ( !$property->ArchivingInProgress() ): ?>
-            <a href="/control/property_archive/?id=<?=$property->ID()?>" class="btn btn-rounded btn-red"><?=__('Archiválás', 'gh')?> <i class="fa fa-trash"></i></a>
+            <a href="/control/property_archive/?id=<?=$property->ID()?>" class="btn btn-rounded btn-red"><?=__('Ingatlanhirdetés archiválása', 'gh')?> <i class="fa fa-archive"></i></a>
         <?php endif; ?>
       <?php endif; ?>
     </div>
@@ -71,7 +71,12 @@
         </select>
         <input type="hidden" name="pre[post_status]" value="<?=$property->StatusKey()?>" class="form-control">
       </div>
-
+      <div class="col-md-3">
+        <label for=""><?=__('Kizárólagos hirdetés', 'gh')?></label>
+        <input type="checkbox" id="_listing_flag_exclusive" name="meta_input[_listing_flag_exclusive]" <?=($property->isExclusive())?'checked="checked"':''?> value="<?=($property->isExclusive())?1:0?>"><label class="fm" for="_listing_flag_exclusive"></label>
+        <input type="hidden" name="pre[meta_input][_listing_flag_exclusive]" value="<?=($property->isHighlighted())?1:0?>" class="form-control">
+        <input type="hidden" name="metacheckboxes[_listing_flag_exclusive]" value="1">
+      </div>
       <?php if ( current_user_can('region_manager') || current_user_can('administrator') ): ?>
       <div class="col-md-3">
         <label for=""><?=__('Kiemelt hirdetés', 'gh')?></label>
@@ -83,12 +88,7 @@
     </div>
     <h3><?=__('Alapadatok', 'gh')?></h3>
     <div class="row">
-      <div class="col-md-3 reqf">
-        <label for="_listing_idnumber"><?=__('Azonosító', 'gh')?></label>
-        <input type="text" id="_listing_idnumber" name="meta_input[_listing_idnumber]" value="<?=$property->Azonosito()?>" class="form-control">
-        <input type="hidden" name="pre[meta_input][_listing_idnumber]" value="<?=$property->Azonosito()?>">
-      </div>
-      <div class="col-md-9 reqf">
+      <div class="col-md-12 reqf">
         <label for="post_title"><?=__('Ingatlan cím (SEO)', 'gh')?></label>
         <input type="text" id="post_title" name="post_title" value="<?=$property->Title()?>" class="form-control">
         <input type="hidden" name="pre[post_title]" value="<?=$property->Title()?>" class="form-control">
@@ -139,7 +139,6 @@
           'selected' => $parea->term_id
         )); ?>
         <input type="hidden" name="pre[tax][locations]" value="<?=$parea->term_id?>">
-        <small class="inputhint"><?=__('Nem találja a várost?', 'gh')?> <a href="#"><?=__('Város hozzáadása', 'gh')?></a></small>
       </div>
       <div class="col-md-6 reqf">
         <label for="_listing_address"><?=__('Pontos cím (utca, házszám, stb)', 'gh')?></label>
@@ -176,7 +175,7 @@
     </div>
     <h3><?=__('Paraméterek', 'gh')?></h3>
     <div class="row">
-      <? $metai = 0; foreach($params as $title => $meta): $metai++; $value = $property->getMetaValue($meta); ?>
+      <? $metai = 0; foreach($params as $title => $meta): $metai++; $value = $property->getMetaValue($meta); if( in_array($meta, array('_listing_archive_text','_listing_archive_who')) ){ continue; }?>
       <div class="col-md-4">
         <label for="<?=$meta?>"><?=$title?></label>
         <input type="text" id="<?=$meta?>" name="meta_input[<?=$meta?>]" value="<?=$value?>" class="form-control">
@@ -187,7 +186,7 @@
     </div>
     <h3><?=__('Egyéb opciók', 'gh')?></h3>
     <div class="row">
-      <? $metai = 0; foreach($flags as $title => $meta): $metai++; $value = $property->getMetaCheckbox($meta);?>
+      <? $metai = 0; foreach($flags as $title => $meta): $metai++; $value = $property->getMetaCheckbox($meta); ?>
       <input type="hidden" name="metacheckboxes[<?=$meta?>]" value="1">
       <div class="col-md-3 boxed-labels">
         <input type="checkbox" id="<?=$meta?>" name="meta_input[<?=$meta?>]" <?=($value == 1)?'checked="checked"':''?> value="<?=$value?>" class="form-control"><label for="<?=$meta?>"><?=$title?></label>

@@ -139,7 +139,7 @@
       <div class="row">
         <div class="col-md-12">
           <label for="property_author"></label>
-          <?php wp_dropdown_users(array('name' => 'post_author')); ?>
+          <?php wp_dropdown_users(array('name' => 'post_author', 'selected' => $me->ID())); ?>
         </div>
       </div>
     <?php endif; ?>
