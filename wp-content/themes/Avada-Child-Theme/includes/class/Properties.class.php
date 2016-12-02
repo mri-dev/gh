@@ -87,14 +87,19 @@ class Properties extends PropertyFactory
     $q .= " WHERE 1=1 ";
     $q .= " and h.group_key ='property'";
 
+    if (isset($arg['property_id']) && !empty($arg['property_id'])) {
+      $q .= " and h.item_id = %d ";
+      $params[] = $arg['property_id'];
+    }
+
     if (isset($arg['user_id'])) {
       $q .= " and h.changer_user_id IN(%d)";
       $params[] = (int)$arg['user_id'];
     }
 
-    if (isset($arg['property_id']) && !empty($arg['property_id'])) {
+    if (isset($arg['azon']) && !empty($arg['azon'])) {
       $q .= " and (SELECT pm1.meta_value FROM {$wpdb->prefix}postmeta as pm1 WHERE pm1.post_id = h.item_id and pm1.meta_key = '_listing_idnumber') = %s ";
-      $params[] = $arg['property_id'];
+      $params[] = $arg['azon'];
     }
 
     $q .= " ORDER BY h.transaction_date DESC";
@@ -164,7 +169,7 @@ class Properties extends PropertyFactory
       } else {
         $archive_ids[] = -1;
       }
-      
+
       $post_arg['post__in'] = $archive_ids;
       $post_arg['post_status'] = -1;
     }

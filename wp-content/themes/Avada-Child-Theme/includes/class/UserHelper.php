@@ -54,7 +54,16 @@ class UserHelper
 
   public function Phone()
   {
-    return get_user_meta($this->ID(), 'phone', true);
+    $phone = get_user_meta($this->ID(), 'phone', true);
+    $_phone = PHONE_PREFIX.' '.substr($phone, 0, 2);
+    $last = substr($phone, 2);
+
+    if (strlen($last) > 6) {
+      $_phone .= ' '.substr($last, 0, 3).' '. substr($last, 3 );
+    } else {
+      $_phone .= ' '. substr($last, 0, 3).' '. substr($last, 3 );
+    }
+    return $_phone;
   }
 
   public function Email()
@@ -69,8 +78,20 @@ class UserHelper
 
   public function PropertiesCount()
   {
-    $c = count_user_posts($this->ID(), 'listing');
-    return $c;
+    global $wpdb;
+
+
+  	$count = $wpdb->get_var( $wpdb->prepare($q = "SELECT
+      COUNT(p.ID)
+    FROM $wpdb->posts as p
+    LEFT JOIN {$wpdb->prefix}postmeta ON ( {$wpdb->prefix}postmeta.post_id = p.ID and wp_gh_postmeta.meta_key = '_listing_flag_archived')
+    WHERE
+      post_type = 'listing' and
+      post_author = %d and
+      post_parent = 0 and
+      (wp_gh_postmeta.meta_value IS NULL or wp_gh_postmeta.meta_value = '')", $this->ID()) );
+
+    return apply_filters( 'get_usernumposts', $count, $this->ID() );
   }
 }
 ?>

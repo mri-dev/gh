@@ -10,6 +10,11 @@
     $filtered = true;
   }
 
+  if (isset($_GET['azon']) && !empty($_GET['azon'])) {
+    $param['azon'] = $_GET['azon'];
+    $filtered = true;
+  }
+
   if (isset($_GET['u']) && !empty($_GET['u'])) {
     $param['user_id'] = $_GET['u'];
     $selected_user = new UserHelper(array('id'=> $_GET['u']));
@@ -61,7 +66,7 @@
         <input type="hidden" name="u" value="<?=$_GET['u']?>">
         <div class="inline-input">
           <div>
-            <input type="text" name="pid" class="pull-right" id="refid" placeholder="<?=__('Referenciaszám', 'gh')?>" class="form-control" value="<?=$_GET['pid']?>">
+            <input type="text" name="azon" class="pull-right" id="refid" placeholder="<?=__('Referenciaszám', 'gh')?>" class="form-control" value="<?=$_GET['azon']?>">
           </div>
           <div>
             <button type="submit" class="fusion-button button-flat button-square button-small button-neutral"><?=__('Keresés')?> <i class="fa fa-search"></i></button>

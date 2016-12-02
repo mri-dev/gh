@@ -144,7 +144,7 @@
       <div class="pagination">
         <?php echo $pager; ?>
       </div>
-      <div id="action_selector" class="selector_action_cont">
+      <div id="action_selector" class="selector_action_cont hide">
         <h4>(<span id="selected_item_n">0</span>) <?=__('kiválasztott ingatlan műveletvégrehajtás', 'gh')?>:</h4>
         <div class="row">
           <div class="col-md-12">
@@ -190,9 +190,9 @@
       $('#selected_item_n').text(len);
 
       if (len == 0) {
-
+        $('#action_selector').removeClass('show');
       } else {
-
+        $('#action_selector').addClass('show');
       }
     }
 

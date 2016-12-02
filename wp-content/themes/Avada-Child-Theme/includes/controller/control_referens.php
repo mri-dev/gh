@@ -7,10 +7,14 @@ class control_referens
   public function __construct()
   {
     global $me;
-    $this->users = (new GlobalHungaryUsers(array(
-      'type' => 'reference_manager',
-      'region' => $me->RegionID()
-    )))->getUsers();
+
+    $arg = array();
+    if (!current_user_can('administrator')) {
+      $arg['type'] = 'reference_manager';
+      $arg['region'] = $me->RegionID();
+    }
+  
+    $this->users = (new GlobalHungaryUsers($arg))->getUsers();
     return $this;
   }
 

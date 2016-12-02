@@ -7,6 +7,7 @@ define('SLUG_INGATLAN', 'ingatlan');
 define('SLUG_INGATLAN_LIST', 'ingatlanok');
 define('SLUG_FAVORITE', 'kedvencek');
 define('GOOGLE_API_KEY', 'AIzaSyA0Mu8_XYUGo9iXhoenj7HTPBIfS2jDU2E');
+define('PHONE_PREFIX', '06');
 
 // Includes
 require_once WP_PLUGIN_DIR."/cmb2/init.php";

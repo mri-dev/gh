@@ -2133,3 +2133,10 @@ footer .widget_nav_menu ul.menu {
   .map-container.gps-map .map-gps-selected .sep {
     padding: 0 10px;
     font-size: 22px; }
+
+/* line 2390, sass/globalhungary.scss */
+.hide {
+  display: none; }
+  /* line 2392, sass/globalhungary.scss */
+  .hide.show {
+    display: block; }
