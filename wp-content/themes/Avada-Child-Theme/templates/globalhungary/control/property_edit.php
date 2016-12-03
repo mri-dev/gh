@@ -222,8 +222,8 @@
     <div class="row">
       <div class="col-md-12">
         <label for="post_content"><?=__('Ingatlan részletes leírása', 'gh')?></label>
-        <?php wp_editor( $property->Description(), 'post_content' ); ?>
-        <input type="hidden" name="pre[post_content]" value="<?=$property->Description()?>">
+        <?php wp_editor( $property->RawDescription(), 'post_content' ); ?>
+        <textarea name="pre[post_content]" class="hide"><?=$property->RawDescription()?></textarea>
       </div>
     </div>
     <h3><?=__('Paraméterek', 'gh')?></h3>

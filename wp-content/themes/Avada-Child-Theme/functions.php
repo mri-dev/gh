@@ -223,6 +223,7 @@ function old_importer()
     //$ing = $importer->ingatlanok();
     //$ing = $importer->do_ingatlan_import($ing['import']);
     //$ing = $importer->user_connecter();
+    $ing = $importer->image_connect();
     /* * /
     echo '<pre>';
     print_r($ing);

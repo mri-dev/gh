@@ -13,6 +13,139 @@ class GHImporter extends PropertyFactory {
     }
   }
 
+  public function image_connect()
+  {
+    global $wpdb;
+
+    $re = array();
+    $parg = array();
+
+    $q = "SELECT
+      k.*
+    FROM keptar as k
+    WHERE 1=1
+    ";
+
+    $qq = $wpdb->get_results($wpdb->prepare($q, $parg), ARRAY_A);
+
+    $image_prepare = array();
+
+    foreach ($qq as $d)
+    {
+      $img_ar = array();
+      //if($d['ingid'] != '2890') continue;
+
+      // Images
+      if ( !array_key_exists($d['ingid'], $image_prepare) )
+      {
+        $post_qry = new WP_Query(array(
+          'post_type' => 'listing',
+          'post_status' => -1,
+          'meta_query' => array(
+            array(
+        			'key' => '_listing_idnumber',
+        			'value' => 'GH'.$d['ingid'],
+        		)
+          )
+        ));
+
+        $post = $post_qry->posts[0];
+        $uploads_dir = wp_upload_dir();
+        $image_dir = $uploads_dir['basedir'] . '/listing/original/';
+
+        if ($post) {
+          $idir = $image_dir;
+          $image_prepare[$d['ingid']]['imgdir'] = $idir;
+          $image_prepare[$d['ingid']]['dir_exists'] = (file_exists($idir)) ? true : false;
+        }
+
+        $image_prepare[$d['ingid']]['post'] = $post;
+      }
+
+      if ($post) {
+        // Image check
+        $d['img_source'] = $idir . 'or_'.$d['kepid'].'.jpg';
+        $d['img_type'] = wp_check_filetype( $d['img_source'], null );
+        $d['img_exists'] = (file_exists($d['img_source'])) ? true : false;
+      }
+
+      $img_ar['src'][] = $d;
+      $image_prepare[$d['ingid']]['src'][] = $d;
+    }
+
+    $re['images'] = $image_prepare;
+
+
+    foreach ( $re['images'] as $rid => $r )
+    {
+      if (!$r['post']) {
+        continue;
+      }
+      if ( !$r['dir_exists']) {
+        continue;
+      }
+
+      foreach ($r['src'] as $i)
+      {
+        if (!$i['img_exists']) {
+          continue;
+        }
+
+        // The ID of the post this attachment is for.
+        $parent_post_id = $r['post']->ID;
+
+        // Check the type of file. We'll use this as the 'post_mime_type'.
+        $filetype = $i['img_type'];
+
+        $filename = 'or_'.$i['kepid'].'.'.$filetype['ext'];
+
+        // Get the path to the upload directory.
+        $wp_upload_dir = wp_upload_dir();
+
+        // Prepare an array of post data for the attachment.
+        $attachment = array(
+        	'guid'           => $wp_upload_dir['url'] . '/listing/original/'.$filename,
+        	'post_mime_type' => $filetype['type'],
+        	'post_title'     => preg_replace( '/\.[^.]+$/', '', $filename),
+        	'post_content'   => '',
+        	'post_status'    => 'inherit'
+        );
+
+        $connected = $wpdb->get_var(
+            $wpdb->prepare(
+                "SELECT ID FROM $wpdb->posts
+                WHERE
+                post_parent = %d and
+                guid = %s
+                AND post_type = 'attachment'",
+                (int) $parent_post_id,
+                $attachment['guid']
+            )
+        );
+
+        if ($connected ) {
+          continue;
+        }
+
+        // Insert the attachment.
+        $attach_id = wp_insert_attachment( $attachment, $filename, $parent_post_id );
+
+        // Make sure that this file is included, as wp_generate_attachment_metadata() depends on it.
+        require_once( ABSPATH . 'wp-admin/includes/image.php' );
+
+        // Generate the metadata for the attachment, and update the database record.
+        $attach_data = wp_generate_attachment_metadata( $attach_id, $filename );
+        wp_update_attachment_metadata( $attach_id, $attach_data );
+
+        if ($i['sorrend'] == 1) {
+          set_post_thumbnail( $parent_post_id, $attach_id );
+        }
+      }
+    }
+
+    return $re;
+  }
+
   public function zonak()
   {
     $pre = array();

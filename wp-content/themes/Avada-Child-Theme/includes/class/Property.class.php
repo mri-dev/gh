@@ -436,6 +436,11 @@ class Property extends PropertyFactory
     return $content;
   }
 
+  public function RawDescription()
+  {
+    return sanitize_text_field($this->raw_post->post_content);
+  }
+
   public function Address()
   {
     $addr = get_post_meta($this->ID(), '_listing_address', true);
@@ -502,16 +507,19 @@ class Property extends PropertyFactory
   {
     return get_post_thumbnail_id( $this->ID() );
   }
+
   public function ProfilImg()
   {
-    $img = wp_get_attachment_image_src( get_post_thumbnail_id( $this->ID() ), "full" );
+    global $wpdb;
+    $img_id = (int)get_post_thumbnail_id( $this->ID() );
 
-    if (!$img) {
+    if (!$img_id) {
       return IMG.'/default_image.jpg';
     } else {
-        return $img[0];
+      return $wpdb->get_var($wpdb->prepare("SELECT guid FROM $wpdb->posts WHERE post_type='attachment' and post_parent = %d and ID = %d", $this->ID(), $img_id));
     }
   }
+
   public function Status( $only_text = true )
   {
     $status = null;

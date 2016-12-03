@@ -212,7 +212,7 @@
   <script type="text/javascript">
     (function($){
       $('.image-slide').slick({
-        autoplay: true,
+        autoplay: false,
         centerMode: true,
         centerPadding: '60px',
         slidesToShow: 5,

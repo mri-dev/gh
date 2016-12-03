@@ -1613,7 +1613,7 @@ footer .widget_nav_menu ul.menu {
       top: 10px !important; }
     /* line 1786, sass/globalhungary.scss */
     .prop-list.style-standard .prop-item-wrapper .image .excerpt {
-      background: rgba(214, 44, 48, 0);
+      background: rgba(214, 44, 48, 0.81);
       padding: 10px;
       font-size: 0.8em;
       color: white; }
@@ -1646,7 +1646,7 @@ footer .widget_nav_menu ul.menu {
       height: 140px !important; }
       /* line 1827, sass/globalhungary.scss */
       .prop-list.style-simple-priced .prop-item-wrapper .image .excerpt {
-        background: rgba(214, 44, 48, 0);
+        background: rgba(214, 44, 48, 0.81);
         padding: 10px;
         font-size: 0.8em;
         color: white; }
@@ -1687,7 +1687,7 @@ footer .widget_nav_menu ul.menu {
         height: 140px !important; }
         /* line 1870, sass/globalhungary.scss */
         .prop-list.style-simple .prop-item-wrapper .image .excerpt {
-          background: rgba(214, 44, 48, 0);
+          background: rgba(214, 44, 48, 0.8);
           padding: 10px;
           font-size: 0.8em;
           color: white; }
