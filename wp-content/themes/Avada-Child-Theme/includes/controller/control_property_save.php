@@ -139,9 +139,17 @@ class control_property_save
     if ( $post_id != 0 ) {
       wp_set_object_terms( $post_id, array((int)$taxes['locations']), 'locations' );
       wp_set_object_terms( $post_id, array((int)$taxes['status']), 'status' );
-      wp_set_object_terms( $post_id, array((int)$taxes['property-types']), 'property-types' );
-      wp_set_object_terms( $post_id, array((int)$taxes['property-condition']), 'property-condition' );
       wp_set_object_terms( $post_id, array((int)$taxes['property-heating']), 'property-heating' );
+
+      $exp_tax_type = explode(",",$taxes['property-types']);
+      $exp_tax_type = array_map( 'intval', $exp_tax_type );
+      $exp_tax_type = array_unique( $exp_tax_type );
+      wp_set_object_terms( $post_id, $exp_tax_type, 'property-types' );
+
+      $exp_tax_cond = explode(",",$taxes['property-condition']);
+      $exp_tax_cond = array_map( 'intval', $exp_tax_cond );
+      $exp_tax_cond = array_unique( $exp_tax_cond );
+      wp_set_object_terms( $post_id, $exp_tax_cond, 'property-condition' );
     }
 
     /**

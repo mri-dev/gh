@@ -74,7 +74,7 @@
       <div class="col-md-3">
         <label for=""><?=__('Kizárólagos hirdetés', 'gh')?></label>
         <input type="checkbox" id="_listing_flag_exclusive" name="meta_input[_listing_flag_exclusive]" <?=($property->isExclusive())?'checked="checked"':''?> value="<?=($property->isExclusive())?1:0?>"><label class="fm" for="_listing_flag_exclusive"></label>
-        <input type="hidden" name="pre[meta_input][_listing_flag_exclusive]" value="<?=($property->isHighlighted())?1:0?>" class="form-control">
+        <input type="hidden" name="pre[meta_input][_listing_flag_exclusive]" value="<?=($property->isExclusive())?1:0?>" class="form-control">
         <input type="hidden" name="metacheckboxes[_listing_flag_exclusive]" value="1">
       </div>
       <?php if ( current_user_can('region_manager') || current_user_can('administrator') ): ?>
@@ -98,18 +98,71 @@
     <div class="row">
       <div class="col-md-3 reqf">
         <label for=""><?=__('Ingatlan státusza', 'gh')?></label>
-        <? $control->getTaxonomySelects( 'status', $property->StatusID() ); ?>
-        <input type="hidden" name="pre[tax][status]" value="<?=$property->StatusID()?>">
+        <?php
+          $status_ids = $property->StatusID();
+        ?>
+        <? $control->getTaxonomySelects( 'status', $status_ids[0] ); ?>
+        <input type="hidden" name="pre[tax][status]" value="<?=implode(",",$status_ids)?>">
       </div>
       <div class="col-md-3 reqf">
-        <label for=""><?=__('Ingatlan kategória', 'gh')?></label>
-        <? $control->getTaxonomySelects( 'property-types', $property->CatID() ); ?>
-        <input type="hidden" name="pre[tax][property-types]" value="<?=$property->CatID()?>">
+        <?php
+          $cat_ids = (array)$property->CatID();
+        ?>
+        <label for="kategoria_multiselect_text"><?=__('Ingatlan kategória', 'gh')?></label>
+        <div class="tglwatcher-wrapper tgl-def">
+          <input type="text" readonly="readonly" id="kategoria_multiselect_text" class="form-control tglwatcher" tglwatcher="kategoria_multiselect" placeholder="<?=__('-- válasszon --', 'gh')?>" value="">
+        </div>
+        <input type="hidden" id="kategoria_multiselect_ids" name="tax[property-types]" value="<?=implode(",",$cat_ids)?>">
+        <div class="multi-selector-holder" tglwatcherkey="kategoria_multiselect" id="kategoria_multiselect">
+          <div class="selector-wrapper sel-def">
+            <? $kategoria = $control->getSelectors( 'property-types', $cat_ids, array('hide_empty' => false)  ); ?>
+            <?php if ($kategoria): ?>
+              <?php foreach ($kategoria as $k): ?>
+              <div class="selector-row lvl-0">
+                <input type="checkbox" <?=(in_array($k->term_id, $cat_ids))?'checked="checked"':''?> tglwatcherkey="kategoria_multiselect" data-parentid="<?=$k->parent?>" data-lvl="0" htxt="<?=$k->name?>" id="kat_<?=$k->term_id?>" value="<?=$k->term_id?>"> <label for="kat_<?=$k->term_id?>"><?=$k->name?> <span class="n">(<?=$k->count?>)</span></label>
+              </div>
+              <?php if ( !empty($k->children) ): ?>
+                <?php foreach ($k->children as $sk): ?>
+                <div class="selector-row lvl-1">
+                  <input type="checkbox" <?=(in_array($sk->term_id, $cat_ids))?'checked="checked"':''?> tglwatcherkey="kategoria_multiselect" data-parentid="<?=$sk->parent?>" data-lvl="1" htxt="<?=$k->name?> / <?=$sk->name?>" id="kat_<?=$sk->term_id?>" value="<?=$sk->term_id?>"> <label for="kat_<?=$sk->term_id?>"><?=$sk->name?> <span class="n">(<?=$sk->count?>)</span></label>
+                </div>
+                <?php endforeach; ?>
+              <?php endif; ?>
+              <?php endforeach; ?>
+            <?php endif; ?>
+          </div>
+        </div>
+        <input type="hidden" name="pre[tax][property-types]" value="<?=implode(",",$cat_ids)?>">
       </div>
       <div class="col-md-3 reqf">
-        <label for=""><?=__('Ingatlan állapota', 'gh')?></label>
-        <? $control->getTaxonomySelects( 'property-condition', $property->ConditionID() ); ?>
-        <input type="hidden" name="pre[tax][property-condition]" value="<?=$property->ConditionID()?>">
+        <?php
+          $cond_ids = (array)$property->ConditionID();
+        ?>
+        <label for="allapot_multiselect_text"><?=__('Ingatlan állapot', 'gh')?></label>
+        <div class="tglwatcher-wrapper tgl-def">
+          <input type="text" readonly="readonly" id="allapot_multiselect_text" class="form-control tglwatcher" tglwatcher="allapot_multiselect" placeholder="<?=__('-- válasszon --', 'gh')?>" value="">
+        </div>
+        <input type="hidden" id="allapot_multiselect_ids" name="tax[property-condition]" value="<?=implode(",",$cond_ids)?>">
+        <div class="multi-selector-holder" tglwatcherkey="allapot_multiselect" id="allapot_multiselect">
+          <div class="selector-wrapper sel-def">
+            <? $kategoria = $control->getSelectors( 'property-condition', $cond_ids, array('hide_empty' => false) ); ?>
+            <?php if ($kategoria): ?>
+              <?php foreach ($kategoria as $k): ?>
+              <div class="selector-row lvl-0">
+                <input type="checkbox" <?=(in_array($k->term_id, $cond_ids))?'checked="checked"':''?>  tglwatcherkey="allapot_multiselect" htxt="<?=$k->name?>" id="kat_<?=$k->term_id?>" value="<?=$k->term_id?>"> <label for="kat_<?=$k->term_id?>"><?=$k->name?> <span class="n">(<?=$k->count?>)</span></label>
+              </div>
+              <?php if ( !empty($k->children) ): ?>
+                <?php foreach ($k->children as $sk): ?>
+                <div class="selector-row lvl-1">
+                  <input type="checkbox" <?=(in_array($sk->term_id, $cond_ids))?'checked="checked"':''?> tglwatcherkey="allapot_multiselect" data-parentid="<?=$sk->parent?>" data-lvl="1" htxt="<?=$k->name?> / <?=$sk->name?>" id="kat_<?=$sk->term_id?>" value="<?=$sk->term_id?>"> <label for="kat_<?=$sk->term_id?>"><?=$sk->name?> <span class="n">(<?=$sk->count?>)</span></label>
+                </div>
+                <?php endforeach; ?>
+              <?php endif; ?>
+              <?php endforeach; ?>
+            <?php endif; ?>
+          </div>
+        </div>
+        <input type="hidden" name="pre[tax][property-condition]" value="<?=implode(",",$cond_ids)?>">
       </div>
       <div class="col-md-3 reqf">
         <label for=""><?=__('Fűtés típusa', 'gh')?></label>
@@ -245,3 +298,82 @@
   </form>
   <? endif; ?>
 </div>
+<script type="text/javascript">
+  (function($){
+    collect_checkbox('kategoria_multiselect', true);
+    collect_checkbox('allapot_multiselect', true);
+
+    $(window).click(function() {
+      if (!$(event.target).closest('.toggler-opener').length) {
+        $('.toggler-opener').removeClass('opened toggler-opener');
+        $('.tglwatcher.toggled').removeClass('toggled');
+      }
+    });
+
+    $('.tglwatcher').click(function(event){
+      event.stopPropagation();
+      event.preventDefault();
+      var e = $(this);
+      var target_id = e.attr('tglwatcher');
+      var opened = e.hasClass('toggled');
+
+      if(opened) {
+        e.removeClass('toggled');
+        $('#'+target_id).removeClass('opened toggler-opener');
+      } else {
+        e.addClass('toggled');
+        $('#'+target_id).addClass('opened toggler-opener');
+      }
+    });
+
+    $('.multi-selector-holder input[type=checkbox]').change(function()
+    {
+      var e = $(this);
+      var checkin = $(this).is(':checked');
+      var tkey = e.attr('tglwatcherkey');
+      var selected = collect_checkbox(tkey, false);
+      $('#'+tkey+'_ids').val(selected);
+    });
+  })(jQuery);
+
+  function collect_checkbox(rkey, loader)
+  {
+    var arr = [];
+    var str = [];
+    var seln = 0;
+
+    jQuery('#'+rkey+' input[type=checkbox]').each(function(e,i)
+    {
+      if(jQuery(this).is(':checked') && !jQuery(this).is(':disabled')){
+        seln++;
+        arr.push(jQuery(this).val());
+        str.push(jQuery(this).attr('htxt'));
+      }
+
+      if(loader) {
+        var e = jQuery(this);
+        var has_child = jQuery(this).hasClass('has-childs');
+        var checkin = jQuery(this).is(':checked');
+        var lvl = e.data('lvl');
+        var parent = e.data('parentid');
+
+        var cnt_child = jQuery('#'+rkey+' .childof'+parent+' input[type=checkbox]:checked').length;
+
+        if(cnt_child == 0) {
+          jQuery('#'+rkey+' .zone'+parent+' input[type=checkbox]').prop('disabled', false);
+        } else {
+          jQuery('#'+rkey+' .childof'+parent).addClass('show');
+          jQuery('#'+rkey+' .zone'+parent+' input[type=checkbox]').prop('checked', true).prop('disabled', true);
+        }
+      }
+    });
+
+    if(seln <= 3 ){
+      jQuery('#'+rkey+'_text').val(str.join(", "));
+    } else {
+      jQuery('#'+rkey+'_text').val(seln + " <?=__('kiválasztva', 'gh')?>");
+    }
+
+    return arr.join(",");
+  }
+</script>

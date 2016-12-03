@@ -32,11 +32,18 @@ class Properties extends PropertyFactory
     return $t;
   }
 
-  public function getSelectors( $id, $sel_values = array() )
+  public function getSelectors( $id, $sel_values = array(), $arg = array() )
   {
-    $terms = get_terms(array(
-      'taxonomy' => $id
-    ));
+    if (!$sel_values) {
+      $sel_values = array();
+    }
+    $param = array(
+      'taxonomy' => $id,
+      'echo' => false
+    );
+    $param = array_merge($param, $arg);
+
+    $terms = get_terms($param);
 
     $t = array();
 
@@ -46,7 +53,28 @@ class Properties extends PropertyFactory
       $t[] = $term;
     }
 
-    return $t;
+    $sorted_terms = array();
+
+    $this->sort_hiearchical_order_term($t, $sorted_terms);
+    unset($t);
+    unset($terms);
+
+    return $sorted_terms;
+  }
+
+  private function sort_hiearchical_order_term( Array &$cats, Array &$into, $parentId = 0 )
+  {
+    foreach ($cats as $i => $cat) {
+        if ($cat->parent == $parentId) {
+            $into[$cat->term_id] = $cat;
+            unset($cats[$i]);
+        }
+    }
+
+    foreach ($into as $topCat) {
+        $topCat->children = array();
+        $this->sort_hiearchical_order_term($cats, $topCat->children, $topCat->term_id);
+    }
   }
 
   public function listChangeHistory( $arg = array() )

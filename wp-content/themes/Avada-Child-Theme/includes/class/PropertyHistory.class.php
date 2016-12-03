@@ -86,6 +86,7 @@ class PropertyHistory extends PropertyFactory
 			'flags' => array(
 				__( 'Kiemelt', 'gh' )  => '_listing_flag_highlight',
 				__( 'Archivált', 'gh' )  => '_listing_flag_archived',
+        __( 'Kizárólagos hirdetés', 'gh' )  => '_listing_flag_exclusive',
 			),
       'default' => array(
         __( 'Ingatlan főcím (SEO)', 'gh') => 'post_title',
@@ -155,6 +156,7 @@ class PropertyHistory extends PropertyFactory
       case '_listing_garage':
       case '_listing_balcony':
       case '_listing_lift':
+      case '_listing_flag_exclusive':
         $value = ($value == '0') ? '<i class="fa fa-times"></i>' : '<i class="fa fa-check"></i>';
         return $value;
       break;

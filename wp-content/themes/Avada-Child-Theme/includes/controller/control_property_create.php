@@ -21,5 +21,10 @@ class control_property_create
   {
     $this->properties->getListParams( $id, $value );
   }
+
+  public function getSelectors( $id, $value = array(), $arg = array() )
+  {
+    return $this->properties->getSelectors( $id, $value, $arg );
+  }
 }
 ?>

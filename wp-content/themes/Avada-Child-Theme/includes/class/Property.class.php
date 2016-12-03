@@ -333,23 +333,33 @@ class Property extends PropertyFactory
   public function StatusID()
   {
     $terms = wp_get_post_terms( $this->ID(), 'status' );
+    $ids = array();
 
     if (!$terms) {
       return 0;
     }
 
-    return $terms[0]->term_id;
+    foreach ($terms as $t) {
+      $ids[] = $t->term_id;
+    }
+
+    return $ids;
   }
 
   public function CatID()
   {
     $terms = wp_get_post_terms( $this->ID(), 'property-types' );
+    $ids = array();
 
     if (!$terms) {
       return 0;
     }
 
-    return $terms[0]->term_id;
+    foreach ($terms as $t) {
+      $ids[] = $t->term_id;
+    }
+
+    return $ids;
   }
 
   public function GPS()
@@ -381,12 +391,17 @@ class Property extends PropertyFactory
   public function ConditionID()
   {
     $terms = wp_get_post_terms( $this->ID(), 'property-condition' );
+    $ids = array();
 
     if (!$terms) {
       return 0;
     }
 
-    return $terms[0]->term_id;
+    foreach ($terms as $t) {
+      $ids[] = $t->term_id;
+    }
+
+    return $ids;
   }
 
   public function ShortDesc()
