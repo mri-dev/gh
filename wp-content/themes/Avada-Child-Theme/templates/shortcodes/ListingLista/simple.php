@@ -19,7 +19,7 @@
       <?=$item->RegionName()?>
     </div>
     <div class="line-price">
-      <?=$item->Price(true)?>
+      <?=$item->Price(true)?> <span class="type"><?=$item->PriceType()?></span>
     </div>
   </div>
 </div>

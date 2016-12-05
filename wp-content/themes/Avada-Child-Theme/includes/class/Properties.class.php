@@ -385,6 +385,11 @@ class Properties extends PropertyFactory
     return $this->datalist;
   }
 
+  public function getQuery()
+  {
+    return $this->query;
+  }
+
   public function CountTotal()
   {
     return $this->count;

@@ -45,7 +45,7 @@
               <?php if ( !empty($k->children) ): ?>
                 <?php foreach ($k->children as $sk): ?>
                 <div class="selector-row lvl-1">
-                  <input type="checkbox" tglwatcherkey="kategoria_multiselect" data-parentid="<?=$sk->parent?>" data-lvl="1" htxt="<?=$k->name?> / <?=$sk->name?>" id="kat_<?=$sk->term_id?>" value="<?=$sk->term_id?>"> <label for="kat_<?=$sk->term_id?>"><?=$sk->name?> <span class="n">(<?=$sk->count?>)</span></label>
+                  <input type="checkbox" <?=(in_array($sk->term_id, $selected))?'checked="checked"':''?> tglwatcherkey="kategoria_multiselect" data-parentid="<?=$sk->parent?>" data-lvl="1" htxt="<?=$k->name?> / <?=$sk->name?>" id="kat_<?=$sk->term_id?>" value="<?=$sk->term_id?>"> <label for="kat_<?=$sk->term_id?>"><?=$sk->name?> <span class="n">(<?=$sk->count?>)</span></label>
                 </div>
                 <?php endforeach; ?>
               <?php endif; ?>

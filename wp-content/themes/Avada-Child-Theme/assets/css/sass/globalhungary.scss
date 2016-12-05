@@ -1550,8 +1550,33 @@ footer {
   }
 }
 
+.listing-list-holder{
+  position: relative;
+}
+
 .prop-list {
   margin: -10px;
+
+  .prop-list-info{
+    position: absolute;
+    right: 0;
+    top: 0;
+    text-align: right;
+
+    .total {
+      font-size: 1.15em;
+      color: black;
+    }
+
+    .pages {
+      color: #9e9e9e;
+      font-size: 0.7em;
+
+      strong {
+        color: #444444;
+      }
+    }
+  }
 
   .prop-wrapper {
     display: flex;
@@ -1706,6 +1731,9 @@ footer {
             flex-basis: 70%;
             padding: 8px 10px;
             font-size: 1.45em;
+            .type {
+              font-size: 0.8em;
+            }
           }
           & > .linkto{
             flex-basis: 30%;

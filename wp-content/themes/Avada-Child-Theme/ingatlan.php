@@ -75,7 +75,7 @@
                 </div>
               <?php endif; ?>
               <div class="current-price">
-                <?=$prop->Price(true)?>
+                <?=$prop->Price(true)?> <span class="type"><?=$prop->PriceType()?></span>  
               </div>
               <div class="clearfix"></div>
             </div>

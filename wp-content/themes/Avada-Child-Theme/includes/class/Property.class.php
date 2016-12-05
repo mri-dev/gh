@@ -476,10 +476,18 @@ class Property extends PropertyFactory
     }
 
     if ($formated) {
-      $price = number_format($price, 0, ' ', '.').' '.$this->getValuta();
+      $price = number_format($price, 0, ' ', '.');
     }
 
     return $price;
+  }
+  public function PriceType()
+  {
+    $price_index = (int)$this->getMetaValue('_listing_flag_pricetype');
+    if ($price_index === 0) {
+      return $this->getValuta();
+    }
+    return $this->getPriceTypeText($price_index);
   }
   public function OriginalPrice( $formated = false )
   {

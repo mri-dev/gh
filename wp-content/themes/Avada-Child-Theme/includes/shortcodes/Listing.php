@@ -6,6 +6,7 @@ class ListingLista
     public $params = array();
     public $template = 'standard';
     public $type;
+    public $pagionation = null;
 
     public function __construct()
     {
@@ -64,6 +65,8 @@ class ListingLista
             break;
           }
           $output .= '</div>';
+          $output .= '<div class="pagination">'.$this->pagionation.'</div>';
+
         }
 
         $output .= '</div>';
@@ -190,14 +193,21 @@ class ListingLista
         $arg['property-types'] = explode(",", $get['c']);
       }
 
-      //print_r($arg);
+      $arg['page'] = (isset($_GET['page']) && is_numeric($_GET['page'])) ? $_GET['page'] : 1;
+
 
       $properties = new Properties($arg);
       $list = $properties->getList();
-
+      $this->pagionation = $properties->pagination();
+      $query = $properties->getQuery();
 
       if ( count($list) != 0 ) {
-        $o .= '<div class="prop-list style-'.$this->template.'"><div class="prop-wrapper">';
+        $o .= '<div class="prop-list style-'.$this->template.'">';
+        $o .= '<div class="prop-list-info">
+          <div class="total">'.sprintf(__('%d találat', 'gh'), $query->found_posts).'</div>
+          <div class="pages">'.sprintf(__('<strong>%d. oldal</strong> / %d', 'gh'), $arg['page'], $query->max_num_pages).'</div>
+        </div>';
+        $o .= '<div class="prop-wrapper">';
         foreach ( $list as $e )
         {
           $o .= $t->load_template( array( 'item' => $e ) );

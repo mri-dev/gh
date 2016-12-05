@@ -15,7 +15,7 @@
       </div>
     </div>
     <div class="sec-line">
-      <div class="price"><?=$item->Price(true)?></div>
+      <div class="price"><?=$item->Price(true)?> <span class="type"><?=$item->PriceType()?></span></div>
     </div>
   </div>
 </div>

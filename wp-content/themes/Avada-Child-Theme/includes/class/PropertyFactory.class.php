@@ -58,6 +58,11 @@ class PropertyFactory
     }
   }
 
+  public function getPriceTypeText( $index = -1 )
+  {
+    return $this->i18n_pricetype_values($index);
+  }
+
   public function i18n_pricetype_values( $index )
   {
     $texts = array(
@@ -66,6 +71,8 @@ class PropertyFactory
       2 => sprintf(__('%s / Ha', 'gh'), $this->getValuta()),
       3 => sprintf(__('%s / hó', 'gh'), $this->getValuta()),
     );
+
+    return $texts[$index];
   }
 
   public static function i18n_taxonomy_values( $key )
