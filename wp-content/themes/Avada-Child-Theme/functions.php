@@ -8,6 +8,7 @@ define('SLUG_INGATLAN_LIST', 'ingatlanok');
 define('SLUG_FAVORITE', 'kedvencek');
 define('GOOGLE_API_KEY', 'AIzaSyA0Mu8_XYUGo9iXhoenj7HTPBIfS2jDU2E');
 define('PHONE_PREFIX', '06');
+define('LANGKEY','hu');
 
 // Includes
 require_once WP_PLUGIN_DIR."/cmb2/init.php";
@@ -223,7 +224,7 @@ function old_importer()
     //$ing = $importer->ingatlanok();
     //$ing = $importer->do_ingatlan_import($ing['import']);
     //$ing = $importer->user_connecter();
-    $ing = $importer->image_connect();
+    //$ing = $importer->image_connect();
     /* * /
     echo '<pre>';
     print_r($ing);
@@ -232,6 +233,24 @@ function old_importer()
   }
 }
 add_action('init', 'old_importer', 9999);
+
+function tester()
+{
+  if ($_GET['testmail'] == '1') {
+    $to = array( 'pocokxtrame@gmail.com' );
+    $sub = 'Teszt email';
+    $mail = (new MailManager( $to, $sub ))
+      ->setContent('Ez itt egy tartalom')
+      ->setTemplate('test');
+    $mail->send();
+    /* */
+    echo '<pre>';
+    print_r($mail);
+    exit;
+    /* */
+  }
+}
+add_action('init', 'tester', 9999);
 
 function get_control_controller( $controller_class )
 { global $wp_query;

@@ -69,11 +69,11 @@
       </div>
       <div class="inp inp-price-min">
         <label for="searcher_price_min"><?=__('Minimum ár (Ft)', 'gh')?></label>
-        <input type="text" class="form-control pricebind" id="searcher_price_min" name="pa" placeholder="<?=__('MFt', 'gh')?>" value="">
+        <input type="text" class="form-control pricebind" id="searcher_price_min" name="pa" placeholder="" value="">
       </div>
       <div class="inp inp-price-max">
         <label for="searcher_price_max"><?=__('Maximum ár (Ft)', 'gh')?></label>
-        <input type="text" class="form-control pricebind" id="searcher_price_max" name="pb" placeholder="<?=__('MFt', 'gh')?>" value="">
+        <input type="text" class="form-control pricebind" id="searcher_price_max" name="pb" placeholder="" value="">
       </div>
       <div class="inp inp-alapterulet">
         <label for="searcher_property_size"><?=__('Min. alapterület', 'gh')?></label>

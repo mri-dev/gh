@@ -90,11 +90,11 @@
       </div>
       <div class="inp inp-price-min">
         <label for="searcher_price_min"><?=__('Minimum ár (Ft)', 'gh')?></label>
-        <input type="text" class="form-control pricebind" id="searcher_price_min" name="pa" placeholder="<?=__('MFt', 'gh')?>" value="<?=$form['pa']?>">
+        <input type="text" class="form-control pricebind" id="searcher_price_min" name="pa" placeholder="" value="<?=$form['pa']?>">
       </div>
       <div class="inp inp-price-max">
         <label for="searcher_price_max"><?=__('Maximum ár (Ft)', 'gh')?></label>
-        <input type="text" class="form-control pricebind" id="searcher_price_max" name="pb" placeholder="<?=__('MFt', 'gh')?>" value="<?=$form['pb']?>">
+        <input type="text" class="form-control pricebind" id="searcher_price_max" name="pb" placeholder="" value="<?=$form['pb']?>">
       </div>
     </div>
 </div>

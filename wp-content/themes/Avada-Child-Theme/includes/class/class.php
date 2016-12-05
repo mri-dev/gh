@@ -12,4 +12,5 @@
   require_once "UsersFuncions.php";
   require_once "GHImporter.php";
   require_once "NotifyManager.class.php";
+  require_once "MailManager.class.php";
 ?>
