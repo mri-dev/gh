@@ -27,8 +27,8 @@
             <div class="title">
               <h1><?=$prop->Title()?></h1>
               <div class="subtitle">
-                <strong><?=$prop->PropertyStatus(true)?> <?=$prop->PropertyType(true)?></strong>
-                <span class="addr"><?php $regtext = ''; foreach ($regions as $r ): $regtext .= $r->name.' / '; endforeach; $regtext = rtrim($regtext, ' / '); ?><?=$regtext?></span>
+                <span class="addr"><i class="fa fa-map-marker"></i> <?php $regtext = ''; foreach ($regions as $r ): $regtext .= $r->name.' / '; endforeach; $regtext = rtrim($regtext, ' / '); ?><?=$regtext?></span>
+                <strong><?=$prop->PropertyStatus(true)?> <?=$prop->multivalue_list($prop->PropertyType(true), true, '/'.SLUG_INGATLAN_LIST.'/?c=#value#')?></strong>
               </div>
               <div class="icons"></div>
             </div>
@@ -89,13 +89,6 @@
               </div>
               <div class="e">
                <div class="h">
-                 <div class="ico"><img src="<?=IMG?>/ico/allapot.svg" alt="<?=__('Állapot', 'gh')?>"></div>
-                 <?=__('Állapot', 'gh')?>
-               </div><!--
-            --><div class="v"><?=($v = $prop->PropertyCondition(true))?$v:'<span class="na">'.__('nincs megadva', 'gh').'</span>'?></div>
-              </div>
-              <div class="e">
-               <div class="h">
                  <div class="ico"><img src="<?=IMG?>/ico/szoba.svg" alt="<?=__('Szobák száma', 'gh')?>"></div>
                  <?=__('Szobák száma', 'gh')?>
                </div><!--
@@ -124,10 +117,10 @@
               </div>
               <div class="e">
                <div class="h">
-                 <div class="ico"><img src="<?=IMG?>/ico/home.svg" alt="<?=__('Ingatlan típusa', 'gh')?>"></div>
-                 <?=__('Ingatlan típusa', 'gh')?>
+                 <div class="ico"><img src="<?=IMG?>/ico/heating.svg" alt="<?=__('Fűtés', 'gh')?>"></div>
+                 <?=__('Fűtés', 'gh')?>
                </div><!--
-            --><div class="v"><?=($v = $prop->PropertyType(true))?$v:'<span class="na">'.__('nincs megadva', 'gh').'</span>'?></div>
+            --><div class="v"><?=($v = $prop->PropertyHeating(true))?$v:'<span class="na">'.__('nincs megadva', 'gh').'</span>'?></div>
               </div>
               <div class="e">
                <div class="h">
@@ -138,10 +131,17 @@
               </div>
               <div class="e">
                <div class="h">
-                 <div class="ico"><img src="<?=IMG?>/ico/heating.svg" alt="<?=__('Fűtés', 'gh')?>"></div>
-                 <?=__('Fűtés', 'gh')?>
+                 <div class="ico"><img src="<?=IMG?>/ico/home.svg" alt="<?=__('Ingatlan típusa', 'gh')?>"></div>
+                 <?=__('Ingatlan típusa', 'gh')?>
                </div><!--
-            --><div class="v"><?=($v = $prop->PropertyHeating(true))?$v:'<span class="na">'.__('nincs megadva', 'gh').'</span>'?></div>
+            --><div class="v"><?=($v = $prop->PropertyType(true))?$prop->multivalue_list($v):'<span class="na">'.__('nincs megadva', 'gh').'</span>'?></div>
+              </div>
+              <div class="e">
+               <div class="h">
+                 <div class="ico"><img src="<?=IMG?>/ico/allapot.svg" alt="<?=__('Állapot', 'gh')?>"></div>
+                 <?=__('Állapot', 'gh')?>
+               </div><!--
+            --><div class="v"><?=($v = $prop->PropertyCondition(true))?$prop->multivalue_list($v):'<span class="na">'.__('nincs megadva', 'gh').'</span>'?></div>
               </div>
               <div class="cube-properties">
                 <div class="cb cb-<?=($prop->getMetaValue('_listing_garage'))?'yes':'no'?>">

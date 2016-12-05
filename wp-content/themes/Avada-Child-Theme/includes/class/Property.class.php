@@ -37,8 +37,17 @@ class Property extends PropertyFactory
   }
   public function AuthorPhone()
   {
-    $meta = get_the_author_meta('phone', $this->raw_post->post_author);
-    return $meta;
+    $phone = get_the_author_meta('phone', $this->raw_post->post_author);
+
+    $_phone = PHONE_PREFIX.' '.substr($phone, 0, 2);
+    $last = substr($phone, 2);
+
+    if (strlen($last) > 6) {
+      $_phone .= ' '.substr($last, 0, 3).' '. substr($last, 3 );
+    } else {
+      $_phone .= ' '. substr($last, 0, 3).' '. substr($last, 3 );
+    }
+    return $_phone;
   }
   public function AuthorEmail()
   {
@@ -191,34 +200,31 @@ class Property extends PropertyFactory
   {
     $terms = wp_get_post_terms( $this->ID(), 'property-condition' );
 
-    foreach ($terms as $term) {
-      if($term->taxonomy == 'property-condition') {
-        if ($text) {
-          return $this->i18n_taxonomy_values($term->name);
-        } else {
-          return $term->name;
-        }
+    return $terms;
+  }
+
+  public function multivalue_list( $term_list = array(), $linked = false, $base = '' )
+  {
+    $text = '';
+
+    foreach ($term_list as $term) {
+      if (!$linked) {
+        $text .= $this->i18n_taxonomy_values($term->name).', ';
+      }else{
+        $link = str_replace('#value#', $term->term_id, $base);
+        $text .= '<a target="_blank" href="'.$link.'">'.$this->i18n_taxonomy_values($term->name).'</a>, ';
       }
     }
 
-    return false;
+    $text = rtrim($text, ', ');
+
+    return $text;
   }
 
   public function PropertyType( $text = false )
   {
     $terms = wp_get_post_terms( $this->ID(), 'property-types' );
-
-    foreach ($terms as $term) {
-      if($term->taxonomy == 'property-types') {
-        if ($text) {
-          return $this->i18n_taxonomy_values($term->name);
-        } else {
-          return $term->name;
-        }
-      }
-    }
-
-    return false;
+    return $terms;
   }
 
   public function historyChangeCount( $user = false )

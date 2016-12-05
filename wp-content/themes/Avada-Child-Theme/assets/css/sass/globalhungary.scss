@@ -2104,20 +2104,30 @@ footer {
           }
 
           .subtitle {
-            font-size: 1em;
+            font-size: 0.8em;
             .addr{
               color: #888888;
               font-weight: normal;
-              margin-left: 15px;
+              margin-right: 15px;
             }
           }
         }
 
         .images{
           .profil {
+            position: relative;
+            height: 600px;
+            overflow: hidden;
+
             img{
+              position: absolute;
+              left: 50%;
+              top: 50%;
               width: 100%;
               max-width: 100%;
+              -webkit-transform: translate(-50%, -50%);
+              -moz-transform: translate(-50%, -50%);
+              transform: translate(-50%, -50%);
             }
           }
           .stack {
@@ -2146,7 +2156,7 @@ footer {
   }
 
   .data-main{
-    margin: 0 0 20px 0;
+    margin: 25px 0 20px 0;
   }
 
   .properties{

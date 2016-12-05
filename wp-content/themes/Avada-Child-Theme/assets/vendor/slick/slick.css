@@ -100,7 +100,28 @@
 }
 .slick-initialized .slick-slide
 {
+  position: relative;
+  display: block;
+  height: 105px;
+  overflow: hidden;
+  border: 5px solid #e2e2e2;
+}
+.slick-initialized .slick-slide img
+{
+  width: 110%;
+  max-width: 110%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -moz-transform: translate(-50%,-50%);
+  -webkit-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+}
+.slick-initialized .slick-slide.slick-center
+{
     display: block;
+    height: 105px;
+    overflow: hidden;
 }
 .slick-loading .slick-slide
 {
@@ -109,10 +130,11 @@
 .slick-vertical .slick-slide
 {
     display: block;
-
     height: auto;
-
     border: 1px solid transparent;
+}
+.slick-slide.slick-current{
+  border: 5px solid #3e4346;
 }
 .slick-arrow.slick-hidden {
     display: none;

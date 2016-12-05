@@ -39,9 +39,16 @@
               $kategoria = $properties->getSelectors( 'property-types' ); ?>
             <?php if ($kategoria): ?>
               <?php foreach ($kategoria as $k): ?>
-              <div class="selector-row">
+              <div class="selector-row lvl-0">
                 <input type="checkbox" <?=(in_array($k->term_id, $selected))?'checked="checked"':''?> tglwatcherkey="kategoria_multiselect" htxt="<?=$k->name?>" id="kat_<?=$k->term_id?>" value="<?=$k->term_id?>"> <label for="kat_<?=$k->term_id?>"><?=$k->name?> <span class="n">(<?=$k->count?>)</span></label>
               </div>
+              <?php if ( !empty($k->children) ): ?>
+                <?php foreach ($k->children as $sk): ?>
+                <div class="selector-row lvl-1">
+                  <input type="checkbox" tglwatcherkey="kategoria_multiselect" data-parentid="<?=$sk->parent?>" data-lvl="1" htxt="<?=$k->name?> / <?=$sk->name?>" id="kat_<?=$sk->term_id?>" value="<?=$sk->term_id?>"> <label for="kat_<?=$sk->term_id?>"><?=$sk->name?> <span class="n">(<?=$sk->count?>)</span></label>
+                </div>
+                <?php endforeach; ?>
+              <?php endif; ?>
               <?php endforeach; ?>
             <?php endif; ?>
           </div>

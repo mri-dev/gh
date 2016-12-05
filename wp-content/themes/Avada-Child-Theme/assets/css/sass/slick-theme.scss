@@ -14,7 +14,7 @@ $slick-dot-character: "•" !default;
 $slick-dot-size: 6px !default;
 $slick-opacity-default: 0.75 !default;
 $slick-opacity-on-hover: 1 !default;
-$slick-opacity-not-active: 0.25 !default; 
+$slick-opacity-not-active: 0.25 !default;
 
 @function slick-image-url($url) {
     @if function-exists(image-url) {
@@ -46,13 +46,6 @@ $slick-opacity-not-active: 0.25 !default;
 .slick-initialized{
   .slick-slide{
     &.slick-center {
-      -webkit-box-shadow: 10px 0px 20px -5px #000, -10px 0px 20px -5px #000;
-      -moz-box-shadow: 10px 0px 20px -5px #000, -10px 0px 20px -5px #000;
-      box-shadow: 10px 0px 20px -5px #000, -10px 0px 20px -5px #000;
-
-      img{
-        outline: 5px solid #3e4346;
-      }
       position: relative;
       z-index: 999;
       -webkit-transform:scale(1.4);
