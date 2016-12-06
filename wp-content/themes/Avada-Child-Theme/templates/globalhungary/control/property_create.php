@@ -122,6 +122,17 @@
       </div>
     </div>
     <div class="row">
+
+      <div class="col-md-3 reqf">
+        <label for="_listing_flag_pricetype"><?=__('Ár jellege', 'gh')?></label>
+        <select class="form-control" name="meta_input[_listing_flag_pricetype]" id="_listing_flag_pricetype">
+          <option value="" selected="selected"><?=__('-- válasszon --', 'gh')?></option>
+          <option value="" disabled="disabled"></option>
+          <?php foreach ($control->properties->price_types as $pt_key => $pt_i): ?>
+            <option value="<?=$pt_i?>" <?=($_POST['meta']['_listing_flag_pricetype'] === $pt_i)?'selected="selected"':''?>><?=$control->properties->getPriceTypeText($pt_i)?></option>
+          <?php endforeach; ?>
+        </select>
+      </div>
       <div class="col-md-3 reqf">
         <label for="_listing_price"><?=__('Irányár (Ft)', 'gh')?></label>
         <input type="number" min="0" id="_listing_price" name="meta_input[_listing_price]" value="<?=$_POST['meta']['_listing_price']?>" class="form-control">

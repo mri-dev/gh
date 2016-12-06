@@ -61,10 +61,8 @@
     <input type="hidden" name="post_date" value="<?=$property->CreateAt()?>">
     <h3><?=__('Művelet végrehajtás', 'gh')?></h3>
     <div class="row">
-
       <div class="col-md-3">
         <label for="post_status"><?=__('Státusz', 'gh')?></label>
-
         <select class="form-control" name="post_status" id="post_status" <?=(!$me->can('property_edit_status') && !current_user_can('administrator')) ? 'disabled="disabled"' : ''?>>
           <option value="publish" <?=($property->StatusKey() == 'publish')?'selected="selected"':''?>><?=__('Közzétéve (aktív)', 'gh')?></option>
           <option value="draft" <?=($property->StatusKey() == 'draft')?'selected="selected"':''?>><?=__('Vázlat (inaktív)', 'gh')?></option>
@@ -200,6 +198,17 @@
       </div>
     </div>
     <div class="row">
+      <div class="col-md-3 reqf">
+        <label for="_listing_flag_pricetype"><?=__('Ár jellege', 'gh')?></label>
+        <select class="form-control" name="meta_input[_listing_flag_pricetype]" id="_listing_flag_pricetype">
+          <option value="" selected="selected"><?=__('-- válasszon --', 'gh')?></option>
+          <option value="" disabled="disabled"></option>
+          <?php foreach ($property->price_types as $pt_key => $pt_i): ?>
+            <option value="<?=$pt_i?>"><?=$property->getPriceTypeText($pt_i)?></option>
+          <?php endforeach; ?>
+        </select>
+        <input type="hidden" name="pre[meta_input][_listing_flag_pricetype]" value="<?=$property->getMetaValue('_listing_flag_pricetype')?>">
+      </div>
       <div class="col-md-3 reqf">
         <label for="_listing_price"><?=__('Irányár (Ft)', 'gh')?></label>
         <input type="number" min="0" id="_listing_price" name="meta_input[_listing_price]" value="<?=$property->Price()?>" class="form-control" <?=(!$me->can('property_edit_price') && !current_user_can('administrator')) ? 'readonly="readonly"' : ''?>>

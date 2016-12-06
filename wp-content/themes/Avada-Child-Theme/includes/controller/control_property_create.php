@@ -2,7 +2,7 @@
 class control_property_create
 {
   public $listing = null;
-  private $properties = null;
+  public $properties = null;
 
   public function __construct()
   {
