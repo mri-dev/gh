@@ -253,9 +253,13 @@ class Properties extends PropertyFactory
     }
 
     if (isset($this->arg['idnumber']) && !empty($this->arg['idnumber'])) {
+      $idnum = $this->arg['idnumber'];
+      if (strpos($idnum,'GH') !== 0) {
+        $idnum = 'GH'.$idnum;
+      }
       $meta_qry[] = array(
         'key' => '_listing_idnumber',
-        'value' => $this->arg['idnumber']
+        'value' => $idnum
       );
     }
 

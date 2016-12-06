@@ -124,6 +124,25 @@ class PropertyFactory
 
     return $t;
   }
+
+  public function getZoneGPS( $term_id = false )
+  {
+    if ( !$term_id ) {
+      return false;
+    }
+
+    $gps_lat = get_term_meta( $term_id, 'gps_lat', true );
+    $gps_lng = get_term_meta( $term_id, 'gps_lng', true );
+
+    if ( !$gps_lat || !$gps_lng ) {
+      return false;
+    }
+
+    return array(
+      'lat' => (float)$gps_lat,
+      'lng' => (float)$gps_lng
+    );
+  }
 }
 
 ?>

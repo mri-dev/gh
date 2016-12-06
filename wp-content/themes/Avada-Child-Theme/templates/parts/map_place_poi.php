@@ -170,18 +170,43 @@
     {name: '<?=__('Letisztult', 'gh')?>'});
 
     var mapopt = {
-      center: {lat: <?=($gps['lat']) ? $gps['lat'] : '46.075493'?>, lng: <?=($gps['lng']) ? $gps['lng'] : '18.228361'?>},
-      zoom: <?=($gps) ? 15 : 12?>,
+      center: {lat: <?=($gps['lat']) ? $gps['lat'] : '0'?>, lng: <?=($gps['lng']) ? $gps['lng'] : '0'?>},
+      zoom: <?=($gps) ? 15 : 5?>,
       mapTypeControlOptions: {
         mapTypeIds: ['roadmap', 'satellite', 'hybrid', 'terrain', 'styled_map']
       }
     };
+
     gpsmap  = new google.maps.Map(document.getElementById('propertygpsmap'), mapopt);
     setGPSMarker(mapopt.center);
     gpsmap.mapTypes.set('styled_map', styledMapType);
     gpsmap.setMapTypeId('styled_map');
 
+    if ( !inited_gps && mapopt.center.lat == 0 ) {
+      findGPSNow('<?=$prop->RegionName(false)?>', <?=$gps_term_id?>);
+    }
+
+    function findGPSNow( address, term ) {
+      console.log('findGPSNow - START');
+      geo.geocode( { 'address': address}, function(results, status) {
+        if (status == 'OK') {
+          setGPSMarker(results[0].geometry.location);
+          $.post('<?=get_ajax_url('set_regio_gps')?>', {
+            lat: results[0].geometry.location.lat(),
+            lng: results[0].geometry.location.lng(),
+            term: term
+          }, function(r){
+            console.log(r);
+          },"data");
+        } else {
+          console.log('Geocode was not successful for the following reason: ' + status);
+        }
+      });
+    }
+
   })(jQuery);
+
+
 
   function setGPSMarker(latLng, address) {
     var circle = new google.maps.Circle({

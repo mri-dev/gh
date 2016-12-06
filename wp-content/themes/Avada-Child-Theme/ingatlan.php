@@ -30,7 +30,14 @@
                 <span class="addr"><i class="fa fa-map-marker"></i> <?php $regtext = ''; foreach ($regions as $r ): $regtext .= $r->name.' / '; endforeach; $regtext = rtrim($regtext, ' / '); ?><?=$regtext?></span>
                 <strong><?=$prop->PropertyStatus(true)?> <?=$prop->multivalue_list($prop->PropertyType(true), true, '/'.SLUG_INGATLAN_LIST.'/?c=#value#')?></strong>
               </div>
-              <div class="icons"></div>
+              <div class="icons">
+                <div class="facebook">
+                  <a href="javascript:void(0);" onclick="window.open('https://www.facebook.com/dialog/share?app_id=<?=FB_APP_ID?>&amp;display=popup&amp;href=<?=get_option('siteurl', '').$_SERVER['REQUEST_URI']?>&amp;redirect_uri=<?=get_option('siteurl', '')?>','','width=800, height=240')"><i class="fa fa-facebook"></i></a>
+                </div>
+                <div class="gplus">
+                  <a href="https://plus.google.com/share?url=<?=get_option('siteurl', '').$_SERVER['REQUEST_URI']?>" onclick="javascript:window.open('https://plus.google.com/share?url=<?=get_option('siteurl', '').$_SERVER['REQUEST_URI']?>', '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><i class="fa fa-google-plus"></i></a>
+                </div>
+              </div>
             </div>
             <div class="images">
               <div class="profil" id="profilimg">
@@ -75,17 +82,24 @@
                 </div>
               <?php endif; ?>
               <div class="current-price">
-                <?=$prop->Price(true)?> <span class="type"><?=$prop->PriceType()?></span>  
+                <?=$prop->Price(true)?> <span class="type"><?=$prop->PriceType()?></span>
               </div>
               <div class="clearfix"></div>
             </div>
             <div class="list">
+              <?php
+                $regions = $prop->Regions();
+                $regio = end($regions);
+                if ($regions[0]->name == 'Budapest' && count($regions) > 1) {
+                  $regio->name = $regions[0]->name.' / '.$regio->name .__('kerület', 'gh');
+                }
+              ?>
               <div class="e">
                 <div class="h">
                   <div class="ico"><img src="<?=IMG?>/ico/telepules.svg" alt="<?=__('Település', 'gh')?>"></div>
                   <?=__('Település', 'gh')?>
                 </div><!--
-             --><div class="v"><?=($v = $prop->ParentRegion())?$v:'<span class="na">'.__('nincs megadva', 'gh').'</span>'?></div>
+             --><div class="v"><?=($v = $regio->name)?$v:'<span class="na">'.__('nincs megadva', 'gh').'</span>'?></div>
               </div>
               <div class="e">
                <div class="h">
@@ -197,6 +211,7 @@
           <div class="map-block">
             <?
               $gps = $prop->GPS();
+              $gps_term_id = $regio->term_id;
               ob_start();
               include(locate_template('/templates/parts/map_place_poi.php'));
               ob_end_flush();
@@ -212,8 +227,8 @@
   <script type="text/javascript">
     (function($){
       $('.image-slide').slick({
+        <?=(count($images)>5)?'centerMode: true,':''?>
         autoplay: false,
-        centerMode: true,
         centerPadding: '60px',
         slidesToShow: 5,
       });

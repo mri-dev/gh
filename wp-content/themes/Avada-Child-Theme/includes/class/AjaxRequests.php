@@ -19,11 +19,41 @@ class AjaxRequests
     add_action( 'wp_ajax_nopriv_'.__FUNCTION__, array( $this, 'propertyFavAction'));
   }
 
-  public function city_autocomplete($value='')
+  public function city_autocomplete()
   {
     add_action( 'wp_ajax_'.__FUNCTION__, array( $this, 'AutocompleteCity'));
     add_action( 'wp_ajax_nopriv_'.__FUNCTION__, array( $this, 'AutocompleteCity'));
   }
+
+  public function set_regio_gps()
+  {
+    add_action( 'wp_ajax_'.__FUNCTION__, array( $this, 'setRegioGPS'));
+    add_action( 'wp_ajax_nopriv_'.__FUNCTION__, array( $this, 'setRegioGPS'));
+  }
+
+  public function setRegioGPS()
+  {
+
+    extract($_POST);
+
+    $return = array(
+      'error' => 0,
+      'msg'   => ''
+    );
+
+    $lat = (float)$lat;
+    $lng = (float)$lng;
+
+    $lat_meta_id = add_term_meta( $term, 'gps_lat', $lat, true);
+    $lng_meta_id = add_term_meta( $term, 'gps_lng', $lng, true);
+
+    $return['data']['lng'] = $lng_meta_id;
+    $return['data']['lat'] = $lat_meta_id;
+
+    echo json_encode($return);
+    die();
+  }
+
 
   public function checkPropertyFavorites()
   {

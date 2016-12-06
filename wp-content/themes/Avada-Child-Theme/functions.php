@@ -9,6 +9,7 @@ define('SLUG_FAVORITE', 'kedvencek');
 define('GOOGLE_API_KEY', 'AIzaSyA0Mu8_XYUGo9iXhoenj7HTPBIfS2jDU2E');
 define('PHONE_PREFIX', '06');
 define('LANGKEY','hu');
+define('FB_APP_ID', '1380917375274546');
 
 // Includes
 require_once WP_PLUGIN_DIR."/cmb2/init.php";
@@ -305,7 +306,7 @@ function ingatlan_custom_title($title)
     $property = $property[0];
 
     if ($property) {
-      $title['title'] = $property->Title() . ' ['.$property->Azonosito().']' . ' - ' . $property->PropertyStatus(true) . ' '. $property->PropertyType(true) . ' - '. $property->ParentRegion();
+      $title['title'] = $property->Title() . ' ['.$property->Azonosito().']' . ' - ' . $property->PropertyStatus(true) . ' '. $property->multivalue_list($property->PropertyType(true)) . ' - '. $property->RegionName( false );
     }
   }
 
@@ -360,6 +361,7 @@ function ajax_requests()
   $ajax->check_property_fav();
   $ajax->property_fav_action();
   $ajax->city_autocomplete();
+  $ajax->set_regio_gps();
 }
 add_action( 'init', 'ajax_requests' );
 
@@ -374,3 +376,28 @@ function after_logo_content()
   echo '<div class="badge">'.__('Alapítva 1999','gh').'</div>';
 }
 add_filter('avada_logo_append', 'after_logo_content');
+
+/**
+* Setup Feeds
+**/
+function setup_feeds(){
+  add_feed('ingatlanbazar', 'feed_ingatlanbazar');
+}
+add_action('init', 'setup_feeds');
+
+function feed_ingatlanbazar()
+{
+  add_filter('pre_option_rss_use_excerpt', '__return_zero');
+
+  $feed = new FeedManager();
+  $feed->load('ingatlanbazar');
+  $feed->render();
+}
+
+function custom_rss_content_type( $content_type, $type ) {
+	if ( 'ingatlanbazar' === $type ) {
+		return feed_content_type( 'rss2' );
+	}
+	return $content_type;
+}
+add_filter( 'feed_content_type', 'custom_rss_content_type', 10, 2 );

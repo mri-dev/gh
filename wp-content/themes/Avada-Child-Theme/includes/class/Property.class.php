@@ -71,7 +71,7 @@ class Property extends PropertyFactory
 
     return get_option('siteurl').'/'.SLUG_INGATLAN.'/'.$this->RegionSlug().'/'.$regionslug.'/'.sanitize_title($this->Title()).'-'.$this->ID();
   }
-  public function RegionName()
+  public function RegionName( $html_text = true )
   {
     $terms = wp_get_post_terms( $this->ID(), 'locations' );
 
@@ -81,7 +81,13 @@ class Property extends PropertyFactory
         if ($term->parent != 0) {
           $parent = get_term($term->parent);
         }
-        return ($parent) ? $parent->name.' <span class="sep">/</span> '.$term->name . ( ($parent->name == 'Budapest') ? ' '.__('kerület', 'gh') : '' ) : $term->name;
+
+        if ($html_text) {
+          return ($parent) ? $parent->name.' <span class="sep">/</span> '.$term->name . ( ($parent->name == 'Budapest') ? ' '.__('kerület', 'gh') : '' ) : $term->name;
+        } else {
+          return ($parent) ? $parent->name.', '.$term->name . ( ($parent->name == 'Budapest') ? ' '.__('kerület', 'gh') : '' ) : $term->name;
+        }
+
       }
     }
 
@@ -372,6 +378,18 @@ class Property extends PropertyFactory
   {
     $lat = $this->getMetaValue( '_listing_gps_lat' );
     $lng = $this->getMetaValue( '_listing_gps_lng' );
+
+    if (!$lng || !$lat)
+    {  
+      // Mentett GPS vizsgálat GEO alapján
+      $parent_zone_term = end($this->Regions());
+      $zone_gps = $this->getZoneGPS($parent_zone_term->term_id);
+
+      if ($zone_gps) {
+        $lng = (float) $zone_gps['lng'];
+        $lat = (float) $zone_gps['lat'];
+      }
+    }
 
     if (!$lng || !$lat) {
       return false;
