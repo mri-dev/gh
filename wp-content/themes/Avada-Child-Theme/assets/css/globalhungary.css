@@ -1911,7 +1911,7 @@ footer .widget_nav_menu ul.menu {
         /* line 2124, sass/globalhungary.scss */
         .ingatlan-page-view .data-top > .data-top-left .cwrapper .title h1,
         .ingatlan-page-view .data-main > .data-top-left .cwrapper .title h1 {
-          margin: 0;
+          margin: 0 123px 0 0;
           text-transform: uppercase;
           font-size: 2.4em;
           line-height: 1;
@@ -2251,6 +2251,9 @@ footer .widget_nav_menu ul.menu {
     display: block; }
 
 /* line 2513, sass/globalhungary.scss */
+.dashboard-view .row {
+  margin-bottom: 30px; }
+/* line 2516, sass/globalhungary.scss */
 .dashboard-view .bgh {
   display: flex;
   width: 100%;
@@ -2261,28 +2264,88 @@ footer .widget_nav_menu ul.menu {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px; }
-  /* line 2524, sass/globalhungary.scss */
+  /* line 2527, sass/globalhungary.scss */
   .dashboard-view .bgh .vis {
     flex-basis: 25%;
     background: #778080;
     text-align: center;
     color: #ffffff;
-    font-size: 35px;
-    line-height: 70px; }
-  /* line 2532, sass/globalhungary.scss */
+    font-size: 28px;
+    line-height: 75px;
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+    -webkit-border-radius: 3px 0 0 3px;
+    -moz-border-radius: 3px 0 0 3px;
+    border-radius: 3px 0 0 3px; }
+    /* line 2539, sass/globalhungary.scss */
+    .dashboard-view .bgh .vis.vis-red {
+      background: #e31f24; }
+    /* line 2542, sass/globalhungary.scss */
+    .dashboard-view .bgh .vis.vis-lred {
+      background: #f95757; }
+    /* line 2545, sass/globalhungary.scss */
+    .dashboard-view .bgh .vis.vis-lgreen {
+      background: #5cbb60; }
+    /* line 2548, sass/globalhungary.scss */
+    .dashboard-view .bgh .vis.vis-lorange {
+      background: #ffac42; }
+  /* line 2552, sass/globalhungary.scss */
   .dashboard-view .bgh .inf {
     flex-basis: 75%;
     line-height: 1;
-    padding: 15px; }
-    /* line 2537, sass/globalhungary.scss */
+    padding: 15px;
+    text-shadow: 1px 1px 0 #ffffff; }
+    /* line 2557, sass/globalhungary.scss */
     .dashboard-view .bgh .inf .num {
       font-size: 2em;
       font-family: 'Arial';
       text-transform: uppercase;
       color: #333333;
       font-weight: bold; }
-    /* line 2545, sass/globalhungary.scss */
+    /* line 2565, sass/globalhungary.scss */
     .dashboard-view .bgh .inf .text {
       font-size: 0.8em;
       color: #989c9c;
-      padding: 0 0 0 4px; }
+      padding: 4px 0 0 4px; }
+  /* line 2572, sass/globalhungary.scss */
+  .dashboard-view .bgh.list-bgh {
+    display: block;
+    width: 100%; }
+    /* line 2575, sass/globalhungary.scss */
+    .dashboard-view .bgh.list-bgh .head {
+      padding: 12px;
+      border-bottom: 1px solid #d6d6d6;
+      background: #e6e6e6;
+      color: #4f5959;
+      font-family: 'Arial';
+      font-weight: bold;
+      font-size: 1.2em;
+      line-height: 1;
+      -webkit-border-radius: 3px 3px 0 0;
+      -moz-border-radius: 3px 3px 0 0;
+      border-radius: 3px 3px 0 0; }
+      /* line 2587, sass/globalhungary.scss */
+      .dashboard-view .bgh.list-bgh .head i {
+        margin: 0 10px 0 5px;
+        color: #e31f24; }
+    /* line 2592, sass/globalhungary.scss */
+    .dashboard-view .bgh.list-bgh .c {
+      font-size: 0.8em; }
+      /* line 2595, sass/globalhungary.scss */
+      .dashboard-view .bgh.list-bgh .c .data-table {
+        margin: 0;
+        border: none; }
+        /* line 2598, sass/globalhungary.scss */
+        .dashboard-view .bgh.list-bgh .c .data-table .row > div[class*=col-md] {
+          padding: 5px; }
+        /* line 2601, sass/globalhungary.scss */
+        .dashboard-view .bgh.list-bgh .c .data-table .data-body {
+          line-height: 1.2; }
+    /* line 2606, sass/globalhungary.scss */
+    .dashboard-view .bgh.list-bgh .foot {
+      font-size: 0.75em;
+      padding: 9px 5px;
+      border-top: 1px solid #d8d8d8;
+      background: #efefef;
+      -webkit-border-radius: 0 0 3px 3px;
+      -moz-border-radius: 0 0 3px 3px;
+      border-radius: 0 0 3px 3px; }

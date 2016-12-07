@@ -211,9 +211,15 @@ class Properties extends PropertyFactory
 
     if (isset($this->arg['orderby'])) {
       $post_arg['orderby'] = $this->arg['orderby'];
+    } else {
+      $post_arg['orderby'] = 'meta_value_num';
+      $post_arg['meta_key'] = '_listing_price';
     }
+
     if (isset($this->arg['order'])) {
       $post_arg['order'] = $this->arg['order'];
+    } else {
+      $post_arg['order'] = 'ASC';
     }
 
     if (isset($this->arg['id'])) {

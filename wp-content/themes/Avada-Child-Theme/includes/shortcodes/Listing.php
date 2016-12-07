@@ -282,7 +282,7 @@ class ListingLista
         'orderby' => 'post__in'
       );
 
-      print_r($arg);
+      //print_r($arg);
 
       $properties = new Properties($arg);
       $list = $properties->getList();
