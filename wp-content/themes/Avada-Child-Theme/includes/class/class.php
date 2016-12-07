@@ -14,4 +14,5 @@
   require_once "NotifyManager.class.php";
   require_once "MailManager.class.php";
   require_once "FeedManager.class.php";
+  require_once "IngatlanBazarFeed.php";
 ?>

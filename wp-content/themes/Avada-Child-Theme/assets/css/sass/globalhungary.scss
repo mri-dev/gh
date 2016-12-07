@@ -2508,3 +2508,45 @@ footer {
     display: block;
   }
 }
+
+.dashboard-view{
+  .bgh {
+    display: flex;
+    width: 100%;
+    background: #f8f8f8;
+    -webkit-box-shadow: 2px 2px 5px -2px #c1b9b9;
+    -moz-box-shadow: 2px 2px 5px -2px #c1b9b9;
+    box-shadow: 2px 2px 5px -2px #c1b9b9;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+
+    .vis{
+      flex-basis: 25%;
+      background: #778080;
+      text-align: center;
+      color: #ffffff;
+      font-size: 35px;
+      line-height: 70px;
+    }
+    .inf {
+      flex-basis: 75%;
+      line-height: 1;
+      padding: 15px;
+
+      .num {
+        font-size: 2em;
+        font-family: 'Arial';
+        text-transform: uppercase;
+        color: #333333;
+        font-weight: bold;
+      }
+
+      .text {
+        font-size: 0.8em;
+        color: #989c9c;
+        padding: 0 0 0 4px;
+      }
+    }
+  }
+}

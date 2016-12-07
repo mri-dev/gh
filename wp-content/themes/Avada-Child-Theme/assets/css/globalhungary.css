@@ -2249,3 +2249,40 @@ footer .widget_nav_menu ul.menu {
   /* line 2507, sass/globalhungary.scss */
   .hide.show {
     display: block; }
+
+/* line 2513, sass/globalhungary.scss */
+.dashboard-view .bgh {
+  display: flex;
+  width: 100%;
+  background: #f8f8f8;
+  -webkit-box-shadow: 2px 2px 5px -2px #c1b9b9;
+  -moz-box-shadow: 2px 2px 5px -2px #c1b9b9;
+  box-shadow: 2px 2px 5px -2px #c1b9b9;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px; }
+  /* line 2524, sass/globalhungary.scss */
+  .dashboard-view .bgh .vis {
+    flex-basis: 25%;
+    background: #778080;
+    text-align: center;
+    color: #ffffff;
+    font-size: 35px;
+    line-height: 70px; }
+  /* line 2532, sass/globalhungary.scss */
+  .dashboard-view .bgh .inf {
+    flex-basis: 75%;
+    line-height: 1;
+    padding: 15px; }
+    /* line 2537, sass/globalhungary.scss */
+    .dashboard-view .bgh .inf .num {
+      font-size: 2em;
+      font-family: 'Arial';
+      text-transform: uppercase;
+      color: #333333;
+      font-weight: bold; }
+    /* line 2545, sass/globalhungary.scss */
+    .dashboard-view .bgh .inf .text {
+      font-size: 0.8em;
+      color: #989c9c;
+      padding: 0 0 0 4px; }

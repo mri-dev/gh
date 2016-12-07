@@ -228,20 +228,29 @@
     (function($){
       $('.image-slide').slick({
         <?=(count($images)>5)?'centerMode: true,':''?>
-        autoplay: false,
+        autoplay: true,
         centerPadding: '60px',
         slidesToShow: 5,
       });
+
+      $('.image-slide .slick-slide').on('click', function(e) {
+        //e.stopPropagation();
+        var index = $(this).data("slick-index");
+        if ($('.image-slide').slick('slickCurrentSlide') !== index) {
+          $('.image-slide').slick('slickGoTo', index);
+        }
+
+        console.log(index);
+      });
+
       $('.image-slide').on('beforeChange', function(event, slick, currentSlide, nextSlide){
         var cs = $(slick.$slides).get(nextSlide);
         var ci = $(cs).find('img').attr('src');
         //$('#profilimg a').attr('href', ci);
         $('#profilimg img').attr('src', ci);
+        console.log(ci);
       });
-      $('.image-slide .slick-slide').on('click', function() {
-        var i = $(this).data('slick-index');
-        console.log(i);
-      });
+
     })(jQuery);
   </script>
 	<?php do_action( 'fusion_after_content' ); ?>

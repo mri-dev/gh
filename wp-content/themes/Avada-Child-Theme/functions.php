@@ -390,6 +390,7 @@ function feed_ingatlanbazar()
   add_filter('pre_option_rss_use_excerpt', '__return_zero');
 
   $feed = new FeedManager();
+  $feed->setController('IngatlanBazarFeed', array( 'account_id' => 1234567 ));
   $feed->load('ingatlanbazar');
   $feed->render();
 }

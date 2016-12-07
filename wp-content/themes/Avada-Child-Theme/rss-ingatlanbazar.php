@@ -2,19 +2,19 @@
 	xsi:schemaLocation="http://schemas.ingatlanbazar.hu/Import/ http://schemas.ingatlanbazar.hu/Import/xsd/import.xsd"
 	xmlns="http://schemas.ingatlanbazar.hu/Import/">
 	<officeList>
-		<office ingatlanbazarId="123123">
+		<office ingatlanbazarId="<?=$feed->account_id?>">
 			<information>
 				<notificationmailList>
-					<notificationmailText><![CDATA[info@ugyfel.hu]]></notificationmailText>
+					<notificationmailText><![CDATA[<?=$feed->contactEmail()?>]]></notificationmailText>
 				</notificationmailList>
 			</information>
 			<agentList>
-				<agent foreignId="agent-1da3bde1">
-					<nameText>Kovács Aladár</nameText>
-					<addressText>6123 Sopron Hágó u. 13.</addressText>
-					<mobilenumberText>06 43 423 2322</mobilenumberText>
-					<emailText>agent1@ugyfel.hu</emailText>
+				<?php foreach ($feed->agents() as $agent): ?><agent foreignId="<?=$agent['ID']?>">
+					<nameText><?=$agent['name']?></nameText>
+					<mobilenumberText><?=$agent['phone']?></mobilenumberText>
+					<emailText><?=$agent['email']?></emailText>
 				</agent>
+				<?php endforeach; ?>
 			</agentList>
 			<adList>
         <ad foreignId="ad-433f6663" agentId="agent-1da3bde1">
