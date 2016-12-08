@@ -899,37 +899,41 @@ footer .widget_nav_menu ul.menu {
     -moz-border-radius: 3px;
     border-radius: 3px;
     margin-right: 5px; }
-  /* line 1015, sass/globalhungary.scss */
+    /* line 1013, sass/globalhungary.scss */
+    .gh_control_properties_page .adv-inf .ref-number.exclusive {
+      background: #5db149;
+      cursor: help; }
+  /* line 1019, sass/globalhungary.scss */
   .gh_control_properties_page .adv-inf .price {
     color: #e31f24;
     font-weight: bold;
     margin-right: 5px; }
 
-/* line 1023, sass/globalhungary.scss */
+/* line 1027, sass/globalhungary.scss */
 .button-neutral {
   background: #26292b;
   color: white; }
 
-/* line 1027, sass/globalhungary.scss */
+/* line 1031, sass/globalhungary.scss */
 .button-red {
   background: #e31f24 !important;
   color: white !important; }
 
-/* line 1034, sass/globalhungary.scss */
+/* line 1038, sass/globalhungary.scss */
 .inline-input > div {
   display: inline-block;
   vertical-align: top;
   line-height: 34px;
   height: 34px; }
-  /* line 1040, sass/globalhungary.scss */
+  /* line 1044, sass/globalhungary.scss */
   .inline-input > div button, .inline-input > div input, .inline-input > div a.fusion-button {
     vertical-align: top;
     height: 34px; }
-  /* line 1044, sass/globalhungary.scss */
+  /* line 1048, sass/globalhungary.scss */
   .inline-input > div input[type=date] {
     border: 1px solid #d2d2d2;
     padding: 0 8px; }
-/* line 1049, sass/globalhungary.scss */
+/* line 1053, sass/globalhungary.scss */
 .inline-input:after {
   display: block;
   position: relative;
@@ -937,25 +941,25 @@ footer .widget_nav_menu ul.menu {
   clear: both;
   width: 100%; }
 
-/* line 1062, sass/globalhungary.scss */
+/* line 1066, sass/globalhungary.scss */
 .gh_control_property_history_page .modify-list .modify-row,
 .gh_control_property_archive_page .modify-list .modify-row {
   background: #fff;
   margin: 5px 0;
   border: 1px solid #e8e8e8; }
-  /* line 1066, sass/globalhungary.scss */
+  /* line 1070, sass/globalhungary.scss */
   .gh_control_property_history_page .modify-list .modify-row .head,
   .gh_control_property_archive_page .modify-list .modify-row .head {
     background: #f1f1f1;
     border-top: 5px solid #ff7b7f;
     display: flex;
     align-items: center; }
-    /* line 1071, sass/globalhungary.scss */
+    /* line 1075, sass/globalhungary.scss */
     .gh_control_property_history_page .modify-list .modify-row .head .prof,
     .gh_control_property_archive_page .modify-list .modify-row .head .prof {
       flex-basis: 75%;
       padding: 15px; }
-      /* line 1075, sass/globalhungary.scss */
+      /* line 1079, sass/globalhungary.scss */
       .gh_control_property_history_page .modify-list .modify-row .head .prof .img,
       .gh_control_property_archive_page .modify-list .modify-row .head .prof .img {
         width: 80px;
@@ -972,7 +976,7 @@ footer .widget_nav_menu ul.menu {
         -webkit-box-shadow: 2px 2px 10px -4px #5d5d5d;
         -moz-box-shadow: 2px 2px 10px -4px #5d5d5d;
         box-shadow: 2px 2px 10px -4px #5d5d5d; }
-        /* line 1091, sass/globalhungary.scss */
+        /* line 1095, sass/globalhungary.scss */
         .gh_control_property_history_page .modify-list .modify-row .head .prof .img img,
         .gh_control_property_archive_page .modify-list .modify-row .head .prof .img img {
           text-align: center;
@@ -985,19 +989,19 @@ footer .widget_nav_menu ul.menu {
           -webkit-transform: translate(-50%, -50%);
           -moz-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%); }
-      /* line 1106, sass/globalhungary.scss */
+      /* line 1110, sass/globalhungary.scss */
       .gh_control_property_history_page .modify-list .modify-row .head .prof .title a,
       .gh_control_property_archive_page .modify-list .modify-row .head .prof .title a {
         font-size: 1.4em;
         text-transform: uppercase;
         font-weight: bold; }
-      /* line 1113, sass/globalhungary.scss */
+      /* line 1117, sass/globalhungary.scss */
       .gh_control_property_history_page .modify-list .modify-row .head .prof .meta,
       .gh_control_property_archive_page .modify-list .modify-row .head .prof .meta {
         font-size: 1em;
         line-height: 1;
         margin: 4px 0; }
-        /* line 1118, sass/globalhungary.scss */
+        /* line 1122, sass/globalhungary.scss */
         .gh_control_property_history_page .modify-list .modify-row .head .prof .meta .code,
         .gh_control_property_archive_page .modify-list .modify-row .head .prof .meta .code {
           background: #26292b;
@@ -1007,38 +1011,38 @@ footer .widget_nav_menu ul.menu {
           line-height: 1.5;
           font-size: 0.8em;
           text-transform: uppercase; }
-        /* line 1128, sass/globalhungary.scss */
+        /* line 1132, sass/globalhungary.scss */
         .gh_control_property_history_page .modify-list .modify-row .head .prof .meta .region,
         .gh_control_property_archive_page .modify-list .modify-row .head .prof .meta .region {
           color: black;
           font-weight: bold; }
-      /* line 1134, sass/globalhungary.scss */
+      /* line 1138, sass/globalhungary.scss */
       .gh_control_property_history_page .modify-list .modify-row .head .prof .modifier,
       .gh_control_property_archive_page .modify-list .modify-row .head .prof .modifier {
         font-size: 0.85em;
         color: #8c8c8c; }
-        /* line 1138, sass/globalhungary.scss */
+        /* line 1142, sass/globalhungary.scss */
         .gh_control_property_history_page .modify-list .modify-row .head .prof .modifier .who,
         .gh_control_property_archive_page .modify-list .modify-row .head .prof .modifier .who {
           font-weight: bold;
           color: black; }
-          /* line 1142, sass/globalhungary.scss */
+          /* line 1146, sass/globalhungary.scss */
           .gh_control_property_history_page .modify-list .modify-row .head .prof .modifier .who a,
           .gh_control_property_archive_page .modify-list .modify-row .head .prof .modifier .who a {
             color: black; }
-        /* line 1145, sass/globalhungary.scss */
+        /* line 1149, sass/globalhungary.scss */
         .gh_control_property_history_page .modify-list .modify-row .head .prof .modifier .date,
         .gh_control_property_archive_page .modify-list .modify-row .head .prof .modifier .date {
           font-style: italic;
           color: black; }
-    /* line 1151, sass/globalhungary.scss */
+    /* line 1155, sass/globalhungary.scss */
     .gh_control_property_history_page .modify-list .modify-row .head .change-n,
     .gh_control_property_archive_page .modify-list .modify-row .head .change-n {
       flex-basis: 25%;
       text-align: center;
       color: #444444;
       font-size: 0.8em; }
-      /* line 1157, sass/globalhungary.scss */
+      /* line 1161, sass/globalhungary.scss */
       .gh_control_property_history_page .modify-list .modify-row .head .change-n .n,
       .gh_control_property_archive_page .modify-list .modify-row .head .change-n .n {
         font-weight: bold;
@@ -1046,55 +1050,55 @@ footer .widget_nav_menu ul.menu {
         color: black;
         line-height: 1;
         font-size: 2.5em; }
-  /* line 1167, sass/globalhungary.scss */
+  /* line 1171, sass/globalhungary.scss */
   .gh_control_property_history_page .modify-list .modify-row .mods,
   .gh_control_property_archive_page .modify-list .modify-row .mods {
     font-size: 0.8em; }
-    /* line 1169, sass/globalhungary.scss */
+    /* line 1173, sass/globalhungary.scss */
     .gh_control_property_history_page .modify-list .modify-row .mods .mcol,
     .gh_control_property_archive_page .modify-list .modify-row .mods .mcol {
       display: flex;
       border-bottom: 1px solid #e8e8e8; }
-      /* line 1173, sass/globalhungary.scss */
+      /* line 1177, sass/globalhungary.scss */
       .gh_control_property_history_page .modify-list .modify-row .mods .mcol:last-child,
       .gh_control_property_archive_page .modify-list .modify-row .mods .mcol:last-child {
         border-bottom: none; }
-      /* line 1177, sass/globalhungary.scss */
+      /* line 1181, sass/globalhungary.scss */
       .gh_control_property_history_page .modify-list .modify-row .mods .mcol > div,
       .gh_control_property_archive_page .modify-list .modify-row .mods .mcol > div {
         padding: 5px;
         border-right: 1px solid #e8e8e8; }
-      /* line 1182, sass/globalhungary.scss */
+      /* line 1186, sass/globalhungary.scss */
       .gh_control_property_history_page .modify-list .modify-row .mods .mcol > div:last-child,
       .gh_control_property_archive_page .modify-list .modify-row .mods .mcol > div:last-child {
         border-right: none; }
-      /* line 1186, sass/globalhungary.scss */
+      /* line 1190, sass/globalhungary.scss */
       .gh_control_property_history_page .modify-list .modify-row .mods .mcol .what,
       .gh_control_property_archive_page .modify-list .modify-row .mods .mcol .what {
         flex-basis: 20%;
         text-align: left; }
-      /* line 1187, sass/globalhungary.scss */
+      /* line 1191, sass/globalhungary.scss */
       .gh_control_property_history_page .modify-list .modify-row .mods .mcol .dfrom,
       .gh_control_property_archive_page .modify-list .modify-row .mods .mcol .dfrom {
         flex-basis: 40%;
         text-align: center; }
-      /* line 1188, sass/globalhungary.scss */
+      /* line 1192, sass/globalhungary.scss */
       .gh_control_property_history_page .modify-list .modify-row .mods .mcol .dto,
       .gh_control_property_archive_page .modify-list .modify-row .mods .mcol .dto {
         flex-basis: 40%;
         text-align: center; }
-      /* line 1189, sass/globalhungary.scss */
+      /* line 1193, sass/globalhungary.scss */
       .gh_control_property_history_page .modify-list .modify-row .mods .mcol .dact,
       .gh_control_property_archive_page .modify-list .modify-row .mods .mcol .dact {
         flex-basis: 80%;
         text-align: center; }
-      /* line 1192, sass/globalhungary.scss */
+      /* line 1196, sass/globalhungary.scss */
       .gh_control_property_history_page .modify-list .modify-row .mods .mcol .key_post_content,
       .gh_control_property_history_page .modify-list .modify-row .mods .mcol .key_post_excerpt,
       .gh_control_property_archive_page .modify-list .modify-row .mods .mcol .key_post_content,
       .gh_control_property_archive_page .modify-list .modify-row .mods .mcol .key_post_excerpt {
         text-align: left; }
-      /* line 1196, sass/globalhungary.scss */
+      /* line 1200, sass/globalhungary.scss */
       .gh_control_property_history_page .modify-list .modify-row .mods .mcol .key__listing_price .price-down,
       .gh_control_property_archive_page .modify-list .modify-row .mods .mcol .key__listing_price .price-down {
         background: red;
@@ -1102,7 +1106,7 @@ footer .widget_nav_menu ul.menu {
         font-size: 0.7em;
         padding: 2px;
         color: white; }
-      /* line 1203, sass/globalhungary.scss */
+      /* line 1207, sass/globalhungary.scss */
       .gh_control_property_history_page .modify-list .modify-row .mods .mcol .key__listing_price .price-up,
       .gh_control_property_archive_page .modify-list .modify-row .mods .mcol .key__listing_price .price-up {
         background: green;
@@ -1110,21 +1114,21 @@ footer .widget_nav_menu ul.menu {
         font-size: 0.7em;
         padding: 2px;
         color: white; }
-      /* line 1212, sass/globalhungary.scss */
+      /* line 1216, sass/globalhungary.scss */
       .gh_control_property_history_page .modify-list .modify-row .mods .mcol i.fa.fa-times,
       .gh_control_property_archive_page .modify-list .modify-row .mods .mcol i.fa.fa-times {
         color: red;
         font-size: 1.4em; }
-      /* line 1216, sass/globalhungary.scss */
+      /* line 1220, sass/globalhungary.scss */
       .gh_control_property_history_page .modify-list .modify-row .mods .mcol i.fa.fa-check,
       .gh_control_property_archive_page .modify-list .modify-row .mods .mcol i.fa.fa-check {
         color: green;
         font-size: 1.4em; }
-      /* line 1221, sass/globalhungary.scss */
+      /* line 1225, sass/globalhungary.scss */
       .gh_control_property_history_page .modify-list .modify-row .mods .mcol .img-prev,
       .gh_control_property_archive_page .modify-list .modify-row .mods .mcol .img-prev {
         margin: 5px; }
-      /* line 1225, sass/globalhungary.scss */
+      /* line 1229, sass/globalhungary.scss */
       .gh_control_property_history_page .modify-list .modify-row .mods .mcol.mcolh,
       .gh_control_property_archive_page .modify-list .modify-row .mods .mcol.mcolh {
         background: #dcdcdc;
@@ -1132,29 +1136,29 @@ footer .widget_nav_menu ul.menu {
         color: #000;
         font-size: 0.8em;
         font-weight: bold; }
-/* line 1236, sass/globalhungary.scss */
+/* line 1240, sass/globalhungary.scss */
 .gh_control_property_history_page .archive-comment,
 .gh_control_property_archive_page .archive-comment {
   padding: 15px; }
-  /* line 1238, sass/globalhungary.scss */
+  /* line 1242, sass/globalhungary.scss */
   .gh_control_property_history_page .archive-comment .text,
   .gh_control_property_archive_page .archive-comment .text {
     font-size: 1.3em;
     color: black;
     font-style: italic; }
-  /* line 1243, sass/globalhungary.scss */
+  /* line 1247, sass/globalhungary.scss */
   .gh_control_property_history_page .archive-comment .who,
   .gh_control_property_archive_page .archive-comment .who {
     margin-top: 10px;
     font-size: 0.85em;
     color: #8c8c8c;
     margin-left: 10px; }
-    /* line 1249, sass/globalhungary.scss */
+    /* line 1253, sass/globalhungary.scss */
     .gh_control_property_history_page .archive-comment .who strong,
     .gh_control_property_archive_page .archive-comment .who strong {
       color: black; }
 
-/* line 1256, sass/globalhungary.scss */
+/* line 1260, sass/globalhungary.scss */
 .listing-searcher-holder {
   background: #ffffff;
   border: 1px solid #cccfd1;
@@ -1164,40 +1168,40 @@ footer .widget_nav_menu ul.menu {
   /* Listing style v2 */
   /* Ingatlan style floating */
   /* MOD v2 */ }
-  /* line 1263, sass/globalhungary.scss */
+  /* line 1267, sass/globalhungary.scss */
   .listing-searcher-holder.style-v1 {
     width: 90%; }
-  /* line 1267, sass/globalhungary.scss */
+  /* line 1271, sass/globalhungary.scss */
   .listing-searcher-holder.style-v2 {
     width: 100%;
     margin-top: 10px; }
-  /* line 1272, sass/globalhungary.scss */
+  /* line 1276, sass/globalhungary.scss */
   .listing-searcher-holder.style-floating {
     width: 320px;
     position: fixed;
     left: 0;
     top: 80px;
     z-index: 99999; }
-  /* line 1280, sass/globalhungary.scss */
+  /* line 1284, sass/globalhungary.scss */
   .listing-searcher-holder .searcher-header {
     position: absolute;
     left: -1px;
     top: -50px; }
-    /* line 1285, sass/globalhungary.scss */
+    /* line 1289, sass/globalhungary.scss */
     .listing-searcher-holder .searcher-header ul {
       margin: 0;
       padding: 0; }
-      /* line 1288, sass/globalhungary.scss */
+      /* line 1292, sass/globalhungary.scss */
       .listing-searcher-holder .searcher-header ul li {
         display: inline-block;
         *display: inline;
         zoom: 1;
         vertical-align: middle;
         margin-right: 5px; }
-        /* line 1295, sass/globalhungary.scss */
+        /* line 1299, sass/globalhungary.scss */
         .listing-searcher-holder .searcher-header ul li input[type=radio] {
           display: none; }
-        /* line 1299, sass/globalhungary.scss */
+        /* line 1303, sass/globalhungary.scss */
         .listing-searcher-holder .searcher-header ul li label {
           cursor: pointer;
           position: relative;
@@ -1212,7 +1216,7 @@ footer .widget_nav_menu ul.menu {
           font-family: 'Arial';
           font-size: 1.2em;
           letter-spacing: 1px; }
-          /* line 1314, sass/globalhungary.scss */
+          /* line 1318, sass/globalhungary.scss */
           .listing-searcher-holder .searcher-header ul li label:before {
             font-family: 'FontAwesome';
             content: "\f111";
@@ -1222,20 +1226,20 @@ footer .widget_nav_menu ul.menu {
             color: #c7c7c7;
             width: 16px;
             text-align: center; }
-        /* line 1326, sass/globalhungary.scss */
+        /* line 1330, sass/globalhungary.scss */
         .listing-searcher-holder .searcher-header ul li input[type=radio]:checked + label {
           background: #e31f24; }
-          /* line 1328, sass/globalhungary.scss */
+          /* line 1332, sass/globalhungary.scss */
           .listing-searcher-holder .searcher-header ul li input[type=radio]:checked + label:before {
             content: "\f192";
             color: white; }
-        /* line 1334, sass/globalhungary.scss */
+        /* line 1338, sass/globalhungary.scss */
         .listing-searcher-holder .searcher-header ul li .ico {
           background: #cf1a1e;
           height: 50px;
           text-align: center;
           padding: 0 15px; }
-          /* line 1340, sass/globalhungary.scss */
+          /* line 1344, sass/globalhungary.scss */
           .listing-searcher-holder .searcher-header ul li .ico i {
             color: white;
             padding: 0;
@@ -1243,32 +1247,32 @@ footer .widget_nav_menu ul.menu {
             height: 50px;
             font-size: 24px;
             line-height: 50px; }
-        /* line 1350, sass/globalhungary.scss */
+        /* line 1354, sass/globalhungary.scss */
         .listing-searcher-holder .searcher-header ul li:first-child {
           margin-right: 0; }
-  /* line 1356, sass/globalhungary.scss */
+  /* line 1360, sass/globalhungary.scss */
   .listing-searcher-holder .searcher-wrapper {
     padding: 10px 15px; }
-    /* line 1359, sass/globalhungary.scss */
+    /* line 1363, sass/globalhungary.scss */
     .listing-searcher-holder .searcher-wrapper .form-items {
       display: flex;
       width: 100%;
       flex-wrap: wrap;
       align-items: flex-end; }
-      /* line 1365, sass/globalhungary.scss */
+      /* line 1369, sass/globalhungary.scss */
       .listing-searcher-holder .searcher-wrapper .form-items .inp {
         padding: 8px;
         position: relative; }
-        /* line 1369, sass/globalhungary.scss */
+        /* line 1373, sass/globalhungary.scss */
         .listing-searcher-holder .searcher-wrapper .form-items .inp label {
           line-height: 1;
           color: #878787;
           margin-bottom: 10px;
           display: block; }
-        /* line 1376, sass/globalhungary.scss */
+        /* line 1380, sass/globalhungary.scss */
         .listing-searcher-holder .searcher-wrapper .form-items .inp.inp-submit {
           text-align: right; }
-          /* line 1378, sass/globalhungary.scss */
+          /* line 1382, sass/globalhungary.scss */
           .listing-searcher-holder .searcher-wrapper .form-items .inp.inp-submit button {
             color: white;
             background: #af161a;
@@ -1283,7 +1287,7 @@ footer .widget_nav_menu ul.menu {
             font-size: 1em;
             position: relative;
             text-align: right; }
-            /* line 1393, sass/globalhungary.scss */
+            /* line 1397, sass/globalhungary.scss */
             .listing-searcher-holder .searcher-wrapper .form-items .inp.inp-submit button i {
               background: #e31f24;
               position: absolute;
@@ -1293,38 +1297,38 @@ footer .widget_nav_menu ul.menu {
               color: #fff;
               padding: 0 5px;
               margin: 6px 0 0 5px; }
-            /* line 1404, sass/globalhungary.scss */
+            /* line 1408, sass/globalhungary.scss */
             .listing-searcher-holder .searcher-wrapper .form-items .inp.inp-submit button:hover {
               background: #e31f24;
               cursor: pointer; }
-        /* line 1411, sass/globalhungary.scss */
+        /* line 1415, sass/globalhungary.scss */
         .listing-searcher-holder .searcher-wrapper .form-items .inp.inp-city {
           flex-basis: 40%; }
-        /* line 1414, sass/globalhungary.scss */
+        /* line 1418, sass/globalhungary.scss */
         .listing-searcher-holder .searcher-wrapper .form-items .inp.inp-rooms {
           flex-basis: 15%; }
-        /* line 1417, sass/globalhungary.scss */
+        /* line 1421, sass/globalhungary.scss */
         .listing-searcher-holder .searcher-wrapper .form-items .inp.inp-alapterulet {
           flex-basis: 15%; }
-        /* line 1420, sass/globalhungary.scss */
+        /* line 1424, sass/globalhungary.scss */
         .listing-searcher-holder .searcher-wrapper .form-items .inp.inp-kategoria {
           flex-basis: 30%; }
-        /* line 1423, sass/globalhungary.scss */
+        /* line 1427, sass/globalhungary.scss */
         .listing-searcher-holder .searcher-wrapper .form-items .inp.inp-azonosito {
           flex-basis: 15%; }
-        /* line 1426, sass/globalhungary.scss */
+        /* line 1430, sass/globalhungary.scss */
         .listing-searcher-holder .searcher-wrapper .form-items .inp.inp-status {
           flex-basis: 30%; }
-        /* line 1429, sass/globalhungary.scss */
+        /* line 1433, sass/globalhungary.scss */
         .listing-searcher-holder .searcher-wrapper .form-items .inp.inp-price-min {
           flex-basis: 20%; }
-        /* line 1432, sass/globalhungary.scss */
+        /* line 1436, sass/globalhungary.scss */
         .listing-searcher-holder .searcher-wrapper .form-items .inp.inp-price-max {
           flex-basis: 20%; }
-        /* line 1435, sass/globalhungary.scss */
+        /* line 1439, sass/globalhungary.scss */
         .listing-searcher-holder .searcher-wrapper .form-items .inp.inp-submit {
           flex-basis: 15%; }
-      /* line 1442, sass/globalhungary.scss */
+      /* line 1446, sass/globalhungary.scss */
       .listing-searcher-holder .searcher-wrapper .form-items input[type=text],
       .listing-searcher-holder .searcher-wrapper .form-items input[type=number],
       .listing-searcher-holder .searcher-wrapper .form-items select {
@@ -1335,36 +1339,36 @@ footer .widget_nav_menu ul.menu {
         border: 1px solid #cccccc;
         font-size: 1.2em;
         color: #e31f24; }
-  /* line 1453, sass/globalhungary.scss */
+  /* line 1457, sass/globalhungary.scss */
   .listing-searcher-holder .searcher-footer {
     padding: 15px;
     background: #f2f2f2;
     border-top: 1px solid #cccfd1; }
-  /* line 1461, sass/globalhungary.scss */
+  /* line 1465, sass/globalhungary.scss */
   .listing-searcher-holder.style-v2 .searcher-header, .listing-searcher-holder.style-floating .searcher-header {
     left: -1px;
     right: -1px; }
-    /* line 1464, sass/globalhungary.scss */
+    /* line 1468, sass/globalhungary.scss */
     .listing-searcher-holder.style-v2 .searcher-header ul, .listing-searcher-holder.style-floating .searcher-header ul {
       width: 100%;
       background: #384040; }
-      /* line 1468, sass/globalhungary.scss */
+      /* line 1472, sass/globalhungary.scss */
       .listing-searcher-holder.style-v2 .searcher-header ul li, .listing-searcher-holder.style-floating .searcher-header ul li {
         color: white;
         text-transform: uppercase;
         font-family: 'Arial';
         font-weight: bold; }
-        /* line 1474, sass/globalhungary.scss */
+        /* line 1478, sass/globalhungary.scss */
         .listing-searcher-holder.style-v2 .searcher-header ul li .head-title, .listing-searcher-holder.style-floating .searcher-header ul li .head-title {
           padding-left: 15px;
           display: block; }
-  /* line 1487, sass/globalhungary.scss */
+  /* line 1491, sass/globalhungary.scss */
   .listing-searcher-holder.style-v2 .searcher-wrapper .form-items .inp.inp-city, .listing-searcher-holder.style-v2 .searcher-wrapper .form-items .inp.inp-kategoria, .listing-searcher-holder.style-v2 .searcher-wrapper .form-items .inp.inp-status, .listing-searcher-holder.style-v2 .searcher-wrapper .form-items .inp.inp-azonosito, .listing-searcher-holder.style-floating .searcher-wrapper .form-items .inp.inp-city, .listing-searcher-holder.style-floating .searcher-wrapper .form-items .inp.inp-kategoria, .listing-searcher-holder.style-floating .searcher-wrapper .form-items .inp.inp-status, .listing-searcher-holder.style-floating .searcher-wrapper .form-items .inp.inp-azonosito {
     flex-basis: 100%; }
-  /* line 1493, sass/globalhungary.scss */
+  /* line 1497, sass/globalhungary.scss */
   .listing-searcher-holder.style-v2 .searcher-wrapper .form-items .inp.inp-alapterulet, .listing-searcher-holder.style-v2 .searcher-wrapper .form-items .inp.inp-rooms, .listing-searcher-holder.style-v2 .searcher-wrapper .form-items .inp.inp-price-min, .listing-searcher-holder.style-v2 .searcher-wrapper .form-items .inp.inp-price-max, .listing-searcher-holder.style-floating .searcher-wrapper .form-items .inp.inp-alapterulet, .listing-searcher-holder.style-floating .searcher-wrapper .form-items .inp.inp-rooms, .listing-searcher-holder.style-floating .searcher-wrapper .form-items .inp.inp-price-min, .listing-searcher-holder.style-floating .searcher-wrapper .form-items .inp.inp-price-max {
     flex-basis: 50%; }
-  /* line 1499, sass/globalhungary.scss */
+  /* line 1503, sass/globalhungary.scss */
   .listing-searcher-holder.style-v2 .submit button, .listing-searcher-holder.style-floating .submit button {
     display: block;
     width: 100%;
@@ -1379,22 +1383,22 @@ footer .widget_nav_menu ul.menu {
     font-family: 'Arial';
     font-weight: bold;
     text-transform: uppercase; }
-    /* line 1514, sass/globalhungary.scss */
+    /* line 1518, sass/globalhungary.scss */
     .listing-searcher-holder.style-v2 .submit button i, .listing-searcher-holder.style-floating .submit button i {
       font-size: 20px;
       line-height: 20px;
       margin-right: 10px;
       padding: 0; }
-    /* line 1521, sass/globalhungary.scss */
+    /* line 1525, sass/globalhungary.scss */
     .listing-searcher-holder.style-v2 .submit button:hover, .listing-searcher-holder.style-floating .submit button:hover {
       background: #941919; }
-  /* line 1526, sass/globalhungary.scss */
+  /* line 1530, sass/globalhungary.scss */
   .listing-searcher-holder.style-floating {
     left: -320px; }
-    /* line 1528, sass/globalhungary.scss */
+    /* line 1532, sass/globalhungary.scss */
     .listing-searcher-holder.style-floating .searcher-wrapper {
       padding: 5px; }
-      /* line 1530, sass/globalhungary.scss */
+      /* line 1534, sass/globalhungary.scss */
       .listing-searcher-holder.style-floating .searcher-wrapper .vlabel {
         cursor: pointer;
         background: #B1241C;
@@ -1409,33 +1413,33 @@ footer .widget_nav_menu ul.menu {
         line-height: 1;
         font-size: 1.1em;
         padding: 15px 80px; }
-    /* line 1547, sass/globalhungary.scss */
+    /* line 1551, sass/globalhungary.scss */
     .listing-searcher-holder.style-floating.opened {
       left: 0; }
 
-/* line 1554, sass/globalhungary.scss */
+/* line 1558, sass/globalhungary.scss */
 .listing-sc .header {
   position: relative;
   border-bottom: 1px solid #e8e8e0;
   padding: 10px 0;
   margin-bottom: 25px; }
-  /* line 1556, sass/globalhungary.scss */
+  /* line 1560, sass/globalhungary.scss */
   .listing-sc .header .morev {
     position: absolute;
     right: 0; }
-    /* line 1560, sass/globalhungary.scss */
+    /* line 1564, sass/globalhungary.scss */
     .listing-sc .header .morev a:link, .listing-sc .header .morev a:visited {
       color: #cccfd1; }
-    /* line 1564, sass/globalhungary.scss */
+    /* line 1568, sass/globalhungary.scss */
     .listing-sc .header .morev a:hover {
       color: #e31f24; }
-    /* line 1568, sass/globalhungary.scss */
+    /* line 1572, sass/globalhungary.scss */
     .listing-sc .header .morev i {
       font-size: 34px;
       line-height: 1;
       margin: 0;
       padding: 0; }
-  /* line 1575, sass/globalhungary.scss */
+  /* line 1579, sass/globalhungary.scss */
   .listing-sc .header h2 {
     text-transform: uppercase;
     color: #b2b2b2;
@@ -1443,59 +1447,59 @@ footer .widget_nav_menu ul.menu {
     font-size: 2.2em !important;
     line-height: 1 !important;
     margin: 0 0 0 50px !important; }
-/* line 1588, sass/globalhungary.scss */
+/* line 1592, sass/globalhungary.scss */
 .listing-sc .listing-list-set-watchnow {
   border: 10px solid #cccfd1; }
-  /* line 1590, sass/globalhungary.scss */
+  /* line 1594, sass/globalhungary.scss */
   .listing-sc .listing-list-set-watchnow .header {
     border-bottom: none;
     margin-bottom: 13px; }
-    /* line 1593, sass/globalhungary.scss */
+    /* line 1597, sass/globalhungary.scss */
     .listing-sc .listing-list-set-watchnow .header h2 {
       margin: 0 !important;
       text-align: center;
       font-size: 2em !important; }
 
-/* line 1602, sass/globalhungary.scss */
+/* line 1606, sass/globalhungary.scss */
 .listing-list-holder {
   position: relative; }
 
-/* line 1606, sass/globalhungary.scss */
+/* line 1610, sass/globalhungary.scss */
 .prop-list {
   margin: -10px; }
-  /* line 1609, sass/globalhungary.scss */
+  /* line 1613, sass/globalhungary.scss */
   .prop-list .prop-list-info {
     position: absolute;
     right: 0;
     top: 0;
     text-align: right; }
-    /* line 1615, sass/globalhungary.scss */
+    /* line 1619, sass/globalhungary.scss */
     .prop-list .prop-list-info .total {
       font-size: 1.15em;
       color: black; }
-    /* line 1620, sass/globalhungary.scss */
+    /* line 1624, sass/globalhungary.scss */
     .prop-list .prop-list-info .pages {
       color: #9e9e9e;
       font-size: 0.7em; }
-      /* line 1624, sass/globalhungary.scss */
+      /* line 1628, sass/globalhungary.scss */
       .prop-list .prop-list-info .pages strong {
         color: #444444; }
-  /* line 1630, sass/globalhungary.scss */
+  /* line 1634, sass/globalhungary.scss */
   .prop-list .prop-wrapper {
     display: flex;
     flex-wrap: wrap;
     width: 100%; }
-    /* line 1635, sass/globalhungary.scss */
+    /* line 1639, sass/globalhungary.scss */
     .prop-list .prop-wrapper > .prop-item {
       width: calc(100% / 3);
       padding: 10px; }
-      /* line 1639, sass/globalhungary.scss */
+      /* line 1643, sass/globalhungary.scss */
       .prop-list .prop-wrapper > .prop-item .prop-item-wrapper {
         position: relative; }
-        /* line 1641, sass/globalhungary.scss */
+        /* line 1645, sass/globalhungary.scss */
         .prop-list .prop-wrapper > .prop-item .prop-item-wrapper .top-wp {
           position: relative; }
-        /* line 1645, sass/globalhungary.scss */
+        /* line 1649, sass/globalhungary.scss */
         .prop-list .prop-wrapper > .prop-item .prop-item-wrapper .features > div {
           position: absolute;
           z-index: 100;
@@ -1503,21 +1507,21 @@ footer .widget_nav_menu ul.menu {
           font-size: 0.8em;
           padding: 4px 8px;
           pointer-events: none; }
-        /* line 1654, sass/globalhungary.scss */
+        /* line 1658, sass/globalhungary.scss */
         .prop-list .prop-wrapper > .prop-item .prop-item-wrapper .features .status {
           background: #26292b; }
-          /* line 1657, sass/globalhungary.scss */
+          /* line 1661, sass/globalhungary.scss */
           .prop-list .prop-wrapper > .prop-item .prop-item-wrapper .features .status.status-elado {
             background: #e31f24; }
-          /* line 1660, sass/globalhungary.scss */
+          /* line 1664, sass/globalhungary.scss */
           .prop-list .prop-wrapper > .prop-item .prop-item-wrapper .features .status.status-berbeado {
             background: #ffa700; }
-        /* line 1665, sass/globalhungary.scss */
+        /* line 1669, sass/globalhungary.scss */
         .prop-list .prop-wrapper > .prop-item .prop-item-wrapper .features .dropoff {
           right: 5px;
           top: 10px;
           z-index: 90; }
-        /* line 1671, sass/globalhungary.scss */
+        /* line 1675, sass/globalhungary.scss */
         .prop-list .prop-wrapper > .prop-item .prop-item-wrapper .features .photo {
           bottom: 3px;
           left: 3px;
@@ -1525,11 +1529,11 @@ footer .widget_nav_menu ul.menu {
           z-index: 100;
           opacity: 1;
           filter: alpha(opacity=100); }
-          /* line 1679, sass/globalhungary.scss */
+          /* line 1683, sass/globalhungary.scss */
           .prop-list .prop-wrapper > .prop-item .prop-item-wrapper .features .photo img {
             height: 25px;
             margin-right: 5px; }
-        /* line 1685, sass/globalhungary.scss */
+        /* line 1689, sass/globalhungary.scss */
         .prop-list .prop-wrapper > .prop-item .prop-item-wrapper .features .newi {
           bottom: -13px;
           line-height: 1;
@@ -1537,18 +1541,18 @@ footer .widget_nav_menu ul.menu {
           right: 22px;
           background: #e31f24;
           text-transform: uppercase; }
-        /* line 1694, sass/globalhungary.scss */
+        /* line 1698, sass/globalhungary.scss */
         .prop-list .prop-wrapper > .prop-item .prop-item-wrapper .features .highlight {
           top: 0;
           right: 0;
           background: #e31f24; }
-        /* line 1700, sass/globalhungary.scss */
+        /* line 1704, sass/globalhungary.scss */
         .prop-list .prop-wrapper > .prop-item .prop-item-wrapper .image {
           position: relative;
           width: 100%;
           height: 172px;
           overflow: hidden; }
-          /* line 1706, sass/globalhungary.scss */
+          /* line 1710, sass/globalhungary.scss */
           .prop-list .prop-wrapper > .prop-item .prop-item-wrapper .image img {
             height: 125%;
             max-height: 125%;
@@ -1560,7 +1564,7 @@ footer .widget_nav_menu ul.menu {
             -webkit-transform: translate(-50%, -50%);
             -moz-transform: translate(-50%, -50%);
             transform: translate(-50%, -50%); }
-          /* line 1718, sass/globalhungary.scss */
+          /* line 1722, sass/globalhungary.scss */
           .prop-list .prop-wrapper > .prop-item .prop-item-wrapper .image .excerpt {
             padding: 7px;
             font-size: 0.7em;
@@ -1572,85 +1576,85 @@ footer .widget_nav_menu ul.menu {
             right: 0;
             width: 100%;
             pointer-events: none; }
-        /* line 1732, sass/globalhungary.scss */
+        /* line 1736, sass/globalhungary.scss */
         .prop-list .prop-wrapper > .prop-item .prop-item-wrapper .prim-line {
           display: flex;
           width: 100%; }
-          /* line 1736, sass/globalhungary.scss */
+          /* line 1740, sass/globalhungary.scss */
           .prop-list .prop-wrapper > .prop-item .prop-item-wrapper .prim-line > .pos {
             flex-basis: 75%;
             text-align: left;
             padding: 10px; }
-            /* line 1741, sass/globalhungary.scss */
+            /* line 1745, sass/globalhungary.scss */
             .prop-list .prop-wrapper > .prop-item .prop-item-wrapper .prim-line > .pos .region {
               font-weight: bold;
               font-size: 0.9em;
               font-family: 'Arial', sans; }
-              /* line 1745, sass/globalhungary.scss */
+              /* line 1749, sass/globalhungary.scss */
               .prop-list .prop-wrapper > .prop-item .prop-item-wrapper .prim-line > .pos .region .sep {
                 font-weight: normal;
                 color: #7a8389; }
-            /* line 1751, sass/globalhungary.scss */
+            /* line 1755, sass/globalhungary.scss */
             .prop-list .prop-wrapper > .prop-item .prop-item-wrapper .prim-line > .pos .title {
               font-size: 0.8em;
               line-height: 1;
               color: #889095; }
-          /* line 1757, sass/globalhungary.scss */
+          /* line 1761, sass/globalhungary.scss */
           .prop-list .prop-wrapper > .prop-item .prop-item-wrapper .prim-line > .fav {
             flex-basis: 25%;
             text-align: center; }
-            /* line 1761, sass/globalhungary.scss */
+            /* line 1765, sass/globalhungary.scss */
             .prop-list .prop-wrapper > .prop-item .prop-item-wrapper .prim-line > .fav i {
               line-height: 63px;
               font-size: 24px;
               padding: 0;
               margin: 0;
               cursor: pointer; }
-              /* line 1768, sass/globalhungary.scss */
+              /* line 1772, sass/globalhungary.scss */
               .prop-list .prop-wrapper > .prop-item .prop-item-wrapper .prim-line > .fav i.hl {
                 color: white; }
-        /* line 1774, sass/globalhungary.scss */
+        /* line 1778, sass/globalhungary.scss */
         .prop-list .prop-wrapper > .prop-item .prop-item-wrapper .sec-line {
           display: flex;
           width: 100%;
           align-items: center; }
-          /* line 1779, sass/globalhungary.scss */
+          /* line 1783, sass/globalhungary.scss */
           .prop-list .prop-wrapper > .prop-item .prop-item-wrapper .sec-line > .price {
             flex-basis: 70%;
             padding: 8px 10px;
             font-size: 1.45em; }
-            /* line 1783, sass/globalhungary.scss */
+            /* line 1787, sass/globalhungary.scss */
             .prop-list .prop-wrapper > .prop-item .prop-item-wrapper .sec-line > .price .type {
               font-size: 0.8em; }
-          /* line 1787, sass/globalhungary.scss */
+          /* line 1791, sass/globalhungary.scss */
           .prop-list .prop-wrapper > .prop-item .prop-item-wrapper .sec-line > .linkto {
             flex-basis: 30%;
             text-align: center;
             padding: 5px; }
-            /* line 1791, sass/globalhungary.scss */
+            /* line 1795, sass/globalhungary.scss */
             .prop-list .prop-wrapper > .prop-item .prop-item-wrapper .sec-line > .linkto a {
               padding: 5px 0;
               font-size: 0.9em;
               display: block;
               border-radius: 5px; }
-        /* line 1801, sass/globalhungary.scss */
+        /* line 1805, sass/globalhungary.scss */
         .prop-list .prop-wrapper > .prop-item .prop-item-wrapper:hover .excerpt {
           bottom: 0%; }
-        /* line 1804, sass/globalhungary.scss */
+        /* line 1808, sass/globalhungary.scss */
         .prop-list .prop-wrapper > .prop-item .prop-item-wrapper:hover .photo {
           opacity: 0.1;
           filter: alpha(opacity=10); }
-        /* line 1810, sass/globalhungary.scss */
+        /* line 1814, sass/globalhungary.scss */
         .prop-list .prop-wrapper > .prop-item .prop-item-wrapper .important-options {
           display: flex;
           width: 100%;
           background: #f5f5f5; }
-          /* line 1815, sass/globalhungary.scss */
+          /* line 1819, sass/globalhungary.scss */
           .prop-list .prop-wrapper > .prop-item .prop-item-wrapper .important-options > .opt {
             flex-basis: 25%;
             font-size: 0.7em;
             border-right: 1px solid #cccccc; }
-            /* line 1820, sass/globalhungary.scss */
+            /* line 1824, sass/globalhungary.scss */
             .prop-list .prop-wrapper > .prop-item .prop-item-wrapper .important-options > .opt .head {
               background: #8a8a8a;
               color: white;
@@ -1658,91 +1662,91 @@ footer .widget_nav_menu ul.menu {
               padding: 2px 0;
               text-align: center;
               border-bottom: 1px solid #cccccc; }
-            /* line 1828, sass/globalhungary.scss */
+            /* line 1832, sass/globalhungary.scss */
             .prop-list .prop-wrapper > .prop-item .prop-item-wrapper .important-options > .opt .d {
               padding: 5px 0;
               line-height: 16px;
               font-size: 0.9em;
               color: #91999c;
               text-align: center; }
-              /* line 1834, sass/globalhungary.scss */
+              /* line 1838, sass/globalhungary.scss */
               .prop-list .prop-wrapper > .prop-item .prop-item-wrapper .important-options > .opt .d .ico {
                 height: 16px;
                 float: left;
                 margin: 0 0 0 5px; }
-                /* line 1838, sass/globalhungary.scss */
+                /* line 1842, sass/globalhungary.scss */
                 .prop-list .prop-wrapper > .prop-item .prop-item-wrapper .important-options > .opt .d .ico img {
                   height: 100%; }
-          /* line 1845, sass/globalhungary.scss */
+          /* line 1849, sass/globalhungary.scss */
           .prop-list .prop-wrapper > .prop-item .prop-item-wrapper .important-options > .opt:last-child {
             border-right: none; }
-  /* line 1854, sass/globalhungary.scss */
+  /* line 1858, sass/globalhungary.scss */
   .prop-list.style-standard .prop-item-wrapper {
     border: 1px solid #d9d9d9; }
-    /* line 1857, sass/globalhungary.scss */
+    /* line 1861, sass/globalhungary.scss */
     .prop-list.style-standard .prop-item-wrapper .dropoff {
       right: 5px !important;
       top: 10px !important; }
-    /* line 1863, sass/globalhungary.scss */
+    /* line 1867, sass/globalhungary.scss */
     .prop-list.style-standard .prop-item-wrapper .image .excerpt {
       background: rgba(214, 44, 48, 0.8);
       padding: 10px;
       font-size: 0.8em;
       color: white; }
-    /* line 1871, sass/globalhungary.scss */
+    /* line 1875, sass/globalhungary.scss */
     .prop-list.style-standard .prop-item-wrapper .prim-line {
       background: #323639;
       color: #f5f5f5; }
-      /* line 1874, sass/globalhungary.scss */
+      /* line 1878, sass/globalhungary.scss */
       .prop-list.style-standard .prop-item-wrapper .prim-line > .fav {
         border-left: 1px solid #3e4346; }
-        /* line 1877, sass/globalhungary.scss */
+        /* line 1881, sass/globalhungary.scss */
         .prop-list.style-standard .prop-item-wrapper .prim-line > .fav i {
           color: #565d61; }
-          /* line 1879, sass/globalhungary.scss */
+          /* line 1883, sass/globalhungary.scss */
           .prop-list.style-standard .prop-item-wrapper .prim-line > .fav i:hover, .prop-list.style-standard .prop-item-wrapper .prim-line > .fav i.active {
             color: #ffffff; }
-    /* line 1885, sass/globalhungary.scss */
+    /* line 1889, sass/globalhungary.scss */
     .prop-list.style-standard .prop-item-wrapper .sec-line {
       background: #d62c30;
       color: #f5f5f5; }
-      /* line 1890, sass/globalhungary.scss */
+      /* line 1894, sass/globalhungary.scss */
       .prop-list.style-standard .prop-item-wrapper .sec-line > .linkto a {
         background: #b8171b;
         color: #f5f5f5; }
-  /* line 1900, sass/globalhungary.scss */
+  /* line 1904, sass/globalhungary.scss */
   .prop-list.style-simple-priced .prop-item-wrapper {
     border: 1px solid #d9d9d9; }
-    /* line 1902, sass/globalhungary.scss */
+    /* line 1906, sass/globalhungary.scss */
     .prop-list.style-simple-priced .prop-item-wrapper .image {
       height: 140px !important; }
-      /* line 1904, sass/globalhungary.scss */
+      /* line 1908, sass/globalhungary.scss */
       .prop-list.style-simple-priced .prop-item-wrapper .image .excerpt {
         background: rgba(214, 44, 48, 0.81);
         padding: 10px;
         font-size: 0.8em;
         color: white; }
-    /* line 1911, sass/globalhungary.scss */
+    /* line 1915, sass/globalhungary.scss */
     .prop-list.style-simple-priced .prop-item-wrapper .sec-line {
       background: #d62c30;
       color: #f5f5f5; }
-      /* line 1915, sass/globalhungary.scss */
+      /* line 1919, sass/globalhungary.scss */
       .prop-list.style-simple-priced .prop-item-wrapper .sec-line .price {
         flex-basis: 100% !important;
         text-align: center; }
-  /* line 1923, sass/globalhungary.scss */
+  /* line 1927, sass/globalhungary.scss */
   .prop-list.style-simple {
     margin: 0; }
-    /* line 1925, sass/globalhungary.scss */
+    /* line 1929, sass/globalhungary.scss */
     .prop-list.style-simple .prop-item {
       padding: 5px 10px !important; }
-    /* line 1928, sass/globalhungary.scss */
+    /* line 1932, sass/globalhungary.scss */
     .prop-list.style-simple .prop-item:last-child {
       padding-bottom: 10px !important; }
-    /* line 1931, sass/globalhungary.scss */
+    /* line 1935, sass/globalhungary.scss */
     .prop-list.style-simple .prop-item-wrapper {
       border: 1px solid #d9d9d9; }
-      /* line 1933, sass/globalhungary.scss */
+      /* line 1937, sass/globalhungary.scss */
       .prop-list.style-simple .prop-item-wrapper .newi {
         bottom: -32px !important;
         right: 0 !important;
@@ -1750,40 +1754,40 @@ footer .widget_nav_menu ul.menu {
         padding: 0 !important;
         text-align: center !important;
         width: 32px !important; }
-      /* line 1941, sass/globalhungary.scss */
+      /* line 1945, sass/globalhungary.scss */
       .prop-list.style-simple .prop-item-wrapper .dropoff {
         right: 5px !important;
         top: 10px !important; }
-      /* line 1945, sass/globalhungary.scss */
+      /* line 1949, sass/globalhungary.scss */
       .prop-list.style-simple .prop-item-wrapper .image {
         height: 140px !important; }
-        /* line 1947, sass/globalhungary.scss */
+        /* line 1951, sass/globalhungary.scss */
         .prop-list.style-simple .prop-item-wrapper .image .excerpt {
           background: rgba(214, 44, 48, 0.8);
           padding: 10px;
           font-size: 0.8em;
           color: white; }
-      /* line 1954, sass/globalhungary.scss */
+      /* line 1958, sass/globalhungary.scss */
       .prop-list.style-simple .prop-item-wrapper .line-region {
         background: #333b3b;
         color: #f5f5f5;
         padding: 5px 10px; }
-      /* line 1959, sass/globalhungary.scss */
+      /* line 1963, sass/globalhungary.scss */
       .prop-list.style-simple .prop-item-wrapper .line-price {
         background: #91999c;
         color: #f5f5f5;
         padding: 8px 12px; }
-  /* line 1969, sass/globalhungary.scss */
+  /* line 1973, sass/globalhungary.scss */
   .prop-list.im1 .prop-wrapper .prop-item {
     width: calc(100% / 1); }
-  /* line 1977, sass/globalhungary.scss */
+  /* line 1981, sass/globalhungary.scss */
   .prop-list.im4 .prop-wrapper .prop-item {
     width: calc(100% / 4); }
-  /* line 1984, sass/globalhungary.scss */
+  /* line 1988, sass/globalhungary.scss */
   .prop-list.im5 .prop-wrapper .prop-item {
     width: calc(100% / 5); }
 
-/* line 1991, sass/globalhungary.scss */
+/* line 1995, sass/globalhungary.scss */
 .autocomplete-suggestions {
   background: #fff;
   border: 1px solid #ccc;
@@ -1793,33 +1797,33 @@ footer .widget_nav_menu ul.menu {
   -webkit-box-shadow: 0 10px 26px -9px #8e8e8e;
   -moz-box-shadow: 0 10px 26px -9px #8e8e8e;
   box-shadow: 0 10px 26px -9px #8e8e8e; }
-  /* line 2001, sass/globalhungary.scss */
+  /* line 2005, sass/globalhungary.scss */
   .autocomplete-suggestions .autocomplete-suggestion {
     padding: 10px;
     font-size: 1.1em; }
-    /* line 2005, sass/globalhungary.scss */
+    /* line 2009, sass/globalhungary.scss */
     .autocomplete-suggestions .autocomplete-suggestion strong {
       color: black; }
-    /* line 2009, sass/globalhungary.scss */
+    /* line 2013, sass/globalhungary.scss */
     .autocomplete-suggestions .autocomplete-suggestion:hover {
       background: #e8e8e8;
       color: #585858; }
-      /* line 2013, sass/globalhungary.scss */
+      /* line 2017, sass/globalhungary.scss */
       .autocomplete-suggestions .autocomplete-suggestion:hover strong {
         color: #e31f24; }
 
-/* line 2018, sass/globalhungary.scss */
+/* line 2022, sass/globalhungary.scss */
 .listing-nodata {
   text-align: center;
   color: #aaaaaa;
   padding: 80px 0; }
-  /* line 2023, sass/globalhungary.scss */
+  /* line 2027, sass/globalhungary.scss */
   .listing-nodata h2 {
     font-size: 2.8em;
     margin: 0;
     font-weight: 100; }
 
-/* line 2033, sass/globalhungary.scss */
+/* line 2037, sass/globalhungary.scss */
 .ingatlan-page-view .search-side,
 .ingatlan-page-view .listing-content,
 .kedvencek-page-view .search-side,
@@ -1827,20 +1831,20 @@ footer .widget_nav_menu ul.menu {
   display: inline-block;
   vertical-align: top;
   float: left; }
-/* line 2038, sass/globalhungary.scss */
+/* line 2042, sass/globalhungary.scss */
 .ingatlan-page-view .search-side,
 .kedvencek-page-view .search-side {
   width: 25%;
   padding-top: 40px; }
-/* line 2042, sass/globalhungary.scss */
+/* line 2046, sass/globalhungary.scss */
 .ingatlan-page-view .listing-content,
 .kedvencek-page-view .listing-content {
   width: 75%; }
-  /* line 2045, sass/globalhungary.scss */
+  /* line 2049, sass/globalhungary.scss */
   .ingatlan-page-view .listing-content .listing-wrapper,
   .kedvencek-page-view .listing-content .listing-wrapper {
     padding-left: 25px; }
-    /* line 2048, sass/globalhungary.scss */
+    /* line 2052, sass/globalhungary.scss */
     .ingatlan-page-view .listing-content .listing-wrapper h1,
     .kedvencek-page-view .listing-content .listing-wrapper h1 {
       color: #e31f24;
@@ -1849,7 +1853,7 @@ footer .widget_nav_menu ul.menu {
       line-height: 1;
       font-size: 2.3em;
       text-transform: uppercase; }
-    /* line 2057, sass/globalhungary.scss */
+    /* line 2061, sass/globalhungary.scss */
     .ingatlan-page-view .listing-content .listing-wrapper h1 + .subtitle,
     .kedvencek-page-view .listing-content .listing-wrapper h1 + .subtitle {
       font-size: 1.2em;
@@ -1857,16 +1861,16 @@ footer .widget_nav_menu ul.menu {
       font-style: italic;
       color: #6c6c6c; }
 
-/* line 2067, sass/globalhungary.scss */
+/* line 2071, sass/globalhungary.scss */
 .tglwatcher {
   cursor: pointer; }
 
-/* line 2072, sass/globalhungary.scss */
+/* line 2076, sass/globalhungary.scss */
 .tglwatcher-wrapper,
 .select-wrapper {
   position: relative;
   cursor: pointer; }
-  /* line 2076, sass/globalhungary.scss */
+  /* line 2080, sass/globalhungary.scss */
   .tglwatcher-wrapper:after,
   .select-wrapper:after {
     pointer-events: none;
@@ -1881,22 +1885,22 @@ footer .widget_nav_menu ul.menu {
     text-align: center;
     line-height: 34px;
     color: #fff; }
-  /* line 2092, sass/globalhungary.scss */
+  /* line 2096, sass/globalhungary.scss */
   .tglwatcher-wrapper.tgl-def:after,
   .select-wrapper.tgl-def:after {
     height: 40px;
     line-height: 40px; }
 
-/* line 2099, sass/globalhungary.scss */
+/* line 2103, sass/globalhungary.scss */
 .multi-selector-holder {
   position: absolute;
   width: 100%;
   z-index: 1000;
   display: none; }
-  /* line 2105, sass/globalhungary.scss */
+  /* line 2109, sass/globalhungary.scss */
   .multi-selector-holder.opened {
     display: block; }
-  /* line 2109, sass/globalhungary.scss */
+  /* line 2113, sass/globalhungary.scss */
   .multi-selector-holder .selector-wrapper {
     background: #ffffff;
     border: 1px solid #cccccc;
@@ -1906,57 +1910,57 @@ footer .widget_nav_menu ul.menu {
     -webkit-box-shadow: 0 10px 26px -9px #8e8e8e;
     -moz-box-shadow: 0 10px 26px -9px #8e8e8e;
     box-shadow: 0 10px 26px -9px #8e8e8e; }
-    /* line 2120, sass/globalhungary.scss */
+    /* line 2124, sass/globalhungary.scss */
     .multi-selector-holder .selector-wrapper .selector-row input[type=checkbox] + label {
       padding: 5px 5px 5px 35px;
       margin: 0 0 1px 0; }
-      /* line 2124, sass/globalhungary.scss */
+      /* line 2128, sass/globalhungary.scss */
       .multi-selector-holder .selector-wrapper .selector-row input[type=checkbox] + label .n {
         color: #d2d2d2;
         font-size: 0.85em; }
-      /* line 2128, sass/globalhungary.scss */
+      /* line 2132, sass/globalhungary.scss */
       .multi-selector-holder .selector-wrapper .selector-row input[type=checkbox] + label:before {
         left: 10px; }
-    /* line 2133, sass/globalhungary.scss */
+    /* line 2137, sass/globalhungary.scss */
     .multi-selector-holder .selector-wrapper .selector-row input[type=checkbox] + label:hover,
     .multi-selector-holder .selector-wrapper .selector-row input[type=checkbox]:checked + label {
       background: #585a5d;
       color: white; }
-      /* line 2137, sass/globalhungary.scss */
+      /* line 2141, sass/globalhungary.scss */
       .multi-selector-holder .selector-wrapper .selector-row input[type=checkbox] + label:hover:before,
       .multi-selector-holder .selector-wrapper .selector-row input[type=checkbox]:checked + label:before {
         color: white; }
-    /* line 2142, sass/globalhungary.scss */
+    /* line 2146, sass/globalhungary.scss */
     .multi-selector-holder .selector-wrapper .selector-row.lvl-1 label {
       padding-left: 45px !important; }
-      /* line 2144, sass/globalhungary.scss */
+      /* line 2148, sass/globalhungary.scss */
       .multi-selector-holder .selector-wrapper .selector-row.lvl-1 label:before {
         left: 20px !important; }
-    /* line 2150, sass/globalhungary.scss */
+    /* line 2154, sass/globalhungary.scss */
     .multi-selector-holder .selector-wrapper.sel-def {
       margin-top: -2px;
       margin-right: 30px; }
 
-/* line 2159, sass/globalhungary.scss */
+/* line 2163, sass/globalhungary.scss */
 .ingatlan-page-view .data-top,
 .ingatlan-page-view .data-main {
   display: flex;
   width: 100%; }
-  /* line 2163, sass/globalhungary.scss */
+  /* line 2167, sass/globalhungary.scss */
   .ingatlan-page-view .data-top > .data-top-left,
   .ingatlan-page-view .data-main > .data-top-left {
     flex-basis: 70%; }
-    /* line 2166, sass/globalhungary.scss */
+    /* line 2170, sass/globalhungary.scss */
     .ingatlan-page-view .data-top > .data-top-left .cwrapper,
     .ingatlan-page-view .data-main > .data-top-left .cwrapper {
       padding-right: 10px;
       position: relative; }
-      /* line 2170, sass/globalhungary.scss */
+      /* line 2174, sass/globalhungary.scss */
       .ingatlan-page-view .data-top > .data-top-left .cwrapper .title,
       .ingatlan-page-view .data-main > .data-top-left .cwrapper .title {
         margin: 0 0 10px 0;
         position: relative; }
-        /* line 2173, sass/globalhungary.scss */
+        /* line 2177, sass/globalhungary.scss */
         .ingatlan-page-view .data-top > .data-top-left .cwrapper .title h1,
         .ingatlan-page-view .data-main > .data-top-left .cwrapper .title h1 {
           margin: 0 123px 0 0;
@@ -1967,31 +1971,31 @@ footer .widget_nav_menu ul.menu {
           font-family: 'Arial';
           font-weight: bold;
           letter-spacing: -1px; }
-        /* line 2184, sass/globalhungary.scss */
+        /* line 2188, sass/globalhungary.scss */
         .ingatlan-page-view .data-top > .data-top-left .cwrapper .title .subtitle,
         .ingatlan-page-view .data-main > .data-top-left .cwrapper .title .subtitle {
           font-size: 0.8em;
           line-height: 1.3; }
-          /* line 2187, sass/globalhungary.scss */
+          /* line 2191, sass/globalhungary.scss */
           .ingatlan-page-view .data-top > .data-top-left .cwrapper .title .subtitle .addr,
           .ingatlan-page-view .data-main > .data-top-left .cwrapper .title .subtitle .addr {
             color: #888888;
             font-weight: normal;
             margin-right: 15px; }
-        /* line 2194, sass/globalhungary.scss */
+        /* line 2198, sass/globalhungary.scss */
         .ingatlan-page-view .data-top > .data-top-left .cwrapper .title .icons,
         .ingatlan-page-view .data-main > .data-top-left .cwrapper .title .icons {
           position: absolute;
           right: 0;
           top: 0; }
-          /* line 2198, sass/globalhungary.scss */
+          /* line 2202, sass/globalhungary.scss */
           .ingatlan-page-view .data-top > .data-top-left .cwrapper .title .icons > div,
           .ingatlan-page-view .data-main > .data-top-left .cwrapper .title .icons > div {
             display: inline-block;
             *display: inline;
             zoom: 1;
             margin-left: 5px; }
-            /* line 2204, sass/globalhungary.scss */
+            /* line 2208, sass/globalhungary.scss */
             .ingatlan-page-view .data-top > .data-top-left .cwrapper .title .icons > div a,
             .ingatlan-page-view .data-main > .data-top-left .cwrapper .title .icons > div a {
               display: block;
@@ -2002,36 +2006,36 @@ footer .widget_nav_menu ul.menu {
               text-align: center;
               color: #757575;
               font-size: 22px; }
-              /* line 2214, sass/globalhungary.scss */
+              /* line 2218, sass/globalhungary.scss */
               .ingatlan-page-view .data-top > .data-top-left .cwrapper .title .icons > div a i,
               .ingatlan-page-view .data-main > .data-top-left .cwrapper .title .icons > div a i {
                 margin: 0;
                 padding: 0; }
-            /* line 2220, sass/globalhungary.scss */
+            /* line 2224, sass/globalhungary.scss */
             .ingatlan-page-view .data-top > .data-top-left .cwrapper .title .icons > div.facebook a,
             .ingatlan-page-view .data-main > .data-top-left .cwrapper .title .icons > div.facebook a {
               background: #0061ad;
               color: white; }
-              /* line 2223, sass/globalhungary.scss */
+              /* line 2227, sass/globalhungary.scss */
               .ingatlan-page-view .data-top > .data-top-left .cwrapper .title .icons > div.facebook a:hover,
               .ingatlan-page-view .data-main > .data-top-left .cwrapper .title .icons > div.facebook a:hover {
                 background: #00447a; }
-            /* line 2229, sass/globalhungary.scss */
+            /* line 2233, sass/globalhungary.scss */
             .ingatlan-page-view .data-top > .data-top-left .cwrapper .title .icons > div.gplus a,
             .ingatlan-page-view .data-main > .data-top-left .cwrapper .title .icons > div.gplus a {
               background: #bf2121;
               color: white; }
-              /* line 2232, sass/globalhungary.scss */
+              /* line 2236, sass/globalhungary.scss */
               .ingatlan-page-view .data-top > .data-top-left .cwrapper .title .icons > div.gplus a:hover,
               .ingatlan-page-view .data-main > .data-top-left .cwrapper .title .icons > div.gplus a:hover {
                 background: #941919; }
-      /* line 2242, sass/globalhungary.scss */
+      /* line 2246, sass/globalhungary.scss */
       .ingatlan-page-view .data-top > .data-top-left .cwrapper .images .profil,
       .ingatlan-page-view .data-main > .data-top-left .cwrapper .images .profil {
         position: relative;
         height: 600px;
         overflow: hidden; }
-        /* line 2247, sass/globalhungary.scss */
+        /* line 2251, sass/globalhungary.scss */
         .ingatlan-page-view .data-top > .data-top-left .cwrapper .images .profil img,
         .ingatlan-page-view .data-main > .data-top-left .cwrapper .images .profil img {
           position: absolute;
@@ -2042,55 +2046,55 @@ footer .widget_nav_menu ul.menu {
           -webkit-transform: translate(-50%, -50%);
           -moz-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%); }
-      /* line 2260, sass/globalhungary.scss */
+      /* line 2264, sass/globalhungary.scss */
       .ingatlan-page-view .data-top > .data-top-left .cwrapper .images .stack .stack-wrapper .items,
       .ingatlan-page-view .data-main > .data-top-left .cwrapper .images .stack .stack-wrapper .items {
         width: 100%;
         table-layout: fixed;
         display: table;
         margin-top: -25px; }
-  /* line 2271, sass/globalhungary.scss */
+  /* line 2275, sass/globalhungary.scss */
   .ingatlan-page-view .data-top > .data-top-right,
   .ingatlan-page-view .data-main > .data-top-right {
     flex-basis: 30%; }
-  /* line 2275, sass/globalhungary.scss */
+  /* line 2279, sass/globalhungary.scss */
   .ingatlan-page-view .data-top > .data-main-left,
   .ingatlan-page-view .data-main > .data-main-left {
     flex-basis: 50%; }
-  /* line 2278, sass/globalhungary.scss */
+  /* line 2282, sass/globalhungary.scss */
   .ingatlan-page-view .data-top > .data-main-right,
   .ingatlan-page-view .data-main > .data-main-right {
     flex-basis: 50%; }
-/* line 2283, sass/globalhungary.scss */
+/* line 2287, sass/globalhungary.scss */
 .ingatlan-page-view .data-main {
   margin: 25px 0 20px 0; }
-/* line 2288, sass/globalhungary.scss */
+/* line 2292, sass/globalhungary.scss */
 .ingatlan-page-view .properties .header {
   padding: 12px 15px;
   background: #e31f24;
   border: 1px solid #b8171b;
   color: white;
   line-height: 26px; }
-  /* line 2295, sass/globalhungary.scss */
+  /* line 2299, sass/globalhungary.scss */
   .ingatlan-page-view .properties .header .old-price {
     float: left;
     text-decoration: line-through; }
-  /* line 2299, sass/globalhungary.scss */
+  /* line 2303, sass/globalhungary.scss */
   .ingatlan-page-view .properties .header .current-price {
     font-family: 'Arial';
     font-weight: bold;
     font-size: 1.6em;
     float: right; }
-/* line 2307, sass/globalhungary.scss */
+/* line 2311, sass/globalhungary.scss */
 .ingatlan-page-view .properties .list {
   border: 1px solid #d7d7d7;
   border-top: none; }
-  /* line 2311, sass/globalhungary.scss */
+  /* line 2315, sass/globalhungary.scss */
   .ingatlan-page-view .properties .list .e {
     border-bottom: 1px solid #e0dede;
     padding: 11px 0;
     font-size: 0.94em; }
-    /* line 2317, sass/globalhungary.scss */
+    /* line 2321, sass/globalhungary.scss */
     .ingatlan-page-view .properties .list .e .h,
     .ingatlan-page-view .properties .list .e .v {
       display: inline-block;
@@ -2100,7 +2104,7 @@ footer .widget_nav_menu ul.menu {
       width: 50%;
       line-height: 20px;
       margin: 0 -1px; }
-      /* line 2326, sass/globalhungary.scss */
+      /* line 2330, sass/globalhungary.scss */
       .ingatlan-page-view .properties .list .e .h .na,
       .ingatlan-page-view .properties .list .e .v .na {
         font-style: italic;
@@ -2108,51 +2112,51 @@ footer .widget_nav_menu ul.menu {
         color: #949494;
         font-size: 0.9em;
         letter-spacing: -0.4px; }
-  /* line 2336, sass/globalhungary.scss */
+  /* line 2340, sass/globalhungary.scss */
   .ingatlan-page-view .properties .list .h {
     color: #262D2D;
     padding-left: 25px; }
-    /* line 2339, sass/globalhungary.scss */
+    /* line 2343, sass/globalhungary.scss */
     .ingatlan-page-view .properties .list .h .ico {
       float: left;
       padding-right: 10px; }
-      /* line 2343, sass/globalhungary.scss */
+      /* line 2347, sass/globalhungary.scss */
       .ingatlan-page-view .properties .list .h .ico img {
         width: 20px;
         height: 20px; }
-  /* line 2350, sass/globalhungary.scss */
+  /* line 2354, sass/globalhungary.scss */
   .ingatlan-page-view .properties .list .v {
     font-weight: bold;
     font-family: 'Arial';
     color: black; }
-  /* line 2356, sass/globalhungary.scss */
+  /* line 2360, sass/globalhungary.scss */
   .ingatlan-page-view .properties .list .e:nth-child(even) {
     background: #F9F9F9; }
-  /* line 2360, sass/globalhungary.scss */
+  /* line 2364, sass/globalhungary.scss */
   .ingatlan-page-view .properties .list .e:last-child {
     border-bottom: none; }
-/* line 2365, sass/globalhungary.scss */
+/* line 2369, sass/globalhungary.scss */
 .ingatlan-page-view .properties .cube-properties {
   display: flex;
   flex-wrap: wrap;
   font-size: 0.9em; }
-  /* line 2370, sass/globalhungary.scss */
+  /* line 2374, sass/globalhungary.scss */
   .ingatlan-page-view .properties .cube-properties .cb {
     color: #cccfd1;
     text-align: center;
     flex-basis: calc(100%/3);
     border-right: 1px solid #f1f1f1; }
-    /* line 2376, sass/globalhungary.scss */
+    /* line 2380, sass/globalhungary.scss */
     .ingatlan-page-view .properties .cube-properties .cb .t {
       text-align: center;
       padding: 8px 0; }
-    /* line 2380, sass/globalhungary.scss */
+    /* line 2384, sass/globalhungary.scss */
     .ingatlan-page-view .properties .cube-properties .cb .i {
       position: relative;
       margin: 0 auto 10px auto;
       width: 20px;
       height: 20px; }
-      /* line 2386, sass/globalhungary.scss */
+      /* line 2390, sass/globalhungary.scss */
       .ingatlan-page-view .properties .cube-properties .cb .i:before {
         font-family: 'FontAwesome';
         content: "\f1db";
@@ -2162,31 +2166,31 @@ footer .widget_nav_menu ul.menu {
         right: 0;
         left: 0;
         font-size: 20px; }
-    /* line 2398, sass/globalhungary.scss */
+    /* line 2402, sass/globalhungary.scss */
     .ingatlan-page-view .properties .cube-properties .cb.cb-yes {
       color: black; }
-      /* line 2400, sass/globalhungary.scss */
+      /* line 2404, sass/globalhungary.scss */
       .ingatlan-page-view .properties .cube-properties .cb.cb-yes .i:before {
         content: "\f058"; }
-  /* line 2405, sass/globalhungary.scss */
+  /* line 2409, sass/globalhungary.scss */
   .ingatlan-page-view .properties .cube-properties .cb:nth-child(3n) {
     border-right: none; }
-/* line 2411, sass/globalhungary.scss */
+/* line 2415, sass/globalhungary.scss */
 .ingatlan-page-view .ref-number {
   background: #3e4346;
   color: white;
   padding: 15px;
   font-size: 0.85em;
   line-height: 24px; }
-  /* line 2418, sass/globalhungary.scss */
+  /* line 2422, sass/globalhungary.scss */
   .ingatlan-page-view .ref-number .n {
     text-align: right; }
-  /* line 2421, sass/globalhungary.scss */
+  /* line 2425, sass/globalhungary.scss */
   .ingatlan-page-view .ref-number strong {
     font-size: 1.8em;
     line-height: 24px;
     text-transform: uppercase; }
-/* line 2428, sass/globalhungary.scss */
+/* line 2432, sass/globalhungary.scss */
 .ingatlan-page-view .contact {
   background: #EFEFEF;
   padding: 15px;
@@ -2194,111 +2198,111 @@ footer .widget_nav_menu ul.menu {
   border: 1px solid #C1C4C6;
   border-top: none;
   line-height: 1.6; }
-  /* line 2436, sass/globalhungary.scss */
+  /* line 2440, sass/globalhungary.scss */
   .ingatlan-page-view .contact i {
     margin-right: 8px;
     color: #8c8c8c; }
-  /* line 2441, sass/globalhungary.scss */
+  /* line 2445, sass/globalhungary.scss */
   .ingatlan-page-view .contact .title {
     color: #e31f24;
     margin-bottom: 10px; }
-  /* line 2445, sass/globalhungary.scss */
+  /* line 2449, sass/globalhungary.scss */
   .ingatlan-page-view .contact .name {
     font-size: 1.1em;
     color: black; }
-  /* line 2449, sass/globalhungary.scss */
+  /* line 2453, sass/globalhungary.scss */
   .ingatlan-page-view .contact .phone {
     color: #e31f24; }
-    /* line 2452, sass/globalhungary.scss */
+    /* line 2456, sass/globalhungary.scss */
     .ingatlan-page-view .contact .phone i {
       color: #e31f24; }
-  /* line 2455, sass/globalhungary.scss */
+  /* line 2459, sass/globalhungary.scss */
   .ingatlan-page-view .contact .email a, .ingatlan-page-view .contact .email a:link, .ingatlan-page-view .contact .email a:visited {
     color: #333333 !important;
     text-decoration: underline !important; }
-/* line 2462, sass/globalhungary.scss */
+/* line 2466, sass/globalhungary.scss */
 .ingatlan-page-view .description-block {
   border: 1px solid #e0dede;
   margin-right: 5px; }
-  /* line 2466, sass/globalhungary.scss */
+  /* line 2470, sass/globalhungary.scss */
   .ingatlan-page-view .description-block .head {
     border-bottom: 1px solid #e0dede;
     background: #F9F9F9;
     line-height: 50px;
     color: #e31f24;
     font-size: 1.2em; }
-    /* line 2473, sass/globalhungary.scss */
+    /* line 2477, sass/globalhungary.scss */
     .ingatlan-page-view .description-block .head .ico {
       float: left;
       border-right: 1px solid #e0dede;
       text-align: center;
       width: 50px;
       margin-right: 15px; }
-      /* line 2480, sass/globalhungary.scss */
+      /* line 2484, sass/globalhungary.scss */
       .ingatlan-page-view .description-block .head .ico i {
         font-size: 24px;
         margin: 0;
         padding: 0;
         vertical-align: middle; }
-  /* line 2489, sass/globalhungary.scss */
+  /* line 2493, sass/globalhungary.scss */
   .ingatlan-page-view .description-block .text {
     padding: 15px;
     font-size: 0.9em;
     color: black; }
-    /* line 2494, sass/globalhungary.scss */
+    /* line 2498, sass/globalhungary.scss */
     .ingatlan-page-view .description-block .text strong {
       font-family: 'Arial';
       font-weight: bold; }
-/* line 2501, sass/globalhungary.scss */
+/* line 2505, sass/globalhungary.scss */
 .ingatlan-page-view .map-block {
   border: 1px solid #e0dede;
   min-height: 200px;
   margin-left: 5px; }
-/* line 2508, sass/globalhungary.scss */
+/* line 2512, sass/globalhungary.scss */
 .ingatlan-page-view .history-list .header {
   text-align: center; }
-  /* line 2510, sass/globalhungary.scss */
+  /* line 2514, sass/globalhungary.scss */
   .ingatlan-page-view .history-list .header h2 {
     margin: 0; }
 
-/* line 2516, sass/globalhungary.scss */
+/* line 2520, sass/globalhungary.scss */
 .transf {
   -webkit-transition: all .6s;
   -moz-transition: all .6s;
   transition: all .6s; }
 
-/* line 2524, sass/globalhungary.scss */
+/* line 2528, sass/globalhungary.scss */
 .map-container.gps-map .map-gps-selected {
   width: 50%;
   margin: 10px auto;
   text-align: center; }
-  /* line 2529, sass/globalhungary.scss */
+  /* line 2533, sass/globalhungary.scss */
   .map-container.gps-map .map-gps-selected .lat, .map-container.gps-map .map-gps-selected .lng {
     background: #ef5659;
     color: #fff;
     padding: 5px 15px;
     border-radius: 4px; }
-    /* line 2535, sass/globalhungary.scss */
+    /* line 2539, sass/globalhungary.scss */
     .map-container.gps-map .map-gps-selected .lat.setted, .map-container.gps-map .map-gps-selected .lng.setted {
       background: #5fb55f; }
-  /* line 2540, sass/globalhungary.scss */
+  /* line 2544, sass/globalhungary.scss */
   .map-container.gps-map .map-gps-selected .selected-address {
     color: #000;
     padding: 15px 0 0 0;
     font-size: 0.9em; }
-  /* line 2546, sass/globalhungary.scss */
+  /* line 2550, sass/globalhungary.scss */
   .map-container.gps-map .map-gps-selected .sep {
     padding: 0 10px;
     font-size: 22px; }
 
-/* line 2554, sass/globalhungary.scss */
+/* line 2558, sass/globalhungary.scss */
 .hide {
   display: none; }
-  /* line 2556, sass/globalhungary.scss */
+  /* line 2560, sass/globalhungary.scss */
   .hide.show {
     display: block; }
 
-/* line 2562, sass/globalhungary.scss */
+/* line 2566, sass/globalhungary.scss */
 .dashboard-view .stat-restricter {
   margin: 0 auto 15px auto;
   background: #8a8a8a;
@@ -2309,14 +2313,14 @@ footer .widget_nav_menu ul.menu {
   line-height: 1;
   color: #fff;
   text-align: center; }
-  /* line 2573, sass/globalhungary.scss */
+  /* line 2577, sass/globalhungary.scss */
   .dashboard-view .stat-restricter strong {
     font-family: 'Arial';
     font-weight: bold; }
-/* line 2578, sass/globalhungary.scss */
+/* line 2582, sass/globalhungary.scss */
 .dashboard-view .row {
   margin-bottom: 30px; }
-/* line 2581, sass/globalhungary.scss */
+/* line 2585, sass/globalhungary.scss */
 .dashboard-view .bgh {
   display: flex;
   width: 100%;
@@ -2329,7 +2333,7 @@ footer .widget_nav_menu ul.menu {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px; }
-  /* line 2594, sass/globalhungary.scss */
+  /* line 2598, sass/globalhungary.scss */
   .dashboard-view .bgh .vis {
     flex-basis: 25%;
     background: #778080;
@@ -2341,41 +2345,41 @@ footer .widget_nav_menu ul.menu {
     -webkit-border-radius: 3px 0 0 3px;
     -moz-border-radius: 3px 0 0 3px;
     border-radius: 3px 0 0 3px; }
-    /* line 2606, sass/globalhungary.scss */
+    /* line 2610, sass/globalhungary.scss */
     .dashboard-view .bgh .vis.vis-red {
       background: #e31f24; }
-    /* line 2609, sass/globalhungary.scss */
+    /* line 2613, sass/globalhungary.scss */
     .dashboard-view .bgh .vis.vis-lred {
       background: #f95757; }
-    /* line 2612, sass/globalhungary.scss */
+    /* line 2616, sass/globalhungary.scss */
     .dashboard-view .bgh .vis.vis-lgreen {
       background: #5cbb60; }
-    /* line 2615, sass/globalhungary.scss */
+    /* line 2619, sass/globalhungary.scss */
     .dashboard-view .bgh .vis.vis-lorange {
       background: #ffac42; }
-  /* line 2619, sass/globalhungary.scss */
+  /* line 2623, sass/globalhungary.scss */
   .dashboard-view .bgh .inf {
     flex-basis: 75%;
     line-height: 1;
     padding: 15px;
     text-shadow: 1px 1px 0 #ffffff; }
-    /* line 2624, sass/globalhungary.scss */
+    /* line 2628, sass/globalhungary.scss */
     .dashboard-view .bgh .inf .num {
       font-size: 2em;
       font-family: 'Arial';
       text-transform: uppercase;
       color: #333333;
       font-weight: bold; }
-    /* line 2632, sass/globalhungary.scss */
+    /* line 2636, sass/globalhungary.scss */
     .dashboard-view .bgh .inf .text {
       font-size: 0.8em;
       color: #989c9c;
       padding: 4px 0 0 4px; }
-  /* line 2639, sass/globalhungary.scss */
+  /* line 2643, sass/globalhungary.scss */
   .dashboard-view .bgh.list-bgh {
     display: block;
     width: 100%; }
-    /* line 2642, sass/globalhungary.scss */
+    /* line 2646, sass/globalhungary.scss */
     .dashboard-view .bgh.list-bgh .head {
       padding: 12px;
       border-bottom: 1px solid #d6d6d6;
@@ -2388,11 +2392,11 @@ footer .widget_nav_menu ul.menu {
       -webkit-border-radius: 3px 3px 0 0;
       -moz-border-radius: 3px 3px 0 0;
       border-radius: 3px 3px 0 0; }
-      /* line 2654, sass/globalhungary.scss */
+      /* line 2658, sass/globalhungary.scss */
       .dashboard-view .bgh.list-bgh .head i {
         margin: 0 10px 0 5px;
         color: #e31f24; }
-      /* line 2659, sass/globalhungary.scss */
+      /* line 2663, sass/globalhungary.scss */
       .dashboard-view .bgh.list-bgh .head .dt-pick {
         background: #a7a7a7;
         font-size: 11px;
@@ -2400,24 +2404,24 @@ footer .widget_nav_menu ul.menu {
         line-height: 1;
         border-radius: 5px;
         color: #fff; }
-    /* line 2668, sass/globalhungary.scss */
+    /* line 2672, sass/globalhungary.scss */
     .dashboard-view .bgh.list-bgh .c {
       font-size: 0.8em; }
-      /* line 2671, sass/globalhungary.scss */
+      /* line 2675, sass/globalhungary.scss */
       .dashboard-view .bgh.list-bgh .c .data-table {
         margin: 0;
         border: none; }
-        /* line 2674, sass/globalhungary.scss */
+        /* line 2678, sass/globalhungary.scss */
         .dashboard-view .bgh.list-bgh .c .data-table .row > div[class*=col-md] {
           padding: 5px; }
-        /* line 2677, sass/globalhungary.scss */
+        /* line 2681, sass/globalhungary.scss */
         .dashboard-view .bgh.list-bgh .c .data-table .data-body {
           line-height: 1.2; }
-          /* line 2680, sass/globalhungary.scss */
+          /* line 2684, sass/globalhungary.scss */
           .dashboard-view .bgh.list-bgh .c .data-table .data-body .name {
             font-size: 1.2em;
             margin-bottom: 3px; }
-    /* line 2687, sass/globalhungary.scss */
+    /* line 2691, sass/globalhungary.scss */
     .dashboard-view .bgh.list-bgh .foot {
       font-size: 0.75em;
       padding: 9px 5px;

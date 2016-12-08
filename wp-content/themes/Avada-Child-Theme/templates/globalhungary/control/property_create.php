@@ -135,11 +135,16 @@
       </div>
       <div class="col-md-3 reqf">
         <label for="_listing_price"><?=__('Irányár (Ft)', 'gh')?></label>
-        <input type="number" min="0" id="_listing_price" name="meta_input[_listing_price]" value="<?=$_POST['meta']['_listing_price']?>" class="form-control">
+        <input type="text" id="_listing_price" name="meta_input[_listing_price]" value="<?=$_POST['meta']['_listing_price']?>" class="form-control pricebind">
       </div>
       <div class="col-md-3">
         <label for="_listing_offprice"><?=__('Akciós irányár (Ft)', 'gh')?></label>
-        <input type="number" min="0" id="_listing_offprice" name="meta_input[_listing_offprice]" value="<?=$_POST['meta']['_listing_offprice']?>" class="form-control">
+        <input type="text" id="_listing_offprice" name="meta_input[_listing_offprice]" value="<?=$_POST['meta']['_listing_offprice']?>" class="form-control pricebind">
+      </div>
+      <div class="col-md-3">
+        <label for="_listing_flag_exclusive"><?=__('Kizárólagos hirdetés', 'gh')?></label>
+        <input type="checkbox" id="_listing_flag_exclusive" name="meta_input[_listing_flag_exclusive]" <?=(isset($_POST['meta']['_listing_offprice']))?'checked="checked"':''?> value="1"><label class="fm" for="_listing_flag_exclusive"></label>
+
       </div>
     </div>
     <h3><?=__('Leírások', 'gh')?></h3>
@@ -232,7 +237,15 @@
           setGPSMarker(center, r[0].formatted_address);
         }
       });
-
+    });
+    $('.pricebind').bind("keyup", function(event) {
+       if(event.which >= 37 && event.which <= 40){
+        event.preventDefault();
+       }
+       var $this = $(this);
+       var num = $this.val().replace(/\./gi, "");
+       var num2 = num.split(/(?=(?:\d{3})+$)/).join(".");
+       $this.val(num2);
     });
   })(jQuery);
 

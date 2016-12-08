@@ -122,7 +122,7 @@
                     <span class="title"><a href="<?=$p->URL()?>" target="_blank"><?=$p->Title()?></a></span>
                   </div>
                   <div class="alt-row">
-                    <span class="ref-number"><?=$p->Azonosito()?></span>
+                    <span class="ref-number <?=($p->isExclusive())?'exclusive':''?>" title="<?=($p->isExclusive())?__('Ez a hirdetés kizárólagos hirdetés.','gh'):''?>"><?=$p->Azonosito()?></span>
                     <span class="price"><?=$p->Price(true)?></span>
                     <span class="region"><?=$p->RegionName()?></span> / <span class="address"><?=$p->Address()?></span>
                   </div>

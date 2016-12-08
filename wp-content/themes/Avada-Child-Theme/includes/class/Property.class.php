@@ -380,7 +380,7 @@ class Property extends PropertyFactory
     $lng = $this->getMetaValue( '_listing_gps_lng' );
 
     if (!$lng || !$lat)
-    {  
+    {
       // Mentett GPS vizsgálat GEO alapján
       $parent_zone_term = end($this->Regions());
       $zone_gps = $this->getZoneGPS($parent_zone_term->term_id);

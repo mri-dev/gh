@@ -365,6 +365,7 @@ class Properties extends PropertyFactory
       }
 
       if (isset($this->arg['price_from'])) {
+        $this->arg['price_from'] = str_replace(".","", $this->arg['price_from']);
         $price_meta_qry[] = array(
           'key' => '_listing_price',
           'value' => (int) $this->arg['price_from'],
@@ -374,6 +375,7 @@ class Properties extends PropertyFactory
       }
 
       if (isset($this->arg['price_to'])) {
+        $this->arg['price_to'] = str_replace(".","", $this->arg['price_to']);
         $price_meta_qry[] = array(
           'key' => '_listing_price',
           'value' => (int) $this->arg['price_to'],

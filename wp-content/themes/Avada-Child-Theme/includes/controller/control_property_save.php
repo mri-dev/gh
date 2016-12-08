@@ -37,6 +37,10 @@ class control_property_save
       $this->temppostid = $post['ID'];
     }
 
+    // Check formats
+    $post['meta_input']['_listing_price'] = (int)str_replace(".","",$post['meta_input']['_listing_price']);
+    $post['meta_input']['_listing_offprice'] = (int)str_replace(".","",$post['meta_input']['_listing_offprice']);
+
     // Meta checkboxes
     foreach ($post['metacheckboxes'] as $mkey => $mv) {
       if (isset($post['meta_input'][$mkey])) {
@@ -110,6 +114,9 @@ class control_property_save
     }
     if ( empty($post['meta_input']['_listing_price']) ) {
       $form_errors .= __('- Az ingatlan irányára hiányzik. Kérjük, hogy pótolja.','gh') . "<br />";
+    }
+    if ( is_null($post['meta_input']['_listing_flag_pricetype']) ) {
+      $form_errors .= __('- Az ingatlan ár jellegét kötelező kiválasztani. Kérjük, hogy pótolja.','gh') . "<br />";
     }
 
     if ( empty($post_excerpt) ) {

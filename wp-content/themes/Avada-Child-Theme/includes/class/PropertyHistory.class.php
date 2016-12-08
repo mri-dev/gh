@@ -87,6 +87,7 @@ class PropertyHistory extends PropertyFactory
 				__( 'Kiemelt', 'gh' )  => '_listing_flag_highlight',
 				__( 'Archivált', 'gh' )  => '_listing_flag_archived',
         __( 'Kizárólagos hirdetés', 'gh' )  => '_listing_flag_exclusive',
+        __( 'Ár jellege', 'gh' )  => '_listing_flag_pricetype',
 			),
       'default' => array(
         __( 'Ingatlan főcím (SEO)', 'gh') => 'post_title',
@@ -128,6 +129,10 @@ class PropertyHistory extends PropertyFactory
   public function formatValue( $key = false, $value = '', $pre_value = false )
   {
     switch ($key) {
+      case '_listing_flag_pricetype':
+        $value = $this->getPriceTypeText((int)$value);
+        return $value;
+      break;
       case '_listing_property_size':
       case '_listing_lot_size':
         $value = number_format($value, 0, '', ' '). ' '.__('nm', 'gh');

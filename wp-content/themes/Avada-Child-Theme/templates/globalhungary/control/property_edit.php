@@ -204,19 +204,19 @@
           <option value="" selected="selected"><?=__('-- válasszon --', 'gh')?></option>
           <option value="" disabled="disabled"></option>
           <?php foreach ($property->price_types as $pt_key => $pt_i): ?>
-            <option value="<?=$pt_i?>"><?=$property->getPriceTypeText($pt_i)?></option>
+            <option value="<?=$pt_i?>" <?=($property->getMetaValue('_listing_flag_pricetype') == $pt_i)?'selected="selected"':''?>><?=$property->getPriceTypeText($pt_i)?></option>
           <?php endforeach; ?>
         </select>
         <input type="hidden" name="pre[meta_input][_listing_flag_pricetype]" value="<?=$property->getMetaValue('_listing_flag_pricetype')?>">
       </div>
       <div class="col-md-3 reqf">
         <label for="_listing_price"><?=__('Irányár (Ft)', 'gh')?></label>
-        <input type="number" min="0" id="_listing_price" name="meta_input[_listing_price]" value="<?=$property->Price()?>" class="form-control" <?=(!$me->can('property_edit_price') && !current_user_can('administrator')) ? 'readonly="readonly"' : ''?>>
+        <input type="text" id="_listing_price" name="meta_input[_listing_price]" value="<?=$property->Price()?>" class="form-control pricebind" <?=(!$me->can('property_edit_price') && !current_user_can('administrator')) ? 'readonly="readonly"' : ''?>>
         <input type="hidden" name="pre[meta_input][_listing_price]" value="<?=$property->Price()?>">
       </div>
       <div class="col-md-3">
         <label for="_listing_offprice"><?=__('Kedvezményes irányár (Ft)', 'gh')?></label>
-        <input type="number" min="0" id="_listing_offprice" name="meta_input[_listing_offprice]" value="<?=$property->OffPrice()?>" class="form-control" <?=(!$me->can('property_edit_price') && !current_user_can('administrator')) ? 'readonly="readonly"' : ''?>>
+        <input type="text" id="_listing_offprice" name="meta_input[_listing_offprice]" value="<?=$property->OffPrice()?>" class="form-control pricebind" <?=(!$me->can('property_edit_price') && !current_user_can('administrator')) ? 'readonly="readonly"' : ''?>>
         <input type="hidden" name="pre[meta_input][_listing_offprice]" value="<?=$property->OffPrice()?>">
       </div>
     </div>
@@ -342,6 +342,24 @@
       var tkey = e.attr('tglwatcherkey');
       var selected = collect_checkbox(tkey, false);
       $('#'+tkey+'_ids').val(selected);
+    });
+    $('.pricebind').bind("keyup", function(event) {
+       if(event.which >= 37 && event.which <= 40){
+        event.preventDefault();
+       }
+       var $this = $(this);
+       var num = $this.val().replace(/\./gi, "");
+       var num2 = num.split(/(?=(?:\d{3})+$)/).join(".");
+       $this.val(num2);
+    });
+    $('.pricebind').each(function(event) {
+       if(event.which >= 37 && event.which <= 40){
+        event.preventDefault();
+       }
+       var $this = $(this);
+       var num = $this.val().replace(/\./gi, "");
+       var num2 = num.split(/(?=(?:\d{3})+$)/).join(".");
+       $this.val(num2);
     });
   })(jQuery);
 

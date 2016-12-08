@@ -21,9 +21,5 @@
       <div class="alert alert-danger"><?=$error?></div>
       <a href="javascript:void(0);" onclick="history.go(-1);"><?=__('vissza a szerkesztéshez', 'gh')?></a>
     <?php endif; ?>
-
-    <pre>
-      <? print_r($f); ?>
-    </pre>
   </div>
 </div>
