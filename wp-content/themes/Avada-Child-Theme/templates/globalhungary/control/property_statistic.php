@@ -3,6 +3,21 @@
 
   $dashboard = get_control_controller('dashboard');
 
+  $dt_selected = false;
+  $dt_from = date('Y / m').' / 01';
+  $dt_to = date('Y / m / d');
+
+  if (isset($_GET['from']) && !empty($_GET['from'])) {
+    $dt_from = str_replace("-"," / ", $_GET['from']);
+  }
+
+  if (isset($_GET['to']) && !empty($_GET['to'])) {
+    $dt_to = str_replace("-"," / ", $_GET['to']);
+  }
+
+  $dt_from_s = str_replace(" / ", "-", $dt_from);
+  $dt_to_s = str_replace(" / ", "-", $dt_to);
+
   if ( current_user_can('region_manager') )
   {
     $ul = new GlobalHungaryUsers(array(
@@ -12,21 +27,9 @@
     $region_user_ids = $ul->userIDS();
   }
 
-  if (current_user_can('administrator') || current_user_can('region_manager')) {
-    // History
-    $param = array();
-    if (current_user_can('region_manager')) {
-      $param['authors'] = $region_user_ids;
-    }
-    $param['limit'] = 10;
-    $history = $dashboard->HistoryList($param);
-  }
-
-
   // Last view
   $param = array();
   $param['limit'] = 10;
-
   if (!current_user_can('administrator')) {
     if (current_user_can('region_manager')) {
       $param['only_me'] = $region_user_ids;
@@ -36,6 +39,24 @@
   }
 
   $watch = $dashboard->LiveWatchedProperties($param);
+
+  // Popular view
+  $param = array();
+  $param['limit'] = 10;
+  $param['datetime'] = array(
+    'from' => $dt_from_s,
+    'to' => $dt_to_s
+  );
+
+  if (!current_user_can('administrator')) {
+    if (current_user_can('region_manager')) {
+      $param['authors'] = $region_user_ids;
+    } else {
+      $param['authors'] = array($me->ID());
+    }
+  }
+
+  $popular = $dashboard->PopularProperties($param);
 
   // Properties count
   $param = array();
@@ -52,7 +73,10 @@
 
   // Clicks
   $param = array();
-  $param['month'] = date('Y-m');
+  $param['datetime'] = array(
+    'from' => $dt_from_s,
+    'to' => $dt_to_s
+  );
   if (!current_user_can('administrator')) {
     if (current_user_can('region_manager')) {
       $param['authors'] = $region_user_ids;
@@ -64,7 +88,10 @@
 
   $param = array();
   $param['unique'] = true;
-  $param['month'] = date('Y-m');
+  $param['datetime'] = array(
+    'from' => $dt_from_s,
+    'to' => $dt_to_s
+  );
   if (!current_user_can('administrator')) {
     if (current_user_can('region_manager')) {
       $param['authors'] = $region_user_ids;
@@ -76,7 +103,10 @@
 
   // Click stat
   $param = array();
-  $param['day'] = 30;
+  $param['datetime'] = array(
+    'from' => $dt_from_s,
+    'to' => $dt_to_s
+  );
   if (!current_user_can('administrator')) {
     if (current_user_can('region_manager')) {
       $param['authors'] = $region_user_ids;
@@ -86,11 +116,37 @@
   }
   $stat_click_all = $dashboard->ClickNumberStat($param);
 
+  $selected_date = $dt_from . ' &mdash; '.$dt_to;
+
 ?>
 <div class="gh_control_content_holder">
   <div class="heading">
-    <h1><?=__('Gépház', 'gh')?></h1>
-    <div class="desc"><?=sprintf(__('Üdvözöljük a %s ingatlanközvetítő adminisztrációs felületén.', 'gh'), get_option('blogname', '--' ))?></div>
+    <h1><?=__('Ingatlan statisztika', 'gh')?></h1>
+    <div class="pull-to-title">
+      <form class="" action="" method="get">
+        <div class="inline-input">
+          <div class="">
+            <input type="date" name="from" value="<?=$dt_from_s?>" class="form-control">
+          </div>
+          <div class="">
+            &mdash;
+          </div>
+          <div class="">
+            <input type="date" name="to" value="<?=$dt_to_s?>" class="form-control">
+          </div>
+          <div class="">
+            <button type="submit" class="fusion-button button-flat button-square button-small button-neutral"><?=__('Végrehajt', 'gh')?> <i class="fa fa-filter"></i></button>
+          </div>
+          <?php if (isset($_GET['from'])): ?>
+            <div class="">
+              <a title="<?=__('Kiválasztott időpont eltávolítása.','gh')?>" href="/control/property_statistic/" class="fusion-button button-flat button-square button-small button-red"><i class="fa fa-times"></i></a>
+            </div>
+          <?php endif; ?>
+        </div>
+      </form>
+    </div>
+    <div class="clearfix"></div>
+    <div class="desc"></div>
   </div>
   <div class="gh_control_dashboard dashboard-view">
     <?php if (current_user_can('region_manager')): ?>
@@ -102,6 +158,20 @@
         <?=sprintf(__('<strong>%s</strong> adatai alapján', 'gh'), $me->Name())?>
       </div>
     <?php endif; ?>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="bgh list-bgh">
+          <div class="head">
+            <i class="fa fa-pie-chart"></i> <?=sprintf(__('Ingatlan nézettség <span class="dt-pick">%s</span>', 'gh'), $selected_date)?>
+          </div>
+          <div class="c">
+            <div id="clickStats"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="row stick-bgh">
       <div class="col-md-4">
         <div class="bgh">
@@ -121,7 +191,7 @@
           </div>
           <div class="inf">
             <div class="num"><?=number_format($click_30day_total, 0, ".",".")?></div>
-            <div class="text"><?=__('Hirdetés oldalbetöltés a hónapban', 'gh')?></div>
+            <div class="text"><?=__('Hirdetés oldalbetöltés', 'gh')?></div>
           </div>
         </div>
       </div>
@@ -132,67 +202,56 @@
           </div>
           <div class="inf">
             <div class="num"><?=number_format($click_30day_unique, 0, ".",".")?></div>
-            <div class="text"><?=__('Egyedi látogatás a hónapban', 'gh')?></div>
+            <div class="text"><?=__('Egyedi látogatás', 'gh')?></div>
           </div>
         </div>
       </div>
     </div>
     <div class="row">
-      <?php if(current_user_can('administrator') || current_user_can('region_manager')): ?>
       <div class="col-md-6">
         <div class="bgh list-bgh">
           <div class="head">
-            <i class="fa fa-history"></i> <?=__('Utoljára módosított ingatlanok', 'gh')?>
+            <i class="fa fa-line-chart"></i> <?=__('10 legnézettebb ingatlan', 'gh')?>
           </div>
           <div class="c">
             <div class="data-table">
               <div class="data-head">
                 <div class="row">
-                  <div class="col-md-4">
+                  <div class="col-md-10">
                     <?=__('Ingatlan', 'gh')?>
                   </div>
-                  <div class="col-md-3">
-                    <?=__('Módosította', 'gh')?>
-                  </div>
                   <div class="col-md-2">
-                    <?=__('Módosítások', 'gh')?>
-                  </div>
-                  <div class="col-md-3">
-                    <?=__('Időpont', 'gh')?>
+                    <?=__('Oldalbetöltés', 'gh')?>
                   </div>
                 </div>
               </div>
               <div class="data-body">
-                <?php foreach ($history['data'] as $c): $mods = $c->mods(); ?>
+                <?php foreach ($popular['data'] as $c):?>
                 <div class="row">
-                  <div class="col-md-4">
-                    <a href="/control/property_history/?u=&azon=<?=$c->property()->Azonosito()?>">[<?=$c->property()->Azonosito()?>] <strong><?=$c->property()->Title()?></strong></a>
+                  <div class="col-md-1">
+                    <div class="prop-img">
+                      <a href="<?=$c->ProfilImg()?>" data-title="<?=$c->Title()?>" data-rel="iLightbox[pop_p<?=$c->ID()?>]" class="fusion-lightbox"><img src="<?=$c->ProfilImg()?>" alt=""></a>
+                    </div>
                   </div>
-                  <div class="col-md-3 center">
-                    <a href="/control/property_history/?u=<?=$c->user()->ID()?>"><?=$c->user()->Name()?></a>
+                  <div class="col-md-9">
+                    <div class="name">
+                      <a href="<?=$c->URL()?>"><strong><?=$c->Title()?></strong></a>
+                    </div>
+                    <div>
+                       <strong>[<?=$c->Azonosito()?>]</strong> <?=$c->RegionName()?>
+                    </div>
                   </div>
                   <div class="col-md-2 center">
-                    <?=count($mods)?> <?=__('elem', 'gh')?>
-                  </div>
-                  <div class="col-md-3 center">
-                    <?=$c->Date()?>
+                    <?=$popular['counts'][$c->ID()]['ct']?> x
                   </div>
                 </div>
                 <?php endforeach; ?>
               </div>
             </div>
           </div>
-          <div class="foot">
-            <div class="pull-left">
-              <strong><?=sprintf(__('%d db elem megjelenítve', 'gh'), $history['page']['limit'])?></strong> (<?php echo sprintf(__('%d db összesen'), $history['count']); ?>)
-            </div>
-            <a href="/control/property_history" class="pull-right"><?=__('Összes módosítás', 'gh')?> <i class="fa fa-arrow-circle-right"></i></a>
-            <div class="clearfix"></div>
-          </div>
         </div>
       </div>
-      <?php endif; ?>
-      <div class="col-md-<?=(current_user_can('reference_manager'))?'12':'6'?>">
+      <div class="col-md-6">
         <div class="bgh list-bgh">
           <div class="head">
             <i class="fa fa-eye"></i> <?=__('Utoljára megtekintett ingatlanok', 'gh')?>
@@ -218,13 +277,20 @@
               <div class="data-body">
                 <?php foreach ($watch['data'] as $c):?>
                 <div class="row">
-                  <div class="col-md-4">
-                    <a href="<?=$c->URL()?>">[<?=$c->Azonosito()?>] <strong><?=$c->Title()?></strong></a>
+                  <div class="col-md-1">
+                    <div class="prop-img">
+                      <a href="<?=$c->ProfilImg()?>" data-title="<?=$c->Title()?>" data-rel="iLightbox[watch_p<?=$c->ID()?>]" class="fusion-lightbox"><img src="<?=$c->ProfilImg()?>" alt=""></a>
+                    </div>
+                  </div>
+                  <div class="col-md-5">
+                    <div class="name">
+                      <a href="<?=$c->URL()?>"><strong><?=$c->Title()?></strong></a>
+                    </div>
+                    <div>
+                       <strong>[<?=$c->Azonosito()?>]</strong> <?=$c->RegionName()?>
+                    </div>
                   </div>
                   <div class="col-md-3 center">
-                    <?=$c->RegionName()?>
-                  </div>
-                  <div class="col-md-2 center">
                     <a href="/control/properties/?user=<?=$c->AuthorID()?>"><?=$c->AuthorName()?></a>
                   </div>
                   <div class="col-md-3 center">
@@ -234,18 +300,6 @@
                 <?php endforeach; ?>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <div class="bgh list-bgh">
-          <div class="head">
-            <i class="fa fa-pie-chart"></i> <?=__('Ingatlan nézettség az elmúlt 30 napban', 'gh')?>
-          </div>
-          <div class="c">
-            <div id="clickStats"></div>
           </div>
         </div>
       </div>

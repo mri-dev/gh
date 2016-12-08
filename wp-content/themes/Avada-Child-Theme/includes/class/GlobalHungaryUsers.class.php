@@ -28,5 +28,22 @@ class GlobalHungaryUsers
   {
     return $this->users;
   }
+
+  public function userIDS()
+  {
+    $ids = array();
+
+    if (!$this->users) {
+      return array();
+    }
+
+    foreach ($this->users->get_results() as $u) {
+      if (!in_array($u->data->ID, $ids)) {
+        $ids[] = $u->data->ID;
+      }
+    }
+
+    return $ids;
+  }
 }
 ?>

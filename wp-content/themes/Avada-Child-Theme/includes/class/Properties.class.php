@@ -110,7 +110,8 @@ class Properties extends PropertyFactory
       h.item_id,
       h.mod_data_json,
       h.transaction_date
-    FROM listing_change_history as h ";
+    FROM listing_change_history as h
+    LEFT JOIN $wpdb->posts as p ON p.ID = h.item_id ";
 
     $q .= " WHERE 1=1 ";
     $q .= " and h.group_key ='property'";
@@ -118,6 +119,10 @@ class Properties extends PropertyFactory
     if (isset($arg['property_id']) && !empty($arg['property_id'])) {
       $q .= " and h.item_id = %d ";
       $params[] = $arg['property_id'];
+    }
+
+    if (isset($arg['authors']) && is_array($arg['authors']) && !empty($arg['authors'])) {
+      $q .= " and p.post_author IN(".implode(",",$arg['authors']).")";
     }
 
     if (isset($arg['user_id'])) {
@@ -231,6 +236,10 @@ class Properties extends PropertyFactory
 
     if (isset($this->arg['author'])) {
       $post_arg['author'] = $this->arg['author'];
+    }
+
+    if (isset($this->arg['authors']) && is_array($this->arg['authors']) && !empty($this->arg['authors'])) {
+      $post_arg['author__in'] = $this->arg['authors'];
     }
 
     if (isset($this->arg['post_status'])) {
@@ -441,6 +450,9 @@ class Properties extends PropertyFactory
   {
     global $wpdb;
     if ($this->arg['id']) {
+
+      if( $this->detect_robot() ) return false;
+
       $wpdb->insert(
         self::LOG_VIEW_DB,
         array(
@@ -453,6 +465,15 @@ class Properties extends PropertyFactory
           '%s', '%d', '%s', '%s'
         )
       );
+    }
+  }
+
+  private function detect_robot()
+  {
+    if (isset($_SERVER['HTTP_USER_AGENT']) && preg_match('/bot|crawl|slurp|spider|facebookexternalhit|Facebot|Googlebot/i', $_SERVER['HTTP_USER_AGENT'])) {
+      return true;
+    } else {
+      return false;
     }
   }
 }
