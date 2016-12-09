@@ -8,7 +8,7 @@
     <div class="contact">
       <div class="phone">
         <i class="fa fa-phone"></i>
-        06 72 222 404
+        06 1 790 58 24 &nbsp;&nbsp; 06 72 222 404
       </div>
     </div><!--
  --><div class="accounts">

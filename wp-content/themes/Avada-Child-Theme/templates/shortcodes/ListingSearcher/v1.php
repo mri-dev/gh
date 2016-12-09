@@ -107,7 +107,19 @@
     </div>
 </div>
 <div class="searcher-footer">
-  OPTIONS
+  <div class="option-holder">
+    <div class="options-more">
+      <a href="#"><?=__('További opciók megjelenítése', 'gh')?> <i class="fa fa-caret-right"></i> </a>
+    </div>
+    <div class="options-selects">
+      <?php for($x = 0; $x <= 5; $x++): ?>
+        <div class="">
+          <input type="checkbox" data-options="teszt" class="fake-radio" value="" id="opt_teszt<?=$x?>"><label for="opt_teszt<?=$x?>">teszt <?=$x?></label>
+        </div>
+      <?php endfor; ?>
+    </div>
+  </div>
+  <input type="hidden" name="opt" value="">
 </div>
 </form>
 <script type="text/javascript">

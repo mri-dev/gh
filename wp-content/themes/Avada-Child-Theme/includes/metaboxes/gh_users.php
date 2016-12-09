@@ -14,8 +14,7 @@ function gh_register_user_profile_metabox() {
   //print_r($user_roles->role_caps);
   //print_r($current_user);
 
-  $main_role = $current_user->roles[0];
-  //echo $main_role;
+  $main_role = reset($current_user->roles);
 
 	/**
 	 * Metabox for the user profile screen
