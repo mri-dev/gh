@@ -34,6 +34,13 @@ class PropertyFactory
     return $this;
   }
 
+  public function get_controller()
+  {
+    global $_wp_listings;
+
+    return $_wp_listings;
+  }
+
   public function StatusText( $status = null )
   {
     switch ( $status ) {

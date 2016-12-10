@@ -95,15 +95,20 @@ input[type=checkbox]:checked + label {
 }
 input[type=checkbox].fake-radio + label {
   &:before {
-    content: "\f1db";
+    background: #ffffff;
+    border: 2px solid #eaeaea;
+    content: "\f111";
     vertical-align: middle;
     padding: 0;
-    margin: 3px 0 0 0;
+    margin: 1px 0 0 0;
   }
 }
 input[type=checkbox].fake-radio:checked + label {
   &:before {
     content: "\f192";
+    border: none;
+    width: 24px;
+    height: 24px;
   }
 }
 
@@ -1341,7 +1346,7 @@ footer {
             left: 12px;
             font-weight: normal;
             color: #c7c7c7;
-            width: 16px;
+            width: 20px;
             text-align: center;
           }
         }
@@ -1505,29 +1510,40 @@ footer {
       flex-basis: 80%;
 
       & > div {
-        flex-basis: calc(100% / 6);
+        flex-basis: calc(100% / 5);
         padding: 0 0 8px 0;
         input[type=checkbox] + label{
-          padding-left:25px;
+          padding-left: 29px;
           color: #808080;
+          line-height: 24px;
           &:before {
-            color: #c7c7c7;
-            background: #fff;
+            color: #ffffff;
             -webkit-border-radius: 25px;
             -moz-border-radius: 25px;
             border-radius: 25px;
             overflow: hidden;
-            font-size: 24px;
-            width: 21px;
-            height: 21px;
+            font-size: 20px;
+            width: 20px;
+            text-align: center;
+            height: 20px;
           }
         }
         input[type=checkbox]:checked + label{
           &:before {
             color: #6cbf92;
             background: transparent;
-            width: 25px;
-            height: 22px;
+            width: 24px;
+            height: 24px;
+            font-size: 24px;
+            margin-top: 2px;
+            vertical-align: middle;
+          }
+        }
+        &.secondary-param {
+          display: none;
+
+          &.show {
+            display: block;
           }
         }
       }

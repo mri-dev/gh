@@ -30,6 +30,54 @@ function theme_enqueue_styles() {
 }
 add_action( 'wp_enqueue_scripts', 'theme_enqueue_styles' );
 
+
+function add_opengraph_doctype( $output ) {
+	return $output . ' xmlns:og="http://opengraphprotocol.org/schema/" xmlns:fb="http://www.facebook.com/2008/fbml"';
+}
+add_filter('language_attributes', 'add_opengraph_doctype');
+
+function facebook_og_meta_header()
+{
+  global $wp_query;
+
+  if ( !in_array($wp_query->query['custom_page'], array(SLUG_INGATLAN, SLUG_INGATLAN_LIST)) ) {
+    return;
+  }
+
+  $title = get_option('blogname');
+  $image = 'http://globalhungary.mri-dev.com/wp-content/uploads/global-hungary-logo-wtext-h75.png';
+  $desc  = get_option('blogdescription');
+  $url   = get_option('site_url');
+
+  if($wp_query->query_vars['custom_page'] == 'ingatlan' ) {
+    $xs = explode("-",$wp_query->query_vars['urlstring']);
+    $ingatlan_id = end($xs);
+    $properties = new Properties(array(
+      'id' => $ingatlan_id,
+      'post_status' => array('publish'),
+    ));
+    $property = $properties->getList();
+    $property = $property[0];
+
+    if ($property) {
+      $title = $property->Title() . ' ['.$property->Azonosito().']' . ' - ' . $property->PropertyStatus(true) . ' '. $property->multivalue_list($property->PropertyType(true)) . ' - '. $property->RegionName( false );
+      $image = $property->ProfilImg();
+      $desc = $property->ShortDesc();
+      $url = $property->URL();
+    }
+  }
+
+  echo '<meta property="fb:app_id" content="'.FB_APP_ID.'"/>'."\n";
+  echo '<meta property="og:title" content="' . $title . '"/>'."\n";
+  echo '<meta property="og:type" content="article"/>'."\n";
+  echo '<meta property="og:url" content="' . $url . '/"/>'."\n";
+  echo '<meta property="og:description" content="' . $desc . '/"/>'."\n";
+  echo '<meta property="og:site_name" content="'.get_option('blogname').'"/>'."\n";
+  echo '<meta property="og:image" content="' . $image . '"/>'."\n";
+
+}
+add_action( 'wp_head', 'facebook_og_meta_header', 5);
+
 function custom_theme_enqueue_styles() {
     wp_enqueue_style( 'globalhungary-css', IFROOT . '/assets/css/globalhungary.css?t=' . ( (DEVMODE === true) ? time() : '' ) );
     wp_enqueue_script( 'globalhungary', IFROOT . '/assets/js/master.js?t=' . ( (DEVMODE === true) ? time() : '' ), array('jquery'), '', 999 );
