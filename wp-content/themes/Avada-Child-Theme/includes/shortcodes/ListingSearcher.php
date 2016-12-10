@@ -42,13 +42,18 @@ class ListingSearcher extends PropertyFactory
 
         $t = new ShortcodeTemplates(__CLASS__.'/'.$attr['view']);
 
+        // Options
         $options = $this->getOptions();
+        if ($get['opt'] != '') {
+          $xoptsel = explode(",",$get['opt']);
+        }
 
         $output .= $t->load_template( array(
           'properties' => $properties,
           'form' => $get,
           'options' => $options,
-          'primary_options' => $this->primary_options
+          'primary_options' => $this->primary_options,
+          'sel_options' => $xoptsel
         ));
 
         $output .= '</div>';

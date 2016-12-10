@@ -1572,6 +1572,19 @@ footer {
         }
       }
     }
+
+    .searcher-footer{
+      .option-holder {
+        display: block;
+      }
+      .options-selects {
+        margin-top: 10px;
+        & > div {
+          flex-basis: 50%;
+        }
+      }
+    }
+
     .searcher-wrapper{
       .form-items{
         .inp{

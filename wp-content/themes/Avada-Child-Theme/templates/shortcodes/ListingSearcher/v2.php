@@ -109,7 +109,19 @@
   <button type="submit"><i class="fa fa-search"></i> <?=__('Keresés', 'gh')?></button>
 </div>
 <div class="searcher-footer">
-  OPTIONS
+  <div class="option-holder">
+    <div class="options-more">
+      <a href="javascript:void(0);" data-options-tgl="0" id="options-toggler"><?=__('További opciók megjelenítése', 'gh')?> <i class="fa fa-caret-right"></i> </a>
+    </div>
+    <div class="options-selects">
+      <?php foreach($options as $opt_id => $opt_text): ?>
+        <div class="<?=(!in_array($opt_id, $primary_options))?'secondary-param':''?>">
+          <input type="checkbox" <?=($sel_options && in_array($opt_id, $sel_options))?'checked="checked"':''?> data-options="<?=$opt_id?>" class="fake-radio" value="<?=$opt_id?>" id="<?=$opt_id?>"><label for="<?=$opt_id?>"><?=$opt_text?></label>
+        </div>
+      <?php endforeach; ?>
+    </div>
+  </div>
+  <input type="hidden" id="options" name="opt" value="<?=implode(",",$sel_options)?>">
 </div>
 </form>
 <script type="text/javascript">
@@ -121,6 +133,20 @@
       if (!$(event.target).closest('.toggler-opener').length) {
         $('.toggler-opener').removeClass('opened toggler-opener');
         $('.tglwatcher.toggled').removeClass('toggled');
+      }
+    });
+
+    $('#options-toggler').click(function(){
+      var toggled = ($(this).data('options-tgl') == '0') ? false : true ;
+
+      if (toggled) {
+        $(this).data('options-tgl', 0);
+        $(this).find('i').removeClass('fa-caret-down').addClass('fa-caret-right');
+        $('form[role=searcher] .options-selects .secondary-param').removeClass('show');
+      }else {
+        $(this).find('i').removeClass('fa-caret-right').addClass('fa-caret-down');
+        $('form[role=searcher] .options-selects .secondary-param').addClass('show');
+        $(this).data('options-tgl', 1);
       }
     });
 
@@ -157,6 +183,14 @@
       var tkey = e.attr('tglwatcherkey');
       var selected = collect_checkbox(tkey, false);
       $('#'+tkey+'_ids').val(selected);
+    });
+
+    $('form[role=searcher] input[data-options]').change(function()
+    {
+      var e = $(this);
+      var checkin = $(this).is(':checked');
+      var selected = collect_options(false);
+      $('#options').val(selected);
     });
 
     /* Autocompleter */
@@ -203,6 +237,20 @@
     }
     /* E:Autocompleter */
   })(jQuery);
+
+  function collect_options( loader )
+  {
+    var arr = [];
+
+    jQuery('form[role=searcher] input[data-options]').each(function(e,i)
+    {
+      if(jQuery(this).is(':checked') && !jQuery(this).is(':disabled')){
+        arr.push(jQuery(this).val());
+      }
+    });
+
+    return arr.join(",");
+  }
 
   function collect_checkbox(rkey, loader)
   {
