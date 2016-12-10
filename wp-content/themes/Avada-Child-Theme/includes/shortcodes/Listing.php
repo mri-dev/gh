@@ -131,6 +131,10 @@ class ListingLista
     {
       $get = $_GET;
 
+      if ($get['opt'] != '') {
+        $options = explode(",",$get['opt']);
+      }
+
       switch ($get['title'])
       {
         case 'news':
@@ -150,7 +154,13 @@ class ListingLista
         'limit' => $this->params['limit'],
       );
 
-      if (isset($get['hl']) && $get['hl'] == '1') {
+      if ($options) {
+        $arg['options'] = $options;
+      }
+
+      if (
+        (isset($get['hl']) && $get['hl'] == '1')
+      ) {
         $arg['highlight'] = 1;
       }
 

@@ -207,6 +207,21 @@ class Properties extends PropertyFactory
       $post_arg['post_status'] = -1;
     }
 
+    if (isset($this->arg['options']) && is_array($this->arg['options']) && !empty($this->arg['options']))
+    {
+      $option_meta = array();
+      $option_meta['relation'] = 'AND';
+      foreach ($this->arg['options'] as $opt) {
+        $option_meta[] = array(
+          'key' => '_listing_'.$opt,
+          'compare' => '=',
+          'value' => '1'
+        );
+      }
+
+      $meta_qry[] = $option_meta;
+    }
+
     if (isset($this->arg['highlight'])) {
       $meta_qry[] = array(
         'key' => '_listing_flag_highlight',
@@ -397,8 +412,6 @@ class Properties extends PropertyFactory
 
     $this->query = $posts;
     $this->count = $posts->found_posts;
-
-    //print_r($post_arg);
 
     foreach($posts->posts as $post) {
       $this->datalist[] = new Property($post);

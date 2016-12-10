@@ -7,6 +7,7 @@ class PropertyFactory
   const LOG_VIEW_DB = 'listing_views';
   const PROPERTY_ARCHIVE_DB = 'listing_archive_reg';
   const PRICE_TYPE_FIX_INDEX = 0;
+  const NEWSDAY = 14;
 
   public $property_taxonomies_id = array('property-types', 'property-condition', 'property-heating', 'status', 'locations');
   public $property_status_colors = array(

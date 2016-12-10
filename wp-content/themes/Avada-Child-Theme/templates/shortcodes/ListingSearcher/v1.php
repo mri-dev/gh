@@ -136,8 +136,10 @@
 
       if (toggled) {
         $(this).data('options-tgl', 0);
+        $(this).find('i').removeClass('fa-caret-down').addClass('fa-caret-right');
         $('form[role=searcher] .options-selects .secondary-param').removeClass('show');
       }else {
+        $(this).find('i').removeClass('fa-caret-right').addClass('fa-caret-down');
         $('form[role=searcher] .options-selects .secondary-param').addClass('show');
         $(this).data('options-tgl', 1);
       }

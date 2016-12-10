@@ -254,6 +254,15 @@ class Property extends PropertyFactory
   {
     $h = true;
 
+    // Diff
+    $diff = 86400 * self::NEWSDAY;
+
+    $time = ((int)strtotime($this->raw_post->post_date)) + $diff;
+
+    if ( time() > $time ) {
+      $h = false;
+    }
+
     return $h;
   }
 
