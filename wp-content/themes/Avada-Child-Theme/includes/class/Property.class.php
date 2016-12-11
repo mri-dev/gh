@@ -549,6 +549,46 @@ class Property extends PropertyFactory
     return get_post_thumbnail_id( $this->ID() );
   }
 
+  public function ProfilImgAttr()
+  {
+    $imgmeta = wp_get_attachment_metadata($this->ProfilImgID());
+    if (is_array($imgmeta))
+    {
+      $width = $imgmeta['width'];
+      $height = $imgmeta['height'];
+
+      if ($width === $height) {
+        $imgmeta['orientation'] = 'square';
+      } else if($width < $height ){
+        $imgmeta['orientation'] = 'portrait';
+      } else {
+        $imgmeta['orientation'] = 'landscape';
+      }
+    } else {
+      $imgmeta = array();
+
+      $prof_img = $this->ProfilImg();
+
+      $size = getimagesize($prof_img);
+
+      if (!$size) {
+        return false;
+      }
+
+      $width = $size[0];
+      $height = $size[1];
+
+      if ($width === $height) {
+        $imgmeta['orientation'] = 'square';
+      } else if($width < $height ){
+        $imgmeta['orientation'] = 'portrait';
+      } else {
+        $imgmeta['orientation'] = 'landscape';
+      }
+    }
+    return $imgmeta;
+  }
+
   public function ProfilImg()
   {
     global $wpdb;

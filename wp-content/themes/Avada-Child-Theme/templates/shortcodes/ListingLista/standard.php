@@ -8,7 +8,11 @@
         <? if($item->isDropOff()):?><div class="dropoff"><img src="<?=IMG?>/discount-label.svg" alt="<?=__('Leárazott', 'gh')?>" /></div><? endif; ?>
         <? if($imgnum = $item->imageNumbers()):?><div class="photo trans-on"><img src="<?=IMG?>/ico-photo-white.svg" alt="<?=__('Fényképek', 'gh')?>" /> <span class="nm"><?=$imgnum?></span></div><? endif; ?>
       </div>
-      <div class="image">
+      <?
+        // Image attr
+        $prof_img_attr = $item->ProfilImgAttr();
+      ?>
+      <div class="image or-<?=$prof_img_attr['orientation']?>">
         <a title="<?=$item->Title()?>" href="<?=$item->URL()?>"><img src="<?=$item->ProfilImg()?>" alt="<?=$item->Title()?>" /></a>
         <? if( ($excp = $item->ShortDesc()) != "" ): ?>
         <div class="excerpt transf"><?=$excp?></div>

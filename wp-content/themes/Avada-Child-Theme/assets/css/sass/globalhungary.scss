@@ -1836,6 +1836,15 @@ footer {
             width: 100%;
             pointer-events: none;
           }
+
+          &.or-portrait{
+            img{
+              height: auto;
+              max-height: initial;
+              width: 125%;
+              max-width: 125%;
+            }
+          }
         }
 
         .prim-line {
