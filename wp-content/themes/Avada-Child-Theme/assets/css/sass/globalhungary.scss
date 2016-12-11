@@ -1863,6 +1863,8 @@ footer {
               font-size: 0.8em;
               line-height: 1;
               color: lighten($color-sec, 40%);
+              height: 25px;
+              overflow: hidden;
             }
           }
           & > .fav{
@@ -2139,11 +2141,24 @@ footer {
     font-size: 2.8em;
     margin: 0;
     font-weight: 100;
+    position: relative;
+    line-height: 1.2;
+
+    &:before{
+      color: $color-sec;
+      line-height: 1;
+      font-family: 'FontAwesome';
+      content: "\f0a2";
+      display: block;
+      font-size: 64px;
+      margin: 0;
+    }
   }
 }
 
 .ingatlan-page-view,
-.kedvencek-page-view{
+.kedvencek-page-view,
+.news-page-view {
   .search-side,
   .listing-content {
     display: inline-block;
@@ -2159,6 +2174,23 @@ footer {
 
     .listing-wrapper{
       padding-left: 25px;
+
+      .set-watced-prop{
+        float: right;
+        background: #bdbdbd;
+        color: #ffffff;
+        font-size: 0.8em;
+        line-height: 1;
+        padding: 8px;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        margin: 2px 0;
+
+        &:hover {
+          background: $color-pr;
+        }
+      }
 
       h1 {
         color: $color-pr;
@@ -2719,7 +2751,7 @@ footer {
       color: #ffffff;
       font-size: 28px;
       line-height: 75px;
-      text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+      text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.31);
       -webkit-border-radius: 3px 0 0 3px;
       -moz-border-radius: 3px 0 0 3px;
       border-radius: 3px 0 0 3px;

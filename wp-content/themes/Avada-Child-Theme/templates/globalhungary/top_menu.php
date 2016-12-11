@@ -1,4 +1,5 @@
 <?php
+  global $notify;
   // Top social icons
   $social = new Avada_Social_Icons();
   $icons_html = $social->render_social_icons(array('position' => 'header'));
@@ -25,10 +26,11 @@
           <div class="fnl" id="notification-favorite"></div>
         </a>
       </div><!--
-   --><div class="notify-newhouse">
-        <a class="trans-on" href="#">
+   --><div class="notify-newhouse" title="<?=__('Nem megtekintett ingatlanok listája', 'gh')?>">
+        <? $unwatched = $notify->propertyUnwatched(); ?>
+        <a class="trans-on" href="/news">
           <img src="<?=IMG?>/ico-house.svg" alt="New House" />
-          <div class="fnl has" id="notification-newhouse">194</div>
+          <div class="fnl <?=($unwatched > 0)?'has':''?>" id="notification-newhouse"><?=$unwatched?></div>
         </a>
       </div><!--
   --></div><!--

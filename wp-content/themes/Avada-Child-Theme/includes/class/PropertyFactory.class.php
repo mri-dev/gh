@@ -5,6 +5,7 @@ class PropertyFactory
   const PROPERTY_TAXONOMY_META_PREFIX = '_listing_';
   const LOG_CHANGE_DB = 'listing_change_history';
   const LOG_VIEW_DB = 'listing_views';
+  const LOG_WATCHTIME_DB = 'listing_watchtimestamp';
   const PROPERTY_ARCHIVE_DB = 'listing_archive_reg';
   const PRICE_TYPE_FIX_INDEX = 0;
   const NEWSDAY = 14;

@@ -6,6 +6,7 @@ define('IMG', IFROOT.'/images');
 define('SLUG_INGATLAN', 'ingatlan');
 define('SLUG_INGATLAN_LIST', 'ingatlanok');
 define('SLUG_FAVORITE', 'kedvencek');
+define('SLUG_NEWS', 'news');
 define('GOOGLE_API_KEY', 'AIzaSyA0Mu8_XYUGo9iXhoenj7HTPBIfS2jDU2E');
 define('PHONE_PREFIX', '06');
 define('LANGKEY','hu');
@@ -261,9 +262,36 @@ function gh_init()
   add_rewrite_rule('^control/([^/]+)', 'index.php?cp=$matches[1]', 'top');
   add_rewrite_rule('^'.SLUG_INGATLAN_LIST.'/?', 'index.php?custom_page='.SLUG_INGATLAN_LIST.'&urlstring=$matches[1]', 'top');
   add_rewrite_rule('^'.SLUG_FAVORITE.'/?', 'index.php?custom_page='.SLUG_FAVORITE.'&urlstring=$matches[1]', 'top');
+  add_rewrite_rule('^'.SLUG_NEWS.'/?', 'index.php?custom_page='.SLUG_NEWS.'&urlstring=$matches[1]', 'top');
   add_rewrite_rule('^'.SLUG_INGATLAN.'/([^/]+)/([^/]+)/([^/]+)', 'index.php?custom_page='.SLUG_INGATLAN.'&regionslug=$matches[1]&cityslug=$matches[2]&urlstring=$matches[3]', 'top');
 }
 add_action('init', 'gh_init');
+
+function gh_get_fnc()
+{
+  global $wpdb;
+  if (isset($_GET['setwatched']) && $_GET['setwatched'] == '1')
+  {
+    $ucid = ucid();
+
+    $wpdb->insert(
+      \PropertyFactory::LOG_WATCHTIME_DB,
+      array(
+        'ucid'  => $ucid,
+        'ip'    => $_SERVER['REMOTE_ADDR'],
+        'wtime' => current_time('mysql')
+      ),
+      array(
+        '%s', '%s', '%s'
+      )
+    );
+
+    wp_redirect('/news/?settedWatchedAll=1');
+    exit;
+  }
+}
+
+add_action('init', 'gh_get_fnc');
 
 function old_importer()
 {
@@ -361,6 +389,10 @@ function ingatlan_custom_title($title)
 
   if($wp_query->query_vars['custom_page'] == 'ingatlanok' ) {
     $title['title'] = __('Ingatlankereső', 'gh');
+  }
+
+  if($wp_query->query_vars['custom_page'] == 'news' ) {
+    $title['title'] = __('Nem megtekintett ingatlanok', 'gh');
   }
 
   return $title;

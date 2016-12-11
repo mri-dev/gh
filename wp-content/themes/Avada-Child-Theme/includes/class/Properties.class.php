@@ -236,6 +236,12 @@ class Properties extends PropertyFactory
       $post_arg['meta_key'] = '_listing_price';
     }
 
+    if (isset($this->arg['after_date'])) {
+      $post_arg['date_query'] = array(
+        'after' => $this->arg['after_date']
+      );
+    }
+
     if (isset($this->arg['order'])) {
       $post_arg['order'] = $this->arg['order'];
     } else {
@@ -247,6 +253,9 @@ class Properties extends PropertyFactory
     }
     if (isset($this->arg['ids']) && is_array($this->arg['ids'])) {
       $post_arg['post__in'] = $this->arg['ids'];
+    }
+    if (isset($this->arg['exc_ids']) && is_array($this->arg['exc_ids'])) {
+      $post_arg['post__not_in'] = $this->arg['exc_ids'];
     }
 
     if (isset($this->arg['author'])) {
@@ -413,6 +422,8 @@ class Properties extends PropertyFactory
     $this->query = $posts;
     $this->count = $posts->found_posts;
 
+    //print_r($posts);
+
     foreach($posts->posts as $post) {
       $this->datalist[] = new Property($post);
     }
@@ -468,16 +479,19 @@ class Properties extends PropertyFactory
 
       if( $this->detect_robot() ) return false;
 
+      $ucid = ucid();
+
       $wpdb->insert(
         self::LOG_VIEW_DB,
         array(
           'ip' => $_SERVER['REMOTE_ADDR'],
           'pid' => $this->arg['id'],
           'ref' => $_SERVER['HTTP_REFERER'],
-          'qrystr' => $_SERVER['QUERY_STRING']
+          'qrystr' => $_SERVER['QUERY_STRING'],
+          'ucid' => $ucid
         ),
         array(
-          '%s', '%d', '%s', '%s'
+          '%s', '%d', '%s', '%s', '%s'
         )
       );
     }

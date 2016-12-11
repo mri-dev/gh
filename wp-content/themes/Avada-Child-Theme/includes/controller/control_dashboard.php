@@ -212,7 +212,7 @@ class control_dashboard
     }
 
     if (isset($arg['unique'])) {
-      $qry .= " GROUP BY t.ip ";
+      $qry .= " GROUP BY t.ucid ";
     }
 
     //echo $qry;

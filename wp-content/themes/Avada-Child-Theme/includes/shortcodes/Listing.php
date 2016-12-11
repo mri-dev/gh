@@ -54,6 +54,9 @@ class ListingLista
             case 'viewed':
               $output .= $this->viewed();
             break;
+            case 'unwatched':
+              $output .= $this->unwatched();
+            break;
             case 'get':
               $output .= $this->get();
             break;
@@ -83,7 +86,7 @@ class ListingLista
       global $wpdb;
 
       $o = '<h1>'.__('Kedvenc ingatlanok listája', 'gh').'</h1>';
-      $o .= '<div class="subtitle">'.__('Az alábbi listában találja azokat az ingatlanokat, amiket Ön kedvencnek jelölt.').'</div>';
+      $o .= '<div class="subtitle">'.__('Az alábbi listában találja azokat az ingatlanokat, amiket Ön kedvencnek jelölt.', 'gh').'</div>';
       $t = new ShortcodeTemplates(__CLASS__.'/'.$this->template);
 
       $get = $_GET;
@@ -144,6 +147,14 @@ class ListingLista
           $o = '<h1>'.__('Kiemelt ingatlanok', 'gh').'</h1>';
         break;
         default:
+          $def = true;
+
+          if (in_array('flag_highlight', $options)) {
+            $def = false;
+            $o = '<h1>'.__('Kiemelt ingatlanok', 'gh').'</h1>';
+          }
+
+          if ($def)
           $o = '<h1>'.__('Keresés eredménye', 'gh').'</h1>';
         break;
       }
@@ -238,7 +249,7 @@ class ListingLista
     private function highlight( $arg = array() )
     {
       $o = '<div class="header">
-        <div class="morev"><a title="'.__('További kiemelt ingatlanok', 'gh').'" href="/ingatlanok/?hl=1&title=highlight"><i class="fa fa-bars"></i></a></div>
+        <div class="morev"><a title="'.__('További kiemelt ingatlanok', 'gh').'" href="/ingatlanok/?opt=flag_highlight&title=highlight"><i class="fa fa-bars"></i></a></div>
         <h2>'.__('Kiemelt ingatlanok', 'gh').'</h2>
       </div>';
       $t = new ShortcodeTemplates(__CLASS__.'/'.$this->template);
@@ -375,6 +386,81 @@ class ListingLista
         $o .= $t->load_template( array( 'item' => $e ) );
       }
       $o .= '</div></div>';
+
+      return $o;
+    }
+
+    /**
+    * Nem megnézett ingatlanok listázás
+    **/
+    private function unwatched( $arg = array() )
+    {
+      global $wpdb;
+      global $notify;
+
+      $unwatched_prop = $notify->propertyUnwatched();
+
+      if ($unwatched_prop > 1) {
+        $o = '<a class="set-watced-prop" href="/news/?setwatched=1"><i class="fa fa-eye"></i> '.__('Összes megtekintettnek jelölése', 'gh').'</a>';
+      }
+
+      $o .= '<h1>'.__('Nem megtekintett ingatlanok', 'gh').'</h1>';
+      $o .= '<div class="subtitle">'.__('Az alábbi listában találja azokat az ingatlanokat, amiket Ön még nem tekintett meg.', 'gh').'</div>';
+      $t = new ShortcodeTemplates(__CLASS__.'/'.$this->template);
+
+      if (isset($_GET['settedWatchedAll'])) {
+        $o .= '<div class="alert alert-success">'.sprintf(__('Ön a mai dátumig (%s) minden korábbi ingatlant megtekintettnek jelölt.', 'gh'), current_time('mysql')).'</div>';
+      }
+
+      $ucid = ucid();
+
+      // Visited
+      $qry = "SELECT pid FROM `".\PropertyFactory::LOG_VIEW_DB."` as t WHERE t.`ucid` = '".$ucid."' ORDER BY t.visited DESC;";
+
+      $idsq = $wpdb->get_results($qry, ARRAY_A );
+      $ids = array();
+      foreach ($idsq as $sid) {
+        if(count($ids) >= $this->params['limit']) break;
+        if (!in_array($sid['pid'], $ids)) {
+          $ids[] = $sid['pid'];
+        }
+      }
+
+      // Time click
+      $t_qry = "SELECT wtime FROM `".\PropertyFactory::LOG_WATCHTIME_DB."` as t WHERE t.`ucid` = '".$ucid."' ORDER BY t.wtime DESC LIMIT 0,1;";
+      $watchtimestmp = $wpdb->get_var($t_qry);
+
+      //var_dump($watchtimestmp);
+
+      $arg = array(
+        'exc_ids' => $ids,
+        'limit' => $this->params['limit']
+      );
+
+      $arg['page'] = (isset($_GET['page']) && is_numeric($_GET['page'])) ? $_GET['page'] : 1;
+
+      if ($watchtimestmp) {
+        $arg['after_date'] = $watchtimestmp;
+      }
+
+      $properties = new Properties($arg);
+      $list = $properties->getList();
+      $this->pagionation = $properties->pagination('/news/');
+
+      if ( count($list) != 0 ) {
+        $o .= '<div class="prop-list style-'.$this->template.'">';
+        $o .= '<div class="prop-wrapper">';
+        foreach ( $list as $e )
+        {
+          $o .= $t->load_template( array( 'item' => $e ) );
+        }
+        $o .= '</div></div>';
+      } else {
+        ob_start();
+        include(locate_template('templates/parts/nodata-listing-unwatched.php'));
+        $o .= ob_get_contents();
+        ob_end_clean();
+      }
 
       return $o;
     }
