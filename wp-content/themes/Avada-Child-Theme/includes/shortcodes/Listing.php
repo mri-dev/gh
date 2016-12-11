@@ -149,7 +149,7 @@ class ListingLista
         default:
           $def = true;
 
-          if (in_array('flag_highlight', $options)) {
+          if (!empty($options) && in_array('flag_highlight', $options)) {
             $def = false;
             $o = '<h1>'.__('Kiemelt ingatlanok', 'gh').'</h1>';
           }

@@ -589,6 +589,21 @@ class Property extends PropertyFactory
     return $imgmeta;
   }
 
+  public function Viewed()
+  {
+    global $wpdb;
+    $click = 0;
+
+    $click = $wpdb->get_var("SELECT count(ID) FROM ".self::LOG_VIEW_DB." WHERE pid = ".$this->ID()." GROUP BY pid");
+
+    if (!$click) {
+      return 0;
+    }
+
+
+    return $click;
+  }
+
   public function ProfilImg()
   {
     global $wpdb;

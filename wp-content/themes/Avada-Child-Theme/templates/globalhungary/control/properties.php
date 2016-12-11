@@ -100,9 +100,10 @@
                 </div>
               <?php endif; ?>
               <?=__('Ingatlan', 'gh')?></div>
-            <div class="col-md-3"><?=__('Referens', 'gh')?></div>
+            <div class="col-md-2"><?=__('Referens', 'gh')?></div>
             <div class="col-md-2"><?=__('Állapot', 'gh')?></div>
             <div class="col-md-2"><?=__('Létrehozva', 'gh')?></div>
+            <div class="col-md-1"><i class="fa fa-mouse-pointer"></i></div>
           </div>
         </div>
         <div class="data-body">
@@ -128,7 +129,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-3 center"><a title="<?=__('Felhasználó ingatlanjainak listázása', 'gh')?>" href="/control/properties/?user=<?=$p->AuthorID()?>"><?=$p->AuthorName()?></a></div>
+              <div class="col-md-2 center"><a title="<?=__('Felhasználó ingatlanjainak listázása', 'gh')?>" href="/control/properties/?user=<?=$p->AuthorID()?>"><?=$p->AuthorName()?></a></div>
               <div class="col-md-2 center"><?=$p->Status(false)?></div>
               <div class="col-md-2 center">
                 <?=$p->CreateAt()?>
@@ -136,6 +137,9 @@
                   <a href="/control/property_edit/?id=<?=$p->ID()?>"><?=__('szerkeszt', 'gh')?> <i class="fa fa-pencil"></i></a>
                   | <a href="/control/property_history/?pid=<?=$p->ID()?><?=($selected_user)?'&u='.$selected_user->ID():''?>" title="<?=__('Módosítások')?>"><?=$p->historyChangeCount($selected_user)?> <i class="fa fa-history"></i></a>
                 </div>
+              </div>
+              <div class="col-md-1 center">
+                <?=$p->Viewed()?>x
               </div>
             </div>
           <?php endforeach; ?>
