@@ -69,7 +69,12 @@ class AjaxRequests
 
     $ucid = ucid();
 
-    $ids = $wpdb->get_results("SELECT pid FROM listing_favorites WHERE ucid = '$ucid' GROUP BY pid;", ARRAY_A);
+    $ids = $wpdb->get_results("SELECT
+      f.pid
+    FROM listing_favorites as f
+    LEFT JOIN $wpdb->posts as p ON p.ID = f.pid
+    WHERE f.ucid = '$ucid' and p.post_status = 'publish'
+    GROUP BY pid;", ARRAY_A);
 
     foreach ($ids as $id) {
       $total++;
