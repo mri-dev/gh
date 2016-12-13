@@ -89,18 +89,14 @@
             </div>
             <div class="list">
               <?php
-                $regions = $prop->Regions();
-                $regio = end($regions);
-                if ($regions[0]->name == 'Budapest' && count($regions) > 1) {
-                  $regio->name = $regions[0]->name.' / '.$regio->name .__('kerület', 'gh');
-                }
+                $regio = $prop->RegionName();
               ?>
               <div class="e">
                 <div class="h">
                   <div class="ico"><img src="<?=IMG?>/ico/telepules.svg" alt="<?=__('Település', 'gh')?>"></div>
                   <?=__('Település', 'gh')?>
                 </div><!--
-             --><div class="v"><?=($v = $regio->name)?$v:'<span class="na">'.__('nincs megadva', 'gh').'</span>'?></div>
+             --><div class="v"><?=($regio)?$regio:'<span class="na">'.__('nincs megadva', 'gh').'</span>'?></div>
               </div>
               <div class="e">
                <div class="h">

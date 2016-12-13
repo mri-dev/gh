@@ -105,9 +105,24 @@ class Property extends PropertyFactory
     $ctp      = $term->parent;
     $regions[$term->term_id] = $term;
 
+    if($term->parent != 0){
+      $pt = get_term($term->parent);
+      if($pt->name == 'Budapest') {
+        $term->name .= ' '.__('kerület', 'gh');
+      }
+    }
+
     while ( $ctp )
     {
       $term =  get_term($ctp, 'locations');
+
+      if($term->parent != 0){
+        $pt = get_term($term->parent);
+        if($pt->name == 'Budapest') {
+          $term->name .= ' '.__('kerület', 'gh');
+        }
+      }
+
       $regions[$term->term_id] = $term;
 
       if($term->parent != 0) {
