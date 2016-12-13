@@ -125,9 +125,6 @@ class control_property_save
     if ( empty($post_content) ) {
       $form_errors .= __('- A ingatlan részletes leírása nem lehet üres. Kérjük, hogy pótolja. ','gh') . "<br />";
     }
-    if ( $mode == 'create' && empty($post['valid-datas']) ) {
-      $form_errors .= __('- El kell fogadnia, hogy a megadott adatok valósak.','gh') . "<br />";
-    }
 
     if ( $form_errors ) {
       $form_errors = "<h3>".__('Hiányzó / Hibás értékek', 'gh').":</h3>".$form_errors;

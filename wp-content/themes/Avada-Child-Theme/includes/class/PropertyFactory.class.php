@@ -8,7 +8,7 @@ class PropertyFactory
   const LOG_WATCHTIME_DB = 'listing_watchtimestamp';
   const PROPERTY_ARCHIVE_DB = 'listing_archive_reg';
   const PRICE_TYPE_FIX_INDEX = 0;
-  const NEWSDAY = 14;
+  const NEWSDAY = 30;
 
   public $property_taxonomies_id = array('property-types', 'property-condition', 'property-heating', 'status', 'locations');
   public $property_status_colors = array(
@@ -103,6 +103,7 @@ class PropertyFactory
       'panel' => __('Panel', 'gh'),
       'sorhaz' => __('Sorház', 'gh'),
       'tegla' => __('Tégla', 'gh'),
+      'uj_epitesu' => __('Új építésű', 'gh'),
 
       'uj' => __('Új', 'gh'),
       'felkesz' => __('Félkész', 'gh'),

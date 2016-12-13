@@ -210,9 +210,6 @@
       </div>
     <?php endif; ?>
     <div class="submit-property">
-      <div class="allowvalidate">
-        <input type="checkbox" name="valid-datas" id="valid-datas" value="1"> <label for="valid-datas"><?php echo __('Kijelentem, hogy a fent közzétett adatok valósak.', 'gh'); ?></label>
-      </div>
       <input type="hidden" name="_nonce" value="<?=wp_create_nonce('property-create')?>">
       <button type="submit" name="createProperty" value="1"><?php echo __('Ingatlanhirdetés rögzítése', 'gh'); ?> <i class="fa fa-file-text-o"></i></button>
     </div>
