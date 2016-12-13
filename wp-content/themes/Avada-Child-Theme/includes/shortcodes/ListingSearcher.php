@@ -5,13 +5,15 @@ class ListingSearcher extends PropertyFactory
     public $excluded_options = array(
       'flag_archived',
       'flag_pricetype',
+      'flag_highlight',
+      'flag_exclusive'
     );
     public $primary_options = array(
-      'flag_highlight',
       'garage',
       'lift',
-      'driveways',
-      'balcony'
+      'balcony',
+      'panorama',
+      'garden'
     );
 
     public function __construct()

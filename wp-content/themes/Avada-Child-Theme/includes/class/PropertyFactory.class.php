@@ -75,7 +75,7 @@ class PropertyFactory
   public function i18n_pricetype_values( $index )
   {
     $texts = array(
-      0 => __('Fix ár', 'gh'),
+      0 => __('Ár', 'gh'),
       1 => sprintf(__('%s / nm', 'gh'), $this->getValuta()),
       2 => sprintf(__('%s / Ha', 'gh'), $this->getValuta()),
       3 => sprintf(__('%s / hó', 'gh'), $this->getValuta()),
@@ -104,8 +104,13 @@ class PropertyFactory
       'sorhaz' => __('Sorház', 'gh'),
       'tegla' => __('Tégla', 'gh'),
       'uj_epitesu' => __('Új építésű', 'gh'),
+      'ikerhaz' => __('Ikerház', 'gh'),
+      'hazresz' => __('Házrész', 'gh'),
+      'kastely_villa' => __('Kastély, villa', 'gh'),
+      'tanya' => __('Tanya', 'gh'),
 
       'uj' => __('Új', 'gh'),
+      'ujszeru' => __('Újszerű', 'gh'),
       'felkesz' => __('Félkész', 'gh'),
       'azonnal-koltozheto' => __('Azonnal költözhető', 'gh'),
       'hasznalt' => __('Használt', 'gh'),
@@ -135,6 +140,21 @@ class PropertyFactory
     return $t;
   }
 
+  public function getLocationChilds( $parent = 0, $arg = array() )
+  {
+    $param = array(
+      'taxonomy' => 'locations',
+      'echo' => true,
+      'hierarchical' => 1,
+      'child_of' => $parent,
+      'orderby' => 'name',
+      'order' => 'ASC',
+      'walker' => new Location_Childs_Walker
+    );
+    $param = array_merge($param, $arg);
+    wp_dropdown_categories($param);
+  }
+
   public function getZoneGPS( $term_id = false )
   {
     if ( !$term_id ) {
@@ -153,6 +173,34 @@ class PropertyFactory
       'lng' => (float)$gps_lng
     );
   }
+}
+
+class Location_Childs_Walker extends Walker_CategoryDropdown {
+  function start_el(&$output, $category, $depth, $args) {
+		$pad = str_repeat('&mdash; ', $depth);
+
+		$cat_name = apply_filters('list_cats', $category->name, $category);
+
+    $cat_name = PropertyFactory::i18n_taxonomy_values($cat_name);
+
+    $parent_term = get_term($category->parent);
+
+		$output .= "\t<option class=\"level-$depth\" value=\"".$category->term_id."\"";
+		if ( $category->term_id == $args['selected'] )
+			$output .= ' selected="selected"';
+		$output .= '>';
+		$output .= $pad.$cat_name;
+    if($parent_term->name == 'Budapest') {
+      $output .= ' '.__('kerület', 'gh');
+    }
+		if ( $args['show_count'] )
+			$output .= '  ('. $category->count .')';
+		if ( $args['show_last_update'] ) {
+			$format = 'Y-m-d';
+			$output .= '  ' . gmdate($format, $category->last_update_timestamp);
+		}
+		$output .= "</option>\n";
+	}
 }
 
 ?>

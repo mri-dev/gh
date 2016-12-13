@@ -100,20 +100,18 @@
         <?
         $cata = array(
           'show_option_all' => __('-- válasszon --', 'gh'),
-          'taxonomy' => 'locations',
           'hide_empty' => 0,
           'name' => 'tax[locations]',
           'id' => 'tax_locations',
-          'hierarchical' => 1,
-          'orderby' => 'name'
         );
 
         $regionid = $me->RegionID();
-        if ( $regionid != 0 ) {
-          $cata['parent'] = $regionid;
-        }
+        $control->properties->getLocationChilds(
+          $regionid,
+          $cata
+        );
 
-        wp_dropdown_categories( $cata ); ?>
+        ?>
         <input type="hidden" name="pre[tax][locations]" value="<?=$parea->term_id?>">
       </div>
       <div class="col-md-6 reqf">

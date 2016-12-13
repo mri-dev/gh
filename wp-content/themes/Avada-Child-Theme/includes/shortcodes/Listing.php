@@ -216,6 +216,7 @@ class ListingLista
 
       $arg['page'] = (isset($_GET['page']) && is_numeric($_GET['page'])) ? $_GET['page'] : 1;
 
+      //print_r($arg);
 
       $properties = new Properties($arg);
       $list = $properties->getList();

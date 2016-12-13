@@ -122,7 +122,7 @@
       <?php endforeach; ?>
     </div>
   </div>
-  <input type="hidden" id="options" name="opt" value="<?=implode(",",$sel_options)?>">
+  <input type="hidden" id="options" name="opt" value="<?=(is_array($sel_options))?implode(",",$sel_options):''?>">
 </div>
 </form>
 <script type="text/javascript">

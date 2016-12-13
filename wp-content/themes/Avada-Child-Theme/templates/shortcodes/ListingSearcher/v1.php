@@ -155,6 +155,15 @@
        $this.val(num2);
     });
 
+    $('form[role=searcher] input[type=radio]').change(function(i,e){
+      var rid = $(this).val();
+      if(rid == 67) {
+        $('form[role=searcher] label[for=searcher_city]').text('Város (kerület)');
+      } else {
+          $('form[role=searcher] label[for=searcher_city]').text('Város');
+      }
+    });
+
     $('.tglwatcher').click(function(event){
       event.stopPropagation();
       event.preventDefault();
@@ -213,6 +222,7 @@
           $('#searcher_city_ids').val(suggestion.data);
         },
         onSearchComplete: function(query, suggestions){
+
         },
         onSearchStart: function(query){
           $(this).autocomplete().options.params.region = get_current_regio();

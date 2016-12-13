@@ -179,16 +179,18 @@
       </div>
       <div class="col-md-4">
         <label for="tax_locations"><?=__('Város', 'gh')?></label>
-        <? wp_dropdown_categories(array(
-          'show_option_all' => __('-- válasszon --', 'gh'),
-          'taxonomy' => 'locations',
-          'hide_empty' => 0,
-          'name' => 'tax[locations]',
-          'id' => 'tax_locations',
-          'parent' => $parea->parent,
-          'orderby' => 'name',
-          'selected' => $parea->term_id
-        )); ?>
+        <?
+        $control->properties->getLocationChilds(
+          $regions[0]->term_id,
+          array(
+            'show_option_all' => __('-- válasszon --', 'gh'),
+            'selected' => $parea->term_id,
+            'name' => 'tax[locations]',
+            'id' => 'tax_locations',
+            'hide_empty' => 0
+          )
+        );
+        ?>
         <input type="hidden" name="pre[tax][locations]" value="<?=$parea->term_id?>">
       </div>
       <div class="col-md-6 reqf">

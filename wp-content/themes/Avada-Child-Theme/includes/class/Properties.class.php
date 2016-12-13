@@ -23,8 +23,12 @@ class Properties extends PropertyFactory
     $t = array();
 
     foreach ($terms as $term) {
+      $origin_name = $term->name;
       if ( !in_array($term->name, $this->exclue_megye_str)) {
         $term->name = sprintf(__('%s megye', 'gh'), $term->name);
+      }
+      if($origin_name == 'Pest') {
+        $term->name .= ' / Budapest';
       }
       $t[] = $term;
     }

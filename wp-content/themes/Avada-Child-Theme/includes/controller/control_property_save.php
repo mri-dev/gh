@@ -101,29 +101,29 @@ class control_property_save
     }
 
     if ( empty($taxes['status']) ) {
-      $form_errors .= __('- Kérjük, hogy válassza ki az ingatlan státuszát.','gh') . "<br />";
+      //$form_errors .= __('- Kérjük, hogy válassza ki az ingatlan státuszát.','gh') . "<br />";
     }
     if ( empty($taxes['property-types']) ) {
-      $form_errors .= __('- Kérjük, hogy válassza ki az ingatlan kategóriáját.','gh') . "<br />";
+      //$form_errors .= __('- Kérjük, hogy válassza ki az ingatlan kategóriáját.','gh') . "<br />";
     }
     if ( empty($taxes['property-condition']) ) {
-      $form_errors .= __('- Kérjük, hogy válassza ki az ingatlan állapotát.','gh') . "<br />";
+      //$form_errors .= __('- Kérjük, hogy válassza ki az ingatlan állapotát.','gh') . "<br />";
     }
     if ( empty($post['meta_input']['_listing_address']) ) {
-      $form_errors .= __('- Az ingatlan pontos címe hiányzik. Kérjük, hogy pótolja.','gh') . "<br />";
+      //$form_errors .= __('- Az ingatlan pontos címe hiányzik. Kérjük, hogy pótolja.','gh') . "<br />";
     }
     if ( empty($post['meta_input']['_listing_price']) ) {
-      $form_errors .= __('- Az ingatlan irányára hiányzik. Kérjük, hogy pótolja.','gh') . "<br />";
+      //$form_errors .= __('- Az ingatlan irányára hiányzik. Kérjük, hogy pótolja.','gh') . "<br />";
     }
     if ( is_null($post['meta_input']['_listing_flag_pricetype']) ) {
-      $form_errors .= __('- Az ingatlan ár jellegét kötelező kiválasztani. Kérjük, hogy pótolja.','gh') . "<br />";
+      //$form_errors .= __('- Az ingatlan ár jellegét kötelező kiválasztani. Kérjük, hogy pótolja.','gh') . "<br />";
     }
 
     if ( empty($post_excerpt) ) {
-      $form_errors .= __('- A ingatlan rövid ismertető leírása nem lehet üres. Kérjük, hogy pótolja. ','gh') . "<br />";
+      //$form_errors .= __('- A ingatlan rövid ismertető leírása nem lehet üres. Kérjük, hogy pótolja. ','gh') . "<br />";
     }
     if ( empty($post_content) ) {
-      $form_errors .= __('- A ingatlan részletes leírása nem lehet üres. Kérjük, hogy pótolja. ','gh') . "<br />";
+      //$form_errors .= __('- A ingatlan részletes leírása nem lehet üres. Kérjük, hogy pótolja. ','gh') . "<br />";
     }
 
     if ( $form_errors ) {

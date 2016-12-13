@@ -139,18 +139,24 @@ class AjaxRequests
 
     extract($_GET);
 
+    $pf = new PropertyFactory();
+
     $return = array();
     $arg    = array(
-      'taxonomy' => 'locations'
+      'taxonomy' => 'locations',
+      'hierarchical' => 1,
+      'hide_empty' => 1,
+      'orderby' => 'name',
+      'order' => 'ASC'
     );
 
     if ($region) {
-      $arg['parent'] = $region;
+      $arg['child_of'] = $region;
     }
 
-    $arg['name__like'] = $search;
+    //$arg['name__like'] = $search;
 
-    $terms = get_terms( $arg );
+    $terms = get_terms($arg);
 
     foreach ($terms as $t) {
       if ($t->parent == 0) {
@@ -159,8 +165,15 @@ class AjaxRequests
       if ($t->parent != 0) {
         $parent = get_term($t->parent);
       }
+
+      $name = ( ($parent->slug == 'budapest') ? $parent->name.' / '.$t->name.' '.__('kerület') : $t->name  );
+
+      if (!empty($search) && stristr($name, $search) === FALSE) {
+        continue;
+      }
+
       $return[] = array(
-        'label' => ( ($parent->slug == 'budapest') ? $parent->name.' / '.$t->name.' '.__('kerület') : $t->name  ),
+        'label' => $name,
         'value' => (int)$t->term_id,
         'slug' => $t->slug,
         'region' => $t->parent,
