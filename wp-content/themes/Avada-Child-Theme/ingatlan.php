@@ -28,7 +28,14 @@
             <div class="title">
               <h1><?=$prop->Title()?></h1>
               <div class="subtitle">
-                <span class="addr"><i class="fa fa-map-marker"></i> <?php $regtext = ''; foreach ($regions as $r ): $regtext .= $r->name.' / '; endforeach; $regtext = rtrim($regtext, ' / '); ?><?=$regtext?></span>
+                <?php
+                $end_reg = end($regions);
+                if(in_array($end_reg->name, $properties->fake_city)) { ?>
+                  <span class="addr"><i class="fa fa-map-marker"></i> <?=$end_reg->name?></span>
+                <? }else{ ?>
+                    <span class="addr"><i class="fa fa-map-marker"></i> <?php $regtext = ''; foreach ($regions as $r ): $regtext .= $r->name.' / '; endforeach; $regtext = rtrim($regtext, ' / '); ?><?=$regtext?></span>
+                <? } ?>
+
                 <strong><?=$prop->PropertyStatus(true)?> <?=$prop->multivalue_list($prop->PropertyType(true), true, '/'.SLUG_INGATLAN_LIST.'/?c=#value#')?></strong>
               </div>
               <div class="icons">

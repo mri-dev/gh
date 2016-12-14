@@ -155,7 +155,9 @@
     <div class="row">
       <div class="col-md-12">
         <label for="post_content"><?=__('Ingatlan részletes leírása', 'gh')?></label>
-        <?php wp_editor( $_POST['post_content'], 'post_content' ); ?>
+        <?php wp_editor( $_POST['post_content'], 'post_content', array(
+          'wpautop' => true
+        ) ); ?>
       </div>
     </div>
     <h3><?=__('Paraméterek', 'gh')?></h3>
@@ -217,7 +219,7 @@
 <script>
   (function($){
     $('#_listing_address, #tax_locations').on('change', function(){
-      var qryaddr = 'Magyarország<?=(!$me->RegionID()) ?'':', '.$me->RegionName().' megye'?>';
+      var qryaddr = 'Magyarország';
       var v = $('#_listing_address').val();
       var c = $('#tax_locations option:selected').text();
       if (typeof c !== 'undefined') {

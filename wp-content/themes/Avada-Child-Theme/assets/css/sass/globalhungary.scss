@@ -1457,22 +1457,27 @@ footer {
         }
 
         &.inp-city{
-          flex-basis: 40%;
+          flex-basis: 40%
         }
+        &.inp-kategoria{
+          flex-basis: 20%;
+        }
+        &.inp-allapot{
+          flex-basis: 20%;
+        }
+        &.inp-status{
+          flex-basis: 20%;
+        }
+
         &.inp-rooms{
           flex-basis: 15%;
         }
         &.inp-alapterulet{
           flex-basis: 15%;
         }
-        &.inp-kategoria{
-          flex-basis: 30%;
-        }
+
         &.inp-azonosito{
           flex-basis: 15%;
-        }
-        &.inp-status{
-          flex-basis: 30%;
         }
         &.inp-price-min{
           flex-basis: 20%;
@@ -1529,8 +1534,7 @@ footer {
       flex-basis: 80%;
 
       & > div {
-        flex-basis: calc(100% / 5);
-        padding: 0 0 8px 0;
+        padding: 0 15px 8px 0;
         input[type=checkbox] + label{
           padding-left: 29px;
           font-size: 0.9em;
@@ -1611,6 +1615,7 @@ footer {
           &.inp-city,
           &.inp-kategoria,
           &.inp-status,
+          &.inp-allapot,
           &.inp-azonosito{
             flex-basis: 100%;
           }

@@ -54,6 +54,28 @@
           </div>
         </div>
       </div>
+      <div class="inp inp-allapot">
+        <label for="allapot_multiselect_text"><?=__('Állapot', 'gh')?></label>
+        <div class="tglwatcher-wrapper">
+          <input type="text" readonly="readonly" id="allapot_multiselect_text" class="form-control tglwatcher" tglwatcher="allapot_multiselect" placeholder="<?=__('Összes', 'gh')?>" value="">
+        </div>
+        <input type="hidden" id="allapot_multiselect_ids" name="cond" value="<?=$form['cond']?>">
+        <div class="multi-selector-holder" tglwatcherkey="allapot_multiselect" id="allapot_multiselect">
+          <div class="selector-wrapper">
+            <?
+              $selected = explode(",", $form['cond']);
+              $status = $properties->getSelectors( 'property-condition' );
+            ?>
+            <?php if ($status): ?>
+              <?php foreach ($status as $k): ?>
+              <div class="selector-row">
+                <input type="checkbox" <?=(in_array($k->term_id, $selected))?'checked="checked"':''?> tglwatcherkey="allapot_multiselect" htxt="<?=$k->name?>" id="stat_<?=$k->term_id?>" value="<?=$k->term_id?>"> <label for="stat_<?=$k->term_id?>"><?=$k->name?> <span class="n">(<?=$k->count?>)</span></label>
+              </div>
+              <?php endforeach; ?>
+            <?php endif; ?>
+          </div>
+        </div>
+      </div>
       <div class="inp inp-status">
         <label for="status_multiselect_text"><?=__('Státusz', 'gh')?></label>
         <div class="tglwatcher-wrapper">
@@ -127,6 +149,7 @@
 <script type="text/javascript">
   (function($){
     collect_checkbox('kategoria_multiselect', true);
+    collect_checkbox('allapot_multiselect', true);
     collect_checkbox('status_multiselect', true);
 
     $(window).click(function() {

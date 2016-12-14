@@ -55,6 +55,32 @@
           </div>
         </div>
       </div>
+      <div class="inp inp-allapot">
+        <label for="allapot_multiselect_text"><?=__('Állapot', 'gh')?></label>
+        <div class="tglwatcher-wrapper">
+          <input type="text" readonly="readonly" id="allapot_multiselect_text" class="form-control tglwatcher" tglwatcher="allapot_multiselect" placeholder="<?=__('Összes', 'gh')?>" value="">
+        </div>
+        <input type="hidden" id="allapot_multiselect_ids" name="cond" value="">
+        <div class="multi-selector-holder" tglwatcherkey="allapot_multiselect" id="allapot_multiselect">
+          <div class="selector-wrapper">
+            <? $kategoria = $properties->getSelectors( 'property-condition' ); ?>
+            <?php if ($kategoria): ?>
+              <?php foreach ($kategoria as $k): ?>
+              <div class="selector-row lvl-0">
+                <input type="checkbox" tglwatcherkey="allapot_multiselect" htxt="<?=$k->name?>" id="kat_<?=$k->term_id?>" value="<?=$k->term_id?>"> <label for="kat_<?=$k->term_id?>"><?=$k->name?> <span class="n">(<?=$k->count?>)</span></label>
+              </div>
+              <?php if ( !empty($k->children) ): ?>
+                <?php foreach ($k->children as $sk): ?>
+                <div class="selector-row lvl-1">
+                  <input type="checkbox" tglwatcherkey="allapot_multiselect" data-parentid="<?=$sk->parent?>" data-lvl="1" htxt="<?=$k->name?> / <?=$sk->name?>" id="kat_<?=$sk->term_id?>" value="<?=$sk->term_id?>"> <label for="kat_<?=$sk->term_id?>"><?=$sk->name?> <span class="n">(<?=$sk->count?>)</span></label>
+                </div>
+                <?php endforeach; ?>
+              <?php endif; ?>
+              <?php endforeach; ?>
+            <?php endif; ?>
+          </div>
+        </div>
+      </div>
       <div class="inp inp-status">
         <label for="status_multiselect_text"><?=__('Státusz', 'gh')?></label>
         <div class="tglwatcher-wrapper">

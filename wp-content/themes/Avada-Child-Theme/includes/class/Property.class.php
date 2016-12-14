@@ -64,12 +64,17 @@ class Property extends PropertyFactory
   public function URL()
   {
     $regionslug = $this->ParentRegionSlug();
+    $megye = $this->RegionSlug();
+
+    if(in_array($this->ParentRegion(), $this->fake_city)) {
+      $megye = 'magyarorszag';
+    }
 
     if (empty($regionslug)) {
       $regionslug = '-';
     }
 
-    return get_option('siteurl').'/'.SLUG_INGATLAN.'/'.$this->RegionSlug().'/'.$regionslug.'/'.sanitize_title($this->Title()).'-'.$this->ID();
+    return get_option('siteurl').'/'.SLUG_INGATLAN.'/'.$megye.'/'.$regionslug.'/'.sanitize_title($this->Title()).'-'.$this->ID();
   }
   public function RegionName( $html_text = true )
   {
@@ -80,6 +85,10 @@ class Property extends PropertyFactory
         $parent = false;
         if ($term->parent != 0) {
           $parent = get_term($term->parent);
+        }
+
+        if(in_array($term->name, $this->fake_city)) {
+          $parent = false;
         }
 
         if ($html_text) {

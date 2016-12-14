@@ -353,6 +353,16 @@ class Properties extends PropertyFactory
       );
     }
 
+    // Ingatlan állapot
+    if (isset($this->arg['property-condition']) && !empty($this->arg['property-condition'])) {
+      $post_arg['tax_query'][] = array(
+        'taxonomy'  => 'property-condition',
+        'field'     => 'term_id',
+        'terms'     => $this->arg['property-condition'],
+        'compare'   => 'IN'
+      );
+    }
+
     if (isset($this->arg['limit'])) {
       $post_arg['posts_per_page'] = $this->arg['limit'];
     } else {

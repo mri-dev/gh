@@ -183,7 +183,7 @@
     gpsmap.setMapTypeId('styled_map');
 
     if ( !inited_gps && mapopt.center.lat == 0 ) {
-      findGPSNow('<?=$prop->RegionName(false)?>', <?=$gps_term_id?>);
+      findGPSNow('<?=$prop->RegionName(false)?>', <?=($gps_term_id)?$gps_term_id:0?>);
     }
 
     function findGPSNow( address, term ) {

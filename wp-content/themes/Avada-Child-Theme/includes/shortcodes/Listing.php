@@ -214,6 +214,10 @@ class ListingLista
         $arg['property-types'] = explode(",", $get['c']);
       }
 
+      if (isset($get['cond']) && !empty($get['cond'])) {
+        $arg['property-condition'] = explode(",", $get['cond']);
+      }
+
       $arg['page'] = (isset($_GET['page']) && is_numeric($_GET['page'])) ? $_GET['page'] : 1;
 
       //print_r($arg);

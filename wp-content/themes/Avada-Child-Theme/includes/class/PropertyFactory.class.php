@@ -11,6 +11,7 @@ class PropertyFactory
   const NEWSDAY = 30;
 
   public $property_taxonomies_id = array('property-types', 'property-condition', 'property-heating', 'status', 'locations');
+  public $fake_city = array('Kecskemét', 'Kiskunhalas');
   public $property_status_colors = array(
     'publish' => '#c6e8c6',
     'draft'   => '#e2e2e2',
