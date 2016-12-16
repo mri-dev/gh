@@ -170,6 +170,7 @@
     {name: '<?=__('Letisztult', 'gh')?>'});
 
     var mapopt = {
+      scrollwheel: false,
       center: {lat: <?=($gps['lat']) ? $gps['lat'] : '0'?>, lng: <?=($gps['lng']) ? $gps['lng'] : '0'?>},
       zoom: <?=($gps) ? 15 : 5?>,
       mapTypeControlOptions: {

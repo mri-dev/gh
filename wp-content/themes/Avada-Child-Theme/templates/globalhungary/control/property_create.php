@@ -183,7 +183,7 @@
     <div class="row">
       <div class="col-md-12">
         <label for="property_images"><?=__('Képek tallózása', 'gh')?></label>
-        <input type="file" name="property_images[]" id="property_images" value="" class="form-control">
+        <input type="file" multiple="multiple" name="property_images[]" id="property_images" value="" class="form-control">
         <div style="color: #53a54f;">
           <small><?=__('A képek automatikusan méretezve lesznek. Méretezés után a képek maximális értékei: 1200 x 1200 pixel.', 'gh')?></small>
         </div>
