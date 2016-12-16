@@ -69,8 +69,8 @@ class control_property_save
           $now = $post[$pkey];
 
           if ($pkey == 'post_content') {
-            $pre = wp_strip_all_tags($pre);
-            $now = wp_strip_all_tags($now);
+            $pre = wp_strip_all_tags($pre, true);
+            $now = wp_strip_all_tags($now, true);
           }
 
           if ($now != $pre) {

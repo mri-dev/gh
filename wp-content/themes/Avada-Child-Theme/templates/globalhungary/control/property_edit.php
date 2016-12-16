@@ -213,8 +213,8 @@
       </div>
       <div class="col-md-3 reqf">
         <label for="_listing_price"><?=__('Irányár (Ft)', 'gh')?></label>
-        <input type="text" id="_listing_price" name="meta_input[_listing_price]" value="<?=$property->Price()?>" class="form-control pricebind" <?=(!$me->can('property_edit_price') && !current_user_can('administrator')) ? 'readonly="readonly"' : ''?>>
-        <input type="hidden" name="pre[meta_input][_listing_price]" value="<?=$property->Price()?>">
+        <input type="text" id="_listing_price" name="meta_input[_listing_price]" value="<?=$property->OriginalPrice()?>" class="form-control pricebind" <?=(!$me->can('property_edit_price') && !current_user_can('administrator')) ? 'readonly="readonly"' : ''?>>
+        <input type="hidden" name="pre[meta_input][_listing_price]" value="<?=$property->OriginalPrice()?>">
       </div>
       <div class="col-md-3">
         <label for="_listing_offprice"><?=__('Kedvezményes irányár (Ft)', 'gh')?></label>
@@ -233,8 +233,8 @@
     <div class="row">
       <div class="col-md-12">
         <label for="post_content"><?=__('Ingatlan részletes leírása', 'gh')?></label>
-        <?php wp_editor( $property->RawDescription(), 'post_content' ); ?>
-        <textarea name="pre[post_content]" class="hide"><?=$property->RawDescription()?></textarea>
+        <?php wp_editor( $property->Description(), 'post_content' ); ?>
+        <textarea name="pre[post_content]" class="hide"><?=$property->Description()?></textarea>
       </div>
     </div>
     <h3><?=__('Paraméterek', 'gh')?></h3>
@@ -321,6 +321,24 @@
   (function($){
     collect_checkbox('kategoria_multiselect', true);
     collect_checkbox('allapot_multiselect', true);
+
+    $('#_listing_address, #tax_locations').on('change', function(){
+      var qryaddr = 'Magyarország';
+      var v = $('#_listing_address').val();
+      var c = $('#tax_locations option:selected').text();
+      if (typeof c !== 'undefined') {
+        qryaddr += ', '+c;
+      }
+      qryaddr += ', '+v;
+      var geo = new google.maps.Geocoder();
+
+      geo.geocode({ address: qryaddr }, function(r,s){
+        if (s == 'OK') {
+          var center = r[0].geometry.location;
+          setGPSMarker(center, r[0].formatted_address);
+        }
+      });
+    });
 
     $(window).click(function() {
       if (!$(event.target).closest('.toggler-opener').length) {
