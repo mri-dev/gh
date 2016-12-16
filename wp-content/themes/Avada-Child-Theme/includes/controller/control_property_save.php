@@ -2,6 +2,7 @@
 class control_property_save
 {
   private $temppostid = 0;
+  private $do_watermark = true;
 
   public function __construct()
   {
@@ -31,6 +32,7 @@ class control_property_save
     $extra = $post['extra'];
     $images = $post['property_images'];
     $pre = $post['pre'];
+    $this->do_watermark = (isset($post['image_watermark'])) ? true : false;
 
     if ($post['ID'] != 0) {
       $mode = 'save';
@@ -91,6 +93,7 @@ class control_property_save
     unset($post['post_author_override']);
     unset($post['tax']);
     unset($post['property_images']);
+    unset($post['image_watermark']);
 
     extract($post);
     $form_errors = null;
@@ -218,7 +221,6 @@ class control_property_save
     if ( $post['ID'] != 0 && !empty($changed) ) {
       $this->logChanges( get_current_user_id(), $post['ID'], $changed );
     }
-
     //return $post;
     return array( 'id' => $post_id, 'mode' => $mode );
   }
@@ -234,6 +236,20 @@ class control_property_save
 
     $attach_id = media_handle_upload( $file_handler, $this->temppostid );
 
+    // Resize
+    if ( true && $attach_id )
+    {
+      $this->resize_attachment($attach_id, 1200, 1200);
+    }
+
+    // Watermark
+    if ( $this->do_watermark && $attach_id )
+    {
+      $image = new ImageModifier();
+      $image->loadResourceByID($attach_id);
+      $image->watermark();
+    }
+
     return $attach_id;
   }
 
@@ -244,6 +260,30 @@ class control_property_save
       'url'    => $dir['baseurl'] . '/listing/'.$this->temppostid,
       'subdir' => '/listing/'.$this->temppostid,
      ) + $dir;
+  }
+
+  private function resize_attachment( $attachment_id, $width = 1024, $height = 1024 )
+  {
+    // Get file path
+    $file = get_attached_file($attachment_id);
+
+    // Get editor, resize and overwrite file
+    $image_editor = wp_get_image_editor($file);
+    $image_editor->resize($width, $height);
+    $image_editor->set_quality(80);
+    $saved = $image_editor->save($file);
+
+    // We need to change the metadata of the attachment to reflect the new size
+
+    // Get attachment meta
+    $image_meta = get_post_meta($attachment_id, '_wp_attachment_metadata', true);
+
+    // We need to change width and height in metadata
+    $image_meta['height'] = $saved['height'];
+    $image_meta['width']  = $saved['width'];
+
+    // Update metadata
+    return update_post_meta($attachment_id, '_wp_attachment_metadata', $image_meta);
   }
 
   private function logChanges( $uid, $pid, $changes_arr = array())

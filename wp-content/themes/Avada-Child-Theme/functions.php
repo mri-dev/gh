@@ -295,7 +295,7 @@ add_action('init', 'gh_get_fnc');
 
 function old_importer()
 {
-  $importer = new GHImporter();
+  //$importer = new GHImporter();
   //$imp_zona_pre = $importer->zonak();
   //$imp_zone_ins = $importer->insert_zonak( $imp_zona_pre );
   if ($_GET['imp'] == '1') {
@@ -308,6 +308,15 @@ function old_importer()
     print_r($ing);
     exit;
     /* */
+  }
+
+  if ($_GET['img'] == '1')
+  {
+    return;
+    $attach_id = $_GET['kep'];
+    $image = new ImageModifier();
+    $image->loadResourceByID($attach_id);
+    $image->watermark();
   }
 }
 add_action('init', 'old_importer', 9999);

@@ -264,6 +264,14 @@
       <div class="col-md-12">
         <label for="property_images"><?=__('Képek tallózása', 'gh')?></label>
         <input type="file" multiple="multiple" name="property_images[]" id="property_images" value="" class="form-control">
+        <div style="color: #53a54f;">
+          <small><?=__('A képek automatikusan méretezve lesznek. Méretezés után a képek maximális értékei: 1200 x 1200 pixel.', 'gh')?></small>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <small><input type="checkbox" id="image_watermark" checked="checked" name="image_watermark" value="1"> <label for="image_watermark"><?=__('Képek automatikus vízjelezése', 'gh')?></label></small>
       </div>
     </div>
     <?

@@ -1,5 +1,6 @@
 <?php
   require_once "Helper.class.php";
+  require_once "ImageModifier.class.php";
 
   require_once "YoutubeHelper.php";
   require_once "UserHelper.php";
