@@ -7,6 +7,9 @@
         <? echo do_shortcode('[listing-searcher view="v2"]'); ?>
       </div><div class="listing-content">
         <div class="listing-wrapper">
+          <div class="show-on-mobile">
+
+          </div>
           <? echo do_shortcode('[listing-list view="standard" src="get" limit="30"]'); ?>
         </div>
       </div>

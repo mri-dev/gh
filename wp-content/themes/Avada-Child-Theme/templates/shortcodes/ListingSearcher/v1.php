@@ -8,7 +8,7 @@
   <ul>
     <li>
       <div class="ico">
-        <i class="fa fa-search"></i>
+        <i class="fa fa-search"></i> <span class="mobile-text"><?=__('Ingatlan kereső', 'gh')?></span>
       </div>
     </li><!--
  --><? foreach( $regions as $r ): if($r->parent != 0) continue; ?><!--
