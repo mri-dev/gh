@@ -2886,8 +2886,11 @@ footer {
     }
   }
 }
-
-@media all and (max-width: 1024px) {
+@media all and (max-width: 1200px) {
+  #main .fusion-row, #slidingbar-area .fusion-row, .fusion-footer-copyright-area .fusion-row, .fusion-footer-widget-area .fusion-row, .fusion-page-title-row, .tfs-slider .slide-content-container .slide-content{
+    width: 100%;
+    max-width: 100%;
+  }
   .top-float-menubar .menu-holder .contact{
     font-size: 1em;
   }
@@ -2900,6 +2903,34 @@ footer {
     margin: -24px 0 0 62px;
     font-size: 0.8em;
   }
+  .ingatlan-page-view .data-top > .data-top-left, .ingatlan-page-view .data-main > .data-top-left{
+    flex-basis: 65%;
+  }
+  .ingatlan-page-view .data-top > .data-top-right, .ingatlan-page-view .data-main > .data-top-right{
+    flex-basis: 35%;
+  }
+  .ingatlan-page-view .data-top > .data-top-left .cwrapper .images .profil, .ingatlan-page-view .data-main > .data-top-left .cwrapper .images .profil{
+    height: auto;
+    max-height: auto;
+  }
+  .ingatlan-page-view .data-top > .data-top-left .cwrapper .images .profil img, .ingatlan-page-view .data-main > .data-top-left .cwrapper .images .profil img{
+    position: relative;
+    left: initial;
+    top: initial;
+    width: 100%;
+    max-width: 100%;
+    -webkit-transform: translate(0, 0);
+    -moz-transform: translate(0, 0);
+    transform: translate(0, 0);
+  }
+  footer .footerlogo-holder .logo .badge {
+    font-size: 0.5em;
+    margin: -18px 0 0 38px;
+  }
+}
+
+@media all and (max-width: 1024px) {
+
   .prop-list .prop-wrapper > .prop-item .prop-item-wrapper .important-options > .opt .head{
     font-size: 0.65em;
   }
@@ -2957,9 +2988,5 @@ footer {
   }
   .prop-list .prop-wrapper > .prop-item .prop-item-wrapper .sec-line > .price {
     font-size: 1.23em;
-  }
-  footer .footerlogo-holder .logo .badge {
-    font-size: 0.5em;
-    margin: -18px 0 0 38px;
   }
 }
