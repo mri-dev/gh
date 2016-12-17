@@ -2886,3 +2886,80 @@ footer {
     }
   }
 }
+
+@media all and (max-width: 1024px) {
+  .top-float-menubar .menu-holder .contact{
+    font-size: 1em;
+  }
+  .fusion-logo{
+    img {
+      max-height: 55px !important;
+    }
+  }
+  .fusion-logo .badge {
+    margin: -24px 0 0 62px;
+    font-size: 0.8em;
+  }
+  .prop-list .prop-wrapper > .prop-item .prop-item-wrapper .important-options > .opt .head{
+    font-size: 0.65em;
+  }
+  .prop-list .prop-wrapper > .prop-item .prop-item-wrapper .important-options > .opt .d{
+    font-size: 0.7em;
+    line-height: 13px;
+  }
+  .prop-list .prop-wrapper > .prop-item .prop-item-wrapper .important-options > .opt .d .ico{
+    height: 12px;
+  }
+  .listing-searcher-holder .searcher-header ul li label{
+    font-size: 0.8em;
+  }
+  .listing-searcher-holder .searcher-wrapper .form-items input[type=text], .listing-searcher-holder .searcher-wrapper .form-items input[type=number], .listing-searcher-holder .searcher-wrapper .form-items select{
+    font-size: 0.8em;
+  }
+  .listing-searcher-holder .searcher-wrapper .form-items .inp label{
+    font-size: 0.85em;
+  }
+  input[type=checkbox] + label:before{
+    font-size: 16px;
+    line-height: 14px;
+  }
+  .multi-selector-holder .selector-wrapper .selector-row input[type=checkbox] + label{
+    padding-left: 30px;
+  }
+  .multi-selector-holder .selector-wrapper .selector-row input[type=checkbox] + label:before{
+    left: 8px;
+  }
+  .multi-selector-holder .selector-wrapper .selector-row.lvl-1 label{
+    padding-left: 38px !important;
+  }
+  .multi-selector-holder .selector-wrapper .selector-row.lvl-1 label:before {
+    left: 16px !important;
+  }
+  .listing-searcher-holder .searcher-footer .options-more a {
+    font-size: 0.65em;
+  }
+  .listing-sc .listing-list-set-watchnow .header h2 {
+    font-size: 1.6em !important;
+  }
+  .listing-searcher-holder .searcher-wrapper .form-items .inp.inp-submit button{
+    font-size: 0.8em;
+  }
+  .prop-list.style-simple .prop-item-wrapper .line-region{
+    font-size: 0.8em;
+  }
+  .prop-list.style-simple .prop-item-wrapper .newi {
+    bottom: -28px !important;
+    line-height: 28px !important;
+  }
+  .prop-list .prop-wrapper > .prop-item .prop-item-wrapper .features .newi {
+    bottom: -11px;
+    right: 15px;
+  }
+  .prop-list .prop-wrapper > .prop-item .prop-item-wrapper .sec-line > .price {
+    font-size: 1.23em;
+  }
+  footer .footerlogo-holder .logo .badge {
+    font-size: 0.5em;
+    margin: -18px 0 0 38px;
+  }
+}
