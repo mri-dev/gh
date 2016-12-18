@@ -3413,6 +3413,11 @@ footer {
   .top-float-menubar .menu-holder .accounts{
     font-size: 0.9em;
   }
+  .ingatlan-page-view .listing-content .listing-wrapper h1 + .subtitle, .kedvencek-page-view .listing-content .listing-wrapper h1 + .subtitle, .news-page-view .listing-content .listing-wrapper h1 + .subtitle{
+    text-align: center;
+    font-size: 0.9em;
+    line-height: 1.3em;
+  }
 }
 /* Mobil S breakpoint */
 @media all and (max-width: 375px) {
