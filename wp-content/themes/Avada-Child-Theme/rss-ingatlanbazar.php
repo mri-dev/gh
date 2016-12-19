@@ -55,8 +55,10 @@
 					$ie++;
 				?>
 				<ad foreignId="<?=$p->Azonosito()?>" agentId="<?=$p->AuthorID()?>">
-					<descriptionText><![CDATA[<?=$p->ShortDesc()?>]]></descriptionText>
+					<type option="<?=$feed->typeConverter($p->PropertyType())?>"/>
+					<descriptionText><![CDATA[<?=$p->RawDescription()?>]]></descriptionText>
 					<price intval="<?=$p->Price()?>"/>
+					<currency option="1"/>
 				</ad>
 				<? } ?>
  			</adList>
