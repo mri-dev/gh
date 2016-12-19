@@ -44,5 +44,16 @@ class IngatlanBazarFeed
 
     return $agents;
   }
+
+  public function properties()
+  {
+    $arg = array();
+    $arg['limit'] = 10;
+
+    $prop = new Properties($arg);
+    $list = $prop->getList();
+
+    return $list;
+  }
 }
 ?>

@@ -48,6 +48,16 @@
               <highlighting id="1" start="2011-02-18" duration="1"/>
           </highlightingList>
         </ad>
+				<?php
+				$properties = $feed->properties();
+				$ie = 0;
+				foreach ($properties as $p) {
+					$ie++;
+				?>
+				<ad foreignId="GH<?=$p->ID()?>" agentId="<?=$p->AuthorID()?>">
+
+				</ad>
+				<? } ?>
  			</adList>
 		</office>
 	</officeList>
