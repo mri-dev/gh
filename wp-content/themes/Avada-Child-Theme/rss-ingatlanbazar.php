@@ -54,8 +54,9 @@
 				foreach ($properties as $p) {
 					$ie++;
 				?>
-				<ad foreignId="GH<?=$p->ID()?>" agentId="<?=$p->AuthorID()?>">
-
+				<ad foreignId="<?=$p->Azonosito()?>" agentId="<?=$p->AuthorID()?>">
+					<descriptionText><![CDATA[<?=$p->ShortDesc()?>]]></descriptionText>
+					<price intval="<?=$p->Price()?>"/>
 				</ad>
 				<? } ?>
  			</adList>
