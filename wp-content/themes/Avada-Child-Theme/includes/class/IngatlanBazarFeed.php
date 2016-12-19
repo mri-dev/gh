@@ -49,11 +49,87 @@ class IngatlanBazarFeed
   {
     $arg = array();
     $arg['limit'] = 10;
+    $arg['regio'] = 67;
+    $arg['post_status']  = 'publish';
 
     $prop = new Properties($arg);
     $list = $prop->getList();
 
     return $list;
+  }
+
+  public function halfrooms( Property $property = null )
+  {
+    $v = false;
+
+    $v = (int)$property->getMetaValue('_listing_halfrooms');
+
+    return $v;
+  }
+
+  public function rooms( Property $property = null )
+  {
+    $v = false;
+
+    $v = (int)$property->getMetaValue('_listing_room_numbers');
+
+    return $v;
+  }
+
+  public function floorspace( Property $property = null )
+  {
+    $v = false;
+
+    $v = (int)$property->getMetaValue('_listing_property_size');
+
+    return $v;
+  }
+
+  public function propertyspace( Property $property = null  )
+  {
+    $v = false;
+
+    $v = (int)$property->getMetaValue('_listing_lot_size');
+
+    return $v;
+  }
+
+  public function heatingConverter( $obj = false )
+  {
+    $newid = false;
+
+    $connect = array(
+      // Gáz
+      1 => array(),
+      // Egyedi
+      2 => array(),
+      // Cirkó
+      3 => array(),
+      // Központi fűtés
+      4 => array(),
+      // Távfűtés
+      5 => array(),
+      // Központi, egyedi mérés
+      6 => array(),
+      // Távfűtés, egyedi mérés
+      7 => array(),
+      // Elektromos fűtés
+      8 => array(),
+      // Gáz + alternatív
+      9 => array(),
+      // Nincs fűtés
+      10 => array(),
+      // Megújuló energia
+      11 => array(),
+    );
+
+    $newid = $obj[0]->term_id;
+
+    if ($newid) {
+      $newid = $this->arraySearch($connect, $newid);
+    }
+
+    return $newid;
   }
 
   public function typeConverter( $obj = false )
@@ -144,6 +220,46 @@ class IngatlanBazarFeed
     return $newid;
   }
 
+  public function periodConverter( $pricetypeid = false )
+  {
+    $connect = array(
+      // Egyszeri
+      1 => array(0, 1, 2),
+      // Havonta
+      2 => array(3)
+    );
+
+    $got = $this->arraySearch($connect, $pricetypeid);
+
+    if ($got) {
+      return $got;
+    }
+
+    return 1;
+  }
+
+  public function statusConverter( $ids = array() )
+  {
+    if (empty($ids)) {
+      return 1;
+    }
+
+    $connect = array(
+      // Eladó
+      1 => array(45),
+      // Kiadó
+      2 => array(44),
+    );
+
+    $got = $this->arraySearch($connect, $ids[0]);
+
+    if ($got) {
+      return $got;
+    }
+
+    return 1;
+  }
+
   private function arraySearch($arr, $id)
   {
     if(!$arr) return false;
@@ -153,6 +269,8 @@ class IngatlanBazarFeed
         return $key;
       }
     }
+
+    return false;
   }
 }
 ?>

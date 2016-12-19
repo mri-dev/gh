@@ -540,6 +540,10 @@ class Property extends PropertyFactory
     }
     return $this->getPriceTypeText($price_index);
   }
+  public function PriceTypeID()
+  {
+    return (int)$this->getMetaValue('_listing_flag_pricetype');
+  }
   public function OriginalPrice( $formated = false )
   {
     $price = $this->getMetaValue('_listing_price');

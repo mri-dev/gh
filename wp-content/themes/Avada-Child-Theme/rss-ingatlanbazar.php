@@ -53,12 +53,54 @@
 				$ie = 0;
 				foreach ($properties as $p) {
 					$ie++;
+					$regions = $p->Regions();
+					$regions = array_reverse($regions);
+					$city = $regions[0]->name;
+					$sub = false;
+					$megye = end($regions)->name;
+
+					if ( in_array($city, array('Kecskemét', 'Kiskunhalas')) )
+					{
+						$megye = 'Csongrád';
+					}
+
+					if($regions[1]->name == 'Budapest') {
+						$sub = $city;
+						$city = $regions[1]->name;
+					}
 				?>
 				<ad foreignId="<?=$p->Azonosito()?>" agentId="<?=$p->AuthorID()?>">
+					<regionText><?=$megye?> megye</regionText>
+          <cityText><?=$city?></cityText>
+					<? if($sub): ?>
+					<suburbText><?=$sub?></suburbText>
+					<? endif; ?>
 					<type option="<?=$feed->typeConverter($p->PropertyType())?>"/>
-					<descriptionText><![CDATA[<?=$p->RawDescription()?>]]></descriptionText>
+					<descriptionText><![CDATA[<?=strip_tags(html_entity_decode($p->Description()))?>]]></descriptionText>
 					<price intval="<?=$p->Price()?>"/>
 					<currency option="1"/>
+					<payingperiod option="<?=$feed->periodConverter($p->PriceTypeID())?>"/>
+					<agreement option="<?=$feed->StatusConverter($p->StatusID())?>"/>
+					<?php // TODO: CONDITION ?>
+					<condition option=""/>
+					<?php // TODO: Heating ?>
+					<heating option=""/>
+					<?php $rooms = $feed->rooms($p); if($rooms): ?>
+					<rooms intval="<?=$rooms?>"/><? endif; ?>
+					<?php $halfrooms = $feed->halfrooms($p); if($halfrooms): ?>
+					<halfrooms intval="<?=$halfrooms?>"/><? endif; ?>
+					<?php $floorspace = $feed->floorspace($p); if($floorspace): ?>
+					<floorspace intval="<?=$floorspace?>"/><? endif; ?>
+					<?php $propertyspace = $feed->propertyspace($p); if($propertyspace): ?>
+					<propertyspace intval="<?=$propertyspace?>"/><? endif; ?>
+					<imageList>
+						<?php
+							$images = $p->Images();
+							if($images)
+							foreach ($images as $i) { ?>
+								<image foreignId="<?=$i->ID?>" href="<?=$i->guid?>" />
+							<? } ?>
+        	</imageList>
 				</ad>
 				<? } ?>
  			</adList>
