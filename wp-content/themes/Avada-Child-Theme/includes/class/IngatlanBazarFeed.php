@@ -48,8 +48,7 @@ class IngatlanBazarFeed
   public function properties()
   {
     $arg = array();
-    $arg['limit'] = 10;
-    $arg['regio'] = 67;
+    $arg['limit'] = -1;
     $arg['post_status']  = 'publish';
 
     $prop = new Properties($arg);
@@ -94,36 +93,66 @@ class IngatlanBazarFeed
     return $v;
   }
 
+  public function conditionConverter( $obj = false )
+  {
+    $newid = false;
+
+    $connect = array(
+      // Újszerű
+      1 => array(53,550),
+      // Átlagos
+      3 => array(),
+      // Jó
+      4 => array(),
+      // Felújított
+      5 => array(55),
+      // Felújításra szorul
+      6 => array(56,133),
+      // Új építésű
+      7 => array(),
+      // Kiváló
+      8 => array(122),
+    );
+
+    $newid = $obj[0];
+
+    if ($newid) {
+      $newid = $this->arraySearch($connect, $newid);
+    }
+
+    return $newid;
+  }
+
   public function heatingConverter( $obj = false )
   {
     $newid = false;
 
     $connect = array(
       // Gáz
-      1 => array(),
+      1 => array(69,125,127),
       // Egyedi
       2 => array(),
       // Cirkó
       3 => array(),
       // Központi fűtés
-      4 => array(),
+      4 => array(129),
       // Távfűtés
-      5 => array(),
+      5 => array(130),
       // Központi, egyedi mérés
       6 => array(),
       // Távfűtés, egyedi mérés
-      7 => array(),
+      7 => array(131),
       // Elektromos fűtés
-      8 => array(),
+      8 => array(132),
       // Gáz + alternatív
-      9 => array(),
+      9 => array(126),
       // Nincs fűtés
       10 => array(),
       // Megújuló energia
-      11 => array(),
+      11 => array(128),
     );
 
-    $newid = $obj[0]->term_id;
+    $newid = $obj;
 
     if ($newid) {
       $newid = $this->arraySearch($connect, $newid);

@@ -17,37 +17,6 @@
 				<?php endforeach; ?>
 			</agentList>
 			<adList>
-        <ad foreignId="ad-433f6663" agentId="agent-1da3bde1">
-          <type option="2"/>
-          <agreement option="1"/>
-          <!-- a hely megadása nevekkel -->
-          <regionText>Csongrád megye</regionText>
-          <cityText>Kecskemét</cityText>
-          <suburbText>Belváros</suburbText>
-          <address visible="true">
-              <street>Hegedűs köz</street>
-              <number>1</number>
-          </address>
-          <!-- / a hely megadása nevekkel -->
-          <price intval="30000000"/>
-          <currency option="1"/>
-          <payingperiod option="1"/>
-          <condition option="5"/>
-          <heating option="1"/>
-          <rooms intval="3"/>
-          <halfrooms intval="1"/>
-          <floorspace intval="100"/>
-          <propertyspace intval="1000"/>
-          <descriptionText><![CDATA[Kecskemét, Hegedűs köznél eladó egy ~100nm-es 2 éve felújított igényes családi ház, 4 szobával, 1000nm-es telekkel, gázfűtéssel.]]></descriptionText>
-          <tagsText><![CDATA[Parketta, Kábel TV, Jó közlekedés]]></tagsText>
-        	<imageList>
-        		<image foreignId="http://www.ugyfel.hu/images/ASD9890_1.jpg" href="http://www.ugyfel.hu/images/ASD9890_1.jpg" />
-        		<image foreignId="http://www.ugyfel.hu/images/ASD9890_2.jpg" href="http://www.ugyfel.hu/images/ASD9890_2.jpg" />
-        	</imageList>
-          <highlightingList>
-              <highlighting id="1" start="2011-02-18" duration="1"/>
-          </highlightingList>
-        </ad>
 				<?php
 				$properties = $feed->properties();
 				$ie = 0;
@@ -75,16 +44,19 @@
 					<? if($sub): ?>
 					<suburbText><?=$sub?></suburbText>
 					<? endif; ?>
+					<?php $gps =$p->GPS(); if($gps): ?>
+					<coordinates latitude="<?=$gps['lat']?>" longitude="<?=$gps['lng']?>"/>
+					<? endif; ?>
 					<type option="<?=$feed->typeConverter($p->PropertyType())?>"/>
 					<descriptionText><![CDATA[<?=strip_tags(html_entity_decode($p->Description()))?>]]></descriptionText>
 					<price intval="<?=$p->Price()?>"/>
 					<currency option="1"/>
 					<payingperiod option="<?=$feed->periodConverter($p->PriceTypeID())?>"/>
 					<agreement option="<?=$feed->StatusConverter($p->StatusID())?>"/>
-					<?php // TODO: CONDITION ?>
-					<condition option=""/>
-					<?php // TODO: Heating ?>
-					<heating option=""/>
+					<?php $condition = $feed->conditionConverter($p->ConditionID()); if($condition): ?>
+					<condition option="<?=$condition?>"/><? endif; ?>
+					<?php $heating = $feed->heatingConverter($p->HeatingID()); if($heating): ?>
+					<heating option="<?=$heating?>"/><? endif; ?>
 					<?php $rooms = $feed->rooms($p); if($rooms): ?>
 					<rooms intval="<?=$rooms?>"/><? endif; ?>
 					<?php $halfrooms = $feed->halfrooms($p); if($halfrooms): ?>
@@ -94,10 +66,13 @@
 					<?php $propertyspace = $feed->propertyspace($p); if($propertyspace): ?>
 					<propertyspace intval="<?=$propertyspace?>"/><? endif; ?>
 					<imageList>
+						<?php $profil = $p->ProfilImg(); if($profil): ?>
+							<image foreignId="<?=$p->ProfilImgID()?>" href="<?=$profil?>" />
+						<? endif; ?>
 						<?php
 							$images = $p->Images();
 							if($images)
-							foreach ($images as $i) { ?>
+							foreach ($images as $i) { if($p->ProfilImgID() == $i->ID) continue; ?>
 								<image foreignId="<?=$i->ID?>" href="<?=$i->guid?>" />
 							<? } ?>
         	</imageList>

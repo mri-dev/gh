@@ -2066,7 +2066,7 @@ footer {
       .image{
         height: 140px !important;
         .excerpt {
-          background: rgba(214, 44, 48, 0.81);
+          background: rgba(214, 44, 48, 0.8);
           padding: 10px;
           font-size: 0.8em;
           color: white;
@@ -3206,11 +3206,33 @@ footer {
   .no-padding-on-mobile{
     padding: 0 !important;
   }
-  .prop-list.im1 .prop-wrapper .prop-item{
-    flex-basis: 100%;
+  footer .fusion-widget-area .fusion-footer-widget-column{
+    display: block !important;
+    width: 100% !important;
+    text-align: center !important;
+    float: none !important;
   }
-  .prop-list.style-simple .prop-wrapper > .prop-item .prop-item-wrapper .image{
-    height: auto !important;
+  footer .footerlogo-holder .logo{
+    width: 380px;
+    margin: 0 auto;
+    padding: 0;
+    text-align: center;
+  }
+  footer .footerlogo-holder .logo img{
+    height: 80px;
+  }
+  footer .footerlogo-holder .logo .badge {
+    font-size: 1.3em;
+    margin: -33px 0 0 90px;
+  }
+  .fusion-social-networks{
+    margin-top: 25px;
+  }
+  footer .widget .fusion-social-networks .fusion-social-network-icon{
+    border: none !important;
+  }
+  .fusion-footer-widget-area{
+    padding-bottom: 25px;
   }
 }
 
@@ -3270,6 +3292,16 @@ footer {
 }
 /* Mobil L breakpoint */
 @media all and (max-width: 480px) {
+  .prop-list.im1 .prop-wrapper .prop-item{
+    flex-basis: 100%;
+  }
+  .prop-list.style-simple .prop-wrapper > .prop-item .prop-item-wrapper .image{
+    height: auto !important;
+  }
+  .prop-list.style-simple .prop-wrapper > .prop-item .prop-item-wrapper .image img{
+    max-width: 100% !important;
+    width: 100% !important;
+  }
   .listing-searcher-holder .searcher-wrapper .form-items .inp{
     padding: 3px;
   }
@@ -3417,6 +3449,16 @@ footer {
     text-align: center;
     font-size: 0.9em;
     line-height: 1.3em;
+  }
+  footer .footerlogo-holder .logo {
+      width: 260px;
+  }
+  footer .footerlogo-holder .logo .badge {
+    font-size: 0.8em;
+    margin: -36px 0 0 65px;
+  }
+  footer .widget_nav_menu ul.menu li{
+    display: block;
   }
 }
 /* Mobil S breakpoint */
