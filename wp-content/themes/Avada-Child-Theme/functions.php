@@ -140,6 +140,15 @@ function add_admin_menus()
       'class' => 'company_ico'
     )
   ) );
+
+  $wp_admin_bar->add_menu( array(
+    'id' => 'gh_dashboard',
+    'title' => '<span class="ab-icon"></span> '.__('Gépház', 'gh'),
+    'href' => get_option('siteurl') . '/control/home',
+    'meta' => array(
+      'class' => ''
+    )
+  ) );
 }
 add_action( 'admin_bar_menu', 'add_admin_menus', 10);
 
@@ -175,6 +184,13 @@ function admin_bar_color() {
     color: #e31f24 !important;
     text-transform: uppercase !important;
     font-weight: bold !important;
+  }
+  #wpadminbar #wp-admin-bar-gh_dashboard .ab-icon:before {
+    content: "\f111";
+    top: 3px;
+  }
+  #collapse-menu:hover, #wpadminbar .ab-item, #wpadminbar a.ab-item, #wpadminbar>#wp-toolbar span.ab-label, #wpadminbar>#wp-toolbar span.noticon{
+	  color: #b5aeae;
   }
   </style>
 <?php

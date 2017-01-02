@@ -10,7 +10,14 @@ function gh_users_data_save( $id )
   if ( !current_user_can( 'edit_user', $id ) ) return false;
 
   $userdata = get_userdata($_POST['user_id']);
-  $all_caps = $user_roles->role_caps[$userdata->roles[0]];
+  $all_caps = $user_roles->role_caps[reset($userdata->roles)];
+
+  /* * /
+  echo '<pre>';
+    print_r($all_caps);
+  echo '</pre>';
+  exit;
+  /* */
 
   foreach ($_POST as $key => $value) {
     if(strpos($key, 'gh_user_permission_') === 0) {
@@ -30,10 +37,7 @@ function gh_users_data_save( $id )
     }
   }
 
-  /*echo '<pre>';
-    print_r($_POST);
-  echo '</pre>';
-  exit;*/
+
 
   // Régió
   update_user_meta( $_POST['user_id'], 'gh_user_regio', wp_kses_post( $_POST['gh_user_regio'] ), get_user_meta($_POST['user_id'], 'gh_user_regio', true) );
