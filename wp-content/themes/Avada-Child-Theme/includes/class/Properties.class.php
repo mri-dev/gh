@@ -297,6 +297,7 @@ class Properties extends PropertyFactory
 
     if (isset($this->arg['idnumber']) && !empty($this->arg['idnumber'])) {
       $idnum = $this->arg['idnumber'];
+      $idnum = strtoupper($idnum);
       if (strpos($idnum,'GH') !== 0) {
         $idnum = 'GH'.$idnum;
       }

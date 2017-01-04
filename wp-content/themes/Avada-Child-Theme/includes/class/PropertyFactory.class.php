@@ -91,7 +91,7 @@ class PropertyFactory
       'elado' => __('Eladó', 'gh'),
       'kiado' => __('Kiadó', 'gh'),
       'berbeado' => __('Bérbeadó', 'gh'),
-
+      // Ingatlan típusok
       'lakas' => __('Lakás', 'gh'),
       'haz' => __('Ház', 'gh'),
       'nyaralo' => __('Nyaraló', 'gh'),
@@ -109,7 +109,7 @@ class PropertyFactory
       'hazresz' => __('Házrész', 'gh'),
       'kastely_villa' => __('Kastély, villa', 'gh'),
       'tanya' => __('Tanya', 'gh'),
-
+      // Ingatlan állapotok
       'uj' => __('Új', 'gh'),
       'ujszeru' => __('Újszerű', 'gh'),
       'felkesz' => __('Félkész', 'gh'),
@@ -120,16 +120,19 @@ class PropertyFactory
       'lakhatatlan' => __('Lakhatatlan', 'gh'),
       'lakhato' => __('Lakható', 'gh'),
       'tehermentes' => __('Tehermentes', 'gh'),
-
+      'jo_allapotu' => __('Jó állapotú', 'gh'),
+      // Fűtés típuskulcsok
       'gaz-cirko' => __('Gáz / Cirkó', 'gh'),
       'elektromos' => __('Elektromos', 'gh'),
       'gaz-konvektor' => __('Gáz / Konvektor', 'gh'),
       'gaz-napkollektor' => __('Gáz + Napkollektor', 'gh'),
       'gazkazan' => __('Gázkazán', 'gh'),
       'geotermikus' => __('Geotermikus', 'gh'),
-      'hazkozponti' => __('Gáz / Cirkó', 'gh'),
+      'hazkozponti' => __('Házközponti', 'gh'),
       'tavfutes' => __('Távfűtés', 'gh'),
       'tavfutes-egyedi-meressel' => __('Távfűtés egyedi mérssel', 'gh'),
+      'vegyes' => __('Vegyes', 'gh'),
+      'egyeb' => __('Egyéb', 'gh'),
     );
 
     $t = $texts[$key];

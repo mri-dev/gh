@@ -100,7 +100,7 @@
                 </div>
               <?php endif; ?>
               <?=__('Ingatlan', 'gh')?></div>
-            <div class="col-md-2"><?=__('Referens', 'gh')?></div>
+            <div class="col-md-2"><?=__('Felhasználó', 'gh')?></div>
             <div class="col-md-2"><?=__('Állapot', 'gh')?></div>
             <div class="col-md-2"><?=__('Létrehozva', 'gh')?></div>
             <div class="col-md-1"><i class="fa fa-mouse-pointer"></i></div>
@@ -117,15 +117,20 @@
                   </div>
                   <?php endif; ?>
                   <div class="img">
-                    <img src="<?=$p->ProfilImg()?>" alt="" />
+                    <a title="<?=__('Kattintson a kép nagyításához.', 'gh')?>" href="<?=$p->ProfilImg()?>" data-rel="iLightbox[i<?=$p->ID()?>]">
+                      <img src="<?=$p->ProfilImg()?>" alt="" />
+                    </a>
                   </div>
                   <div class="main-row">
                     <span class="title"><a href="<?=$p->URL()?>" target="_blank"><?=$p->Title()?></a></span>
                   </div>
                   <div class="alt-row">
+                    <div class="position">
+                        <span class="region"><?=$p->RegionName()?></span> / <span class="address"><?=$p->Address()?></span>
+                    </div>
                     <span class="ref-number <?=($p->isExclusive())?'exclusive':''?>" title="<?=($p->isExclusive())?__('Ez a hirdetés kizárólagos hirdetés.','gh'):''?>"><?=$p->Azonosito()?></span>
                     <span class="price"><?=$p->Price(true)?></span>
-                    <span class="region"><?=$p->RegionName()?></span> / <span class="address"><?=$p->Address()?></span>
+
                   </div>
                 </div>
               </div>
@@ -134,7 +139,7 @@
               <div class="col-md-2 center">
                 <?=$p->CreateAt()?>
                 <div class="edit">
-                  <a href="/control/property_edit/?id=<?=$p->ID()?>"><?=__('szerkeszt', 'gh')?> <i class="fa fa-pencil"></i></a>
+                  <a href="/control/property_edit/?id=<?=$p->ID()?>&return=<?=base64_encode($_SERVER['REQUEST_URI'])?>"><?=__('szerkeszt', 'gh')?> <i class="fa fa-pencil"></i></a>
                   | <a href="/control/property_history/?pid=<?=$p->ID()?><?=($selected_user)?'&u='.$selected_user->ID():''?>" title="<?=__('Módosítások')?>"><?=$p->historyChangeCount($selected_user)?> <i class="fa fa-history"></i></a>
                 </div>
               </div>

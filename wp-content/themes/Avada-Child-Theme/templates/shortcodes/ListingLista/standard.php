@@ -22,7 +22,7 @@
     <div class="prim-line">
       <div class="pos">
         <div class="region"><?=$item->RegionName()?></div>
-        <div class="title"><?=$item->Title()?></div>
+        <div class="title" title="<?=$item->Title()?>"><?=$item->Title()?></div>
       </div>
       <div class="fav">
         <i class="fa fa-heart" favchecker data-fav-pid="<?=$item->ID()?>" title="<?=__('Ingatlanhirdetés mentése kedvencek közzé.', 'gh')?>"></i>

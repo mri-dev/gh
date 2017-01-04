@@ -14,6 +14,7 @@ class control_property_save
     $post_id = 0;
     $changed = array();
     $mode    = 'create';
+    $return  = $post['return'];
 
     if ( !wp_verify_nonce($post['_nonce'], 'property-create') ) {
       throw new Exception( __('Nem sikerült létrehozni az ingatlanhirdetést. Ön nem az oldalunkról kezdeményezte a folyamatot!', 'gh') );
@@ -222,7 +223,7 @@ class control_property_save
       $this->logChanges( get_current_user_id(), $post['ID'], $changed );
     }
     //return $post;
-    return array( 'id' => $post_id, 'mode' => $mode );
+    return array( 'id' => $post_id, 'mode' => $mode, 'return' => $return );
   }
 
   public function uploads_handler ( $file_handler, $post_id, $set_thu = false )

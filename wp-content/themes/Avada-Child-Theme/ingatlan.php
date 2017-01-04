@@ -232,7 +232,7 @@
     (function($){
       $('.image-slide').slick({
         <?=(count($images)>5)?'centerMode: true,':''?>
-        autoplay: true,
+        autoplay: false,
         centerPadding: '60px',
         slidesToShow: 5,
       });

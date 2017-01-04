@@ -59,6 +59,7 @@
   <form class="wide-form" action="/control/property_save" method="post" enctype="multipart/form-data">
     <input type="hidden" name="property_id" value="<?=$property->ID()?>">
     <input type="hidden" name="post_date" value="<?=$property->CreateAt()?>">
+    <input type="hidden" name="return" value="<?=base64_decode($_GET['return'])?>">
     <h3><?=__('Művelet végrehajtás', 'gh')?></h3>
     <div class="row">
       <div class="col-md-3">

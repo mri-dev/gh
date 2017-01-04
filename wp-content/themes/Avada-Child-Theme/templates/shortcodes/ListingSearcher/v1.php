@@ -29,6 +29,25 @@
         <div id="searcher_city_autocomplete" class="selector-wrapper"></div>
         <input type="hidden" name="ci" id="searcher_city_ids" value="">
       </div>
+      <div class="inp inp-status">
+        <label for="status_multiselect_text"><?=__('Eladó/Kiadó', 'gh')?></label>
+        <div class="tglwatcher-wrapper">
+          <input type="text" readonly="readonly" id="status_multiselect_text" class="form-control tglwatcher" tglwatcher="status_multiselect" placeholder="<?=__('Összes', 'gh')?>" value="">
+        </div>
+        <input type="hidden" id="status_multiselect_ids" name="st" value="">
+        <div class="multi-selector-holder" tglwatcherkey="status_multiselect" id="status_multiselect">
+          <div class="selector-wrapper">
+            <? $status = $properties->getSelectors( 'status' ); ?>
+            <?php if ($status): ?>
+              <?php foreach ($status as $k): ?>
+              <div class="selector-row">
+                <input type="checkbox" tglwatcherkey="status_multiselect" htxt="<?=$k->name?>" id="stat_<?=$k->term_id?>" value="<?=$k->term_id?>"> <label for="stat_<?=$k->term_id?>"><?=$k->name?> <span class="n">(<?=$k->count?>)</span></label>
+              </div>
+              <?php endforeach; ?>
+            <?php endif; ?>
+          </div>
+        </div>
+      </div>      
       <div class="inp inp-kategoria">
         <label for="kategoria_multiselect_text"><?=__('Kategória', 'gh')?></label>
         <div class="tglwatcher-wrapper">
@@ -76,25 +95,6 @@
                 </div>
                 <?php endforeach; ?>
               <?php endif; ?>
-              <?php endforeach; ?>
-            <?php endif; ?>
-          </div>
-        </div>
-      </div>
-      <div class="inp inp-status">
-        <label for="status_multiselect_text"><?=__('Státusz', 'gh')?></label>
-        <div class="tglwatcher-wrapper">
-          <input type="text" readonly="readonly" id="status_multiselect_text" class="form-control tglwatcher" tglwatcher="status_multiselect" placeholder="<?=__('Összes', 'gh')?>" value="">
-        </div>
-        <input type="hidden" id="status_multiselect_ids" name="st" value="">
-        <div class="multi-selector-holder" tglwatcherkey="status_multiselect" id="status_multiselect">
-          <div class="selector-wrapper">
-            <? $status = $properties->getSelectors( 'status' ); ?>
-            <?php if ($status): ?>
-              <?php foreach ($status as $k): ?>
-              <div class="selector-row">
-                <input type="checkbox" tglwatcherkey="status_multiselect" htxt="<?=$k->name?>" id="stat_<?=$k->term_id?>" value="<?=$k->term_id?>"> <label for="stat_<?=$k->term_id?>"><?=$k->name?> <span class="n">(<?=$k->count?>)</span></label>
-              </div>
               <?php endforeach; ?>
             <?php endif; ?>
           </div>
