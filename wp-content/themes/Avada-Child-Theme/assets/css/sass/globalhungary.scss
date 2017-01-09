@@ -790,7 +790,9 @@ footer {
           float: right;
           .btn {
             font-size: 0.8em;
-            display: block;
+            display: inline-block;
+            *display: inline;
+            zoom: 1;
             padding: 5px;
             line-height: 1;
           }
@@ -806,9 +808,62 @@ footer {
         }
       }
     }
+  }
+}
 
+.pdf-docs-holder{
+  padding: 8px 0;
+
+  .pdf-row-add{
+    border: 2px solid #e2e2e2;
+    padding: 5px;
+    margin: 4px 0;
+    background: #f3f3f3;
+    border-radius: 5px;
+
+    .row-remove {
+      display: block;
+      height: 40px;
+      width: 40px;
+      line-height: 36px;
+      text-align: center;
+      background: #ffffff;
+      border-radius: 40px;
+      border: 2px solid #dadada;
+
+      i {
+        line-height: 36px;
+        margin: 0;
+        padding: 0;
+      }
+
+      &:hover {
+        background: #f5595c;
+        color: white;
+      }
+    }
+
+    .row {
+      margin: 0;
+    }
+
+    &.row-added {
+      .up-date {
+        font-size: 0.8em;
+      }
+      .del-lab {
+        line-height: 40px;
+
+        &:before {
+          line-height: 40px;
+        }
+      }
+    }
   }
 
+  input[type=file] {
+    padding-top: 10px;
+  }
 }
 
 .fusion-page-title-captions {
@@ -941,6 +996,10 @@ footer {
       border-color: #ff989b;
       color: #ec6e6e !important;
     }
+    &.btn-green {
+      border-color: #98cc87;
+      color: #19ad19 !important;
+    }
   }
 }
 
@@ -1066,15 +1125,31 @@ footer {
 
 
 .inline-input {
+  .multiselect{
+    position: relative;
+  }
+  .multi-selector-holder .selector-wrapper{
+    margin: 0;
+
+    label {
+      width: 100%;
+      display: block;
+    }
+  }
   & > div {
     display: inline-block;
     vertical-align: top;
     line-height: 34px;
     height: 34px;
 
-    button, input, a.fusion-button {
+    button,
+    input,
+    select,
+    a.fusion-button {
       vertical-align: top;
       height: 34px;
+      font-size: 14px;
+      margin: 0;
     }
     input[type=date]{
       border: 1px solid #d2d2d2;
@@ -2686,11 +2761,12 @@ footer {
         text-decoration: underline !important;
       }
     }
-  }
+  } 
 
   .description-block{
     border:1px solid #e0dede;
     margin-right: 5px;
+    margin-bottom: 12px;
 
     .head{
       border-bottom: 1px solid #e0dede;
@@ -2723,6 +2799,34 @@ footer {
       strong{
         font-family: 'Arial';
         font-weight: bold;
+      }
+
+      &.doc-list {
+        padding: 8px;
+        .doc a {
+          display: block;
+          border-bottom: 1px solid #f1f1f1;
+          padding: 8px;
+          line-height: 1;
+          color: #747474;
+
+          i {
+            margin-right: 5px;
+          }
+
+          .doc-info {
+            float: right;
+            color: #bdbdbd;
+            font-size: 0.9em;
+          }
+
+          &:hover {
+            background: #f1f1f1;
+          }
+        }
+        .doc:last-child a{
+          border-bottom: none;
+        }
       }
     }
   }

@@ -2,17 +2,19 @@
   global $me;
 
   $control = get_control_controller('properties');
+  $pf = new PropertyFactory();
 
   $selected_user = false;
   $author = false;
   $filtered = false;
   $archived = false;
   $show_selector = false;
+  $location = false;
 
   if (current_user_can('reference_manager')) {
     $author = $me->ID();
   } else {
-    if (isset($_GET['user'])) {
+    if (isset($_GET['user']) && !empty($_GET['user'])) {
       if ( true ) {
         if ( current_user_can('region_manager') || current_user_can('administrator') ) {
           $author = $_GET['user'];
@@ -27,6 +29,10 @@
     }
   }
 
+  if (current_user_can('region_manager')) {
+    $location = $me->RegionID();
+  }
+
   if (isset($_GET['arc'])) {
     $filtered = true;
     if ( current_user_can('administrator') || current_user_can('region_manager') ){
@@ -34,14 +40,29 @@
     }
   }
 
+  $all_status = array('publish', 'pending', 'draft', 'future');
+  $status = $all_status;
+
+  if(isset($_GET['st']) && !empty($_GET['st']))
+  {
+    $status = array($_GET['st']);
+    $filtered = true;
+  }
+
+  if (isset($_GET['c']) && !empty($_GET['c'])) {
+    $type_ids = explode(",", $_GET['c']);
+    $filtered = true;
+  }
+
   $properties = $control->getProperties(array(
-    'post_status' => array('publish', 'pending', 'draft', 'future'),
-    'location' => $me->RegionID(),
+    'post_status' => $status,
+    'location' => $location,
     'author' => $author,
     'hide_archived' => (($archived) ? false : true),
     'only_archived' => (($archived) ? true : false),
     'page' => (isset($_GET['page']) && is_numeric($_GET['page'])) ? $_GET['page'] : 1,
-    'idnumber' => (isset($_GET['id'])) ? $_GET['id'] : false
+    'idnumber' => (isset($_GET['id'])) ? $_GET['id'] : false,
+    'property-types' => $type_ids,
   ));
   $item_num = $control->propertyCount();
   $pager = $control->pager('/control/properties/');
@@ -54,6 +75,11 @@
           <a href="/control/properties/?arc=1" class="btn btn-rounded btn-red"><?=__('Archiváltak', 'gh')?> <i class="fa fa-archive"></i></a>
         <?php endif; ?>
       <?php endif; ?>
+      <?php
+      // Excel export
+      $qrys = $_SERVER['QUERY_STRING'];
+      ?>
+      <a title="<?=__('Expotálásnál a következő szűrőfeltátelek is érvényesek: Státusz, Referens', 'gh')?>" href="/ingatlan-export/<?=($qrys)?'?'.$qrys:''?>" class="btn btn-rounded btn-green"><?=__('Excel export', 'gh')?> <i class="fa fa-file-excel-o"></i></a>
     </div>
     <h1><?=(isset($_GET['arc'])?__('Archivált', 'gh').' ':'')?><?=sprintf(__('Ingatlanok <span class="region">/ %s</span> <span class="badge">%d</span>', 'gh'), $me->RegionName(), $item_num)?></h1>
     <div class="desc"><?=__('Az alábbi listában az Ön régiójába található ingatlan hirdetéseket találhatja.', 'gh')?></div>
@@ -64,7 +90,7 @@
     <?php else: ?>
     <?php if ($filtered): ?>
       <a href="/control/properties/">< <?=__('Teljes lista mutatása', 'gh')?></a> <br>
-      <?php if (isset($_GET['user'])): ?>
+      <?php if (isset($_GET['user'])&& !empty($_GET['user'])): ?>
         <?=sprintf(__('Kiválasztott felhasználó: <strong>%s</strong>', 'gh'), $selected_user->Name())?>
       <?php endif; ?>
       <?php if ($archived): ?>
@@ -75,7 +101,43 @@
     <form action="/control/properties/" method="get" class="pull-right">
       <input type="hidden" name="user" value="<?=$_GET['user']?>">
       <div class="inline-input">
-        <div>
+        <div class="multiselect">
+          <div class="tglwatcher-wrapper">
+            <input type="text" readonly="readonly" id="kategoria_multiselect_text" class="form-control tglwatcher" tglwatcher="kategoria_multiselect" placeholder="<?=__('Összes kategória', 'gh')?>" value="">
+          </div>
+          <input type="hidden" id="kategoria_multiselect_ids" name="c" value="">
+          <div class="multi-selector-holder" tglwatcherkey="kategoria_multiselect" id="kategoria_multiselect">
+            <div class="selector-wrapper">
+              <?
+                $selected = (array)explode(",", $_GET['c']);
+                $kategoria = $control->getSelectors( 'property-types' );
+              ?>
+              <?php if ($kategoria): ?>
+                <?php foreach ($kategoria as $k): ?>
+                <div class="selector-row lvl-0">
+                  <input type="checkbox" <?=(in_array($k->term_id, $selected))?'checked="checked"':''?>  tglwatcherkey="kategoria_multiselect" htxt="<?=$k->name?>" id="kat_<?=$k->term_id?>" value="<?=$k->term_id?>"> <label for="kat_<?=$k->term_id?>"><?=$k->name?></label>
+                </div>
+                <?php if ( !empty($k->children) ): ?>
+                  <?php foreach ($k->children as $sk): ?>
+                  <div class="selector-row lvl-1">
+                    <input type="checkbox" <?=(in_array($sk->term_id, $selected))?'checked="checked"':''?>  tglwatcherkey="kategoria_multiselect" data-parentid="<?=$sk->parent?>" data-lvl="1" htxt="<?=$k->name?> / <?=$sk->name?>" id="kat_<?=$sk->term_id?>" value="<?=$sk->term_id?>"> <label for="kat_<?=$sk->term_id?>"><?=$sk->name?></label>
+                  </div>
+                  <?php endforeach; ?>
+                <?php endif; ?>
+                <?php endforeach; ?>
+              <?php endif; ?>
+            </div>
+          </div>
+        </div><!--
+    --><div>
+          <select class="form-control" name="st">
+            <option value="" selected="selected"><?=__('Összes állapot', 'gh')?></option>
+            <?php foreach ($all_status as $st): ?>
+              <option value="<?=$st?>" <?=($_GET['st'] == $st)?'selected="selected"':''?>><?=$pf->StatusText($st)?></option>
+            <?php endforeach; ?>
+          </select>
+        </div><!--
+     --><div>
           <input type="text" name="id" class="pull-right" id="refid" placeholder="<?=__('Referenciaszám', 'gh')?>" class="form-control" value="<?=$_GET['id']?>">
         </div>
         <div>
@@ -176,7 +238,9 @@
 </div>
 <script type="text/javascript">
   (function($){
+    collect_checkbox('kategoria_multiselect', true);
     checkCheckbox();
+
     $('#reconnecter_switch').change(function(){
 			var sa 	= $(this).is(':checked');
 			var chs = $('.data-body').find('input[type=checkbox]');
@@ -187,6 +251,31 @@
 			}
       checkCheckbox();
 		});
+
+    $('.tglwatcher').click(function(event){
+      event.stopPropagation();
+      event.preventDefault();
+      var e = $(this);
+      var target_id = e.attr('tglwatcher');
+      var opened = e.hasClass('toggled');
+
+      if(opened) {
+        e.removeClass('toggled');
+        $('#'+target_id).removeClass('opened toggler-opener');
+      } else {
+        e.addClass('toggled');
+        $('#'+target_id).addClass('opened toggler-opener');
+      }
+    });
+
+    $('.multi-selector-holder input[type=checkbox]').change(function()
+    {
+      var e = $(this);
+      var checkin = $(this).is(':checked');
+      var tkey = e.attr('tglwatcherkey');
+      var selected = collect_checkbox(tkey, false);
+      $('#'+tkey+'_ids').val(selected);
+    });
 
     $('.data-body input[type=checkbox]').change(function(){
       checkCheckbox();
@@ -203,6 +292,47 @@
       } else {
         $('#action_selector').addClass('show');
       }
+    }
+
+    function collect_checkbox(rkey, loader)
+    {
+      var arr = [];
+      var str = [];
+      var seln = 0;
+
+      jQuery('#'+rkey+' input[type=checkbox]').each(function(e,i)
+      {
+        if(jQuery(this).is(':checked') && !jQuery(this).is(':disabled')){
+          seln++;
+          arr.push(jQuery(this).val());
+          str.push(jQuery(this).attr('htxt'));
+        }
+
+        if(loader) {
+          var e = jQuery(this);
+          var has_child = jQuery(this).hasClass('has-childs');
+          var checkin = jQuery(this).is(':checked');
+          var lvl = e.data('lvl');
+          var parent = e.data('parentid');
+
+          var cnt_child = jQuery('#'+rkey+' .childof'+parent+' input[type=checkbox]:checked').length;
+
+          if(cnt_child == 0) {
+            jQuery('#'+rkey+' .zone'+parent+' input[type=checkbox]').prop('disabled', false);
+          } else {
+            jQuery('#'+rkey+' .childof'+parent).addClass('show');
+            jQuery('#'+rkey+' .zone'+parent+' input[type=checkbox]').prop('checked', true).prop('disabled', true);
+          }
+        }
+      });
+
+      if(seln <= 3 ){
+        jQuery('#'+rkey+'_text').val(str.join(", "));
+      } else {
+        jQuery('#'+rkey+'_text').val(seln + " <?=__('kiválasztva', 'gh')?>");
+      }
+
+      return arr.join(",");
     }
 
   })(jQuery);

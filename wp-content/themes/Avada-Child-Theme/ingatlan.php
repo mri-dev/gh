@@ -210,6 +210,30 @@
               <?=$prop->Description(true)?>
             </div>
           </div>
+          <?php
+            $docs = $prop->PDFDocuments();
+          ?>
+          <?php if ($docs): ?>
+            <div class="description-block">
+              <div class="head">
+                <div class="ico">
+                  <i class="fa fa-file-pdf-o"></i>
+                </div>
+                <?=__('Dokumentumok', 'gh')?> (<?=count($docs)?>)
+              </div>
+              <div class="text doc-list">
+                <?php
+                foreach ($docs as $doc):
+                  $size = filesize( get_attached_file( $doc->ID ) );
+                  $file = str_replace(array('application/'), '', $doc->post_mime_type);
+                ?>
+                  <div class="doc">
+                    <a href="<?=$doc->guid?>" target="_blank"><i class="fa fa-file-pdf-o"></i> <strong><?=$doc->post_title?></strong> <span class="doc-info">(<?=$file?> &mdash; <?=\Helper::filesize($size, 0)?>)</span></a>
+                  </div>
+                <?php endforeach; ?>
+              </div>
+            </div>
+          <?php endif; ?>
         </div>
         <div class="data-main-right">
           <div class="map-block">

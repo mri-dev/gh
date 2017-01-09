@@ -99,7 +99,9 @@ class PropertyHistory extends PropertyFactory
       'extra' => array(
         __( 'Profilkép', 'gh') => 'feature_img_id',
         __( 'Törölt képek (ID)', 'gh') => 'deleting_imgs',
-        __( 'Feltöltött képek', 'gh') => 'image_uploads'
+        __( 'Feltöltött képek', 'gh') => 'image_uploads',
+        __( 'Törölt dokumentumok (ID)', 'gh') => 'deleting_pdf',
+        __( 'Feltöltött dokumentumok (pdf)', 'gh') => 'pdf_uploads'
       ),
       'tax' => array(
         __( 'Ingatlan státusza', 'gh') => 'status',
@@ -179,6 +181,18 @@ class PropertyHistory extends PropertyFactory
       case 'deleting_imgs':
         unset($value['type']);
         return implode($value, ', ');
+      break;
+      case 'deleting_pdf':
+        unset($value['type']);
+        return implode($value, ', ');
+      break;
+      case 'pdf_uploads':
+        $set = '';
+        foreach ($value as $id ) {
+          $src = get_post($id);
+          $set .= '<a href="'.$src->guid.'" target="_blank"><i class="fa fa-file-pdf-o"></i> '.$src->post_title.'</a><br>';
+        }
+        return $set;
       break;
       case 'image_uploads':
         $imgset = '';

@@ -27,6 +27,11 @@ class control_properties
     return $this->class->pagination( $base );
   }
 
+  public function getSelectors( $id, $sel_values = array(), $arg = array() )
+  {
+    return $this->class->getSelectors( $id, $sel_values = array(), $arg = array() );
+  }
+
   public function propertyCount()
   {
     return $this->properties_number;

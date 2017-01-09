@@ -196,8 +196,9 @@
       </div>
       <div class="col-md-6 reqf">
         <label for="_listing_address"><?=__('Pontos cím (utca, házszám, stb)', 'gh')?></label>
-        <input type="text" id="_listing_address" name="meta_input[_listing_address]" value="<?=$property->Address()?>" class="form-control">
+        <input type="text" id="_listing_address" name="meta_input[_listing_address]" value="<?=$parea->name?>, <?=$property->Address()?>" class="form-control">
         <input type="hidden" name="pre[meta_input][_listing_address]" value="<?=$property->Address()?>">
+        <input type="hidden" id="_listing_address_remove" name="_listing_address_remove" value="<?=$parea->name?>, ">
       </div>
     </div>
     <div class="row">
@@ -283,6 +284,12 @@
     ?>
     <?
       $gps = $property->GPS();
+
+      // PDF DOCUMENTUMOK
+      $docs = $property->PDFDocuments();
+      ob_start();
+      include(locate_template('/templates/parts/property_pdf_edit.php'));
+      ob_end_flush();
     ?>
     <h3><?=__('Ingatlan jelölése térképen', 'gh')?></h3>
     <div class="row">
@@ -319,9 +326,33 @@
   <? endif; ?>
 </div>
 <script type="text/javascript">
-  (function($){
+  (function($)
+  {
+    var autocomplete;
     collect_checkbox('kategoria_multiselect', true);
     collect_checkbox('allapot_multiselect', true);
+
+    google.maps.event.addDomListener(window, 'load', placeAutocomplate);
+
+    function placeAutocomplate() {
+      autocomplete = new google.maps.places.Autocomplete(
+         (document.getElementById('_listing_address')),
+         {
+           types: ['address'],
+           componentRestrictions: {
+             country: 'hu'
+           }
+         }
+      );
+    }
+
+    $('#tax_locations').on('change', function()
+    {
+      var city = $("#tax_locations option[value='"+$("#tax_locations").val()+"']").text();
+
+      $('#_listing_address').val(city+", ").focus();
+      $('#_listing_address_remove').val(city+", ");
+    });
 
     $('#_listing_address, #tax_locations').on('change', function(){
       var qryaddr = 'Magyarország';
@@ -390,8 +421,9 @@
        var num2 = num.split(/(?=(?:\d{3})+$)/).join(".");
        $this.val(num2);
     });
-  })(jQuery);
 
+  })(jQuery);
+  
   function collect_checkbox(rkey, loader)
   {
     var arr = [];

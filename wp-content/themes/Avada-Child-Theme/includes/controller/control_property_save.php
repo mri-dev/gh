@@ -43,8 +43,10 @@ class control_property_save
     // Check formats
     $post['meta_input']['_listing_price'] = (int)str_replace(".","",$post['meta_input']['_listing_price']);
     $post['meta_input']['_listing_offprice'] = (int)str_replace(".","",$post['meta_input']['_listing_offprice']);
+    $post['meta_input']['_listing_address'] = str_replace($post['_listing_address_remove'], '', $post['meta_input']['_listing_address']);
 
     // Meta checkboxes
+    if($post['metacheckboxes'])
     foreach ($post['metacheckboxes'] as $mkey => $mv) {
       if (isset($post['meta_input'][$mkey])) {
         $post['meta_input'][$mkey] = 1;
@@ -92,9 +94,14 @@ class control_property_save
     unset($post['createProperty']);
     unset($post['_nonce']);
     unset($post['post_author_override']);
+    unset($post['_listing_address_remove']);
     unset($post['tax']);
     unset($post['property_images']);
     unset($post['image_watermark']);
+
+
+    /*print_r($_FILES['pdf']);
+    exit;*/
 
     extract($post);
     $form_errors = null;
@@ -160,13 +167,13 @@ class control_property_save
       wp_set_object_terms( $post_id, $exp_tax_cond, 'property-condition' );
     }
 
-    /**
+    /********************************************************************
     * Images
-    **/
+    *********************************************************************/
     $uploads_dir = wp_upload_dir();
     $property_image_dir = $uploads_dir['basedir'] . '/listing/' . $post_id;
 
-    if ( $_FILES )
+    if ( $_FILES && isset($_FILES['property_images']) )
     {
       $first_imaged = false;
       add_filter( 'upload_dir', array( $this, 'upload_dir_filter') );
@@ -204,6 +211,43 @@ class control_property_save
       remove_filter( 'intermediate_image_sizes', '__return_empty_array', 99 );
     }
 
+    /************************************************************************
+    * PDF DOCS Upload
+    *************************************************************************/
+    if ( $_FILES && isset($_FILES['pdf']) )
+    {
+      $pdf_dir = $uploads_dir['basedir'] . '/listing_pdf/' . $post_id;
+
+      add_filter( 'upload_dir', array( $this, 'upload_pdf_dir_filter') );
+      add_filter( 'intermediate_image_sizes', '__return_empty_array', 99 );
+
+      $pdfs = $_FILES["pdf"];
+
+      foreach ($pdfs['name'] as $key => $value) {
+        if ($pdfs['name'][$key]) {
+          $pdf = array(
+              'name' => $pdfs['name'][$key],
+              'title' => $_POST['pdf_name'][$key],
+              'type' => $pdfs['type'][$key],
+              'tmp_name' => $pdfs['tmp_name'][$key],
+              'error' => $pdfs['error'][$key],
+              'size' => $pdfs['size'][$key]
+          );
+
+          $_FILES = array ("pdf" => $pdf);
+
+          foreach ($_FILES as $file => $array) {
+            $newupload = $this->pdf_uploads_handler( $file, $this->temppostid );
+            $changed['pdf_uploads'][] = $newupload;
+          }
+        }
+      }
+
+      remove_filter( 'upload_dir', array( $this, 'upload_pdf_dir_filter') );
+      remove_filter( 'intermediate_image_sizes', '__return_empty_array', 99 );
+    }
+
+
     if ($mode == 'save') {
       // Profilkép cseréje
       if ( $extra['feature_img_id'] != $pre['extra']['feature_img_id']) {
@@ -216,6 +260,13 @@ class control_property_save
           $changed['extra']['deleting_imgs'][] = $did;
         }
       }
+      // PDF(ek) törlése
+      if (!empty($extra['deleting_pdf'])) {
+        foreach ($extra['deleting_pdf']as $did => $v) {
+          wp_delete_attachment( $did );
+          $changed['extra']['deleting_pdf'][] = $did;
+        }
+      }
     }
 
     // Változások logolása
@@ -224,6 +275,29 @@ class control_property_save
     }
     //return $post;
     return array( 'id' => $post_id, 'mode' => $mode, 'return' => $return );
+  }
+
+  public function pdf_uploads_handler( $file_handler, $post_id )
+  {
+    // check to make sure its a successful upload
+    if ($_FILES[$file_handler]['error'] !== UPLOAD_ERR_OK) __return_false();
+
+    require_once(ABSPATH . "wp-admin" . '/includes/image.php');
+    require_once(ABSPATH . "wp-admin" . '/includes/file.php');
+    require_once(ABSPATH . "wp-admin" . '/includes/media.php');
+
+    $attach_id = media_handle_upload( $file_handler, $this->temppostid );
+
+    if ( $attach_id && !empty($_FILES[$file_handler]['title']) )
+    {
+      wp_update_post( array(
+        'ID' => $attach_id,
+        'post_title' => $_FILES[$file_handler]['title']
+      ) );
+    }
+
+
+    return $attach_id;
   }
 
   public function uploads_handler ( $file_handler, $post_id, $set_thu = false )
@@ -260,6 +334,15 @@ class control_property_save
       'path'   => $dir['basedir'] . '/listing/'.$this->temppostid,
       'url'    => $dir['baseurl'] . '/listing/'.$this->temppostid,
       'subdir' => '/listing/'.$this->temppostid,
+     ) + $dir;
+  }
+
+  public function upload_pdf_dir_filter( $dir )
+  {
+    return array(
+      'path'   => $dir['basedir'] . '/listing_pdf/'.$this->temppostid,
+      'url'    => $dir['baseurl'] . '/listing_pdf/'.$this->temppostid,
+      'subdir' => '/listing_pdf/'.$this->temppostid,
      ) + $dir;
   }
 

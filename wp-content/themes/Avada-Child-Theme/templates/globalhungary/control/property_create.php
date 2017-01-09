@@ -117,6 +117,7 @@
       <div class="col-md-6 reqf">
         <label for="_listing_address"><?=__('Pontos cím (utca, házszám, stb)', 'gh')?></label>
         <input type="text" id="_listing_address" name="meta_input[_listing_address]" value="<?=$_POST['meta']['_listing_address']?>" class="form-control">
+        <input type="hidden" id="_listing_address_remove" name="_listing_address_remove" value="">
       </div>
     </div>
     <div class="row">
@@ -194,7 +195,12 @@
         <small><input type="checkbox" id="image_watermark" checked="checked" name="image_watermark" value="1"> <label for="image_watermark"><?=__('Képek automatikus vízjelezése', 'gh')?></label></small>
       </div>
     </div>
-
+    <?php
+      // PDF DOCUMENTUMOK
+      ob_start();
+      include(locate_template('/templates/parts/property_pdf_edit.php'));
+      ob_end_flush();
+    ?>
     <h3><?=__('Ingatlan jelölése térképen', 'gh')?></h3>
     <small class="inputhint"><?=__('Kattintson a térképen az ingatlan pozíciójának kiválasztásához. Ha módosítani kívánja, fogja meg a markert és helyezze át.', 'gh')?></small>
     <br><br>
@@ -207,6 +213,7 @@
         ?>
       </div>
     </div>
+
     <?php if(current_user_can('reference_manager')): ?>
       <input type="hidden" name="property_author" value="<?=get_current_user_id()?>">
     <?php else: ?>
@@ -226,7 +233,10 @@
   <? endif; ?>
 </div>
 <script>
-  (function($){
+  (function($)
+  {
+    var autocomplete;
+
     $('#_listing_address, #tax_locations').on('change', function(){
       var qryaddr = 'Magyarország';
       var v = $('#_listing_address').val();
@@ -244,6 +254,30 @@
         }
       });
     });
+
+    google.maps.event.addDomListener(window, 'load', placeAutocomplate);
+
+    function placeAutocomplate() {
+      autocomplete = new google.maps.places.Autocomplete(
+         (document.getElementById('_listing_address')),
+         {
+           types: ['address'],
+           componentRestrictions: {
+             country: 'hu'
+           }
+         }
+      );
+    }
+
+
+    $('#tax_locations').on('change', function()
+    {
+      var city = $("#tax_locations option[value='"+$("#tax_locations").val()+"']").text();
+
+      $('#_listing_address').val(city+", ").focus();
+      $('#_listing_address_remove').val(city+", ");
+    });
+
     $('.pricebind').bind("keyup", function(event) {
        if(event.which >= 37 && event.which <= 40){
         event.preventDefault();

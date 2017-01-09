@@ -61,6 +61,26 @@ class Helper
 
 
 			return $ret;
-		}	
+		}
+
+    static function filesize($bytes, $decimals = 2)
+    {
+      $sz = 'BKMGTP';
+      $factor = floor((strlen($bytes) - 1) / 3);
+
+      $faf = @$sz[$factor];
+
+      switch ($faf) {
+        case 'B':
+          $fae = 'yte';
+        break;
+
+        default:
+          $fae = 'B';
+        break;
+      }
+
+      return sprintf("%.{$decimals}f", $bytes / pow(1024, $factor)) . ' '.$faf.$fae;
+    }
 }
 ?>

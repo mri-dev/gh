@@ -24,7 +24,7 @@ function theme_enqueue_styles() {
     wp_enqueue_style( 'slick', IFROOT . '/assets/vendor/slick/slick.css?t=' . ( (DEVMODE === true) ? time() : '' ) );
     wp_enqueue_style( 'slick-theme', IFROOT . '/assets/css/slick-theme.css?t=' . ( (DEVMODE === true) ? time() : '' ) );
     wp_enqueue_script( 'slick', IFROOT . '/assets/vendor/slick/slick.min.js?t=' . ( (DEVMODE === true) ? time() : '' ) , array('jquery'));
-    wp_enqueue_script( 'google-maps', '//maps.googleapis.com/maps/api/js?language=hu&region=hu&key='.GOOGLE_API_KEY);
+    wp_enqueue_script( 'google-maps', '//maps.googleapis.com/maps/api/js?sensor=false&language=hu&region=hu&libraries=places&key='.GOOGLE_API_KEY);
     wp_enqueue_script( 'google-charts', '//www.gstatic.com/charts/loader.js');
     wp_enqueue_script( 'mocjax', IFROOT . '/assets/vendor/autocomplete/scripts/jquery.mockjax.js');
     wp_enqueue_script( 'autocomplete', IFROOT . '/assets/vendor/autocomplete/dist/jquery.autocomplete.min.js');
@@ -280,6 +280,7 @@ function gh_init()
   add_rewrite_rule('^'.SLUG_FAVORITE.'/?', 'index.php?custom_page='.SLUG_FAVORITE.'&urlstring=$matches[1]', 'top');
   add_rewrite_rule('^'.SLUG_NEWS.'/?', 'index.php?custom_page='.SLUG_NEWS.'&urlstring=$matches[1]', 'top');
   add_rewrite_rule('^'.SLUG_INGATLAN.'/([^/]+)/([^/]+)/([^/]+)', 'index.php?custom_page='.SLUG_INGATLAN.'&regionslug=$matches[1]&cityslug=$matches[2]&urlstring=$matches[3]', 'top');
+  add_rewrite_rule('^ingatlan-export/?', 'index.php?custom_page=ingatlan-export&urlstring=$matches[1]', 'top');
 }
 add_action('init', 'gh_init');
 
@@ -306,7 +307,6 @@ function gh_get_fnc()
     exit;
   }
 }
-
 add_action('init', 'gh_get_fnc');
 
 function old_importer()

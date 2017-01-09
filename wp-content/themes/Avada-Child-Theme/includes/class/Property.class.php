@@ -369,6 +369,12 @@ class Property extends PropertyFactory
     return get_attached_media( 'image', $this->ID() );
   }
 
+  public function PDFDocuments()
+  {
+    return get_attached_media( 'application/pdf', $this->ID() );
+  }
+
+
   public function imageNumbers()
   {
     $n = count($this->Images());

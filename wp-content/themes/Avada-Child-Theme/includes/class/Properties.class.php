@@ -168,6 +168,8 @@ class Properties extends PropertyFactory
   {
     global $wpdb;
 
+    //print_r($this->arg);
+
     $data     = array();
     $post_arg = array(
       'post_type' => 'listing',
