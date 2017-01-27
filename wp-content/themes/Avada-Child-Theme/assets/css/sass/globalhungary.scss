@@ -255,6 +255,62 @@ input[type=checkbox].fake-radio:checked + label {
   }
 }
 
+
+  .gh_premium {
+    .fusion-page-title-bar{
+      display: none !important;
+    }
+
+    h1 {
+      text-transform: uppercase;
+    }
+
+    .validatePremium-view {
+      text-align: center;
+
+      .validator-box{
+        background: #ebeded;
+        padding: 25px;
+        margin: 50px auto;
+        width: 50%;
+
+        label {
+          display: block;
+          font-size: 1.2em;
+          padding: 0 0 15px 0;
+        }
+
+        input[type=password] {
+          display: block;
+          width: 100%;
+          padding: 0 15px;
+          line-height: 50px;
+          font-size: 4em;
+          color: $color-pr;
+          border: 1px solid #d7d7d7;
+        }
+
+        button {
+          background: #d12529;
+          color: white;
+          text-transform: uppercase;
+          padding: 15px;
+          font-size: 1.3em;
+          margin-top: 25px;
+          border: none;
+          -moz-border-radius: 4px;
+          -webkit-border-radius: 4px;
+          border-radius: 4px;
+          cursor: pointer;
+
+          &:hover {
+            background: darken(#d12529, 10%);
+          }
+        }
+      }
+    }
+  }
+
 .fusion-main-menu > ul > li{
   position: relative;
   border-right: 2px solid #333b3b;
@@ -3270,6 +3326,7 @@ footer {
     }
   }
 
+
   .ingatlan-page-view{
     padding: 0;
     #search-tgl{
@@ -3369,6 +3426,8 @@ footer {
     padding-bottom: 25px;
   }
 }
+
+
 
 /* Searcher breakpoint */
 @media all and (max-width: 960px) {

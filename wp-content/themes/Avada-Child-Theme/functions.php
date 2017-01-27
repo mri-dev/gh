@@ -1,6 +1,6 @@
 <?php
-
-define('IFROOT', get_stylesheet_directory_uri());
+define('DOMAIN', $_SERVER['HTTP_HOST']);
+define('IFROOT', str_replace(get_option('siteurl'), '//'.DOMAIN, get_stylesheet_directory_uri()));
 define('DEVMODE', true);
 define('IMG', IFROOT.'/images');
 define('SLUG_INGATLAN', 'ingatlan');
@@ -11,6 +11,10 @@ define('GOOGLE_API_KEY', 'AIzaSyA0Mu8_XYUGo9iXhoenj7HTPBIfS2jDU2E');
 define('PHONE_PREFIX', '06');
 define('LANGKEY','hu');
 define('FB_APP_ID', '1380917375274546');
+// PREMIUM
+define('FIND_PREMIUM_DOMAIN_PREFIX', 'globalhungary.mri-dev.com');
+define('PREMIUM_AUTH_PAGE_SLUG', 'validatePremium');
+
 
 // Includes
 require_once WP_PLUGIN_DIR."/cmb2/init.php";
@@ -274,8 +278,27 @@ add_action('admin_init', 'admin_init_fc');
 
 function gh_init()
 {
+  add_filter('option_siteurl', 'replace_siteurl');
+  add_filter('option_home', 'replace_siteurl');
+  remove_filter('template_redirect','redirect_canonical');
+
+  if( strpos(DOMAIN,FIND_PREMIUM_DOMAIN_PREFIX) !== false) {
+      define('IS_PREMIUM', true);
+  }
+
+  if (defined('IS_PREMIUM')) {
+    if( !isset($_COOKIE['access_to_premium_'.ucid()]) )
+    {
+      if($_SERVER['REQUEST_URI'] != '/'.PREMIUM_AUTH_PAGE_SLUG)
+      {
+        //wp_redirect('/'.PREMIUM_AUTH_PAGE_SLUG); exit;
+      }
+    }
+  }
+
   date_default_timezone_set('Europe/Budapest');
   add_rewrite_rule('^control/([^/]+)', 'index.php?cp=$matches[1]', 'top');
+  add_rewrite_rule('^'.PREMIUM_AUTH_PAGE_SLUG, 'index.php?custom_page='.PREMIUM_AUTH_PAGE_SLUG, 'top');
   add_rewrite_rule('^'.SLUG_INGATLAN_LIST.'/?', 'index.php?custom_page='.SLUG_INGATLAN_LIST.'&urlstring=$matches[1]', 'top');
   add_rewrite_rule('^'.SLUG_FAVORITE.'/?', 'index.php?custom_page='.SLUG_FAVORITE.'&urlstring=$matches[1]', 'top');
   add_rewrite_rule('^'.SLUG_NEWS.'/?', 'index.php?custom_page='.SLUG_NEWS.'&urlstring=$matches[1]', 'top');
@@ -283,6 +306,10 @@ function gh_init()
   add_rewrite_rule('^ingatlan-export/?', 'index.php?custom_page=ingatlan-export&urlstring=$matches[1]', 'top');
 }
 add_action('init', 'gh_init');
+
+function replace_siteurl($val) {
+    return '//'.$_SERVER['HTTP_HOST'];
+}
 
 function gh_get_fnc()
 {
@@ -378,14 +405,30 @@ function gh_custom_template($template) {
     }
     return get_stylesheet_directory() . '/control.php';
   } else if(isset($wp_query->query_vars['custom_page'])) {
-    add_filter( 'body_class','gh_ingatlan_class_body' );
-    add_filter( 'document_title_parts', 'ingatlan_custom_title' );
+
+    if (SLUG_INGATLAN == $wp_query->query_vars['custom_page']) {
+      add_filter( 'body_class','gh_ingatlan_class_body' );
+      add_filter( 'document_title_parts', 'ingatlan_custom_title' );
+    }
+
+    // Premium template
+    if (PREMIUM_AUTH_PAGE_SLUG == $wp_query->query_vars['custom_page']) {
+      add_filter( 'body_class','gh_premium_class_body' );
+      add_filter( 'document_title_parts', 'premiumvalidator_custom_title' );
+    }
+
     return get_stylesheet_directory() . '/'.$wp_query->query_vars['custom_page'].'.php';
   } else {
     return $template;
   }
 }
 add_filter( 'template_include', 'gh_custom_template' );
+
+
+function gh_premium_class_body( $classes ) {
+  $classes[] = 'gh_premium';
+  return $classes;
+}
 function gh_control_panel_class_body( $classes ) {
   $classes[] = 'gh_control_panel';
   return $classes;
@@ -394,6 +437,12 @@ function gh_ingatlan_class_body( $classes ) {
   $classes[] = 'gh_ingatlan_page';
   return $classes;
 }
+function premiumvalidator_custom_title( $title )
+{
+  $title['title'] = __('Prémium hozzáférés azonosítás', 'gh');
+  return $title;
+}
+
 function ingatlan_custom_title($title)
 { global $wp_query;
 
