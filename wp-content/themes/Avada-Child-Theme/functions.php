@@ -14,7 +14,7 @@ define('FB_APP_ID', '1380917375274546');
 // PREMIUM
 define('FIND_PREMIUM_DOMAIN_PREFIX', 'globalhungary.mri-dev.com');
 define('PREMIUM_AUTH_PAGE_SLUG', 'validatePremium');
-
+define('PREMIUM_MASTER_PW', '12345');
 
 // Includes
 require_once WP_PLUGIN_DIR."/cmb2/init.php";
@@ -50,7 +50,7 @@ function facebook_og_meta_header()
   }
 
   $title = get_option('blogname');
-  $image = 'http://globalhungary.mri-dev.com/wp-content/uploads/global-hungary-logo-wtext-h75.png';
+  $image = '//'.DOMAIN.'/wp-content/uploads/global-hungary-logo-wtext-h75.png';
   $desc  = get_option('blogdescription');
   $url   = get_option('site_url');
 
@@ -284,16 +284,22 @@ function gh_init()
 
   if( strpos(DOMAIN,FIND_PREMIUM_DOMAIN_PREFIX) !== false) {
       define('IS_PREMIUM', true);
+      define('SHOW_PREMIUM_ONLY', true);
   }
 
   if (defined('IS_PREMIUM')) {
     if( !isset($_COOKIE['access_to_premium_'.ucid()]) )
     {
-      if($_SERVER['REQUEST_URI'] != '/'.PREMIUM_AUTH_PAGE_SLUG)
+      if(
+        strpos($_SERVER['REQUEST_URI'], '/'.PREMIUM_AUTH_PAGE_SLUG) === false &&
+        strpos($_SERVER['REQUEST_URI'], '/wp-admin') === false
+      )
       {
-        //wp_redirect('/'.PREMIUM_AUTH_PAGE_SLUG); exit;
+        wp_redirect('/'.PREMIUM_AUTH_PAGE_SLUG); exit;
       }
     }
+
+    // Allowed
   }
 
   date_default_timezone_set('Europe/Budapest');
@@ -308,8 +314,34 @@ function gh_init()
 add_action('init', 'gh_init');
 
 function replace_siteurl($val) {
-    return '//'.$_SERVER['HTTP_HOST'];
+  return '//'.$_SERVER['HTTP_HOST'];
 }
+
+function admin_post_premium_validation_handler()
+{
+  $err = false;
+
+  if (isset($_POST['accessPremium']))
+  {
+    if(!empty($_POST['premium_pass']))
+    {
+      if($_POST['premium_pass'] == PREMIUM_MASTER_PW)
+      {
+        $pkey = 'access_to_premium_'.ucid();
+        setcookie($pkey, time(), time()+3600*24, '/');
+        wp_redirect('//'.DOMAIN); exit;
+      } else $err = true;
+    } else $err = true;
+  } else $err = true;
+
+
+  if($err) {
+    wp_redirect('/'.PREMIUM_AUTH_PAGE_SLUG.'/?ekey=failauth');
+    exit;
+  }
+}
+add_action( 'admin_post_nopriv_premium_validation', 'admin_post_premium_validation_handler' );
+add_action( 'admin_post_premium_validation', 'admin_post_premium_validation_handler' );
 
 function gh_get_fnc()
 {
@@ -529,6 +561,9 @@ function get_ajax_url( $function )
 function after_logo_content()
 {
   echo '<div class="badge">'.__('Alapítva 1999','gh').'</div>';
+  if (defined('IS_PREMIUM') && IS_PREMIUM === true) {
+    echo '<div class="premium-badge"><i class="fa fa-star"></i> '.__('prémium','gh').' <i class="fa fa-star"></i></div>';
+  }
 }
 add_filter('avada_logo_append', 'after_logo_content');
 

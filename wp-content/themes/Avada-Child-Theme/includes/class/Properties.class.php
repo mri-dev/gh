@@ -428,6 +428,26 @@ class Properties extends PropertyFactory
       $meta_qry[] = $price_meta_qry;
     }
 
+    // PREMIUM
+    if (defined('SHOW_PREMIUM_ONLY') && SHOW_PREMIUM_ONLY === true) {
+      $meta_qry[] = array(
+        'key' => '_listing_premium',
+        'value' => '1'
+      );
+    } else {
+      $meta_qry[] = array(
+          'relation' => 'OR',
+          array(
+            'key' => '_listing_premium',
+            'compare' => 'NOT EXISTS'
+          ),
+          array(
+            'key' => '_listing_premium',
+            'value' => ''
+          )
+      );
+    }
+
     if (!empty($meta_qry)) {
       $post_arg['meta_query'] = $meta_qry;
     }
@@ -439,7 +459,6 @@ class Properties extends PropertyFactory
     $this->query = $posts;
     $this->count = $posts->found_posts;
 
-    //print_r($posts);
 
     foreach($posts->posts as $post) {
       $this->datalist[] = new Property($post);

@@ -351,6 +351,19 @@ class Property extends PropertyFactory
     return $h;
   }
 
+  public function isPremium()
+  {
+    $h = true;
+
+    $v = $this->getMetaValue('_listing_premium');
+
+    if (!$v || $v == '' || $v == '0') {
+      return false;
+    }
+
+    return $h;
+  }
+
   public function isExclusive()
   {
     $h = true;

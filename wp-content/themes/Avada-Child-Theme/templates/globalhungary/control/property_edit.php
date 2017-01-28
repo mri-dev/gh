@@ -84,6 +84,14 @@
         <input type="hidden" name="metacheckboxes[_listing_flag_highlight]" value="1">
       </div>
       <?php endif; ?>
+      <?php if ( current_user_can('administrator') ): ?>
+      <div class="col-md-3">
+        <label for=""><?=__('Prémium hirdetés', 'gh')?></label>
+        <input type="checkbox" id="_listing_premium" name="meta_input[_listing_premium]" <?=($property->isPremium())?'checked="checked"':''?> value="<?=($property->isPremium())?1:0?>"><label class="fm" for="_listing_premium"></label>
+        <input type="hidden" name="pre[meta_input][_listing_premium]" value="<?=($property->isPremium())?1:0?>" class="form-control">
+        <input type="hidden" name="metacheckboxes[_listing_premium]" value="1">
+      </div>
+      <?php endif; ?>
     </div>
     <h3><?=__('Alapadatok', 'gh')?></h3>
     <div class="row">
@@ -423,7 +431,7 @@
     });
 
   })(jQuery);
-  
+
   function collect_checkbox(rkey, loader)
   {
     var arr = [];

@@ -121,7 +121,6 @@
       </div>
     </div>
     <div class="row">
-
       <div class="col-md-3 reqf">
         <label for="_listing_flag_pricetype"><?=__('Ár jellege', 'gh')?></label>
         <select class="form-control" name="meta_input[_listing_flag_pricetype]" id="_listing_flag_pricetype">
@@ -143,9 +142,18 @@
       <div class="col-md-3">
         <label for="_listing_flag_exclusive"><?=__('Kizárólagos hirdetés', 'gh')?></label>
         <input type="checkbox" id="_listing_flag_exclusive" name="meta_input[_listing_flag_exclusive]" <?=(isset($_POST['meta']['_listing_offprice']))?'checked="checked"':''?> value="1"><label class="fm" for="_listing_flag_exclusive"></label>
-
       </div>
     </div>
+
+    <div class="row">
+      <?php if (current_user_can('administrator')): ?>
+        <div class="col-md-12">
+          <label for="_listing_premium"><?=__('Prémium hirdetés', 'gh')?></label>
+          <input type="checkbox" id="_listing_premium" name="meta_input[_listing_premium]" <?=(isset($_POST['meta']['_listing_premium']))?'checked="checked"':''?> value="1"><label class="fm" for="_listing_premium"></label>
+        </div>
+      <?php endif; ?>
+    </div>
+
     <h3><?=__('Leírások', 'gh')?></h3>
     <div class="row">
       <div class="col-md-12">
