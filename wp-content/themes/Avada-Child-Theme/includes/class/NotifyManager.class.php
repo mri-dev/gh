@@ -55,6 +55,35 @@ class NotifyManager extends PropertyFactory
       $arg['date_query']['after'] = $watchtimestmp;
     }
 
+    $meta_qry = array();
+
+    // PREMIUM
+    if (defined('SHOW_PREMIUM_ONLY') && SHOW_PREMIUM_ONLY === true) {
+      $meta_qry[] = array(
+        'key' => '_listing_premium',
+        'value' => '1'
+      );
+    } else {
+      /* */
+      $meta_qry[] = array(
+        'relation' => 'OR',
+        array(
+          'key' => '_listing_premium_only',
+          'compare' => 'NOT EXISTS'
+        ),
+        array(
+          'key' => '_listing_premium_only',
+          'value' => '1',
+          'compare' => '!='
+        )
+      );
+      /* */
+    }
+
+    if (!empty($meta_qry)) {
+      $arg['meta_query'] = $meta_qry;
+    }
+
     $qry = new WP_Query($arg);
 
     $n = $qry->found_posts;

@@ -12,9 +12,9 @@ define('PHONE_PREFIX', '06');
 define('LANGKEY','hu');
 define('FB_APP_ID', '1380917375274546');
 // PREMIUM
-define('FIND_PREMIUM_DOMAIN_PREFIX', 'globalhungary.mri-dev.com');
+define('FIND_PREMIUM_DOMAIN_PREFIX', 'premium.');
 define('PREMIUM_AUTH_PAGE_SLUG', 'validatePremium');
-define('PREMIUM_MASTER_PW', '12345');
+define('PREMIUM_MASTER_PW', 'globalpremium2017');
 
 // Includes
 require_once WP_PLUGIN_DIR."/cmb2/init.php";
@@ -610,4 +610,16 @@ if( defined('DEVMODE') && DEVMODE === false ) {
 		<?
 	}
 	add_action('wp_footer', 'ga_tracking_code');
+}
+
+function premium_site_switcher()
+{
+  $premium = false;
+  $premium = (defined('IS_PREMIUM') && IS_PREMIUM) ? true : false;
+
+  if ($premium) {
+    return '//'.str_replace(FIND_PREMIUM_DOMAIN_PREFIX,'',DOMAIN) . $_SERVER['REQUEST_URI'];
+  } else {
+    return '//'.FIND_PREMIUM_DOMAIN_PREFIX.DOMAIN . $_SERVER['REQUEST_URI'];
+  }
 }

@@ -364,6 +364,19 @@ class Property extends PropertyFactory
     return $h;
   }
 
+  public function isPremiumOnly()
+  {
+    $h = true;
+
+    $v = $this->getMetaValue('_listing_premium_only');
+
+    if (!$v || $v == '' || $v == '0') {
+      return false;
+    }
+
+    return $h;
+  }
+
   public function isExclusive()
   {
     $h = true;
@@ -615,6 +628,10 @@ class Property extends PropertyFactory
       $imgmeta = array();
 
       $prof_img = $this->ProfilImg();
+
+      if(strpos($prof_img, '//') === 0){
+        $prof_img = str_replace('//', 'http://', $prof_img);
+      }
 
       $size = getimagesize($prof_img);
 

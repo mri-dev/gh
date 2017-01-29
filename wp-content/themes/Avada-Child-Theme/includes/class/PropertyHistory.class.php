@@ -88,6 +88,7 @@ class PropertyHistory extends PropertyFactory
 				__( 'Archivált', 'gh' )  => '_listing_flag_archived',
         __( 'Kizárólagos hirdetés', 'gh' )  => '_listing_flag_exclusive',
         __( 'Premium hirdetés', 'gh' )  => '_listing_premium',
+        __( 'Csak Premium hirdetés', 'gh' )  => '_listing_premium_only',
         __( 'Ár jellege', 'gh' )  => '_listing_flag_pricetype',
 			),
       'default' => array(
@@ -161,6 +162,7 @@ class PropertyHistory extends PropertyFactory
       case '_listing_green_area':
       case '_listing_flag_highlight':
       case '_listing_premium':
+      case '_listing_premium_only':
       case '_listing_garden':
       case '_listing_garage':
       case '_listing_balcony':

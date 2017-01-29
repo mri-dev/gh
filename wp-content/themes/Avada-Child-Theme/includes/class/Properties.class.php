@@ -435,17 +435,20 @@ class Properties extends PropertyFactory
         'value' => '1'
       );
     } else {
+      /* */
       $meta_qry[] = array(
-          'relation' => 'OR',
-          array(
-            'key' => '_listing_premium',
-            'compare' => 'NOT EXISTS'
-          ),
-          array(
-            'key' => '_listing_premium',
-            'value' => ''
-          )
+        'relation' => 'OR',
+        array(
+          'key' => '_listing_premium_only',
+          'compare' => 'NOT EXISTS'
+        ),
+        array(
+          'key' => '_listing_premium_only',
+          'value' => '1',
+          'compare' => '!='
+        )
       );
+      /* */
     }
 
     if (!empty($meta_qry)) {

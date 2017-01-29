@@ -27,7 +27,6 @@ body.home {
 .avada-skin-rev {
   border: none !important;
 }
-
 .fusion-logo {
   position: relative;
   .badge {
@@ -849,6 +848,33 @@ footer {
             a{
               font-size: 0.8em;
               color: desaturate(lighten($color-pr, 20%), 35);
+            }
+          }
+
+          &.premium-switcher{
+            a {
+              position:relative;
+              font-size: 0.8em;
+              background: #26292b;
+              color: #919696;
+              text-align: center;
+
+              strong {
+                color: white;
+              }
+
+              &:before {
+                content: "";
+                position: absolute;
+                width: 70%;
+                height: 1px;
+                top: 0;
+                left: 50%;
+                -webkit-transform: translateX(-50%);
+                -moz-transform: translateX(-50%);
+                transform: translateX(-50%);
+                background: #525556;
+              }
             }
           }
         }

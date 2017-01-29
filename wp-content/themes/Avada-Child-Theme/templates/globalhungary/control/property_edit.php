@@ -70,26 +70,32 @@
         </select>
         <input type="hidden" name="pre[post_status]" value="<?=$property->StatusKey()?>" class="form-control">
       </div>
-      <div class="col-md-3">
-        <label for=""><?=__('Kizárólagos hirdetés', 'gh')?></label>
+      <div class="col-md-2">
+        <label for=""><?=__('Kizárólagos', 'gh')?></label>
         <input type="checkbox" id="_listing_flag_exclusive" name="meta_input[_listing_flag_exclusive]" <?=($property->isExclusive())?'checked="checked"':''?> value="<?=($property->isExclusive())?1:0?>"><label class="fm" for="_listing_flag_exclusive"></label>
         <input type="hidden" name="pre[meta_input][_listing_flag_exclusive]" value="<?=($property->isExclusive())?1:0?>" class="form-control">
         <input type="hidden" name="metacheckboxes[_listing_flag_exclusive]" value="1">
       </div>
       <?php if ( current_user_can('region_manager') || current_user_can('administrator') ): ?>
-      <div class="col-md-3">
-        <label for=""><?=__('Kiemelt hirdetés', 'gh')?></label>
+      <div class="col-md-2">
+        <label for=""><?=__('Kiemelt', 'gh')?></label>
         <input type="checkbox" id="_listing_flag_highlight" name="meta_input[_listing_flag_highlight]" <?=($property->isHighlighted())?'checked="checked"':''?> value="<?=($property->isHighlighted())?1:0?>"><label class="fm" for="_listing_flag_highlight"></label>
         <input type="hidden" name="pre[meta_input][_listing_flag_highlight]" value="<?=($property->isHighlighted())?1:0?>" class="form-control">
         <input type="hidden" name="metacheckboxes[_listing_flag_highlight]" value="1">
       </div>
       <?php endif; ?>
       <?php if ( current_user_can('administrator') ): ?>
-      <div class="col-md-3">
-        <label for=""><?=__('Prémium hirdetés', 'gh')?></label>
+      <div class="col-md-2">
+        <label for=""><?=__('Prémium', 'gh')?> <i title="<?=__('A hirdetés megjelenik a prémium oldalon és a sima oldalon is.','gh')?>" class="fa fa-info-circle"></i></label>
         <input type="checkbox" id="_listing_premium" name="meta_input[_listing_premium]" <?=($property->isPremium())?'checked="checked"':''?> value="<?=($property->isPremium())?1:0?>"><label class="fm" for="_listing_premium"></label>
         <input type="hidden" name="pre[meta_input][_listing_premium]" value="<?=($property->isPremium())?1:0?>" class="form-control">
         <input type="hidden" name="metacheckboxes[_listing_premium]" value="1">
+      </div>
+      <div class="col-md-2">
+        <label for=""><?=__('Csak Prémium', 'gh')?> <i title="<?=__('A prémium hirdetés csak a prémium verziónál jelenik meg kizárólag.','gh')?>" class="fa fa-info-circle"></i></label>
+        <input type="checkbox" id="_listing_premium_only" name="meta_input[_listing_premium_only]" <?=($property->isPremiumOnly())?'checked="checked"':''?> value="<?=($property->isPremiumOnly())?1:0?>"><label class="fm" for="_listing_premium_only"></label>
+        <input type="hidden" name="pre[meta_input][_listing_premium_only]" value="<?=($property->isPremiumOnly())?1:0?>" class="form-control">
+        <input type="hidden" name="metacheckboxes[_listing_premium_only]" value="1">
       </div>
       <?php endif; ?>
     </div>

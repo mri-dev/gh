@@ -5,6 +5,13 @@ global $notify;
 <div class="gh_control_sidebar">
   <ul>
     <li class="mainhead"><?=__('Kezelőfelület', 'gh')?></li>
+    <?php if ( current_user_can('administrator') ): ?>
+      <?php if (defined('IS_PREMIUM') && IS_PREMIUM === true): ?>
+        <li class="premium-switcher"><a href="<? echo premium_site_switcher(); ?>"><i class="fa fa-exchange"></i> <?=__('Váltás <strong>SIMA</strong> oldalra', 'gh')?></a></li>
+      <?php else: ?>
+        <li class="premium-switcher"><a href="<? echo premium_site_switcher(); ?>"><i class="fa fa-exchange"></i> <?=__('Váltás <strong>PRÉMIUM</strong> oldalra', 'gh')?></a></li>
+      <?php endif; ?>
+    <?php endif; ?>
     <li class=""><a href="/control/home"><i class="fa fa-gear"></i> <?=__('Gépház', 'gh')?></a></li>
     <?php if ( current_user_can('administrator') ): ?>
     <li class=""><a href="/wp-admin/users.php"><i class="fa fa-users"></i> <?=__('Felhasználók', 'gh')?></a></li>
