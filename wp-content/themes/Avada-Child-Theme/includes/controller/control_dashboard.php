@@ -144,11 +144,55 @@ class control_dashboard
   {
     global $wpdb;
     $pq = array();
+    $meta_query = false;
+
+    // PREMIUM
+    if (defined('SHOW_PREMIUM_ONLY') && SHOW_PREMIUM_ONLY === true) {
+      $meta_query[] = array(
+        'key' => '_listing_premium',
+        'value' => '1'
+      );
+    } else {
+      /* */
+      $meta_query[] = array(
+        'relation' => 'OR',
+        array(
+          'key' => '_listing_premium_only',
+          'compare' => 'NOT EXISTS'
+        ),
+        array(
+          'key' => '_listing_premium_only',
+          'value' => '1',
+          'compare' => '!='
+        )
+      );
+      /* */
+    }
+
+    if ($meta_query) {
+      $meta_qry = new WP_Meta_Query( $meta_query  );
+      $meta_qry_sql = $meta_qry->get_sql(
+        'post',
+        't',
+        'pid',
+        null
+      );
+
+      //print_r($meta_qry_sql);
+      // $join, $where
+      extract($meta_qry_sql);
+    }
+    // End:PREMIUM
 
     $qry = "SELECT SUBSTR( t.visited, 1, 10 ) as day, count(t.ID) as ct
     FROM ".\PropertyFactory::LOG_VIEW_DB." as t
-    LEFT JOIN $wpdb->posts as p ON p.ID = t.pid
-    WHERE 1=1 ";
+    LEFT JOIN $wpdb->posts as p ON p.ID = t.pid";
+
+    if (isset($join)) {
+      $qry .= $join;
+    }
+
+    $qry .= " WHERE 1=1 ";
 
     if (isset($arg['authors']) && is_array($arg['authors']) && !empty($arg['authors'])) {
       $qry .= " and p.post_author IN (".implode(",",$arg['authors']).") ";
@@ -170,10 +214,14 @@ class control_dashboard
       $pq[] = $arg['month'].'%';
     }
 
+    if (isset($where)) {
+      $qry .= $where;
+    }
+
     $qry .= " GROUP BY SUBSTR( t.visited, 1, 10 ) ";
     $qry .= " ORDER BY SUBSTR( t.visited, 1, 10 ) ASC ";
 
-    //echo $qry;
+    //echo $qry . '<br>';
 
     $data = $wpdb->get_results( $wpdb->prepare( $qry, $pq ) );
 
@@ -185,13 +233,58 @@ class control_dashboard
   {
     global $wpdb;
     $clicks = 0;
+    $meta_query = false;
 
     $pq = array();
 
+    // PREMIUM
+    if (defined('SHOW_PREMIUM_ONLY') && SHOW_PREMIUM_ONLY === true) {
+      $meta_query[] = array(
+        'key' => '_listing_premium',
+        'value' => '1'
+      );
+    } else {
+      /* */
+      $meta_query[] = array(
+        'relation' => 'OR',
+        array(
+          'key' => '_listing_premium_only',
+          'compare' => 'NOT EXISTS'
+        ),
+        array(
+          'key' => '_listing_premium_only',
+          'value' => '1',
+          'compare' => '!='
+        )
+      );
+      /* */
+    }
+
+    if ($meta_query) {
+      $meta_qry = new WP_Meta_Query( $meta_query  );
+      $meta_qry_sql = $meta_qry->get_sql(
+        'post',
+        't',
+        'pid',
+        null
+      );
+
+      //print_r($meta_qry_sql);
+      // $join, $where
+      extract($meta_qry_sql);
+    }
+    // End:PREMIUM
+
+
     $qry = "SELECT t.ID
     FROM ".\PropertyFactory::LOG_VIEW_DB." as t
-    LEFT JOIN $wpdb->posts as p ON p.ID = t.pid
-    WHERE 1=1 ";
+    LEFT JOIN $wpdb->posts as p ON p.ID = t.pid ";
+
+    if (isset($join)) {
+      $qry .= $join;
+    }
+
+    $qry .= " WHERE 1=1 ";
 
     if (isset($arg['authors']) && is_array($arg['authors']) && !empty($arg['authors'])) {
       $qry .= " and p.post_author IN (".implode(",",$arg['authors']).") ";
@@ -211,11 +304,15 @@ class control_dashboard
       $pq[] = $arg['month'].'%';
     }
 
+    if (isset($where)) {
+      $qry .= $where;
+    }
+
     if (isset($arg['unique'])) {
       $qry .= " GROUP BY t.ucid ";
     }
 
-    //echo $qry;
+    //echo $qry . '<br>';
 
     $data = $wpdb->get_results( $wpdb->prepare( $qry, $pq ) );
 

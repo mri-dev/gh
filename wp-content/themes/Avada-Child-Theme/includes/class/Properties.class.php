@@ -85,6 +85,47 @@ class Properties extends PropertyFactory
   {
     global $wpdb;
 
+    $meta_query = false;
+
+    // PREMIUM
+    if (defined('SHOW_PREMIUM_ONLY') && SHOW_PREMIUM_ONLY === true) {
+      $meta_query[] = array(
+        'key' => '_listing_premium',
+        'value' => '1'
+      );
+    } else {
+      /* * /
+      $meta_query[] = array(
+        'relation' => 'OR',
+        array(
+          'key' => '_listing_premium_only',
+          'compare' => 'NOT EXISTS'
+        ),
+        array(
+          'key' => '_listing_premium_only',
+          'value' => '1',
+          'compare' => '!='
+        )
+      );
+      /* */
+    }
+
+    if ($meta_query) {
+      $meta_qry = new WP_Meta_Query( $meta_query  );
+      $meta_qry_sql = $meta_qry->get_sql(
+        'post',
+        'h',
+        'item_id',
+        null
+      );
+
+      //print_r($meta_qry_sql);
+      // $join, $where
+      extract($meta_qry_sql);
+    }
+    // End:PREMIUM
+
+
     $data = array(
       'page' => array(
         'current' => 1,
@@ -117,6 +158,10 @@ class Properties extends PropertyFactory
     FROM listing_change_history as h
     LEFT JOIN $wpdb->posts as p ON p.ID = h.item_id ";
 
+    if (isset($join)) {
+      $q .= $join;
+    }
+
     $q .= " WHERE 1=1 ";
     $q .= " and h.group_key ='property'";
 
@@ -139,11 +184,17 @@ class Properties extends PropertyFactory
       $params[] = $arg['azon'];
     }
 
+    if (isset($where)) {
+      $q .= $where;
+    }
+
     $q .= " ORDER BY h.transaction_date DESC";
 
     // Limit
     $page_min = ($data['page']['current'] * $data['page']['limit']) - $data['page']['limit'];
     $q .= " LIMIT ".$page_min.", ".$data['page']['limit'];
+
+    //echo $q .'<br>';
 
     $qry = $wpdb->get_results($wpdb->prepare( $q, $params ));
     $count = $wpdb->get_var( "SELECT FOUND_ROWS();" );

@@ -5,13 +5,33 @@ class NotifyManager extends PropertyFactory
   private $total_notify = 0;
   public function __construct()
   {
-    global $wpdb;
 
     // Archive requests
-    $this->notifications['property']['archive_request'] = $wpdb->get_var( "SELECT count(ID) FROM ".self::PROPERTY_ARCHIVE_DB." WHERE accept_date IS NULL;" );
+    $this->notifications['property']['archive_request'] = $this->checkArchiveRequest();
     $this->total_notify += $this->notifications['property']['archive_request'];
 
     return $this;
+  }
+
+  public function checkArchiveRequest()
+  {
+    global $wpdb;
+
+
+
+    $qry = "SELECT count(arc.ID) FROM ".self::PROPERTY_ARCHIVE_DB." as arc ";
+
+    if (isset($join)) {
+      $qry .= $join;
+    }
+
+    $qry .= " WHERE accept_date IS NULL ";
+
+    if (isset($where)) {
+      $qry .= $where;
+    }
+
+    return $wpdb->get_var( $qry );
   }
 
   public function propertyArchiveRequests()
