@@ -4,7 +4,7 @@
 	<div id="content" <?php Avada()->layout->add_class( 'content_class' ); ?> <?php Avada()->layout->add_style( 'content_style' ); ?>>
     <div class="<?=PREMIUM_AUTH_PAGE_SLUG?>-view">
       <h1><?=__('Prémium hozzáférés engedélyezése', 'gh')?></h1>
-      <h3><?=__('Kérjük adja meg a Mesterkulcsot a prémium tartalom hozzáféréséhez.', 'gh')?></h3>
+      <h3><?=__('Kérjük adja meg a Mesterkulcsot a prémium tartalom eléréséhez.', 'gh')?></h3>
       <?php if (isset($_GET['ekey'])): ?>
         <?php if ($_GET['ekey'] == 'failauth'): ?>
           <div class="">
@@ -20,6 +20,7 @@
           <button type="submit" name="accessPremium" value="1"><?=__('Premium engedélyezése', 'gh')?> <i class="fa fa-lock"></i></button>
         </form>
       </div>
+      <a href="<? echo str_replace(PREMIUM_AUTH_PAGE_SLUG, '', premium_site_switcher()); ?>"><?=__('vissza a főoldalra', 'gh')?></a>
     </div>
 	</div>
 	<?php do_action( 'fusion_after_content' ); ?>

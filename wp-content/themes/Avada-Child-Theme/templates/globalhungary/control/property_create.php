@@ -139,21 +139,26 @@
         <label for="_listing_offprice"><?=__('Akciós irányár (Ft)', 'gh')?></label>
         <input type="text" id="_listing_offprice" name="meta_input[_listing_offprice]" value="<?=$_POST['meta']['_listing_offprice']?>" class="form-control pricebind">
       </div>
+
+    </div>
+
+    <div class="row">
       <div class="col-md-3">
         <label for="_listing_flag_exclusive"><?=__('Kizárólagos hirdetés', 'gh')?></label>
         <input type="checkbox" id="_listing_flag_exclusive" name="meta_input[_listing_flag_exclusive]" <?=(isset($_POST['meta']['_listing_offprice']))?'checked="checked"':''?> value="1"><label class="fm" for="_listing_flag_exclusive"></label>
       </div>
-    </div>
-
-    <div class="row">
       <?php if (current_user_can('administrator')): ?>
-        <div class="col-md-12">
-          <label for="_listing_premium"><?=__('Prémium hirdetés', 'gh')?></label>
+        <div class="col-md-3">
+          <label for="_listing_premium"><?=__('Prémium hirdetés', 'gh')?> <i title="<?=__('A hirdetés megjelenik a prémium oldalon és a sima oldalon is.','gh')?>" class="fa fa-info-circle"></i></label>
           <input type="checkbox" id="_listing_premium" name="meta_input[_listing_premium]" <?=(isset($_POST['meta']['_listing_premium']))?'checked="checked"':''?> value="1"><label class="fm" for="_listing_premium"></label>
+        </div>
+        <div class="col-md-3">
+          <label for="_listing_premium_only"><?=__('Csak Prémium hirdetés', 'gh')?> <i title="<?=__('A prémium hirdetés csak a prémium verziónál jelenik meg kizárólag.','gh')?>" class="fa fa-info-circle"></i></label>
+          <input type="checkbox" id="_listing_premium_only" name="meta_input[_listing_premium_only]" <?=(isset($_POST['meta']['_listing_premium_only']))?'checked="checked"':''?> value="1"><label class="fm" for="_listing_premium"></label>
         </div>
       <?php endif; ?>
     </div>
-
+    <br>
     <h3><?=__('Leírások', 'gh')?></h3>
     <div class="row">
       <div class="col-md-12">
