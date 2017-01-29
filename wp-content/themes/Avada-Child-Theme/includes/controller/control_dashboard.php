@@ -153,7 +153,7 @@ class control_dashboard
         'value' => '1'
       );
     } else {
-      /* */
+      /* * /
       $meta_query[] = array(
         'relation' => 'OR',
         array(
@@ -244,7 +244,7 @@ class control_dashboard
         'value' => '1'
       );
     } else {
-      /* */
+      /* * /
       $meta_query[] = array(
         'relation' => 'OR',
         array(
