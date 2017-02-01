@@ -41,6 +41,20 @@ function add_opengraph_doctype( $output ) {
 }
 add_filter('language_attributes', 'add_opengraph_doctype');
 
+function app_locale( $locale )
+{
+  /*
+    $lang = explode('/', $_SERVER['REQUEST_URI']);
+    if(array_pop($lang) === 'en'){
+      $locale = 'en_US';
+    }else{
+      $locale = 'gr_GR';
+    }*/
+    $locale = 'en_US';
+    return $locale;
+}
+add_filter('locale','app_locale', 10);
+
 function facebook_og_meta_header()
 {
   global $wp_query;
@@ -90,8 +104,8 @@ function custom_theme_enqueue_styles() {
 add_action( 'wp_enqueue_scripts', 'custom_theme_enqueue_styles', 100 );
 
 function avada_lang_setup() {
-	$lang = get_stylesheet_directory() . '/languages';
-	load_child_theme_textdomain( 'Avada', $lang );
+	$lang = get_stylesheet_directory() . '/langs';
+	load_child_theme_textdomain( 'gh', $lang );
 
   $ucid = ucid();
 
@@ -248,6 +262,8 @@ function gh_custom_role()
   /* * /
   print_r(wp_get_current_user());
   /* */
+
+  //echo get_locale();
 }
 add_action('after_setup_theme', 'gh_custom_role');
 
