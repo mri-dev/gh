@@ -1,4 +1,5 @@
 <?php
+define('PROTOCOL', 'http');
 define('DOMAIN', $_SERVER['HTTP_HOST']);
 define('IFROOT', str_replace(get_option('siteurl'), '//'.DOMAIN, get_stylesheet_directory_uri()));
 define('DEVMODE', true);
@@ -82,7 +83,7 @@ function facebook_og_meta_header()
       $title = $property->Title() . ' ['.$property->Azonosito().']' . ' - ' . $property->PropertyStatus(true) . ' '. $property->multivalue_list($property->PropertyType(true)) . ' - '. $property->RegionName( false );
       $image = $property->ProfilImg();
       $desc = $property->ShortDesc();
-      $url = $property->URL();
+      $url = $url.$property->URL();
     }
   }
 
