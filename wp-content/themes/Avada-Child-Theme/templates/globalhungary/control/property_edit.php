@@ -228,12 +228,12 @@
         <input type="hidden" name="pre[meta_input][_listing_flag_pricetype]" value="<?=$property->getMetaValue('_listing_flag_pricetype')?>">
       </div>
       <div class="col-md-3 reqf">
-        <label for="_listing_price"><?=__('Irányár (Ft)', 'gh')?></label>
+        <label for="_listing_price"><?=__('Irányár', 'gh')?></label>
         <input type="text" id="_listing_price" name="meta_input[_listing_price]" value="<?=$property->OriginalPrice()?>" class="form-control pricebind" <?=(!$me->can('property_edit_price') && !current_user_can('administrator')) ? 'readonly="readonly"' : ''?>>
         <input type="hidden" name="pre[meta_input][_listing_price]" value="<?=$property->OriginalPrice()?>">
       </div>
       <div class="col-md-3">
-        <label for="_listing_offprice"><?=__('Kedvezményes irányár (Ft)', 'gh')?></label>
+        <label for="_listing_offprice"><?=__('Kedvezményes irányár', 'gh')?></label>
         <input type="text" id="_listing_offprice" name="meta_input[_listing_offprice]" value="<?=$property->OffPrice()?>" class="form-control pricebind" <?=(!$me->can('property_edit_price') && !current_user_can('administrator')) ? 'readonly="readonly"' : ''?>>
         <input type="hidden" name="pre[meta_input][_listing_offprice]" value="<?=$property->OffPrice()?>">
       </div>

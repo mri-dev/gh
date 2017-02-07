@@ -51,7 +51,7 @@ function app_locale( $locale )
     }else{
       $locale = 'gr_GR';
     }*/
-    $locale = 'en_US';
+    //$locale = 'en_US';
     return $locale;
 }
 add_filter('locale','app_locale', 10);

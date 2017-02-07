@@ -86,7 +86,7 @@
             <div class="header">
               <?php if ($prop->isDropOff()): ?>
                 <div class="old-price">
-                  <?=$prop->OriginalPrice(true)?>
+                  <?=$prop->OriginalPrice()?> <?=$prop->PriceType()?>
                 </div>
               <?php endif; ?>
               <div class="current-price">
