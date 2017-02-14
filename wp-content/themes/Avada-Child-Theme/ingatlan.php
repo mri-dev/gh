@@ -48,7 +48,10 @@
               </div>
             </div>
             <div class="images">
-              <div class="profil" id="profilimg">
+              <?php
+                $profil_attr = $prop->ProfilImgAttr();
+              ?>
+              <div class="profil or-<?=$profil_attr['orientation']?>" id="profilimg">
                 <a data-rel="iLightbox[p<?=$prop->ID()?>]" class="fusion-lightbox" data-title="<?=$prop->Title()?>" href="<?=$prop->ProfilImg()?>"><img src="<?=$prop->ProfilImg()?>" alt=""></a>
               </div>
               <?
@@ -69,8 +72,8 @@
               <div class="stack">
                 <div class="stack-wrapper">
                   <div class="items image-slide">
-                    <? foreach( $newimgs as $img ): ?>
-                    <div class="i">
+                    <? foreach( $newimgs as $img ):?>
+                    <div class="i or-<?=$img->params['orientation']?>">
                       <img src="<?=$img->guid?>" alt="<?=$prop->Title()?>" />
                     </div>
                     <? endforeach; ?>

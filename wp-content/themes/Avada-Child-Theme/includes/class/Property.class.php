@@ -392,7 +392,35 @@ class Property extends PropertyFactory
 
   public function Images()
   {
-    return get_attached_media( 'image', $this->ID() );
+    $set = array();
+    $images = get_attached_media( 'image', $this->ID() );
+
+    if($images)
+    foreach ($images as $i)
+    {
+      $i->params = array();
+      $i->params = wp_get_attachment_metadata($i->ID);
+
+      if( !empty($i->params) ) {
+        $width = $i->params['width'];
+        $height = $i->params['height'];
+      } else {
+        list($width, $height) = getimagesize($i->guid);
+      }
+
+
+        if ($width === $height) {
+          $i->params['orientation'] = 'square';
+        } else if($width < $height ){
+          $i->params['orientation'] = 'portrait';
+        } else {
+          $i->params['orientation'] = 'landscape';
+        }
+
+      $set[] = $i;
+    }
+
+    return $images;
   }
 
   public function PDFDocuments()

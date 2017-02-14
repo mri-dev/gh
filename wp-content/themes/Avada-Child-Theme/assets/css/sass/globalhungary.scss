@@ -4,7 +4,7 @@
   position: absolute;
   float: none;
   bottom: 0;
-  right: 0; 
+  right: 0;
 }
 
 body, html {
@@ -2072,11 +2072,12 @@ footer {
           }
 
           &.or-portrait{
+            background: #717171;
             img{
-              height: auto;
-              max-height: initial;
-              width: 125%;
-              max-width: 125%;
+              height: 100%;
+              max-height: 100%;
+              width: auto;
+              max-width: initial;
             }
           }
         }
@@ -2665,6 +2666,16 @@ footer {
               -moz-transform: translate(-50%, -50%);
               transform: translate(-50%, -50%);
             }
+
+            &.or-portrait{
+              background: #717171;
+              img {
+                width: auto;
+                max-width: initial;
+                height: 100%;
+                max-height: 100%;
+              }
+            }
           }
           .stack {
             .stack-wrapper{
@@ -2672,7 +2683,7 @@ footer {
                 width: 100%;
                 table-layout: fixed;
                 display: table;
-                margin-top: -25px;
+                margin-top: -25px; 
               }
             }
           }
