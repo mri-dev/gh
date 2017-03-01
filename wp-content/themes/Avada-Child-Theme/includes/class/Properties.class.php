@@ -11,6 +11,8 @@ class Properties extends PropertyFactory
   {
     $this->arg = array_replace( $this->arg, $arg );
 
+    switch_to_blog(SITEKEY_HU);
+
     return $this;
   }
 
@@ -594,6 +596,11 @@ class Properties extends PropertyFactory
     } else {
       return false;
     }
+  }
+
+  public function __destruct()
+  {
+    restore_current_blog();
   }
 }
 

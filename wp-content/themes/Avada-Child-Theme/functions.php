@@ -16,6 +16,8 @@ define('FB_APP_ID', '1380917375274546');
 define('FIND_PREMIUM_DOMAIN_PREFIX', 'premium.');
 define('PREMIUM_AUTH_PAGE_SLUG', 'validatePremium');
 define('PREMIUM_MASTER_PW', 'globalpremium2017');
+define('SITEKEY_ENG', 3);
+define('SITEKEY_HU', 1);
 
 // Includes
 require_once WP_PLUGIN_DIR."/cmb2/init.php";
