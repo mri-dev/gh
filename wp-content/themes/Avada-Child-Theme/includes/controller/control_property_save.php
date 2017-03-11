@@ -16,6 +16,8 @@ class control_property_save
     $mode    = 'create';
     $return  = $post['return'];
 
+    //print_r($_POST); exit;
+
     if ( !wp_verify_nonce($post['_nonce'], 'property-create') ) {
       throw new Exception( __('Nem sikerült létrehozni az ingatlanhirdetést. Ön nem az oldalunkról kezdeményezte a folyamatot!', 'gh') );
     }

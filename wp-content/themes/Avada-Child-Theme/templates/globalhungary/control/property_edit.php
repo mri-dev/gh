@@ -24,7 +24,7 @@
     <div class="buttons">
       <?php if ( $me->can('property_archive') || (current_user_can('administrator')) ): ?>
         <?php if ( !$property->ArchivingInProgress() ): ?>
-            <a href="/control/property_archive/?id=<?=$property->ID()?>" class="btn btn-rounded btn-red"><?=__('Ingatlanhirdetés archiválása', 'gh')?> <i class="fa fa-archive"></i></a>
+          <a href="/control/property_archive/?id=<?=$property->ID()?>" class="btn btn-rounded btn-red"><?=__('Ingatlanhirdetés archiválása', 'gh')?> <i class="fa fa-archive"></i></a>
         <?php endif; ?>
       <?php endif; ?>
     </div>
@@ -103,7 +103,7 @@
     <div class="panel-switcher">
       <ul>
         <?php foreach ( $app_languages as $id => $lang ):  if(!$lang['avaiable']) continue;  ?>
-          <li class="<?=($lang['code'] == 'hu_HU') ? 'active' : ''?>" data-lang="<?php echo $lang['code']; ?>"><?php echo $lang['name']; ?></li>
+          <li class="<?=($lang['code'] == 'hu_HU') ? 'active' : ''?>" data-lang="<?php echo $lang['code']; ?>"> <img src="<?=IMG?>/flags/<?=$lang['code']?>.png" style="height: 16px;" alt="<?php echo $lang['name']; ?>"> <?php echo $lang['name']; ?></li>
         <?php endforeach; ?>
       </ul>
     </div>
@@ -350,20 +350,47 @@
     <?php foreach ((array)$app_languages as $id => $lang): if($lang['code'] == 'hu_HU') continue; if(!$lang['avaiable']) continue;  ?>
     <!-- END: lang <?php echo $lang['code']; ?> panel -->
     <div class="lang-panel" data-lang="<?php echo $lang['code']; ?>">
-      <?php echo $lang['code']; ?>
-
       <?php $lang_param = $property->getLangMetalist($lang['meta_prefix']); ?>
       <?php foreach ($lang_param as $meta => $langp): $value = $langp['value']; $title = $langp['name']; ?>
         <div class="row">
           <div class="col-md-12">
-            <label for="<?=$meta?>"><?=$title?></label>
-            <input type="text" id="<?=$meta?>" name="meta_input[<?=$meta?>]" value="<?=$value?>" class="form-control">
-            <input type="hidden" name="pre[meta_input][<?=$meta?>]" value="<?=$value?>">
+            <?php if ($langp['holdertype'] != 'checkbox'): ?>
+              <label for="<?=$meta?>"><?=$title?></label>
+            <?php endif; ?>
+            <?php switch($langp['holdertype']){
+              case 'checkbox':
+              ?>
+              <input type="hidden" name="metacheckboxes[<?=$meta?>]" value="1">
+              <input type="checkbox" id="<?=$meta?>" name="meta_input[<?=$meta?>]" value="<?=$value?>" class="form-control" <?=($value == 1)?'checked="checked"':''?>><label for="<?=$meta?>"><?=$title?></label>
+              <input type="hidden" name="pre[meta_input][<?=$meta?>]" value="<?=$value?>">
+              <?
+              break;
+              case 'textfield':
+              ?>
+              <input type="text" id="<?=$meta?>" name="meta_input[<?=$meta?>]" value="<?=$value?>" class="form-control">
+              <input type="hidden" name="pre[meta_input][<?=$meta?>]" value="<?=$value?>">
+              <?
+              break;
+              case 'textarea':
+              ?>
+              <textarea name="meta_input[<?=$meta?>]" style="height: 80px;" class="form-control" id="<?=$meta?>"><?=$value?></textarea>
+              <input type="hidden" name="pre[meta_input][<?=$meta?>]" value="<?=$value?>">
+              <?
+              break;
+              case 'editor':
+              ?>
+              <br><br>
+              <?php wp_editor($value, $meta, array('textarea_name' => "meta_input[".$meta."]")); ?>
+              <textarea name="pre[meta_input][<?=$meta?>]" class="hide"><?=$value?></textarea>
+              <?
+              break;
+            } ?>
+            <?php if ($langp['hint'] != ''): ?>
+              <small class="inputhint"><?php echo $langp['hint']; ?></small>
+            <?php endif; ?>
           </div>
         </div>
       <?php endforeach; ?>
-      <pre><?php print_r($lang_param); ?></pre>
-
     </div>
     <!-- END: lang <?php echo $lang['code']; ?> panel -->
     <?php endforeach; ?>

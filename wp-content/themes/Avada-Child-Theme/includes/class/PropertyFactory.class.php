@@ -182,9 +182,23 @@ class PropertyFactory
     );
   }
 
+  public function getLanguageSettings( $lang )
+  {
+    global $app_languages;
+
+    foreach ($app_languages as $id => $l) {
+      if($lang == $l['code']) return $l;
+    }
+  }
+
   public function getLanguagesMetas()
   {
     return array(
+      'allow_inlang' => array(
+        'name' => __('Engedélyezés a nyelvi oldalon', 'gh'),
+        'hint' => __('Jelölje be, és az ingatlan meg fog jelenni a hozzá tartozó nyelvi oldalon.', 'gh'),
+        'type' => 'checkbox'
+      ),
       'post_title' => array(
         'name' => __('Ingatlan címe (SEO)', 'gh'),
         'hint' => __('Pl.: Újépítésű 120 nm-es 4 szobás családi ház Pécs szívében.', 'gh'),

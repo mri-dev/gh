@@ -6,10 +6,15 @@ class Properties extends PropertyFactory
   private $exclue_megye_str = array( 'Budapest', 'Balaton' );
   private $count = 0;
   private $query = null;
+  private $qry_locale = 'hu_HU';
 
   public function __construct( $arg = array() )
   {
     $this->arg = array_replace( $this->arg, $arg );
+
+    if(isset($arg['lang']) && !empty($arg['lang'])) {
+      $this->qry_locale = $arg['lang'];
+    }
 
     switch_to_blog(SITEKEY_HU);
 
@@ -281,6 +286,16 @@ class Properties extends PropertyFactory
       $meta_qry[] = $option_meta;
     }
 
+    $lang = get_locale();
+    if ( $lang !== DEFAULT_LANGUAGE ) {
+      $langsettings = $this->getLanguageSettings($this->qry_locale);
+      $lngprefix = $langsettings['meta_prefix'];
+      $meta_qry[] = array(
+        'key' => 'allow_inlang'.$lngprefix,
+        'value' => '1'
+      );
+    }
+
     if (isset($this->arg['highlight'])) {
       $meta_qry[] = array(
         'key' => '_listing_flag_highlight',
@@ -517,7 +532,7 @@ class Properties extends PropertyFactory
 
 
     foreach($posts->posts as $post) {
-      $this->datalist[] = new Property($post);
+      $this->datalist[] = new Property($post, array('lang' => $this->qry_locale));
     }
     return $this->datalist;
   }

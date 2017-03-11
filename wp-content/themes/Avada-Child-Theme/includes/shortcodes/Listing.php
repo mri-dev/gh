@@ -102,6 +102,7 @@ class ListingLista
 
       $arg = array(
         'limit' => $this->params['limit'],
+        'lang' => get_locale(),
       );
 
       if (count($fav_ids) != 0)
@@ -219,6 +220,7 @@ class ListingLista
       }
 
       $arg['page'] = (isset($_GET['page']) && is_numeric($_GET['page'])) ? $_GET['page'] : 1;
+      $arg['lang'] = get_locale();
 
       //print_r($arg);
 
@@ -262,7 +264,8 @@ class ListingLista
       $arg = array(
         'limit' => $this->params['limit'],
         'orderby' => 'rand',
-        'highlight' => true
+        'highlight' => true,
+        'lang' => get_locale(),
       );
 
       $properties = new Properties($arg);
@@ -305,7 +308,8 @@ class ListingLista
       $arg = array(
         'ids' => $ids,
         'limit' => $this->params['limit'],
-        'orderby' => 'post__in'
+        'orderby' => 'post__in',
+        'lang' => get_locale(),
       );
 
       //print_r($arg);
@@ -337,7 +341,8 @@ class ListingLista
       $arg = array(
         'limit' => $this->params['limit'],
         'orderby' => 'post_date',
-        'order' => 'DESC'
+        'order' => 'DESC',
+        'lang' => get_locale(),
       );
 
       $properties = new Properties($arg);
@@ -379,7 +384,8 @@ class ListingLista
       $arg = array(
         'ids' => $ids,
         'limit' => $this->params['limit'],
-        'orderby' => 'post__in'
+        'orderby' => 'post__in',
+        'lang' => get_locale(),
       );
 
       $properties = new Properties($arg);
@@ -439,7 +445,8 @@ class ListingLista
 
       $arg = array(
         'exc_ids' => $ids,
-        'limit' => $this->params['limit']
+        'limit' => $this->params['limit'],
+        'lang' => get_locale(),
       );
 
       $arg['page'] = (isset($_GET['page']) && is_numeric($_GET['page'])) ? $_GET['page'] : 1;

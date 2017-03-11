@@ -7,6 +7,7 @@
   $properties = new Properties(array(
     'id' => $ingatlan_id,
     'post_status' => array('publish'),
+    'lang' => get_locale()
   ));
   $property = $properties->getList();
   $prop = $property[0];

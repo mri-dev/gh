@@ -18,6 +18,7 @@ define('PREMIUM_AUTH_PAGE_SLUG', 'validatePremium');
 define('PREMIUM_MASTER_PW', 'globalpremium2017');
 define('SITEKEY_ENG', 3);
 define('SITEKEY_HU', 1);
+define('DEFAULT_LANGUAGE', 'hu_HU');
 
 // Includes
 require_once WP_PLUGIN_DIR."/cmb2/init.php";
@@ -52,7 +53,7 @@ function theme_enqueue_styles() {
     wp_enqueue_style( 'slick', IFROOT . '/assets/vendor/slick/slick.css?t=' . ( (DEVMODE === true) ? time() : '' ) );
     wp_enqueue_style( 'slick-theme', IFROOT . '/assets/css/slick-theme.css?t=' . ( (DEVMODE === true) ? time() : '' ) );
     wp_enqueue_script( 'slick', IFROOT . '/assets/vendor/slick/slick.min.js?t=' . ( (DEVMODE === true) ? time() : '' ) , array('jquery'));
-    wp_enqueue_script( 'google-maps', '//maps.googleapis.com/maps/api/js?sensor=false&language=hu&region=hu&libraries=places&key='.GOOGLE_API_KEY);
+    wp_enqueue_script( 'google-maps', '//maps.googleapis.com/maps/api/js?sensor=false&language='.get_locale().'&region=hu&libraries=places&key='.GOOGLE_API_KEY);
     wp_enqueue_script( 'google-charts', '//www.gstatic.com/charts/loader.js');
     wp_enqueue_script( 'mocjax', IFROOT . '/assets/vendor/autocomplete/scripts/jquery.mockjax.js');
     wp_enqueue_script( 'autocomplete', IFROOT . '/assets/vendor/autocomplete/dist/jquery.autocomplete.min.js');
@@ -100,6 +101,7 @@ function facebook_og_meta_header()
     $properties = new Properties(array(
       'id' => $ingatlan_id,
       'post_status' => array('publish'),
+      'lang' => get_locale()
     ));
     $property = $properties->getList();
     $property = $property[0];
@@ -539,6 +541,7 @@ function ingatlan_custom_title($title)
     $properties = new Properties(array(
       'id' => $ingatlan_id,
       'post_status' => array('publish'),
+      'lang' => get_locale()
     ));
     $property = $properties->getList();
     $property = $property[0];

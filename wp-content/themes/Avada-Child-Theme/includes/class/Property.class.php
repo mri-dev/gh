@@ -2,9 +2,18 @@
 class Property extends PropertyFactory
 {
   private $raw_post = false;
+  private $arg = array();
+  private $qry_locale = 'hu_HU';
 
-  public function __construct( WP_Post $property_post = null )
+  public function __construct( WP_Post $property_post = null, $arg = array() )
   {
+    $this->arg = array_replace( $this->arg, $arg );
+
+
+    if(isset($arg['lang']) && !empty($arg['lang'])) {
+      $this->qry_locale = $arg['lang'];
+    }
+
     $this->raw_post = $property_post;
     return $this;
   }
@@ -21,6 +30,10 @@ class Property extends PropertyFactory
   }
   public function Title()
   {
+    if ($this->qry_locale !== DEFAULT_LANGUAGE) {
+      $value = $this->getLocaleValue('post_title');
+      if(!empty($value)) return $value;
+    }
     return $this->raw_post->post_title;
   }
   public function CreateAt()
@@ -523,12 +536,29 @@ class Property extends PropertyFactory
 
   public function ShortDesc()
   {
+    if ($this->qry_locale !== DEFAULT_LANGUAGE) {
+      $value = $this->getLocaleValue('post_excerpt');
+      if(!empty($value)) return $value;
+    }
     return $this->raw_post->post_excerpt;
   }
 
   public function getMetaValue( $key )
   {
     $value = get_post_meta($this->ID(), $key, true);
+
+    return $value;
+  }
+  private function getLocaleValue( $key )
+  {
+    $prefix = '';
+
+    if ($this->qry_locale !== DEFAULT_LANGUAGE) {
+      $langsettings = $this->getLanguageSettings($this->qry_locale);
+      $prefix = $langsettings['meta_prefix'];
+    }
+
+    $value = get_post_meta($this->ID(), $key.$prefix, true);
 
     return $value;
   }
@@ -547,8 +577,16 @@ class Property extends PropertyFactory
   public function Description( $front = false )
   {
     $content = apply_filters ("the_content", $this->raw_post->post_content);
+
+    if ($this->qry_locale !== DEFAULT_LANGUAGE) {
+      $value = $this->getLocaleValue('post_content');
+      if(!empty($value)){
+        $content = apply_filters ("the_content", $value);
+      }
+    }
+
     if ($front) {
-        $content = YoutubeHelper::ember($content);
+      $content = YoutubeHelper::ember($content);
     }
     return $content;
   }
@@ -740,7 +778,8 @@ class Property extends PropertyFactory
         'meta' => $mkey,
         'name' => $meta['name'],
         'holdertype' => $meta['type'],
-        'value' => $value
+        'value' => $value,
+        'hint' => $meta['hint']
       );
     }
     return $list;

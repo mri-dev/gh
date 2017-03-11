@@ -3172,6 +3172,7 @@ footer {
     zoom: 1;
     position: relative;
     z-index: 101;
+    line-height: 16px;
 
     background: #bababa;
     color: #ffffff;
@@ -3179,6 +3180,11 @@ footer {
     text-align: center;
     border: 1px solid #b9b9b9;
     cursor: pointer;
+
+    img {
+      height: 16px;
+      margin-right: 4px;
+    }
 
     &:hover {
       background: #a8a8a8;
