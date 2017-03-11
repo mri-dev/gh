@@ -181,6 +181,27 @@ class PropertyFactory
       'lng' => (float)$gps_lng
     );
   }
+
+  public function getLanguagesMetas()
+  {
+    return array(
+      'post_title' => array(
+        'name' => __('Ingatlan címe (SEO)', 'gh'),
+        'hint' => __('Pl.: Újépítésű 120 nm-es 4 szobás családi ház Pécs szívében.', 'gh'),
+        'type' => 'textfield'
+      ),
+      'post_excerpt' => array(
+        'name' => __('Rövid ismertető', 'gh'),
+        'hint' => false,
+        'type' => 'textarea'
+      ),
+      'post_content' => array(
+        'name' => __('Leírás', 'gh'),
+        'hint' => false,
+        'type' => 'editor'
+      ),
+    );
+  }
 }
 
 class Location_Childs_Walker extends Walker_CategoryDropdown {

@@ -673,6 +673,10 @@ form.wide-form{
     font-size: 20px;
   }
 
+  h3:first-child {
+    margin: 0 0 15px 0;
+  }
+
   .wp-editor-container{
     border: 1px solid #e5e5e5;
   }
@@ -2683,7 +2687,7 @@ footer {
                 width: 100%;
                 table-layout: fixed;
                 display: table;
-                margin-top: -25px; 
+                margin-top: -25px;
               }
             }
           }
@@ -3149,6 +3153,68 @@ footer {
         border-radius: 0 0 3px 3px;
       }
     }
+  }
+}
+
+.panel-switcher{
+  margin: 10px 0 0 0;
+  position: relative;
+
+  ul, li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    display: inline-block;
+    *display: inline;
+    zoom: 1;
+    position: relative;
+    z-index: 101;
+
+    background: #bababa;
+    color: #ffffff;
+    padding: 10px 15px;
+    text-align: center;
+    border: 1px solid #b9b9b9;
+    cursor: pointer;
+
+    &:hover {
+      background: #a8a8a8;
+    }
+
+    &.active {
+      color: black;
+      background: white;
+      font-weight: bold;
+      border: 1px solid #a7a7a7;
+      border-bottom: 1px solid white;
+      cursor: default;;
+    }
+  }
+
+  &:after {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    right:0;
+    content: "";
+    height: 1px;
+    background: #a7a7a7;
+    z-index: 100;
+  }
+}
+
+.lang-panel {
+  display: none;
+  border: 1px solid #a7a7a7;
+  border-top: none;
+  padding: 15px;
+
+  &.active {
+    display: block;
   }
 }
 

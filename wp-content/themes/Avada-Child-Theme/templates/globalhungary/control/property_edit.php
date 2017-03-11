@@ -1,5 +1,5 @@
 <?php
-  global $me;
+  global $me, $app_languages;
   $control  = get_control_controller('property_create');
   $params = $control->getPropertyParams('col2');
   $flags  = $control->getPropertyParams('checkbox');
@@ -99,6 +99,18 @@
       </div>
       <?php endif; ?>
     </div>
+
+    <div class="panel-switcher">
+      <ul>
+        <?php foreach ( $app_languages as $id => $lang ):  if(!$lang['avaiable']) continue;  ?>
+          <li class="<?=($lang['code'] == 'hu_HU') ? 'active' : ''?>" data-lang="<?php echo $lang['code']; ?>"><?php echo $lang['name']; ?></li>
+        <?php endforeach; ?>
+      </ul>
+    </div>
+
+    <!-- lang hu_HU panel -->
+    <div class="lang-panel active" data-lang="hu_HU">
+
     <h3><?=__('Alapadatok', 'gh')?></h3>
     <div class="row">
       <div class="col-md-12 reqf">
@@ -331,6 +343,31 @@
         </div>
       </div>
     <?php endif; ?>
+
+    </div>
+    <!-- END: lang hu_HU panel -->
+
+    <?php foreach ((array)$app_languages as $id => $lang): if($lang['code'] == 'hu_HU') continue; if(!$lang['avaiable']) continue;  ?>
+    <!-- END: lang <?php echo $lang['code']; ?> panel -->
+    <div class="lang-panel" data-lang="<?php echo $lang['code']; ?>">
+      <?php echo $lang['code']; ?>
+
+      <?php $lang_param = $property->getLangMetalist($lang['meta_prefix']); ?>
+      <?php foreach ($lang_param as $meta => $langp): $value = $langp['value']; $title = $langp['name']; ?>
+        <div class="row">
+          <div class="col-md-12">
+            <label for="<?=$meta?>"><?=$title?></label>
+            <input type="text" id="<?=$meta?>" name="meta_input[<?=$meta?>]" value="<?=$value?>" class="form-control">
+            <input type="hidden" name="pre[meta_input][<?=$meta?>]" value="<?=$value?>">
+          </div>
+        </div>
+      <?php endforeach; ?>
+      <pre><?php print_r($lang_param); ?></pre>
+
+    </div>
+    <!-- END: lang <?php echo $lang['code']; ?> panel -->
+    <?php endforeach; ?>
+
     <input type="hidden" name="pre[post_author]" value="<?=$property->AuthorID()?>">
     <div class="submit-property">
       <input type="hidden" name="_nonce" value="<?=wp_create_nonce('property-create')?>">
@@ -359,6 +396,20 @@
          }
       );
     }
+
+    $('.panel-switcher ul li[data-lang]').click(function(){
+      var is_active = $(this).hasClass('active');
+      var lang =  $(this).data('lang');
+
+      if ( !is_active ) {
+        $('.panel-switcher ul li[data-lang].active').removeClass('active');
+        $(this).addClass('active');
+
+        $('.lang-panel[data-lang]').removeClass('active');
+        $('.lang-panel[data-lang=\''+lang+'\']').addClass('active');
+      }
+
+    });
 
     $('#tax_locations').on('change', function()
     {

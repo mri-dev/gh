@@ -23,6 +23,27 @@ define('SITEKEY_HU', 1);
 require_once WP_PLUGIN_DIR."/cmb2/init.php";
 require_once "includes/include.php";
 
+// Languages
+$app_languages = array(
+    1 => array(
+      'code' => 'hu_HU',
+      'name' => 'Magyar',
+      'id' => 1,
+      'meta_prefix' => false,
+      'store_blogid' => 1,
+      'avaiable' => true,
+    ),
+    3 => array(
+      'code' => 'en_US',
+      'name' => 'Angol',
+      'meta_prefix' => '_lngvalue_en_US',
+      'id' => 3,
+      'store_blogid' => 1,
+      'avaiable' => true,
+    ),
+);
+$current_language = false;
+
 $me = new UserHelper();
 
 function theme_enqueue_styles() {
@@ -54,8 +75,10 @@ function app_locale( $locale )
       $locale = 'gr_GR';
     }*/
     //$locale = 'en_US';
+
     return $locale;
 }
+
 add_filter('locale','app_locale', 10);
 
 function facebook_og_meta_header()
@@ -297,6 +320,8 @@ add_action('admin_init', 'admin_init_fc');
 
 function gh_init()
 {
+  global $app_languages, $current_language;
+
   add_filter('option_siteurl', 'replace_siteurl');
   add_filter('option_home', 'replace_siteurl');
   remove_filter('template_redirect','redirect_canonical');
@@ -319,6 +344,17 @@ function gh_init()
     }
 
     // Allowed
+  }
+
+  // Language get
+  if( $app_languages ) {
+    $my_locale = get_locale();
+    foreach ($app_languages as $id => $lang) {
+      if($lang['code'] == $my_locale) {
+        $current_language = $lang;
+        break;
+      }
+    }
   }
 
   date_default_timezone_set('Europe/Budapest');

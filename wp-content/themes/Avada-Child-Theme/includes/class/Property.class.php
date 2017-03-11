@@ -724,5 +724,26 @@ class Property extends PropertyFactory
 
     return $status;
   }
+
+  public function getLangMetalist( $lang_meta_after_slug )
+  {
+    $list = array();
+    $metas = $this->getLanguagesMetas();
+
+    foreach ($metas as $key => $meta)
+    {
+      $mkey = $key.$lang_meta_after_slug;
+
+      $value = get_post_meta($this->ID(), $mkey, true);
+
+      $list[$mkey] = array(
+        'meta' => $mkey,
+        'name' => $meta['name'],
+        'holdertype' => $meta['type'],
+        'value' => $value
+      );
+    }
+    return $list;
+  }
 }
 ?>

@@ -5,3 +5,12 @@ Template: Avada
 Version: 1.0.0
 Text Domain:  gh
 */
+
+.fusion-footer footer.fusion-footer-widget-area {
+  background-image: url("images/footer-bg-bottom-v1.svg");
+  background-position: bottom center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  padding-top: 0;
+  padding-bottom: 95px;
+} 
