@@ -33,7 +33,6 @@ class AjaxRequests
 
   public function setRegioGPS()
   {
-
     extract($_POST);
 
     $return = array(
@@ -135,9 +134,11 @@ class AjaxRequests
 
   public function AutocompleteCity()
   {
-    global $wpdb;
+    global $wpdb, $current_language;
 
     extract($_GET);
+
+    switch_to_blog($current_language['store_blogid']);
 
     $pf = new PropertyFactory();
 
@@ -158,7 +159,33 @@ class AjaxRequests
 
     $terms = get_terms($arg);
 
-    foreach ($terms as $t) {
+    foreach ($terms as $t)
+    {
+      if ($current_language['code'] != DEFAULT_LANGUAGE) {
+        $meta_query = array();
+        $meta_query[] = array(
+          'key' => 'allow_inlang_lngvalue_'.$current_language['code'],
+          'value' => '1'
+        );
+
+        $cqry = new WP_Query(array(
+          'post_type'   => 'listing',
+          'meta_query'  => $meta_query,
+          'tax_query' => array(
+        		array(
+        			'taxonomy' => 'locations',
+        			'field'    => 'id',
+        			'terms'    => $t->term_id,
+        		),
+        	)
+        ));
+
+        $count = $cqry->found_posts;
+        unset($cqry);
+
+        if( intval($count) === 0 ) continue;
+      }
+
       if ($t->parent == 0) {
         continue;
       }
@@ -180,6 +207,8 @@ class AjaxRequests
         'count' => $t->count
       );
     }
+
+    restore_current_blog();
 
     header('Content-Type: application/json;charset=utf8');
     echo json_encode($return);

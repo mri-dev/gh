@@ -70,6 +70,9 @@ class Properties extends PropertyFactory
     unset($t);
     unset($terms);
 
+
+    //print_r($sorted_terms);
+
     return $sorted_terms;
   }
 

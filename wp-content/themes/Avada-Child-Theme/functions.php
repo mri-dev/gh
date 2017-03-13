@@ -47,6 +47,7 @@ $app_languages = array(
     ),
 );
 $current_language = false;
+$running_searcher_get_terms = false;
 
 $me = new UserHelper();
 
@@ -684,3 +685,63 @@ function premium_site_switcher()
     return '//'.FIND_PREMIUM_DOMAIN_PREFIX.DOMAIN . $_SERVER['REQUEST_URI'];
   }
 }
+
+function memory_convert($size)
+{
+    $unit=array('b','kb','mb','gb','tb','pb');
+    return @round($size/pow(1024,($i=floor(log($size,1024)))),2).' '.$unit[$i];
+}
+
+function get_terms_property_custom_filter( $terms, $taxonomies, $args )
+{
+  global $current_language, $running_searcher_get_terms;
+
+  if(!$running_searcher_get_terms) return $terms;
+
+  $farr = array(
+    'property-types',
+    'property-condition',
+    //'status'
+  );
+
+  if ( in_array( $taxonomies[0], $farr ) && get_locale() != DEFAULT_LANGUAGE )
+  {
+    switch_to_blog($current_language['store_blogid']);
+    $lngprefix = $current_language['meta_prefix'];
+
+    $tterms = array();
+
+    foreach ((array)$terms as $term)
+    {
+      $cp = new WP_Query(array(
+        'post_type' => 'listing',
+        'post_status' => 'publish',
+        'meta_query' => array(
+          array(
+            'key' => 'allow_inlang'.$lngprefix,
+            'value' => '1'
+          )
+        ),
+        'tax_query' => array(
+          array(
+            'taxonomy' => $taxonomies[0],
+            'field' => 'term_id',
+            'terms' => $term->term_id
+          )
+        )
+      ));
+
+      if($cp->found_posts == 0) continue;
+      $term->count = $cp->found_posts;
+
+      $tterms[] = $term;
+    }
+
+    unset($cp);
+    unset($terms);
+    restore_current_blog();
+
+    return $tterms;
+  } else return $terms;
+}
+add_filter('get_terms', 'get_terms_property_custom_filter', 10, 3);

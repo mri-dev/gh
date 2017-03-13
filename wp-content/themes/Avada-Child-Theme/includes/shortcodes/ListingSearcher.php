@@ -28,6 +28,8 @@ class ListingSearcher extends PropertyFactory
 
     public function do_shortcode( $attr, $content = null )
     {
+      global $running_searcher_get_terms;
+
       /* Set up the default arguments. */
       $defaults = apply_filters(
           self::SCTAG.'_defaults',
@@ -40,6 +42,8 @@ class ListingSearcher extends PropertyFactory
         $get = $_GET;
 
         $output = '<div class="'.self::SCTAG.'-holder style-'.$attr['view'].' transf">';
+
+        $running_searcher_get_terms = true;
 
         $properties = new Properties(array(
           'lang' => get_locale()
@@ -62,6 +66,8 @@ class ListingSearcher extends PropertyFactory
         ));
 
         $output .= '</div>';
+
+        $running_searcher_get_terms = false;
 
         /* Return the output of the tooltip. */
         return apply_filters( self::SCTAG, $output );
