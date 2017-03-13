@@ -1,5 +1,6 @@
 <?php
 define('PROTOCOL', 'http');
+define('TARGETDOMAIN', 'globalhungary.mri-dev.com');
 define('DOMAIN', $_SERVER['HTTP_HOST']);
 define('IFROOT', str_replace(get_option('siteurl'), '//'.DOMAIN, get_stylesheet_directory_uri()));
 define('DEVMODE', true);
@@ -27,6 +28,7 @@ require_once "includes/include.php";
 // Languages
 $app_languages = array(
     1 => array(
+      'subdomain' => '',
       'code' => 'hu_HU',
       'name' => 'Magyar',
       'id' => 1,
@@ -35,6 +37,7 @@ $app_languages = array(
       'avaiable' => true,
     ),
     3 => array(
+      'subdomain' => 'en.',
       'code' => 'en_US',
       'name' => 'Angol',
       'meta_prefix' => '_lngvalue_en_US',

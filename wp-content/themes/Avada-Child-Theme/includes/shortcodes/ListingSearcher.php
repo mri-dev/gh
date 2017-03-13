@@ -41,7 +41,9 @@ class ListingSearcher extends PropertyFactory
 
         $output = '<div class="'.self::SCTAG.'-holder style-'.$attr['view'].' transf">';
 
-        $properties = new Properties();
+        $properties = new Properties(array(
+          'lang' => get_locale()
+        ));
 
         $t = new ShortcodeTemplates(__CLASS__.'/'.$attr['view']);
 

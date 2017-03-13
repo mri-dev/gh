@@ -413,6 +413,50 @@ input[type=checkbox].fake-radio:checked + label {
       }
     }
 
+    .languages {
+      border: 1px solid #333b3b;
+
+      ul, li {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+      }
+
+      ul {
+        padding: 0 4px;
+        li {
+          display: inline-block;
+          *display: inline;
+          zoom: 1;
+          padding: 0 2px;
+          opacity: 0.5;
+          filter:alpha(opacity=50);
+
+          &:hover {
+            opacity: 0.8;
+            filter:alpha(opacity=80);
+          }
+
+          &.active {
+            opacity: 1;
+            filter:alpha(opacity=100);
+          }
+
+          a {
+            display: block;
+            width: 25px;
+            height: 44px;
+            line-height: 44px;
+          }
+
+          img {
+            max-width: 100%;
+            vertical-align: middle;
+          }
+        }
+      }
+    }
+
     .notify-icos {
       height: 45px;
       line-height: 45px;
@@ -3172,7 +3216,6 @@ footer {
     zoom: 1;
     position: relative;
     z-index: 101;
-    line-height: 16px;
 
     background: #bababa;
     color: #ffffff;
@@ -3180,11 +3223,6 @@ footer {
     text-align: center;
     border: 1px solid #b9b9b9;
     cursor: pointer;
-
-    img {
-      height: 16px;
-      margin-right: 4px;
-    }
 
     &:hover {
       background: #a8a8a8;
@@ -3401,8 +3439,12 @@ footer {
     width: 260px;
     float: none;
   }
+  .top-float-menubar .menu-holder .languages{
+    display: block;
+  }
   .top-float-menubar .menu-holder .accounts,
   .top-float-menubar .menu-holder .contact,
+  .top-float-menubar .menu-holder .languages,
   .top-float-menubar .menu-holder .socials .fusion-social-networks .fusion-social-network-icon,
   .top-float-menubar .menu-holder .notify-icos > div a
   {
