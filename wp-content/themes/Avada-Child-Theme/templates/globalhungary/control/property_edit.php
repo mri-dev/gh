@@ -111,6 +111,15 @@
     <!-- lang hu_HU panel -->
     <div class="lang-panel active" data-lang="hu_HU">
 
+    <div class="row">
+      <div class="col-md-12">
+        <?php $value = ($property->isHUOffline()) ? 1 : 0; ?>
+        <input type="hidden" name="metacheckboxes[_listing_flag_hu_off]" value="1">
+        <input type="checkbox" id="_listing_flag_hu_off" name="meta_input[_listing_flag_hu_off]" value="<?=$value?>" class="form-control" <?=($value == 1)?'checked="checked"':''?>><label for="_listing_flag_hu_off"><?=__('Hirdetés ne legyen látható a magyar nyelvvű oldalon.', 'gh')?></label>
+        <input type="hidden" name="pre[meta_input][_listing_flag_hu_off]" value="<?=$value?>">
+      </div>
+    </div>
+
     <h3><?=__('Alapadatok', 'gh')?></h3>
     <div class="row">
       <div class="col-md-12 reqf">

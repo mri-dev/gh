@@ -13,6 +13,7 @@ class control_properties
   public function getProperties( $arg = array() )
   {
     $data = false;
+    //print_r($arg);
     $properties = new Properties( $arg );
     $this->class = $properties;
 

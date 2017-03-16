@@ -290,12 +290,29 @@ class Properties extends PropertyFactory
     }
 
     $lang = get_locale();
+
     if ( $lang !== DEFAULT_LANGUAGE ) {
       $langsettings = $this->getLanguageSettings($this->qry_locale);
       $lngprefix = $langsettings['meta_prefix'];
       $meta_qry[] = array(
         'key' => 'allow_inlang'.$lngprefix,
         'value' => '1'
+      );
+    } else if( !$this->arg['admin'] ) {
+      $meta_qry[] = array(
+          'relation' => 'OR',
+          array(
+            'key' => '_listing_flag_hu_off',
+            'compare' => 'NOT EXISTS'
+          ),
+          array(
+            'key' => '_listing_flag_hu_off',
+            'value' => '0'
+          ),
+          array(
+            'key' => '_listing_flag_hu_off',
+            'value' => ''
+          )
       );
     }
 
@@ -357,6 +374,9 @@ class Properties extends PropertyFactory
           array(
             'key' => '_listing_flag_archived',
             'value' => ''
+          ),array(
+            'key' => '_listing_flag_archived',
+            'value' => '0'
           )
       );
     }
@@ -527,6 +547,8 @@ class Properties extends PropertyFactory
     }
 
     $post_arg['paged'] = (int)$this->arg['page'];
+
+    //print_r($post_arg);
 
     $posts = new WP_Query($post_arg);
 

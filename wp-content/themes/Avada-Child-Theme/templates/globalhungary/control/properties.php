@@ -11,17 +11,18 @@
   $show_selector = false;
   $location = false;
 
-  if (current_user_can('reference_manager')) {
+  if ($me->can('reference_manager') ) {
     $author = $me->ID();
   } else {
     if (isset($_GET['user']) && !empty($_GET['user'])) {
+
       if ( true ) {
-        if ( current_user_can('region_manager') || current_user_can('administrator') ) {
+        if ( $me->can('region_manager') || $me->can('administrator') ) {
           $author = $_GET['user'];
           $filtered = true;
           $selected_user = new UserHelper(array( 'id' => $_GET['user']) );
 
-          if ($me->can('user_property_connector') || current_user_can('administrator')) {
+          if ($me->can('user_property_connector') || $me->can('administrator')) {
             $show_selector = true;
           }
         }
@@ -29,13 +30,13 @@
     }
   }
 
-  if (current_user_can('region_manager')) {
+  if ($me->can('region_manager')) {
     $location = $me->RegionID();
   }
 
   if (isset($_GET['arc'])) {
     $filtered = true;
-    if ( current_user_can('administrator') || current_user_can('region_manager') ){
+    if ( $me->can('administrator') || $me->can('region_manager') ){
       $archived = true;
     }
   }
@@ -63,6 +64,7 @@
     'page' => (isset($_GET['page']) && is_numeric($_GET['page'])) ? $_GET['page'] : 1,
     'idnumber' => (isset($_GET['id'])) ? $_GET['id'] : false,
     'property-types' => $type_ids,
+    'admin' => true
   ));
   $item_num = $control->propertyCount();
   $pager = $control->pager('/control/properties/');
@@ -70,7 +72,7 @@
 <div class="gh_control_content_holder">
   <div class="heading">
     <div class="buttons">
-      <?php if ( current_user_can('administrator') || current_user_can('region_manager') ): ?>
+      <?php if ( $me->can('administrator') || $me->can('region_manager') ): ?>
         <?php if ($_GET['arc'] != '1'): ?>
           <a href="/control/properties/?arc=1" class="btn btn-rounded btn-red"><?=__('Archiváltak', 'gh')?> <i class="fa fa-archive"></i></a>
         <?php endif; ?>
@@ -192,7 +194,19 @@
                     </div>
                     <span class="ref-number <?=($p->isExclusive())?'exclusive':''?>" title="<?=($p->isExclusive())?__('Ez a hirdetés kizárólagos hirdetés.','gh'):''?>"><?=$p->Azonosito()?></span>
                     <span class="price"><?=$p->Price(true)?></span>
+                    <?php if ($p->isHUOffline()): ?>
+                      <img style="height: 18px;" title="<?php echo __('Magyar nyelvű oldalon nem jelenik meg!', 'gh'); ?>" src="<?php echo IMG; ?>/flags/circles/hu_HU-off.png" alt="">
+                    <?php endif; ?>
+                    <?php
+                      global $app_languages;
+                      foreach ($app_languages as $lngid => $lng)
+                      {
+                        if(!$lng['avaiable'] || $lng['code'] == DEFAULT_LANGUAGE) continue;
+                        if( !$p->isInLangsite($lng['code']) ) continue;
 
+                        echo '<img title="'.sprintf(__("%s nyelvű oldalon megjelenik!", 'gh'), $lng['name']).'" style="height: 18px;" src="'.IMG.'/flags/circles/'.$lng['code'].'.png" alt=""/> ';
+                      }
+                    ?>
                   </div>
                 </div>
               </div>

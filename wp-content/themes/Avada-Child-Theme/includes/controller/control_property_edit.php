@@ -15,6 +15,7 @@ class control_property_edit
     $properties = new Properties(array(
       'id' => $id,
       'post_status' => array('publish', 'pending', 'draft', 'future'),
+      'admin' => true
     ));
     $property = $properties->getList();
 

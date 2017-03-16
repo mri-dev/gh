@@ -45,6 +45,15 @@ $app_languages = array(
       'store_blogid' => 1,
       'avaiable' => true,
     ),
+    4 => array(
+      'subdomain' => 'de.',
+      'code' => 'de_DE',
+      'name' => 'Német',
+      'meta_prefix' => '_lngvalue_de_DE',
+      'id' => 4,
+      'store_blogid' => 1,
+      'avaiable' => false,
+    ),
 );
 $current_language = false;
 $running_searcher_get_terms = false;
@@ -694,7 +703,7 @@ function premium_site_switcher()
     return '//'.str_replace(FIND_PREMIUM_DOMAIN_PREFIX,'',DOMAIN) . $_SERVER['REQUEST_URI'];
   } else {
     if (get_locale() !== DEFAULT_LANGUAGE) {
-      return '//'.FIND_PREMIUM_DOMAIN_PREFIX.TARGETDOMAIN .  $_SERVER['REQUEST_URI'];  
+      return '//'.FIND_PREMIUM_DOMAIN_PREFIX.TARGETDOMAIN .  $_SERVER['REQUEST_URI'];
     }
     return '//'.FIND_PREMIUM_DOMAIN_PREFIX.DOMAIN . $_SERVER['REQUEST_URI'];
   }

@@ -37,8 +37,6 @@ function gh_users_data_save( $id )
     }
   }
 
-
-
   // Régió
   update_user_meta( $_POST['user_id'], 'gh_user_regio', wp_kses_post( $_POST['gh_user_regio'] ), get_user_meta($_POST['user_id'], 'gh_user_regio', true) );
 }

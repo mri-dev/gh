@@ -312,6 +312,24 @@ class Property extends PropertyFactory
     return false;
   }
 
+  public function isHUOffline()
+  {
+    if ($this->getMetaValue('_listing_flag_hu_off') == 1) {
+      return true;
+    }
+
+    return false;
+  }
+
+  public function isInLangsite( $lang_code )
+  {
+    if ($this->getMetaValue('allow_inlang_lngvalue_'.$lang_code) == 1) {
+      return true;
+    }
+
+    return false;
+  }
+
   public function ArchivingInProgress()
   {
     global $wpdb;
