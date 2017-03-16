@@ -682,12 +682,20 @@ if( defined('DEVMODE') && DEVMODE === false ) {
 
 function premium_site_switcher()
 {
+  global $current_language;
+
   $premium = false;
   $premium = (defined('IS_PREMIUM') && IS_PREMIUM) ? true : false;
 
   if ($premium) {
+    if (get_locale() !== DEFAULT_LANGUAGE) {
+      return '//'.$current_language['subdomain'].TARGETDOMAIN .  $_SERVER['REQUEST_URI'];
+    }
     return '//'.str_replace(FIND_PREMIUM_DOMAIN_PREFIX,'',DOMAIN) . $_SERVER['REQUEST_URI'];
   } else {
+    if (get_locale() !== DEFAULT_LANGUAGE) {
+      return '//'.FIND_PREMIUM_DOMAIN_PREFIX.TARGETDOMAIN .  $_SERVER['REQUEST_URI'];  
+    }
     return '//'.FIND_PREMIUM_DOMAIN_PREFIX.DOMAIN . $_SERVER['REQUEST_URI'];
   }
 }
