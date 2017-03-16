@@ -53,6 +53,13 @@ class PropertyHistory extends PropertyFactory
   {
     $text = array();
 
+    // Check lang key
+    if (strpos($key, '_lngvalue_') !== false)
+    {
+      $langtexts = explode('_lngvalue_', $key);
+      return '<img style="height: 18px;" src="'.IMG.'/flags/circles/'.$langtexts[1].'.png" /> '.$this->modText($langtexts[0]);
+    }
+
     $texts = array(
 			'col1' => array(
 				__( 'Azonosító', 'gh' ) => '_listing_idnumber',
@@ -110,6 +117,9 @@ class PropertyHistory extends PropertyFactory
         __( 'Ingatlan kategória', 'gh') => 'property-types',
         __( 'Fűtés', 'gh') => 'property-heating',
         __( 'Ingatlan állapota', 'gh') => 'property-condition',
+      ),
+      'langs' => array(
+        __( 'Nyelv engedélyeztés', 'gh') => 'allow_inlang',
       )
 		);
 
@@ -132,6 +142,22 @@ class PropertyHistory extends PropertyFactory
 
   public function formatValue( $key = false, $value = '', $pre_value = false )
   {
+
+    // Check lang key
+    if (strpos($key, '_lngvalue_') !== false)
+    {
+      $langtexts = explode('_lngvalue_', $key);
+      switch ($langtexts[0]) {
+        case 'allow_inlang':
+          $value = ($value == '0') ? '<i class="fa fa-times"></i>' : '<i class="fa fa-check"></i>';
+          return $value;
+        break;
+        default:
+          return $value;
+        break;
+      }
+    }
+
     switch ($key) {
       case '_listing_flag_pricetype':
         $value = $this->getPriceTypeText((int)$value);

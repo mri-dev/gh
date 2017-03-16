@@ -41,7 +41,9 @@
             <?php if ($status): ?>
               <?php foreach ($status as $k): ?>
               <div class="selector-row">
-                <input type="checkbox" <?=(in_array($k->term_id, $selected))?'checked="checked"':''?> tglwatcherkey="status_multiselect" htxt="<?=$k->name?>" id="stat_<?=$k->term_id?>" value="<?=$k->term_id?>"> <label for="stat_<?=$k->term_id?>"><?=$k->name?> <span class="n">(<?=$k->count?>)</span></label>
+                <input type="checkbox" <?=(in_array($k->term_id, $selected))?'checked="checked"':''?> tglwatcherkey="status_multiselect" htxt="<?=$k->name?>" id="stat_<?=$k->term_id?>" value="<?=$k->term_id?>"> <label for="stat_<?=$k->term_id?>"><?=$k->name?><?php if (get_locale() === DEFAULT_LANGUAGE): ?>
+                 <span class="n">(<?=$k->count?>)</span>
+                <?php endif; ?></label>
               </div>
               <?php endforeach; ?>
             <?php endif; ?>

@@ -51,11 +51,11 @@ class WP_Listings {
 				__( 'Archiválta', 'gh' )  => '_listing_archive_who',
 			),
 			'checkbox' => array(
-				__( 'Garázs/Autóbeálló', 'gh' )  => '_listing_garage',
-				__( 'Kertkapcsolat/Udvar', 'gh' )  => '_listing_garden',
-				__( 'Erkély/Terasz', 'gh' )  => '_listing_balcony',
-				__( 'Lift', 'gh' )  => '_listing_lift',
-				__( 'Panorámás', 'gh' )  => '_listing_panorama',		
+				__( 'Garázs/Autóbeálló', 'wp-listings' )  => '_listing_garage',
+				__( 'Kertkapcsolat/Udvar', 'wp-listings' )  => '_listing_garden',
+				__( 'Erkély/Terasz', 'wp-listings' )  => '_listing_balcony',
+				__( 'Lift', 'wp-listings' )  => '_listing_lift',
+				__( 'Panorámás', 'wp-listings' )  => '_listing_panorama',
 			),
 			'flags' => array(
 				__( 'Kiemelt', 'gh' )  => '_listing_flag_highlight',

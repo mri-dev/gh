@@ -1,7 +1,6 @@
 <?php
   // Régiók
   $regions = $properties->getRegions();
-
 ?>
 <form class="" role="searcher" id="searcher-form" action="/<?=SLUG_INGATLAN_LIST?>/" method="get">
 <div class="searcher-header">
@@ -41,13 +40,16 @@
             <?php if ($status): ?>
               <?php foreach ($status as $k): ?>
               <div class="selector-row">
-                <input type="checkbox" tglwatcherkey="status_multiselect" htxt="<?=$k->name?>" id="stat_<?=$k->term_id?>" value="<?=$k->term_id?>"> <label for="stat_<?=$k->term_id?>"><?=$k->name?> <span class="n">(<?=$k->count?>)</span></label>
+                <input type="checkbox" tglwatcherkey="status_multiselect" htxt="<?=$k->name?>" id="stat_<?=$k->term_id?>" value="<?=$k->term_id?>"> <label for="stat_<?=$k->term_id?>"><?=$k->name?>
+                  <?php if (get_locale() === DEFAULT_LANGUAGE): ?>
+                   <span class="n">(<?=$k->count?>)</span>
+                  <?php endif; ?></label>
               </div>
               <?php endforeach; ?>
             <?php endif; ?>
           </div>
         </div>
-      </div>      
+      </div>
       <div class="inp inp-kategoria">
         <label for="kategoria_multiselect_text"><?=__('Kategória', 'gh')?></label>
         <div class="tglwatcher-wrapper">

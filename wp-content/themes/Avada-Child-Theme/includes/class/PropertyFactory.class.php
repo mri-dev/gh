@@ -27,6 +27,7 @@ class PropertyFactory
     'per_month' => 3,
   	'eur_per_month' => 4,
   	'eur_per_month_plusvat' => 5,
+    'fix_plusvat' => 6,
    );
 
   public function getValuta()
@@ -84,6 +85,7 @@ class PropertyFactory
       3 => sprintf(__('%s / hó', 'gh'), $this->getValuta()),
   	  4 => sprintf(__('%s / hó', 'gh'), '€'),
   	  5 => sprintf(__('%s / hó + áfa', 'gh'), '€'),
+      6 => sprintf(__('%s + áfa', 'gh'), $this->getValuta()),
     );
 
     return $texts[$index];

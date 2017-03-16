@@ -366,10 +366,16 @@ function gh_init()
   date_default_timezone_set('Europe/Budapest');
   add_rewrite_rule('^control/([^/]+)', 'index.php?cp=$matches[1]', 'top');
   add_rewrite_rule('^'.PREMIUM_AUTH_PAGE_SLUG, 'index.php?custom_page='.PREMIUM_AUTH_PAGE_SLUG, 'top');
+
   add_rewrite_rule('^'.SLUG_INGATLAN_LIST.'/?', 'index.php?custom_page='.SLUG_INGATLAN_LIST.'&urlstring=$matches[1]', 'top');
+  add_rewrite_rule('^properties/?', 'index.php?custom_page='.SLUG_INGATLAN_LIST.'&urlstring=$matches[1]', 'top');
+
   add_rewrite_rule('^'.SLUG_FAVORITE.'/?', 'index.php?custom_page='.SLUG_FAVORITE.'&urlstring=$matches[1]', 'top');
   add_rewrite_rule('^'.SLUG_NEWS.'/?', 'index.php?custom_page='.SLUG_NEWS.'&urlstring=$matches[1]', 'top');
+
   add_rewrite_rule('^'.SLUG_INGATLAN.'/([^/]+)/([^/]+)/([^/]+)', 'index.php?custom_page='.SLUG_INGATLAN.'&regionslug=$matches[1]&cityslug=$matches[2]&urlstring=$matches[3]', 'top');
+  add_rewrite_rule('^property/([^/]+)/([^/]+)/([^/]+)', 'index.php?custom_page='.SLUG_INGATLAN.'&regionslug=$matches[1]&cityslug=$matches[2]&urlstring=$matches[3]', 'top');
+
   add_rewrite_rule('^ingatlan-export/?', 'index.php?custom_page=ingatlan-export&urlstring=$matches[1]', 'top');
 }
 add_action('init', 'gh_init');
