@@ -17,7 +17,7 @@ define('FB_APP_ID', '1380917375274546');
 define('FIND_PREMIUM_DOMAIN_PREFIX', 'premium.');
 define('PREMIUM_AUTH_PAGE_SLUG', 'validatePremium');
 define('PREMIUM_MASTER_PW', 'globalpremium2017');
-define('SITEKEY_ENG', 3);
+define('SITEKEY_ENG', 2);
 define('SITEKEY_HU', 1);
 define('DEFAULT_LANGUAGE', 'hu_HU');
 
@@ -36,23 +36,14 @@ $app_languages = array(
       'store_blogid' => 1,
       'avaiable' => true,
     ),
-    3 => array(
+    2 => array(
       'subdomain' => 'en.',
       'code' => 'en_US',
       'name' => 'Angol',
       'meta_prefix' => '_lngvalue_en_US',
-      'id' => 3,
+      'id' => 2,
       'store_blogid' => 1,
       'avaiable' => true,
-    ),
-    4 => array(
-      'subdomain' => 'de.',
-      'code' => 'de_DE',
-      'name' => 'Német',
-      'meta_prefix' => '_lngvalue_de_DE',
-      'id' => 4,
-      'store_blogid' => 1,
-      'avaiable' => false,
     ),
 );
 $current_language = false;
@@ -153,6 +144,14 @@ function avada_lang_setup() {
   $ucid = $_COOKIE['uid'];
 }
 add_action( 'after_setup_theme', 'avada_lang_setup' );
+
+function hook_pre_get_posts(){
+  if(defined('IS_PREMIUM')) {
+	//switch_to_blog(1);
+  }
+
+}
+add_action('pre_get_posts', 'hook_pre_get_posts');
 
 function ucid()
 {
@@ -332,6 +331,12 @@ function admin_init_fc()
   }
 }
 add_action('admin_init', 'admin_init_fc');
+
+function wp_before() {
+  if (defined('IS_PREMIUM')) {
+	 switch_to_blog(1);
+  }
+}
 
 function gh_init()
 {
