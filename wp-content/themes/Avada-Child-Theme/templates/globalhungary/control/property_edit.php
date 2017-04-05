@@ -124,7 +124,7 @@
     <div class="row">
       <div class="col-md-12 reqf">
         <label for="post_title"><?=__('Ingatlan cím (SEO)', 'gh')?></label>
-        <input type="text" id="post_title" name="post_title" value="<?=$property->Title()?>" class="form-control">
+        <input type="text" id="post_title" name="post_title" value="<?=$property->Title()?>" maxlength="60" class="form-control">
         <input type="hidden" name="pre[post_title]" value="<?=$property->Title()?>" class="form-control">
         <small class="inputhint"><?=__('Pl.: Újépítésű 120 nm-es 4 szobás családi ház Pécs szívében.', 'gh')?></small>
       </div>

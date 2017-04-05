@@ -16,9 +16,7 @@ class control_property_save
     $mode    = 'create';
     $return  = $post['return'];
 
-    //print_r($_POST); exit;
-
-    if ( !wp_verify_nonce($post['_nonce'], 'property-create') ) {
+        if ( !wp_verify_nonce($post['_nonce'], 'property-create') ) {
       throw new Exception( __('Nem sikerült létrehozni az ingatlanhirdetést. Ön nem az oldalunkról kezdeményezte a folyamatot!', 'gh') );
     }
 
@@ -101,14 +99,10 @@ class control_property_save
     unset($post['property_images']);
     unset($post['image_watermark']);
 
-
-    /*print_r($_FILES['pdf']);
-    exit;*/
-
     extract($post);
     $form_errors = null;
 
-    // Validate
+        // Validate
     if ( empty($post_title) ) {
       $form_errors .= __('- A ingatlan cím (SEO) értéke nem lehet üres. Kérjük, hogy pótolja. ','gh') . "<br />";
     }
@@ -174,6 +168,7 @@ class control_property_save
     *********************************************************************/
     $uploads_dir = wp_upload_dir();
     $property_image_dir = $uploads_dir['basedir'] . '/listing/' . $post_id;
+    $tempfiles = $_FILES;
 
     if ( $_FILES && isset($_FILES['property_images']) )
     {
@@ -211,6 +206,7 @@ class control_property_save
       }
       remove_filter( 'upload_dir', array( $this, 'upload_dir_filter') );
       remove_filter( 'intermediate_image_sizes', '__return_empty_array', 99 );
+      $_FILES = $tempfiles;
     }
 
     /************************************************************************
@@ -247,6 +243,7 @@ class control_property_save
 
       remove_filter( 'upload_dir', array( $this, 'upload_pdf_dir_filter') );
       remove_filter( 'intermediate_image_sizes', '__return_empty_array', 99 );
+      $_FILES = $tempfiles;
     }
 
 

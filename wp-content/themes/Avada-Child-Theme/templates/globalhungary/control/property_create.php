@@ -12,13 +12,13 @@
   <? if(!$me->can('property_create') && !current_user_can('administrator')): ?>
   <div class="alert alert-danger"><?=__('Ön nem jogosult ingatlan létrehozására. Vegye fel a kapcsolatot felettesével vagy az oldal üzemeltetőjével', 'gh')?></div>
   <? else: ?>
-  <form class="wide-form" action="/control/property_save" method="post">
+  <form class="wide-form" action="/control/property_save" method="post" enctype="multipart/form-data">
     <input type="hidden" name="property_id" value="0">
     <h3><?=__('Alapadatok', 'gh')?></h3>
     <div class="row">
       <div class="col-md-12 reqf">
         <label for="post_title"><?=__('Ingatlan cím (SEO)', 'gh')?></label>
-        <input type="text" id="post_title" name="post_title" size="60" value="<?=$_POST['post_title']?>" class="form-control">
+        <input type="text" id="post_title" name="post_title" size="60" value="<?=$_POST['post_title']?>" maxlength="60" class="form-control">
         <small class="inputhint"><strong><?=__('max. 60 karakter', 'gh')?></strong> &nbsp; <?=__('Pl.: Újépítésű 120 nm-es 4 szobás családi ház Pécs szívében.', 'gh')?></small>
       </div>
     </div>
@@ -154,7 +154,7 @@
         </div>
         <div class="col-md-3">
           <label for="_listing_premium_only"><?=__('Csak Prémium hirdetés', 'gh')?> <i title="<?=__('A prémium hirdetés csak a prémium verziónál jelenik meg kizárólag.','gh')?>" class="fa fa-info-circle"></i></label>
-          <input type="checkbox" id="_listing_premium_only" name="meta_input[_listing_premium_only]" <?=(isset($_POST['meta']['_listing_premium_only']))?'checked="checked"':''?> value="1"><label class="fm" for="_listing_premium"></label>
+          <input type="checkbox" id="_listing_premium_only" name="meta_input[_listing_premium_only]" <?=(isset($_POST['meta']['_listing_premium_only']))?'checked="checked"':''?> value="1"><label class="fm" for="_listing_premium_only"></label>
         </div>
       <?php endif; ?>
     </div>
