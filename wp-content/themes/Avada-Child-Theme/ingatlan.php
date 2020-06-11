@@ -15,43 +15,47 @@
     wp_redirect('/');
   }
   $properties->logView();
-  $regions = $prop->Regions();
+  $regions = array();
+  if ($regions) {
+    $regions = $prop->Regions();
+  }
 
+  $backuri = $_COOKIE['__lastsearchuri'];
+  if (!empty($backuri)) {
+    $backuri = json_decode(base64_decode($backuri), true);
+  }
 ?>
 	<div id="content" <?php Avada()->layout->add_class( 'content_class' ); ?> <?php Avada()->layout->add_style( 'content_style' ); ?>>
     <div class="<?=SLUG_INGATLAN?>-page-view">
       <div class="floating-search-box">
         <? echo do_shortcode('[listing-searcher view="floating"]'); ?>
       </div>
+      <?php if ($backuri): ?>
+      <div class="backurl">
+      <a href="<?=$backuri?>"><< <?=__('vissza a találati listához', 'gh')?></a>
+      </div>
+      <?php endif; ?>
       <div class="data-top">
         <div class="data-top-left">
           <div class="cwrapper">
             <div class="title">
-              <h1><?=$prop->Title()?></h1>
-              <div class="subtitle">
+              <h1>
                 <?php
                 $end_reg = end($regions);
                 if(in_array($end_reg->name, $properties->fake_city)) { ?>
-                  <span class="addr"><i class="fa fa-map-marker"></i> <?=$end_reg->name?></span>
+                  <span class="addr"><?=$end_reg->name?></span>
                 <? }else{ ?>
-                    <span class="addr"><i class="fa fa-map-marker"></i> <?php $regtext = ''; foreach ($regions as $r ): $regtext .= $r->name.' / '; endforeach; $regtext = rtrim($regtext, ' / '); ?><?=$regtext?></span>
-                <? } ?>
-
-                <strong><?=$prop->PropertyStatus(true)?> <?=$prop->multivalue_list($prop->PropertyType(true), true, '/'.SLUG_INGATLAN_LIST.'/?c=#value#')?></strong>
-              </div>
+                    <span class="addr"><?php $regtext = ''; foreach ($regions as $r ): $regtext .= $r->name.', '; endforeach; $regtext = rtrim($regtext, ', '); ?><?=$regtext?></span>
+                <? } ?> <?=$prop->PropertyStatus(true)?> <?=$prop->Title()?>
+              </h1>
               <div class="icons">
                 <div class="facebook">
                   <a href="javascript:void(0);" onclick="window.open('https://www.facebook.com/dialog/share?app_id=<?=FB_APP_ID?>&amp;display=popup&amp;href=<?=PROTOCOL.'://'.DOMAIN?><?=$_SERVER['REQUEST_URI']?><?=($_GET['share']=='')?'?share=fb'.((is_user_logged_in())?'.u-'.get_current_user_id():''):''?>&amp;redirect_uri=<?=PROTOCOL.'://'.DOMAIN?>/close.html','','width=800, height=240')"><i class="fa fa-facebook"></i></a>
                 </div>
-                <div class="gplus">
-                  <a href="https://plus.google.com/share?url=<?=get_option('siteurl', '').$_SERVER['REQUEST_URI']?><?=($_GET['share']=='')?'?share=fb'.((is_user_logged_in())?'.u-'.get_current_user_id():''):''?>" onclick="javascript:window.open('https://plus.google.com/share?url=<?=PROTOCOL.'://'.DOMAIN?><?=$_SERVER['REQUEST_URI']?><?=($_GET['share']=='')?'?share=fb'.((is_user_logged_in())?'.u-'.get_current_user_id():''):''?>', '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><i class="fa fa-google-plus"></i></a>
-                </div>
               </div>
             </div>
             <div class="images">
-              <?php
-                $profil_attr = $prop->ProfilImgAttr();
-              ?>
+              <?php $profil_attr = $prop->ProfilImgAttr(); ?>
               <div class="profil or-<?=$profil_attr['orientation']?>" id="profilimg">
                 <a data-rel="iLightbox[p<?=$prop->ID()?>]" class="fusion-lightbox" data-title="<?=$prop->Title()?>" href="<?=$prop->ProfilImg()?>"><img src="<?=$prop->ProfilImg()?>" alt=""></a>
               </div>
@@ -83,16 +87,66 @@
               </div>
               <? endif; ?>
             </div>
+            <?php $desc = $prop->Description(true); ?>
+            <?php if ($desc): ?>
+            <div class="description-block">
+              <div class="head">
+                <div class="ico">
+                  <i class="fa fa-file-text"></i>
+                </div>
+                <?=__('Leírás', 'gh')?>
+              </div>
+              <div class="text">
+                <?=$desc?>
+              </div>
+            </div>
+            <?php endif; ?>
+            <?php
+              $docs = $prop->PDFDocuments();
+            ?>
+            <?php if ($docs): ?>
+              <div class="description-block">
+                <div class="head">
+                  <div class="ico">
+                    <i class="fa fa-file-pdf-o"></i>
+                  </div>
+                  <?=__('Dokumentumok', 'gh')?> (<?=count($docs)?>)
+                </div>
+                <div class="text doc-list">
+                  <?php
+                  foreach ($docs as $doc):
+                    $size = filesize( get_attached_file( $doc->ID ) );
+                    $file = str_replace(array('application/'), '', $doc->post_mime_type);
+                  ?>
+                    <div class="doc">
+                      <a href="<?=$doc->guid?>" target="_blank"><i class="fa fa-file-pdf-o"></i> <strong><?=$doc->post_title?></strong> <span class="doc-info">(<?=$file?> &mdash; <?=\Helper::filesize($size, 0)?>)</span></a>
+                    </div>
+                  <?php endforeach; ?>
+                </div>
+              </div>
+            <?php endif; ?>
+            <div class="map-block">
+              <?
+                $gps = $prop->GPS();
+                $gps_term_id = $regio->term_id;
+                ob_start();
+                include(locate_template('/templates/parts/map_place_poi.php'));
+                ob_end_flush();
+              ?>
+            </div>
           </div>
         </div>
         <div class="data-top-right">
           <div class="properties">
+            <?php if ($prop->isDropOff()): ?>
+            <div class="header col-grey">
+              <div class="old-price">
+                <?=$prop->OriginalPrice(true)?>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+            <?php endif; ?>
             <div class="header">
-              <?php if ($prop->isDropOff()): ?>
-                <div class="old-price">
-                  <?=$prop->OriginalPrice()?> <?=$prop->PriceType()?>
-                </div>
-              <?php endif; ?>
               <div class="current-price">
                 <?=$prop->Price(true)?> <span class="type"><?=$prop->PriceType()?></span>
               </div>
@@ -107,7 +161,9 @@
                   <div class="ico"><img src="<?=IMG?>/ico/telepules.svg" alt="<?=__('Település', 'gh')?>"></div>
                   <?=__('Település', 'gh')?>
                 </div><!--
-             --><div class="v"><?=($regio)?$regio:'<span class="na">'.__('nincs megadva', 'gh').'</span>'?></div>
+             --><div class="v"><?=($regio)?$regio:'<span class="na">'.__('nincs megadva', 'gh').'</span>'?><?php if ($prop->iShowAddress()): ?>
+                <div class="address"><?php echo $prop->Address(); ?></div>
+             <?php endif; ?></div>
               </div>
               <div class="e">
                <div class="h">
@@ -116,20 +172,24 @@
                </div><!--
             --><div class="v"><?=($v = $prop->getMetaValue('_listing_room_numbers'))?$v:'<span class="na">'.__('nincs megadva', 'gh').'</span>'?></div>
               </div>
+              <?php $v = $prop->getMetaValue('_listing_lot_size'); ?>
+              <?php if(!empty($v)): ?>
               <div class="e">
                <div class="h">
                  <div class="ico"><img src="<?=IMG?>/ico/telek-alapterulet.svg" alt="<?=__('Telek területe', 'gh')?>"></div>
                  <?=__('Telek területe', 'gh')?>
                </div><!--
-            --><div class="v"><?=($v = $prop->getMetaValue('_listing_lot_size'))?sprintf(__('%d nm', 'gh'), $v):'<span class="na">'.__('nincs megadva', 'gh').'</span>'?></div>
-              </div>
+            --><div class="v"><?=($v)?sprintf(__('%d nm', 'gh'), $v):'<span class="na">'.__('nincs megadva', 'gh').'</span>'?></div>
+              </div><? endif; ?>
+              <?php $v = $prop->getMetaValue('_listing_property_size'); ?>
+              <?php if(!empty($v)): ?>
               <div class="e">
                <div class="h">
                  <div class="ico"><img src="<?=IMG?>/ico/alapterulet.svg" alt="<?=__('Alapterület', 'gh')?>"></div>
                  <?=__('Alapterület', 'gh')?>
                </div><!--
-            --><div class="v"><?=($v = $prop->getMetaValue('_listing_property_size'))?sprintf(__('%d nm', 'gh'), $v):'<span class="na">'.__('nincs megadva', 'gh').'</span>'?></div>
-              </div>
+            --><div class="v"><?=($v)?sprintf(__('%d nm', 'gh'), $v):'<span class="na">'.__('nincs megadva', 'gh').'</span>'?></div>
+              </div><? endif; ?>
               <div class="e">
                <div class="h">
                  <div class="ico"><img src="<?=IMG?>/ico/szint.svg" alt="<?=__('Szintek száma', 'gh')?>"></div>
@@ -142,8 +202,17 @@
                  <div class="ico"><img src="<?=IMG?>/ico/heating.svg" alt="<?=__('Fűtés', 'gh')?>"></div>
                  <?=__('Fűtés', 'gh')?>
                </div><!--
-            --><div class="v"><?=($v = $prop->PropertyHeating(true))?$v:'<span class="na">'.__('nincs megadva', 'gh').'</span>'?></div>
+            --><div class="v"><?=($v = $prop->PropertyHeating(true))?$prop->multivalue_list($v):'<span class="na">'.__('nincs megadva', 'gh').'</span>'?></div>
               </div>
+              <?php if ( $ch = $prop->getCustomHeating($v)): ?>
+              <div class="e">
+               <div class="h">
+                 <div class="ico"><img src="<?=IMG?>/ico/heating.svg" alt="<?=__('Egyéb fűtés', 'gh')?>"></div>
+                 <?=__('Egyéb fűtés', 'gh')?>
+               </div><!--
+            --><div class="v"><?=($v = $ch)?$ch:'<span class="na">'.__('nincs megadva', 'gh').'</span>'?></div>
+              </div>
+              <?php endif; ?>
               <div class="e">
                <div class="h">
                  <div class="ico"><img src="<?=IMG?>/ico/payment.svg" alt="<?=__('Megbízás típusa', 'gh')?>"></div>
@@ -165,6 +234,31 @@
                </div><!--
             --><div class="v"><?=($v = $prop->PropertyCondition(true))?$prop->multivalue_list($v):'<span class="na">'.__('nincs megadva', 'gh').'</span>'?></div>
               </div>
+              <?php if ( true ): ?>
+                <div class="e">
+                 <div class="h">
+                   <div class="ico"><img src="<?=IMG?>/ico/allapot.svg" alt="<?=__('Garázs', 'gh')?>"></div>
+                   <?=__('Garázs', 'gh')?>
+                 </div><!--
+              --><div class="v"><?=($v = $prop->getMetaValue('_listing_garage'))?'<span>'.__('Van', 'gh').'</span>':'<span>'.__('Nincs', 'gh').'</span>'?></div>
+                </div>
+
+                <div class="e">
+                 <div class="h">
+                   <div class="ico"><img src="<?=IMG?>/ico/allapot.svg" alt="<?=__('Erkély', 'gh')?>"></div>
+                   <?=__('Erkély', 'gh')?>
+                 </div><!--
+              --><div class="v"><?=($v = $prop->getMetaValue('_listing_balcony'))?'<span>'.__('Van', 'gh').'</span>':'<span>'.__('Nincs', 'gh').'</span>'?></div>
+                </div>
+
+                <div class="e">
+                 <div class="h">
+                   <div class="ico"><img src="<?=IMG?>/ico/allapot.svg" alt="<?=__('Lift', 'gh')?>"></div>
+                   <?=__('Lift', 'gh')?>
+                 </div><!--
+              --><div class="v"><?=($v = $prop->getMetaValue('_listing_lift'))?'<span>'.__('Van', 'gh').'</span>':'<span>'.__('Nincs', 'gh').'</span>'?></div>
+                </div>
+              <?php else: ?>
               <div class="cube-properties">
                 <div class="cb cb-<?=($prop->getMetaValue('_listing_garage'))?'yes':'no'?>">
                   <div class="t">
@@ -185,6 +279,7 @@
                   <div class="i"></div>
                 </div>
               </div>
+              <?php endif; ?>
             </div>
             <div class="ref-number">
               <div class="row">
@@ -194,61 +289,30 @@
             </div>
           </div>
           <div class="contact">
-            <div class="title"><?=__('Keresse kollégánkat', 'gh')?></div>
+            <?php
+            $avatar = $prop->AuthorImage(200);
+            $rate = $prop->AuthorRate();
+
+            if ($avatar): ?>
+            <div class="avatar"><div class="in"><?php echo $avatar; ?></div></div>
+            <?php endif; ?>
+            <?php if ($rate > 0): ?>
+            <div class="rate">
+              <?php for ($i=1; $i <= 5; $i++) { ?>
+                <i class="fa fa-star<?=($rate >= $i)?' hl':''?>"></i>
+              <? } ?>
+            </div>
+            <?php endif; ?>
             <div class="name"><i class="fa fa-user"></i> <?=$prop->AuthorName()?></div>
-            <div class="phone"><i class="fa fa-phone"></i> <?=$prop->AuthorPhone()?></div>
+            <div class="phone"><i class="fa fa-phone"></i> <a href="tel:<?=$prop->AuthorPhone()?>"><?=$prop->AuthorPhone()?></a></div>
             <div class="email"><i class="fa fa-envelope"></i> <a href="mailto:<?=$prop->AuthorEmail()?>"><?=$prop->AuthorEmail()?></a></div>
           </div>
-        </div>
-      </div>
-      <div class="data-main">
-        <div class="data-main-left">
-          <div class="description-block">
-            <div class="head">
-              <div class="ico">
-                <i class="fa fa-file-text"></i>
-              </div>
-              <?=__('Leírás', 'gh')?>
-            </div>
-            <div class="text">
-              <?=$prop->Description(true)?>
-            </div>
+          <?php $kiemelt_title = $prop->KiemeltTitle(); ?>
+          <?php if ($kiemelt_title): ?>
+          <div class="primary-title">
+            <?php echo $kiemelt_title; ?>
           </div>
-          <?php
-            $docs = $prop->PDFDocuments();
-          ?>
-          <?php if ($docs): ?>
-            <div class="description-block">
-              <div class="head">
-                <div class="ico">
-                  <i class="fa fa-file-pdf-o"></i>
-                </div>
-                <?=__('Dokumentumok', 'gh')?> (<?=count($docs)?>)
-              </div>
-              <div class="text doc-list">
-                <?php
-                foreach ($docs as $doc):
-                  $size = filesize( get_attached_file( $doc->ID ) );
-                  $file = str_replace(array('application/'), '', $doc->post_mime_type);
-                ?>
-                  <div class="doc">
-                    <a href="<?=$doc->guid?>" target="_blank"><i class="fa fa-file-pdf-o"></i> <strong><?=$doc->post_title?></strong> <span class="doc-info">(<?=$file?> &mdash; <?=\Helper::filesize($size, 0)?>)</span></a>
-                  </div>
-                <?php endforeach; ?>
-              </div>
-            </div>
           <?php endif; ?>
-        </div>
-        <div class="data-main-right">
-          <div class="map-block">
-            <?
-              $gps = $prop->GPS();
-              $gps_term_id = $regio->term_id;
-              ob_start();
-              include(locate_template('/templates/parts/map_place_poi.php'));
-              ob_end_flush();
-            ?>
-          </div>
         </div>
       </div>
       <div class="history-list">
@@ -263,6 +327,15 @@
         autoplay: false,
         centerPadding: '60px',
         slidesToShow: 5,
+        responsive: [
+          {
+            breakpoint: 480,
+            settings: {
+              slidesToShow: 2,
+              slidesToScroll: 1,
+            }
+          }
+        ]
       });
 
       $('.image-slide .slick-slide').on('click', function(e) {

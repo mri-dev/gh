@@ -19,11 +19,11 @@
   </ul>
 </div><!--
 --><div class="searcher-wrapper">
-    <div class="vlabel" eopener=".listing-searcher-holder.style-floating"><?=__('További ingatlanok kersése', 'gh')?></div>
+    <div class="vlabel" eopener=".listing-searcher-holder.style-floating"><?=__('ingatlanok további keresése', 'gh')?></div>
     <div class="form-items">
       <div class="inp inp-city">
         <label for="searcher_city"><?=__('Város', 'gh')?></label>
-        <input type="text" id="searcher_city" class="form-control" name="cities" value="<?=$form['cities']?>" placeholder="<?=__('Összes', 'gh')?>">
+        <input type="text" id="searcher_city" autocomplete="new-password" class="form-control" name="cities" value="<?=$form['cities']?>" placeholder="<?=__('Összes', 'gh')?>">
         <div id="searcher_city_autocomplete" class="selector-wrapper"></div>
         <input type="hidden" name="ci" id="searcher_city_ids" value="<?=$form['ci']?>">
       </div>
@@ -37,7 +37,7 @@
           <div class="selector-wrapper">
             <?
               $selected = explode(",", $form['st']);
-              $status = $properties->getSelectors( 'status' );
+              $status = $properties->getSelectors( 'status', array(), array('showCombined' => true)  );
             ?>
             <?php if ($status): ?>
               <?php foreach ($status as $k): ?>
@@ -61,7 +61,7 @@
           <div class="selector-wrapper">
             <?
               $selected = explode(",", $form['c']);
-              $kategoria = $properties->getSelectors( 'property-types' ); ?>
+              $kategoria = $properties->getSelectors( 'property-types', array(), array('showCombined' => true)  ); ?>
             <?php if ($kategoria): ?>
               <?php foreach ($kategoria as $k): ?>
               <div class="selector-row lvl-0">
@@ -89,7 +89,7 @@
           <div class="selector-wrapper">
             <?
               $selected = explode(",", $form['cond']);
-              $status = $properties->getSelectors( 'property-condition' );
+              $status = $properties->getSelectors( 'property-condition', array(), array('showCombined' => true)  );
             ?>
             <?php if ($status): ?>
               <?php foreach ($status as $k): ?>
