@@ -1,26 +1,34 @@
 <?php
 define('PROTOCOL', 'http');
-define('TARGETDOMAIN', 'globalhungary.mri-dev.com');
+define('TARGETDOMAIN', 'gh.web-pro.hu');
 define('DOMAIN', $_SERVER['HTTP_HOST']);
+define('SITEROOT', rtrim($_SERVER['DOCUMENT_ROOT'],'/').'/');
 define('IFROOT', str_replace(get_option('siteurl'), '//'.DOMAIN, get_stylesheet_directory_uri()));
 define('DEVMODE', true);
 define('IMG', IFROOT.'/images');
 define('SLUG_INGATLAN', 'ingatlan');
 define('SLUG_INGATLAN_LIST', 'ingatlanok');
 define('SLUG_FAVORITE', 'kedvencek');
+define('SLUG_VISITED', 'megtekintett');
 define('SLUG_NEWS', 'news');
 define('GOOGLE_API_KEY', 'AIzaSyA0Mu8_XYUGo9iXhoenj7HTPBIfS2jDU2E');
 define('PHONE_PREFIX', '06');
 define('LANGKEY','hu');
 define('FB_APP_ID', '1380917375274546');
+define('MAX_SLIDE_ITEM', 12);
+define('TS', '202004221530');
 // PREMIUM
 define('FIND_PREMIUM_DOMAIN_PREFIX', 'premium.');
+define('FIND_KIEMELT_DOMAIN_PREFIX', 'kiemelt.');
 define('PREMIUM_AUTH_PAGE_SLUG', 'validatePremium');
 define('PREMIUM_MASTER_PW', 'globalpremium2017');
+
 define('SITEKEY_ENG', 2);
 define('SITEKEY_HU', 1);
 define('DEFAULT_LANGUAGE', 'hu_HU');
+define('IMAGE_EDITOR_AFTER', '20200212');
 
+@ini_set( 'upload_max_size' , '32M' );
 // Includes
 require_once WP_PLUGIN_DIR."/cmb2/init.php";
 require_once "includes/include.php";
@@ -51,19 +59,53 @@ $running_searcher_get_terms = false;
 
 $me = new UserHelper();
 
-function theme_enqueue_styles() {
-    wp_enqueue_style( 'avada-parent-stylesheet', get_template_directory_uri() . '/style.css?' . ( (DEVMODE === true) ? time() : '' )  );
-    wp_enqueue_style( 'avada-child-stylesheet', IFROOT . '/style.css?' . ( (DEVMODE === true) ? time() : '' ) );
-    wp_enqueue_style( 'slick', IFROOT . '/assets/vendor/slick/slick.css?t=' . ( (DEVMODE === true) ? time() : '' ) );
-    wp_enqueue_style( 'slick-theme', IFROOT . '/assets/css/slick-theme.css?t=' . ( (DEVMODE === true) ? time() : '' ) );
-    wp_enqueue_script( 'slick', IFROOT . '/assets/vendor/slick/slick.min.js?t=' . ( (DEVMODE === true) ? time() : '' ) , array('jquery'));
-    wp_enqueue_script( 'google-maps', '//maps.googleapis.com/maps/api/js?sensor=false&language='.get_locale().'&region=hu&libraries=places&key='.GOOGLE_API_KEY);
-    wp_enqueue_script( 'google-charts', '//www.gstatic.com/charts/loader.js');
-    wp_enqueue_script( 'mocjax', IFROOT . '/assets/vendor/autocomplete/scripts/jquery.mockjax.js');
-    wp_enqueue_script( 'autocomplete', IFROOT . '/assets/vendor/autocomplete/dist/jquery.autocomplete.min.js');
+function theme_enqueue_styles()
+{
+  wp_enqueue_style( 'avada-parent-stylesheet', get_template_directory_uri() . '/style.css?' . ( (DEVMODE === true) ? time() : TS )  );
+  wp_enqueue_style( 'avada-child-stylesheet', IFROOT . '/style.css?' . ( (DEVMODE === true) ? time() : TS ) );
+  wp_enqueue_style( 'slick', IFROOT . '/assets/vendor/slick/slick.css?t=' . ( (DEVMODE === true) ? time() : TS ) );
+  wp_enqueue_style( 'slick-theme', IFROOT . '/assets/css/slick-theme.css?t=' . ( (DEVMODE === true) ? time() : TS ) );
+  wp_enqueue_script( 'slick', IFROOT . '/assets/vendor/slick/slick.min.js?t=' . ( (DEVMODE === true) ? time() : TS ) , array('jquery'));
+  wp_enqueue_script( 'google-maps', '//maps.googleapis.com/maps/api/js?sensor=false&language='.get_locale().'&region=hu&libraries=places&key='.GOOGLE_API_KEY);
+  wp_enqueue_script( 'google-charts', '//www.gstatic.com/charts/loader.js');
+  wp_enqueue_script( 'mocjax', IFROOT . '/assets/vendor/autocomplete/scripts/jquery.mockjax.js');
+  wp_enqueue_script( 'autocomplete', IFROOT . '/assets/vendor/autocomplete/dist/jquery.autocomplete.min.js');
+  wp_enqueue_script( 'angularjs', '//ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js', array('jquery'));
+  wp_enqueue_script( 'ngcookie', '//ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-cookies.js');
+
+  if (DEVMODE === false ) {
+    wp_enqueue_script( 'app-ang', IFROOT . '/assets/js/apps.ang.min.js?ts='.TS);
+  } else {
+    wp_enqueue_script( 'app-ang', IFROOT . '/assets/js/apps.ang.js');
+  }
 }
 add_action( 'wp_enqueue_scripts', 'theme_enqueue_styles' );
 
+function gh_increase_upload( $bytes )
+{
+    return 33554432; // 32 megabytes
+}
+add_filter( 'upload_size_limit', 'gh_increase_upload' );
+
+function mailer_config(PHPMailer $phpmailer)
+{
+  if ( ! is_object( $phpmailer ) ) {
+		$phpmailer = (object) $phpmailer;
+	}
+
+	$phpmailer->Mailer     = 'smtp';
+	$phpmailer->Host       = SMTP_HOST;
+	$phpmailer->SMTPAuth   = SMTP_AUTH;
+	$phpmailer->Port       = SMTP_PORT;
+	$phpmailer->Username   = SMTP_USER;
+	$phpmailer->Password   = SMTP_PASS;
+	$phpmailer->SMTPSecure = SMTP_SECURE;
+	$phpmailer->From       = SMTP_FROM;
+	$phpmailer->FromName   = SMTP_NAME;
+
+	return $phpmailer;
+}
+add_action( 'phpmailer_init', 'mailer_config', 10, 1);
 
 function add_opengraph_doctype( $output ) {
 	return $output . ' xmlns:og="http://opengraphprotocol.org/schema/" xmlns:fb="http://www.facebook.com/2008/fbml"';
@@ -129,9 +171,10 @@ function facebook_og_meta_header()
 }
 add_action( 'wp_head', 'facebook_og_meta_header', 5);
 
-function custom_theme_enqueue_styles() {
-    wp_enqueue_style( 'globalhungary-css', IFROOT . '/assets/css/globalhungary.css?t=' . ( (DEVMODE === true) ? time() : '' ) );
-    wp_enqueue_script( 'globalhungary', IFROOT . '/assets/js/master.js?t=' . ( (DEVMODE === true) ? time() : '' ), array('jquery'), '', 999 );
+function custom_theme_enqueue_styles()
+{
+    wp_enqueue_style( 'globalhungary-css', IFROOT . '/assets/css/globalhungary.css?t=' . ( (DEVMODE === true) ? time() : TS ) );
+    wp_enqueue_script( 'globalhungary', IFROOT . '/assets/js/master.js?t=' . ( (DEVMODE === true) ? time() : TS ), array('jquery'), '', 999 );
 }
 add_action( 'wp_enqueue_scripts', 'custom_theme_enqueue_styles', 100 );
 
@@ -333,7 +376,7 @@ function admin_init_fc()
 add_action('admin_init', 'admin_init_fc');
 
 function wp_before() {
-  if (defined('IS_PREMIUM')) {
+  if (defined('IS_PREMIUM') || defined('IS_KIEMELT')) {
 	 switch_to_blog(1);
   }
 }
@@ -351,7 +394,11 @@ function gh_init()
       define('SHOW_PREMIUM_ONLY', true);
   }
 
-  if (defined('IS_PREMIUM')) {
+  if( strpos(DOMAIN,FIND_KIEMELT_DOMAIN_PREFIX) !== false) {
+      define('IS_KIEMELT', true);
+  }
+
+  if (defined('IS_PREMIUM') || defined('IS_KIEMELT')) {
     if( !isset($_COOKIE['access_to_premium_'.ucid()]) )
     {
       if(
@@ -385,6 +432,7 @@ function gh_init()
   add_rewrite_rule('^properties/?', 'index.php?custom_page='.SLUG_INGATLAN_LIST.'&urlstring=$matches[1]', 'top');
 
   add_rewrite_rule('^'.SLUG_FAVORITE.'/?', 'index.php?custom_page='.SLUG_FAVORITE.'&urlstring=$matches[1]', 'top');
+  add_rewrite_rule('^'.SLUG_VISITED.'/?', 'index.php?custom_page='.SLUG_VISITED.'&urlstring=$matches[1]', 'top');
   add_rewrite_rule('^'.SLUG_NEWS.'/?', 'index.php?custom_page='.SLUG_NEWS.'&urlstring=$matches[1]', 'top');
 
   add_rewrite_rule('^'.SLUG_INGATLAN.'/([^/]+)/([^/]+)/([^/]+)', 'index.php?custom_page='.SLUG_INGATLAN.'&regionslug=$matches[1]&cityslug=$matches[2]&urlstring=$matches[3]', 'top');
@@ -449,34 +497,7 @@ function gh_get_fnc()
 }
 add_action('init', 'gh_get_fnc');
 
-function old_importer()
-{
-  //$importer = new GHImporter();
-  //$imp_zona_pre = $importer->zonak();
-  //$imp_zone_ins = $importer->insert_zonak( $imp_zona_pre );
-  if ($_GET['imp'] == '1') {
-    //$ing = $importer->ingatlanok();
-    //$ing = $importer->do_ingatlan_import($ing['import']);
-    //$ing = $importer->user_connecter();
-    //$ing = $importer->image_connect();
-    /* * /
-    echo '<pre>';
-    print_r($ing);
-    exit;
-    /* */
-  }
-
-  if ($_GET['img'] == '1')
-  {
-    return;
-    $attach_id = $_GET['kep'];
-    $image = new ImageModifier();
-    $image->loadResourceByID($attach_id);
-    $image->watermark();
-  }
-}
-add_action('init', 'old_importer', 9999);
-
+/*
 function tester()
 {
   if ($_GET['testmail'] == '1') {
@@ -486,14 +507,10 @@ function tester()
       ->setContent('Ez itt egy tartalom')
       ->setTemplate('test');
     $mail->send();
-    /* */
-    echo '<pre>';
-    print_r($mail);
-    exit;
-    /* */
   }
 }
 add_action('init', 'tester', 9999);
+*/
 
 function get_control_controller( $controller_class )
 { global $wp_query;
@@ -627,10 +644,15 @@ function globalhungary_custom_top_menu()
 function ajax_requests()
 {
   $ajax = new AjaxRequests();
+
   $ajax->check_property_fav();
   $ajax->property_fav_action();
   $ajax->city_autocomplete();
   $ajax->set_regio_gps();
+  $ajax->dailyCRON();
+  $ajax->image_editor();
+  $ajax->fileuploader();
+  $ajax->contactformhandler();
 }
 add_action( 'init', 'ajax_requests' );
 
@@ -645,6 +667,9 @@ function after_logo_content()
   echo '<div class="badge">'.__('Alapítva 1999','gh').'</div>';
   if (defined('IS_PREMIUM') && IS_PREMIUM === true) {
     echo '<div class="premium-badge"><i class="fa fa-star"></i> '.__('prémium','gh').' <i class="fa fa-star"></i></div>';
+  }
+   if (defined('IS_KIEMELT') && IS_KIEMELT === true) {
+    echo '<div class="premium-badge"><i class="fa fa-star"></i> '.__('kiemelt','gh').' <i class="fa fa-star"></i></div>';
   }
 }
 add_filter('avada_logo_append', 'after_logo_content');
